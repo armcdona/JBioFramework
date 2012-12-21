@@ -1,0 +1,12 @@
+
+#Windows Users
+Thumbs.db
+
+#Eclipse users
+.project
+.settings
+.classpath
+
+#IntelliJ IDEA
+.idea
+*.iml
