@@ -31,8 +31,6 @@ public class Electro2D extends JPanel implements ActionListener {
     private GelCanvasSwingVersion                gelCanvas;           //area where animation takes place
     private HelpButtonSwingVersion               helpButton;          //brings up help page
     private AboutButtonSwingVersion              aboutButton;         //brings up about page
-    private JButton                              addProteinButton;    //brings up file frame
-    private JButton                              removeProteinButton; //removes proteins
     private PlayButtonSwingVersion               playButton;          //starts/pauses animation
     private StopButtonSwingVersion               stopButton;          //stops animation
     private RestartButtonSwingVersion            restartButton;       //restarts animation
@@ -52,8 +50,6 @@ public class Electro2D extends JPanel implements ActionListener {
     private Graphics                             graphics;
     private boolean                              rangeReload;         //determines whether or not the user
                                                                       //enters a pH range manually or not
-    private SearchProteinFieldButtonSwingVersion searchButton;        //opens a frame which allows the
-    //user to search through the proteins for specific information
 
     private PercentAcrylamideSwingVersion  percentAcrylamide; //the Choices for entering the
                                                               //% acrylamide for the gel
@@ -116,17 +112,34 @@ public class Electro2D extends JPanel implements ActionListener {
         rangeReload         = false;
         gelCanvas           = new GelCanvasSwingVersion(this);
         secondProt          = new CompareProteinsButtonSwingVersion(this);
-        searchButton        = new SearchProteinFieldButtonSwingVersion(this);
         csvButton           = new CSVButtonSwingVersion(this);
         helpButton          = new HelpButtonSwingVersion();
         aboutButton         = new AboutButtonSwingVersion();
 
-        // Add/remove protein buttons
-        addProteinButton    = new JButton("Add Proteins");
-        addProteinButton.addActionListener(new AddProteinListener());
+        // Add/Remove/Search protein buttons
+        JButton addProteinButton    = new JButton("Add Proteins");
+        addProteinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                getSequenceData();
+            }
+        });
 
-        removeProteinButton = new JButton("Remove Proteins");
-        removeProteinButton.addActionListener(new RemoveProteinListener());
+        JButton removeProteinButton = new JButton("Remove Proteins");
+        removeProteinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                removeHighlightedProteins();
+            }
+        });
+
+        JButton searchButton = new JButton("Search Protein Field");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                openProteinSearch();
+            }
+        });
 
         colorkey            = new ColorKeyButtonSwingVersion();
 	
@@ -480,8 +493,7 @@ public class Electro2D extends JPanel implements ActionListener {
      *  Currently, supported file types are .fasta, .faa, .gbk, and .pdb.
      */
     public void getSequenceData() {
-
-	// display the fileFrame
+	    // display the fileFrame
         fileFrame.toFront();
         fileFrame.setVisible(true);
     }
@@ -781,6 +793,13 @@ public class Electro2D extends JPanel implements ActionListener {
                 proteinList2.remove(selectedIndexes2[x] - x);
             }
         }
+    }
+
+    /**
+     * Opens the protein search dialog box
+     */
+    public void openProteinSearch() {
+        SearchProteinFunction proteinSearch = new SearchProteinFunction(this);
     }
 
     /**
@@ -1589,37 +1608,4 @@ public class Electro2D extends JPanel implements ActionListener {
         proteinList2   = new java.awt.List();
         sequencesReady = false;
     }
-
-    // LISTENERS ///////////////////////////////////////////////////////////
-
-    /**
-     * Listener for the add protein button
-     */
-    public class AddProteinListener implements ActionListener {
-        /**
-         * Called when the add protein button is pressed. Opens the dialog
-         * to get protein sequence data
-         * @param e The event itself
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            getSequenceData();
-        }
-    }
-
-    /**
-     * Listener for when the remove proteins button is depressed
-     */
-    public class RemoveProteinListener implements ActionListener {
-        /**
-         * Called when the remove proteins button is pressed. Removes the
-         * selected proteins from the active proteins list.
-         * @param e The event itself
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            removeHighlightedProteins();
-        }
-    }
-
 }
