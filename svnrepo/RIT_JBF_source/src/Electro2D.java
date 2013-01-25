@@ -25,7 +25,6 @@ public class Electro2D extends JPanel implements ActionListener {
 
     private FileFrame                     fileFrame;        //pop up for loading file data
     private SingleProteinListFrame        proteinListFrame; //pop up for displaying protein lists
-    private ProteinListButtonSwingVersion proteinListButton;
 
     /** components of the main applet **/
     private GelCanvasSwingVersion                gelCanvas;           //area where animation takes place
@@ -116,7 +115,8 @@ public class Electro2D extends JPanel implements ActionListener {
         helpButton          = new HelpButtonSwingVersion();
         aboutButton         = new AboutButtonSwingVersion();
 
-        // Add/Remove/Search protein buttons
+        // Add/Remove/List/Search protein buttons
+        // @TODO: Consider consolidating all protein actions into a singular dialog for protein "Management"
         JButton addProteinButton    = new JButton("Add Proteins");
         addProteinButton.addActionListener(new ActionListener() {
             @Override
@@ -141,6 +141,14 @@ public class Electro2D extends JPanel implements ActionListener {
             }
         });
 
+        JButton displayProteinsButton = new JButton("Display Protein List");
+        displayProteinsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                displayProteinList();
+            }
+        });
+
         colorkey            = new ColorKeyButtonSwingVersion();
 	
         playButton       = new PlayButtonSwingVersion(this);
@@ -161,7 +169,6 @@ public class Electro2D extends JPanel implements ActionListener {
         sequencesReady    = false;
 
         proteinListFrame  = new SingleProteinListFrame("Protein Lists", this);
-        proteinListButton = new ProteinListButtonSwingVersion(this);
 
        /*
         * new code for designing a Swing GUI; uses JPanels and layout managers
@@ -259,7 +266,7 @@ public class Electro2D extends JPanel implements ActionListener {
         leftPanel.add(seventhPanel);
 
         JPanel eighthPanel = new JPanel();
-        eighthPanel.add(proteinListButton);
+        eighthPanel.add(displayProteinsButton);
         leftPanel.add(eighthPanel);
 
         JPanel ninthPanel = new JPanel();
@@ -298,8 +305,8 @@ public class Electro2D extends JPanel implements ActionListener {
      * Any drawing on the applet panel itself is done here.
      */
 
-    public void displayProtList() {
-	
+    public void displayProteinList() {
+
         proteinListFrame.setVisible(true);
         proteinListFrame.validate();
     }
