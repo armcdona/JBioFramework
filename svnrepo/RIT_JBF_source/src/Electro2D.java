@@ -24,18 +24,18 @@ public class Electro2D extends JPanel implements ActionListener {
 
     private FileFrame fileFrame;          //pop up for loading file data
     private SingleProteinListFrame proteinListFrame;       //pop up for displaying protein lists
-    private ProteinListButtonSwingVersion proteinListButton;
+    private ProteinListButton proteinListButton;
     
     /** components of the main applet **/
-    private GelCanvasSwingVersion gelCanvas;          //area where animation takes place
-    private HelpButtonSwingVersion helpButton;        //brings up help page
-    private AboutButtonSwingVersion aboutButton;      //brings up about page
+    private JButton about;
+    private JButton help;
+    private GelCanvas gelCanvas;          //area where animation takes place
     private AddProteinButtonSwingVersion addProteinButton;   //brings up file frame
     private RemoveProteinButton removeProteinButton;  //removes proteins
     private PlayButtonSwingVersion playButton;        //starts/pauses animation
     private StopButtonSwingVersion stopButton;        //stops animation
     private RestartButtonSwingVersion restartButton;  //restarts animation
-    private CSVButtonSwingVersion csvButton;          //writes to csv file
+    private JButton csvButton;          //writes to csv file
     private CompareProteinsButtonSwingVersion secondProt; //loads second file for comparison
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
@@ -85,6 +85,8 @@ public class Electro2D extends JPanel implements ActionListener {
     private FileFrame fileFrame2;
     private boolean sequencesReady;
 
+    private JPanel header;
+    private JLabel header0;
     private JPanel leftPanel;
     private JPanel pHPanel;
     private JPanel mWPanel;
@@ -113,12 +115,15 @@ public class Electro2D extends JPanel implements ActionListener {
 	mwLabels = new Vector();
 	resetPressed = false;
 	rangeReload = false;
-	gelCanvas = new GelCanvasSwingVersion(this);
+	gelCanvas = new GelCanvas(this);
 	secondProt = new CompareProteinsButtonSwingVersion(this);
 	searchButton = new SearchProteinFieldButtonSwingVersion(this);
-	csvButton = new CSVButtonSwingVersion( this );
-	helpButton = new HelpButtonSwingVersion();
-	aboutButton = new AboutButtonSwingVersion();
+	csvButton = new JButton("Record to CSV");
+    csvButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            writeToCSV(); //really confused as to why we don't put the logic right here
+        }
+    });
 	addProteinButton = new AddProteinButtonSwingVersion(this);
 	removeProteinButton = new RemoveProteinButton(this);
 	colorkey = new ColorKeyButtonSwingVersion();
@@ -141,7 +146,7 @@ public class Electro2D extends JPanel implements ActionListener {
         sequencesReady = false;
 
 	proteinListFrame = new SingleProteinListFrame( "Protein Lists", this);
-	proteinListButton = new ProteinListButtonSwingVersion( this );
+	proteinListButton = new ProteinListButton( this );
 
        /*
         * new code for designing a Swing GUI; uses JPanels and layout managers
@@ -194,10 +199,42 @@ public class Electro2D extends JPanel implements ActionListener {
        constraint.ipadx = 650;
        rightPanel.add(gelCanvas, constraint);
 
+       JPanel header = new JPanel(new GridBagLayout());
+       c.gridy = 0;
+       header0 = new JLabel("2-Dimensional Electrophoresis");
+       header0.setFont(new Font("SansSerif", Font.BOLD, 18));
+       header.add(header0,c);
+       leftPanel.add(header);
+
        JPanel firstPanel = new JPanel();
-       firstPanel.add(helpButton);
-       firstPanel.add(aboutButton);
+       c.gridy = 1;
+       help = new JButton("Help");
+       help.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                } catch(IOException i){
+                    System.err.println( i.getMessage());
+                }
+            }
+       });
+       firstPanel.add(help);
+       about = new JButton("About");
+       about.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                File f = new File( "HTML Files" + File.separator + "about.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                }catch(IOException i){
+                    System.err.println(i.getMessage());
+                    i.printStackTrace();
+                }
+            }
+       });
+       firstPanel.add(about);
        leftPanel.add(firstPanel);
+
 
        JPanel secondPanel = new JPanel();
        secondPanel.add(addProteinButton);
@@ -234,7 +271,7 @@ public class Electro2D extends JPanel implements ActionListener {
        
        JPanel seventhPanel = new JPanel();
        JLabel additionalOptions = new JLabel("Additional Options");
-       additionalOptions.setFont(new Font("SansSerif", Font.BOLD, 18));
+       additionalOptions.setFont(new Font("SansSerif", Font.BOLD, 16));
        seventhPanel.add(additionalOptions);
        leftPanel.add(seventhPanel);
 
@@ -288,8 +325,8 @@ public class Electro2D extends JPanel implements ActionListener {
      * displays the incrementing pH values above the gel after the IEF
      * animation.
      *
-     * @param loc - the location of the label
-     * @param value - the value to be placed on the label
+     * parameter loc - the location of the label
+     * parameter value - the value to be placed on the label
      */
     public ArrayList<Integer> showPH() {
 
@@ -1159,7 +1196,7 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return gelCanvas
      */
-    public GelCanvasSwingVersion getGel() {
+    public GelCanvas getGel() {
 	return gelCanvas;
     }
 
