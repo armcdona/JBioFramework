@@ -23,7 +23,7 @@ public class IEFFrame extends Frame {
     private JPanel IEFPanel;           //panel to add components to
     private Rectangle dimensions;         //dimension holders
     private Label titleLabel;   //holds protein name
-    private IEFProteinSwingVersion ief;    // the IEFProtein whose information will
+    private IEFProtein ief;    // the IEFProtein whose information will
                                // be displayed
     private Font theFont;                 //font used in this panel
     private String maxRange;   //the maximum pI value held in the IEFProtein
@@ -39,7 +39,7 @@ public class IEFFrame extends Frame {
      *
      * @param i - the IEFProtein being represented
      */
-    public IEFFrame( IEFProteinSwingVersion i ) {
+    public IEFFrame( IEFProtein i ) {
 	labels = new Vector();
 	
 	//set the font for the information being displayed
