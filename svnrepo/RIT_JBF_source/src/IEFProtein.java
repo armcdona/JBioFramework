@@ -10,7 +10,7 @@
 import java.awt.*;
 import java.util.*;
 
-public class IEFProteinSwingVersion extends Component {
+public class IEFProtein extends Component {
 
     private static Color[] colors = { Color.blue, Color.green, Color.yellow,
 				      Color.red, Color.orange, Color.pink };
@@ -30,14 +30,14 @@ public class IEFProteinSwingVersion extends Component {
     private Vector names;
     private static double maxpH = 10;
     private static double minpH = 3;
-    private static GelCanvasSwingVersion gelcanvas;
+    private static GelCanvas gelcanvas;
 
     /**
      * constructor - creates the IEFProtein object
      *
      * @param p the first protein to be represented by this object
      */
-    public IEFProteinSwingVersion(E2DProtein p, GelCanvasSwingVersion g){
+    public IEFProtein(E2DProtein p, GelCanvas g){
 	names = new Vector();
 	gelcanvas = g;
 	proteins = new Vector();

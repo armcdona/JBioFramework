@@ -7,7 +7,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
     
     private Vector dots1;
     private Vector dots2;
-    private GelCanvasSwingVersion gel;
+    private GelCanvas gel;
     private Electro2D electro2D;
     private JFrame window;
     private JButton search;
@@ -135,10 +135,10 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
             dots2 = new Vector();
         }
 
-	ProteinDotSwingVersion prot = null;
+	ProteinDot prot = null;
 	if( searchField.equals( "function" ) ){
 	    for( int i = 0; i < dots1.size(); i++ ){
-		prot = (ProteinDotSwingVersion)dots1.elementAt( i );
+		prot = (ProteinDot)dots1.elementAt( i );
 		if( ((E2DProtein)prot.getPro()).getFunction().indexOf( fcnName )
 		    == -1 ){
 		    prot.doNotShowMe();
@@ -150,7 +150,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	    }
 	    if( dots2.size() != 0 ){
 		for( int j = 0; j < dots2.size(); j++ ){
-		    prot = (ProteinDotSwingVersion)dots2.elementAt( j );
+		    prot = (ProteinDot)dots2.elementAt( j );
 		    if( ((E2DProtein)prot.getPro()).getFunction().indexOf(
 				      		       fcnName ) == -1 ){
 			prot.doNotShowMe();
@@ -164,7 +164,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	}
 	else if(searchField.equals( "sequence" )){
 	    for( int i = 0; i < dots1.size(); i++ ){
-		prot = (ProteinDotSwingVersion)dots1.elementAt( i );
+		prot = (ProteinDot)dots1.elementAt( i );
 		if(((E2DProtein)prot.getPro()).getSequence().indexOf( fcnName )
 		   == -1 ){
 		    prot.doNotShowMe();
@@ -181,7 +181,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	}
 	else if(searchField.equals( "title" ) ){
 	    for( int i = 0; i < dots1.size(); i++ ){
-		prot = (ProteinDotSwingVersion)dots1.elementAt( i );
+		prot = (ProteinDot)dots1.elementAt( i );
 		if(((E2DProtein)prot.getPro()).getID().indexOf( fcnName ) 
 		   == -1 ){
 		    prot.doNotShowMe();
@@ -193,7 +193,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	    }
 	    if( dots2.size() != 0 ){
 		for( int j = 0; j < dots2.size(); j++ ){
-		    prot = (ProteinDotSwingVersion)dots2.elementAt( j );
+		    prot = (ProteinDot)dots2.elementAt( j );
 		    if(((E2DProtein)prot.getPro()).getID().indexOf( fcnName)
 		       == -1 ){
 			prot.doNotShowMe();
@@ -206,12 +206,12 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	    }
 	}
         int count = 0;
-        for(ProteinDotSwingVersion dot : (Vector<ProteinDotSwingVersion>)dots1) {
+        for(ProteinDot dot : (Vector<ProteinDot>)dots1) {
             if (dot.getShowMe()) {
                 count++;
             }
         }
-        for(ProteinDotSwingVersion dot : (Vector<ProteinDotSwingVersion>)dots2) {
+        for(ProteinDot dot : (Vector<ProteinDot>)dots2) {
             if (dot.getShowMe()) {
                 count++;
             }
@@ -225,11 +225,11 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	dots1 = gel.getDots();
 	dots2 = gel.getDots2();
 	for( int i = 0; i < dots1.size(); i++ ){
-	    ((ProteinDotSwingVersion)dots1.elementAt( i )).doShowMe();
+	    ((ProteinDot)dots1.elementAt( i )).doShowMe();
 	}
 	if( dots2.size() != 0 ){
 	    for( int j = 0; j < dots2.size(); j++ ){
-		((ProteinDotSwingVersion)dots2.elementAt( j )).doShowMe();
+		((ProteinDot)dots2.elementAt( j )).doShowMe();
 	    }
 	}
 //	gel.repaint();

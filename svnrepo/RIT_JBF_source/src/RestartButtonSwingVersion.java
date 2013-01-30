@@ -19,16 +19,16 @@ public class RestartButtonSwingVersion extends JButton implements ActionListener
     }
 
     public void actionPerformed(ActionEvent e) {
-        GelCanvasSwingVersion g = electro2D.getGel();
+        GelCanvas g = electro2D.getGel();
 	g.clearIEF();
 	g.resetLocation();
 	g.resetRanges();
 	g.clearCanvas();
 	electro2D.resetIEF();
-	IEFProteinSwingVersion.resetProtein();
+	IEFProtein.resetProtein();
 
-	if( ProteinDotSwingVersion.getShow() ){
-	    ProteinDotSwingVersion.setShow();
+	if( ProteinDot.getShow() ){
+	    ProteinDot.setShow();
 	    electro2D.stopThread();
 	}
 	g.restartCanvas();
@@ -38,10 +38,10 @@ public class RestartButtonSwingVersion extends JButton implements ActionListener
 	electro2D.setBool();
 	electro2D.clearpH();
 	electro2D.setIEF();
-	GelCanvasSwingVersion.setRed();
-	GelCanvasSwingVersion.setGreen();
-	GelCanvasSwingVersion.setBlue();
-	IEFProteinSwingVersion.resetTempWidth();
+	GelCanvas.setRed();
+	GelCanvas.setGreen();
+	GelCanvas.setBlue();
+	IEFProtein.resetTempWidth();
         PlayButtonSwingVersion.setCompare(false);
         electro2D.resetBothProteinLists();
         electro2D.setSequences(new Vector());
