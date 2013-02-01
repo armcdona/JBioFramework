@@ -28,8 +28,6 @@ public class Electro2D extends JPanel implements ActionListener {
     private SingleProteinListFrame        proteinListFrame; //pop up for displaying protein lists
 
     /** components of the main applet **/
-    private JButton about;
-    private JButton help;
     private GelCanvas gelCanvas;          //area where animation takes place
     private PlayButtonSwingVersion playButton;        //starts/pauses animation
     private StopButtonSwingVersion stopButton;        //stops animation
@@ -116,6 +114,33 @@ public class Electro2D extends JPanel implements ActionListener {
         csvButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 writeToCSV(); //really confused as to why we don't put the logic right here
+            }
+        });
+
+        // Help/About buttons
+        JButton aboutButton = new JButton("About");
+        aboutButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File f = new File( "HTML Files" + File.separator + "about.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                }catch(IOException i){
+                    JOptionPane.showMessageDialog(Electro2D.this, "The help files could not be loaded!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        JButton helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                } catch(IOException i){
+                    JOptionPane.showMessageDialog(Electro2D.this, "The help files could not be loaded!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -235,31 +260,8 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JPanel firstPanel = new JPanel();
         c.gridy = 1;
-        help = new JButton("Help");
-        help.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
-                try{
-                    BrowserLauncher.openHTMLFile(f);
-                } catch(IOException i){
-                    System.err.println( i.getMessage());
-                }
-            }
-        });
-        firstPanel.add(help);
-        about = new JButton("About");
-        about.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                File f = new File( "HTML Files" + File.separator + "about.html" );
-                try{
-                    BrowserLauncher.openHTMLFile(f);
-                }catch(IOException i){
-                    System.err.println(i.getMessage());
-                    i.printStackTrace();
-                }
-            }
-        });
-        firstPanel.add(about);
+        firstPanel.add(helpButton);
+        firstPanel.add(aboutButton);
         leftPanel.add(firstPanel);
 
 
