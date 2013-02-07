@@ -33,7 +33,6 @@ public class Electro2D extends JPanel implements ActionListener {
     private StopButtonSwingVersion stopButton;        //stops animation
     private RestartButtonSwingVersion restartButton;  //restarts animation
     private JButton csvButton;          //writes to csv file
-    private CompareProteinsButtonSwingVersion secondProt; //loads second file for comparison
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
     private AnimationChooserSwingVersion animationChooser;      //select animation to control
@@ -108,7 +107,15 @@ public class Electro2D extends JPanel implements ActionListener {
 	    resetPressed        = false;
 	    rangeReload         = false;
 	    gelCanvas           = new GelCanvas(this);
-	    secondProt          = new CompareProteinsButtonSwingVersion(this);
+        JButton compareButton = new JButton("Compare Proteins");
+        compareButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getSequenceData2();
+                PlayButtonSwingVersion.setCompare(true);
+            }
+        });
+
         csvButton           = new JButton("Record to CSV");
         csvButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -180,7 +187,7 @@ public class Electro2D extends JPanel implements ActionListener {
         JButton colorKey = new JButton("Color Key");
         colorKey.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
                 new ColorFrame().showKey();
             }
         });
@@ -313,8 +320,9 @@ public class Electro2D extends JPanel implements ActionListener {
         eighthPanel.add(displayProteinsButton);
         leftPanel.add(eighthPanel);
 
+        // @TODO: This code is dead. Will we be actually using it anytime?
         JPanel ninthPanel = new JPanel();
-        ninthPanel.add(secondProt);
+        ninthPanel.add(compareButton);
         //leftPanel.add(ninthPanel); Removed compare protein functionality until it is useful.
 
         JPanel tenthPanel = new JPanel();
