@@ -40,7 +40,6 @@ public class Electro2D extends JPanel implements ActionListener {
     private RangeChoiceSwingVersion rangeChooser;     //select the range for IEF
     private DotThread dotThread;          //thread controlling the SDS-PAGE
                                           //animation
-    private ColorKeyButtonSwingVersion colorkey;      //protein color key
     private IEFThread iefThread;          //thread controlling IEF animation
     private boolean resetPressed;         //detects whether reset was pressed
                                           //or not 
@@ -177,8 +176,14 @@ public class Electro2D extends JPanel implements ActionListener {
                 displayProteinList();
             }
         });
-        
-	    colorkey = new ColorKeyButtonSwingVersion();
+
+        JButton colorKey = new JButton("Color Key");
+        colorKey.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ColorFrame().showKey();
+            }
+        });
 	
         playButton       = new PlayButtonSwingVersion(this);
         stopButton       = new StopButtonSwingVersion(this);
@@ -325,7 +330,7 @@ public class Electro2D extends JPanel implements ActionListener {
         leftPanel.add(twelfPanel);
 
         JPanel thirteenthPanel = new JPanel();
-        thirteenthPanel.add(colorkey);
+        thirteenthPanel.add(colorKey);
         leftPanel.add(thirteenthPanel);
 
     }
