@@ -1,4 +1,5 @@
 package one.d.electrophoresis;
+
 // Decompiled by DJ v3.10.10.93 Copyright 2007 Atanas Neshkov  Date: 3/13/2009 10:21:41 AM
 // Home Page: http://members.fortunecity.com/neshkov/dj.html  http://www.neshkov.com/dj.html - Check often for new version!
 // Decompiler options: packimports(3) 
@@ -147,10 +148,6 @@ public class Parameters extends JPanel {
 		// helper methods
 		setPanelsColors();
 
-	
-		
-		
-		
 		setLayout(new GridLayout(5, 1, 2, 2));
 		headerPanel.setLayout(new GridLayout(1, 1, 5, 5));
 		Border border = BorderFactory
@@ -169,8 +166,8 @@ public class Parameters extends JPanel {
 		// Register buttons Listeners
 
 		ListHandler handler = new ListHandler();
-		RadioButtonsHandler rHandler= new RadioButtonsHandler();
-		
+		RadioButtonsHandler rHandler = new RadioButtonsHandler();
+
 		slowbutton.addItemListener(rHandler);
 		modbutton.addItemListener(rHandler);
 		fastbutton.addItemListener(rHandler);
@@ -300,8 +297,6 @@ public class Parameters extends JPanel {
 		selectedSample = unknown1;
 	}
 
-
-
 	protected void setAnimationSpeed(String s) {
 		parent.setAnimationSpeed(s);
 	}
@@ -394,7 +389,7 @@ public class Parameters extends JPanel {
 		labelPanel1.setBackground(Color.lightGray);
 		labelPanel2.setBackground(Color.lightGray);
 		dropPanel.setBackground(Color.lightGray);
-		
+
 		stdArray[std1Ref] = new Protein("Standard #1", "beta-Galactosidase",
 				"b-gal", 0x1c58b, Color.blue);
 		stdArray[std2Ref] = new Protein("Standard #2", "Ovalbumin", "oval",
@@ -484,12 +479,13 @@ public class Parameters extends JPanel {
 					stdArray[std7Ref].selected = standard7.isSelected();
 					if (stdArray[std7Ref].selected)
 						parent.displayProtein(stdArray[std7Ref]);
+
 					System.out.println("btn 2");
 
 				}
 				if (e.getStateChange() == ItemEvent.DESELECTED) {
-				
 
+					System.out.println("Item Deslected");
 				}
 
 			}
@@ -636,7 +632,6 @@ public class Parameters extends JPanel {
 	}
 
 	class RadioButtonsHandler implements ItemListener {
-		
 
 		@Override
 		public void itemStateChanged(ItemEvent e) {

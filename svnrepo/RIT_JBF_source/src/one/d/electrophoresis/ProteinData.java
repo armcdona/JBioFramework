@@ -1,4 +1,5 @@
 package one.d.electrophoresis;
+
 import java.awt.*;
 
 import javax.swing.JLabel;
@@ -19,6 +20,11 @@ public class ProteinData extends JPanel {
 	JPanel abbrPanel;
 	JPanel molWtPanel;
 	JPanel logMolWtPanel;
+
+	/*
+	 * setting the protein info to be deployed in the simulation panel
+	 * note1: method name is m
+	 */
 
 	public void displayData(Protein protein) {
 		name.setText(protein.name);

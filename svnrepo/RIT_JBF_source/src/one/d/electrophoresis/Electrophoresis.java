@@ -1,8 +1,9 @@
 package one.d.electrophoresis;
+
 /**
  * @author  Win-Air
  *The Swing version 1D electrophoresis simulation, as Desktop
-application
+ application
 
 
  */
@@ -20,6 +21,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 public class Electrophoresis extends JFrame {
 	public static void main(String... args) {
@@ -38,8 +40,11 @@ public class Electrophoresis extends JFrame {
 		leftPanel = new JPanel();
 		leftPanel.setPreferredSize(new Dimension(250, 500));
 
+		// test
+
 		rightPanel = new JPanel();
 		rightPanel.setPreferredSize(new Dimension(250, 500));
+		JTabbedPane tabPane = new JTabbedPane();
 
 		paramPanel = new Parameters(this);
 		simPanel = new Simulation(this);
@@ -57,6 +62,8 @@ public class Electrophoresis extends JFrame {
 		buttonPanel.add(plotButton);
 		buttonPanel.add(simButton);
 		buttonPanel.add(infButton);
+
+		// JTabbedPane tabPane = new JTabbedPane();
 
 		class BtnListener implements ActionListener {
 
@@ -112,6 +119,10 @@ public class Electrophoresis extends JFrame {
 		add("North", buttonPanel);
 		add("Center", masterPanel);
 		paramPanel.setDefaults();
+
+		tabPane.addTab("1ED", masterPanel);
+		tabPane.addTab("Emty", new JPanel());
+		add(tabPane);
 	}
 
 	public void addStandard() {
