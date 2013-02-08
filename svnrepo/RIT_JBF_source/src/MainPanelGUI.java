@@ -25,6 +25,8 @@ import java.awt.event.ItemEvent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JCheckBox;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
@@ -33,8 +35,8 @@ public class MainPanelGUI extends JPanel {
 
     private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
         "Thermolysin"};
-    private HelpButtonSwingVersion help;
-    private AboutButtonSwingVersion about;
+    private JButton help;
+    private JButton about;
     private static JTextArea inputArea; // static so ProteinFrame can interact with it.
     private JTextField lowerRange;
     private JTextField upperRange;
@@ -60,8 +62,28 @@ public class MainPanelGUI extends JPanel {
         constraints.insets = new Insets(1, 5, 1, 5);
 
         JPanel infoButtonsPanel = new JPanel();
-        help = new HelpButtonSwingVersion();
-        about = new AboutButtonSwingVersion();
+        help = new JButton("Help");
+        help.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                } catch(IOException i){
+                    System.err.println( i.getMessage());
+                }
+            }
+        });
+        about = new JButton("About");
+        about.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                } catch(IOException i){
+                    System.err.println( i.getMessage());
+                }
+            }
+        });
         infoButtonsPanel.add(help);
         infoButtonsPanel.add(about);
         constraints.gridx = 0;

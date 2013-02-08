@@ -18,7 +18,8 @@ public class JBioFrameworkMain extends JFrame {
     private Electro2D electro2D;
     private MainPanelGUI spectrometer;
     private Welcome welcome;
-    /*private [NameOfClass] [user-created reference]*/
+    private Tutorial tutorial;
+    /*private [NameOfClass] [user-created reference];*/
 
     public static void main(String[] args) {
         JBioFrameworkMain jbfMain = new JBioFrameworkMain();
@@ -33,13 +34,15 @@ public class JBioFrameworkMain extends JFrame {
         electro2D = new Electro2D();
         spectrometer = new MainPanelGUI();
         welcome = new Welcome();
+        tutorial = new Tutorial();
         /*[user-created reference] = new [name of class]()*/
 
-        tabbedPane = new JTabbedPane();
-
+        /**/tabbedPane = new JTabbedPane();/**/
         tabbedPane.addTab("Welcome", welcome);
         tabbedPane.addTab("Electro2D", electro2D);
         tabbedPane.addTab("Mass Spectrometer", spectrometer);
+
+        tabbedPane.addTab("test", tutorial);
         /*tabbedPane.addTab(["user-created name (to be displayed)], [user-created reference]);*/
 
         add(tabbedPane);

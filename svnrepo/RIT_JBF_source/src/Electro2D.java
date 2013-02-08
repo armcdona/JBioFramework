@@ -39,7 +39,7 @@ public class Electro2D extends JPanel implements ActionListener {
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
     private JLabel animationChooser;      //select animation to control
-    private RangeChoiceSwingVersion rangeChooser;     //select the range for IEF
+    private JComboBox rangeChooser;     //select the range for IEF
     private DotThread dotThread;          //thread controlling the SDS-PAGE
                                           //animation
     private JButton colorkey;      //protein color key
@@ -51,7 +51,7 @@ public class Electro2D extends JPanel implements ActionListener {
     private boolean rangeReload;      //determines whether or not the user 
                                       //enters a pH range manually or not
 
-    private PercentAcrylamideSwingVersion  percentAcrylamide; //the Choices for entering the
+    private JComboBox  percentAcrylamide; //the Choices for entering the
                                                               //% acrylamide for the gel
     private Vector<JLabel>                 rangeLabels;
     private Vector<JLabel>                 mwLabels;
@@ -136,7 +136,6 @@ public class Electro2D extends JPanel implements ActionListener {
         // @TODO: Consider consolidating all protein actions into a singular dialog for protein "Management"
         JButton addProteinButton    = new JButton("Add Proteins");
         addProteinButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 getSequenceData();
             }
@@ -144,7 +143,6 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JButton removeProteinButton = new JButton("Remove Proteins");
         removeProteinButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 removeHighlightedProteins();
             }
@@ -152,7 +150,6 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JButton searchButton = new JButton("Search Protein Field");
         searchButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 openProteinSearch();
             }
@@ -160,7 +157,6 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JButton displayProteinsButton = new JButton("Display Protein List");
         displayProteinsButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 displayProteinList();
             }
@@ -169,7 +165,6 @@ public class Electro2D extends JPanel implements ActionListener {
         colorkey = new JButton("Color Key");
         colorkey.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                //To change body of implemented methods use File | Settings | File Templates.
                 ColorFrame key;
                 key = new ColorFrame();
                 key.showKey();
@@ -182,10 +177,20 @@ public class Electro2D extends JPanel implements ActionListener {
 
         animationChooser = new JLabel("IEF");
 
-        rangeChooser     = new RangeChoiceSwingVersion(this);
+        rangeChooser     = new JComboBox();
 
 	    // init %Acrylamide field and set initial value to 15
-        percentAcrylamide = new PercentAcrylamideSwingVersion();
+        percentAcrylamide = new JComboBox();
+        percentAcrylamide.addItem( "5" );
+        percentAcrylamide.addItem( "7.5" );
+        percentAcrylamide.addItem( "10" );
+        percentAcrylamide.addItem( "15" );
+        percentAcrylamide.addItem( "18" );
+        percentAcrylamide.addItem( "4 - 15" );
+        percentAcrylamide.addItem( "4 - 20" );
+        percentAcrylamide.addItem( "8 - 16" );
+        percentAcrylamide.addItem( "10 - 20" );
+        percentAcrylamide.setSelectedItem( "15" );
 
         sequences         = new Vector();
         sequenceTitles    = new Vector();

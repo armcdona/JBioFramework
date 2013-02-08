@@ -65,7 +65,6 @@ public class Welcome extends JPanel{
 	//////////////////////////////
 		GridBagConstraints c = new GridBagConstraints();
 
-		
 		/*left panel*/
 		lP = new JPanel(new GridBagLayout());
 		lP.setBackground(Color.gray);;
@@ -198,5 +197,5 @@ public class Welcome extends JPanel{
 		this.add(lP);
 		this.add(rP);
         this.setVisible(true);
-	}   
+	}
 }
