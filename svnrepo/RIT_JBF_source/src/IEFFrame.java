@@ -120,8 +120,8 @@ public class IEFFrame extends Frame {
 	}
     }
 
-	public IEFFrame(IEFProteinSwingVersion elementAt) {
-		// temporary  constructor created for fix compiling error 
-	}
+//	public IEFFrame(IEFProteinSwingVersion elementAt) {
+//		// temporary  constructor created for fix compiling error 
+//	}
 
 }
