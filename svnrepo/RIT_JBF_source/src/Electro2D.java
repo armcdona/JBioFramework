@@ -38,7 +38,7 @@ public class Electro2D extends JPanel implements ActionListener {
     private JButton secondProt; //loads second file for comparison
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
-    private AnimationChooserSwingVersion animationChooser;      //select animation to control
+    private JLabel animationChooser;      //select animation to control
     private RangeChoiceSwingVersion rangeChooser;     //select the range for IEF
     private DotThread dotThread;          //thread controlling the SDS-PAGE
                                           //animation
@@ -180,7 +180,7 @@ public class Electro2D extends JPanel implements ActionListener {
         stopButton       = new StopButtonSwingVersion(this);
         restartButton    = new RestartButtonSwingVersion(this);
 
-        animationChooser = new AnimationChooserSwingVersion();
+        animationChooser = new JLabel("IEF");
 
         rangeChooser     = new RangeChoiceSwingVersion(this);
 
