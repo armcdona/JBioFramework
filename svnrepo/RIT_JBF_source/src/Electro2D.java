@@ -35,14 +35,14 @@ public class Electro2D extends JPanel implements ActionListener {
     private StopButtonSwingVersion stopButton;        //stops animation
     private RestartButtonSwingVersion restartButton;  //restarts animation
     private JButton csvButton;          //writes to csv file
-    private CompareProteinsButtonSwingVersion secondProt; //loads second file for comparison
+    private JButton secondProt; //loads second file for comparison
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
     private AnimationChooserSwingVersion animationChooser;      //select animation to control
     private RangeChoiceSwingVersion rangeChooser;     //select the range for IEF
     private DotThread dotThread;          //thread controlling the SDS-PAGE
                                           //animation
-    private ColorKeyButtonSwingVersion colorkey;      //protein color key
+    private JButton colorkey;      //protein color key
     private IEFThread iefThread;          //thread controlling IEF animation
     private boolean resetPressed;         //detects whether reset was pressed
                                           //or not 
@@ -111,7 +111,13 @@ public class Electro2D extends JPanel implements ActionListener {
 	    resetPressed        = false;
 	    rangeReload         = false;
 	    gelCanvas           = new GelCanvas(this);
-	    secondProt          = new CompareProteinsButtonSwingVersion(this);
+	    secondProt          = new JButton("Compare Proteins");
+        secondProt.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                    getSequenceData2();
+                    PlayButtonSwingVersion.setCompare(true);
+            }
+        });
         csvButton           = new JButton("Record to CSV");
         csvButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -152,9 +158,17 @@ public class Electro2D extends JPanel implements ActionListener {
                 displayProteinList();
             }
         });
-        
-	    colorkey = new ColorKeyButtonSwingVersion();
-	
+
+        colorkey = new JButton("Color Key");
+        colorkey.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                //To change body of implemented methods use File | Settings | File Templates.
+                ColorFrame key;
+                key = new ColorFrame();
+                key.showKey();
+            }
+        });
+
         playButton       = new PlayButtonSwingVersion(this);
         stopButton       = new StopButtonSwingVersion(this);
         restartButton    = new RestartButtonSwingVersion(this);
@@ -262,7 +276,6 @@ public class Electro2D extends JPanel implements ActionListener {
         firstPanel.add(about);
         leftPanel.add(firstPanel);
 
-
         JPanel secondPanel = new JPanel();
         secondPanel.add(addProteinButton);
         leftPanel.add(secondPanel);
@@ -352,8 +365,8 @@ public class Electro2D extends JPanel implements ActionListener {
      * displays the incrementing pH values above the gel after the IEF
      * animation.
      *
-     * @param loc - the location of the label
-     * @param value - the value to be placed on the label
+     * [at]param loc - the location of the label
+     * [at]param value - the value to be placed on the label
      */
     public ArrayList<Integer> showPH() {
 
