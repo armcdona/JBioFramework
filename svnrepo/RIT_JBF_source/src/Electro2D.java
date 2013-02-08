@@ -56,7 +56,7 @@ public class Electro2D extends JPanel implements ActionListener {
     private Vector<JLabel>                 rangeLabels;
     private Vector<JLabel>                 mwLabels;
     private WebGenerator                   web;               //generates the website
-    private GenerateHTMLButtonSwingVersion webButton;
+    private JButton webButton;
     
     /** protein data vectors **/
     private String        lastFileLoaded    = "";           //name of the last data file loaded
@@ -89,6 +89,8 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * This method initializes all GUI components.
      */
+    private Electro2D electro2D;
+
     public Electro2D() {
 
         proteinListFrame = new SingleProteinListFrame("Protein Lists", this);
@@ -99,7 +101,12 @@ public class Electro2D extends JPanel implements ActionListener {
         proteinList2 = new java.awt.List();
 
         web          = new WebGenerator(this);
-        webButton    = new GenerateHTMLButtonSwingVersion(this);
+        webButton    = new JButton("Generate HTML Page");
+        webButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                    new HTMLGenScreen(electro2D);
+            }
+        });
 	
 	    //read in deactivated range Image
         rangeImage          = new RangeImage(
