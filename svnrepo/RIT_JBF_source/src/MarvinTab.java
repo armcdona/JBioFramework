@@ -13,7 +13,7 @@ import chemaxon.marvin.beans.MSketchPane;
 import chemaxon.marvin.common.UserSettings;
 import chemaxon.marvin.sketch.SketchParameterConstants;
 
-public class MarvinTab {
+public class MarvinTab extends JPanel {
 
 	private JTextArea textarea = new JTextArea(10,50);
 
@@ -35,7 +35,7 @@ public class MarvinTab {
 		return settings;
 	}
 
-	private JComponent createMainPanel() {
+	public JComponent createMainPanel() {
 		JPanel topPanel = new JPanel();
 		MSketchPane sketch = createSketchPane();
 		JPanel sketchPanel = new JPanel();
