@@ -20,13 +20,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * @author Win-Air
  * 
  */
 
-public class Parameters extends JPanel {
+public class Parameters extends JPanel implements Constants {
 	protected Electrophoresis parent;
 	protected int std1Ref;
 	protected int std2Ref;
@@ -51,6 +53,109 @@ public class Parameters extends JPanel {
 	protected Protein stdArray[];
 	protected Acrylamide selectedGel;
 
+	// handel the events for speed selection + voltage .
+	// private class RadioButtonsHandler implements ItemListener,
+	// ChangeListener,
+	// ActionListener {
+	//
+	// @Override
+	// public void itemStateChanged(ItemEvent e) {
+	// // TODO Auto-generated method stub
+	//
+	// e.getStateChange();
+	// if (e.equals(fiftyV)) {
+	// selectedSpeed = low;
+	// setSpeed(selectedSpeed);
+	// System.out.println("lol");
+	//
+	// }
+	// if (e.equals(hundredV)) {
+	// selectedSpeed = medium;
+	// setSpeed(selectedSpeed);
+	//
+	// }
+	// if (e.equals(oneFiftyV)) {
+	// selectedSpeed = high;
+	// setSpeed(selectedSpeed);
+	//
+	// }
+	// if (e.equals(twoHundredV)) {
+	// selectedSpeed = highX2;
+	// setSpeed(selectedSpeed);
+	//
+	// }
+	// if (e.getSource().equals(slow)) {
+	//
+	// setAnimationSpeed(slow);
+	// }
+	// if (e.getSource().equals(moderate)) {
+	// setAnimationSpeed(moderate);
+	// }
+	// if (e.getSource().equals(fast)) {
+	// setAnimationSpeed(fast);
+	// System.out.println("llkjbjhv");
+	// }
+	//
+	// }
+	//
+	// @Override
+	// public void actionPerformed(ActionEvent e) {
+	//
+	// if (e.equals(fiftyV)) {
+	// selectedSpeed = low;
+	// setSpeed(selectedSpeed);
+	// System.out.println("selected voltage is " + fiftyV
+	// + " speed is " + selectedSpeed);
+	//
+	// }
+	// if (e.equals(hundredV)) {
+	// selectedSpeed = medium;
+	// setSpeed(selectedSpeed);
+	// System.out.println("selected voltage is " + fiftyV
+	// + " speed is " + selectedSpeed);
+	//
+	// }
+	// if (e.equals(oneFiftyV)) {
+	// selectedSpeed = high;
+	// setSpeed(selectedSpeed);
+	//
+	// System.out.println("selected voltage is " + fiftyV
+	// + " speed is " + selectedSpeed);
+	//
+	// }
+	// if (e.equals(twoHundredV)) {
+	// selectedSpeed = highX2;
+	// setSpeed(selectedSpeed);
+	// System.out.println("selected voltage is " + fiftyV
+	// + " speed is " + selectedSpeed);
+	//
+	// }
+	// if (e.getSource().equals(slow)) {
+	//
+	// setAnimationSpeed(slow);
+	// System.out.println("animtion sepeed ");
+	// }
+	// if (e.getSource().equals(moderate)) {
+	// setAnimationSpeed(moderate);
+	// }
+	// if (e.getSource().equals(fast)) {
+	// setAnimationSpeed(fast);
+	// System.out.println("llkjbjhv");
+	// }
+	//
+	// }
+	//
+	// @Override
+	// public void stateChanged(ChangeEvent arg0) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	//
+	// }// end class RadioButtonsHandler
+
+	/*
+	 * constructor
+	 */
 	Parameters(Electrophoresis electrophoresis) {
 
 		low = 0.80000000000000004D;
@@ -162,20 +267,70 @@ public class Parameters extends JPanel {
 		JRadioButton hundredV = new JRadioButton("100V");
 		JRadioButton oneFiftyV = new JRadioButton("150V", true);
 		JRadioButton twoHundredV = new JRadioButton("200V");
+
+		slowbutton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				selectedSpeed = low;
+				setSpeed(selectedSpeed);
+				System.out.println("speed " + selectedSpeed);
+			}
+		});
+
+		oneFiftyV.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				selectedSpeed = medium;
+				setSpeed(selectedSpeed);
+				System.out.println("speed " + selectedSpeed);
+
+			}
+		});
+		twoHundredV.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				selectedSpeed = high;
+				setSpeed(selectedSpeed);
+				System.out.println("speed " + selectedSpeed);
+
+			}
+		});
+
 		// Listen to RadioButtons
 		// Register buttons Listeners
-
-		ListHandler handler = new ListHandler();
-		RadioButtonsHandler rHandler = new RadioButtonsHandler();
-
-		slowbutton.addItemListener(rHandler);
-		modbutton.addItemListener(rHandler);
-		fastbutton.addItemListener(rHandler);
-
-		fiftyV.addItemListener(rHandler);
-		hundredV.addItemListener(rHandler);
-		oneFiftyV.addItemListener(rHandler);
-		twoHundredV.addItemListener(rHandler);
+		// RadioButtonsHandler rHandler = new RadioButtonsHandler();
+		//
+		// slowbutton.addItemListener(rHandler);
+		// slowbutton.addChangeListener(rHandler);
+		// slowbutton.addActionListener(rHandler);
+		//
+		// modbutton.addItemListener(rHandler);
+		// modbutton.addActionListener(rHandler);
+		// modbutton.addChangeListener(rHandler);
+		//
+		// fastbutton.addItemListener(rHandler);
+		// fastbutton.addActionListener(rHandler);
+		// fastbutton.addItemListener(rHandler);
+		//
+		// fiftyV.addItemListener(rHandler);
+		// fiftyV.addActionListener(rHandler);
+		//
+		// hundredV.addItemListener(rHandler);
+		// hundredV.addActionListener(rHandler);
+		//
+		// oneFiftyV.addItemListener(rHandler);
+		// oneFiftyV.addActionListener(rHandler);
+		// twoHundredV.addItemListener(rHandler);
+		// twoHundredV.addActionListener(rHandler);
 
 		speed.add(fastbutton);
 		speed.add(modbutton);
@@ -201,7 +356,6 @@ public class Parameters extends JPanel {
 		voltagePanel.setLayout(new GridLayout(2, 1));
 		voltageSub1Panel.add(new Label("Voltage "));
 		voltageSub2Panel.setLayout(new GridLayout(1, 4));
-
 		voltage.add(fiftyV);
 		voltage.add(hundredV);
 		voltage.add(oneFiftyV);
@@ -243,50 +397,56 @@ public class Parameters extends JPanel {
 		dropPanel.add(labelPanel2);
 		controlPanel.setLayout(new GridLayout(2, 2, 8, 8));
 
-		final JButton addStdButton = new JButton("Add Strandard");
-		final JButton addSampleButton = new JButton("Add Sample");
-		final JButton startButton = new JButton("Start Run");
-		final JButton stopButton = new JButton("Stop Run");
+		// create the
+		JButton addStdButton = new JButton("Add Strandard");
+		// add anonymous inner listener
+		addStdButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				parent.startRun(stdArray, dye1, dye2, selectedSample);
+
+			}
+		});
+
+		JButton addSampleButton = new JButton("Add Sample");
+
+		addSampleButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				parent.addSample();
+
+			}
+		});
+		JButton startButton = new JButton("Start Run");
+
+		startButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.stopRun();
+				parent.setPlotData(stdArray, selectedSample, dye1);
+			}
+		});
+
+		JButton stopButton = new JButton("Stop Run");
+
+		stopButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 
 		controlPanel.add(addStdButton);
 		controlPanel.add(addSampleButton);
 		controlPanel.add(startButton);
 		controlPanel.add(stopButton);
-
-		// handle controlPanel events
-		class ButtonListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				if (e.getSource().equals(startButton)) {
-
-					parent.startRun(stdArray, dye1, dye2, selectedSample);
-					System.out.println("Cool");
-				}
-
-				if (e.getSource().equals(stopButton)) {
-					parent.stopRun();
-					parent.setPlotData(stdArray, selectedSample, dye1);
-
-				}
-				if (e.getSource().equals(addSampleButton)) {
-					parent.addSample();
-
-				}
-				if (e.getSource().equals(addStdButton)) {
-					parent.addStandard();
-
-				}
-			}
-
-		}
-
-		ButtonListener bls = new ButtonListener();
-		addStdButton.addActionListener(bls);
-		addSampleButton.addActionListener(bls);
-		startButton.addActionListener(bls);
-		stopButton.addActionListener(bls);
 
 		add(headerPanel);
 		add(dropPanel);
@@ -408,13 +568,13 @@ public class Parameters extends JPanel {
 	}
 
 	private void createCheckBoxes() {
-		final JCheckBox standard1 = new JCheckBox(stdArray[std1Ref].name);
-		final JCheckBox standard2 = new JCheckBox(stdArray[std2Ref].name);
-		final JCheckBox standard3 = new JCheckBox(stdArray[std3Ref].name);
-		final JCheckBox standard4 = new JCheckBox(stdArray[std4Ref].name);
-		final JCheckBox standard5 = new JCheckBox(stdArray[std5Ref].name);
-		final JCheckBox standard6 = new JCheckBox(stdArray[std6Ref].name);
-		final JCheckBox standard7 = new JCheckBox(stdArray[std7Ref].name);
+		final JCheckBox standard1 = new JCheckBox(stdArray[std1Ref].abbr);
+		final JCheckBox standard2 = new JCheckBox(stdArray[std2Ref].abbr);
+		final JCheckBox standard3 = new JCheckBox(stdArray[std3Ref].abbr);
+		final JCheckBox standard4 = new JCheckBox(stdArray[std4Ref].abbr);
+		final JCheckBox standard5 = new JCheckBox(stdArray[std5Ref].abbr);
+		final JCheckBox standard6 = new JCheckBox(stdArray[std6Ref].abbr);
+		final JCheckBox standard7 = new JCheckBox(stdArray[std7Ref].abbr);
 
 		standardPanel.add(standard1);
 		standardPanel.add(standard2);
@@ -437,42 +597,36 @@ public class Parameters extends JPanel {
 					stdArray[std1Ref].selected = standard1.isSelected();
 					if (stdArray[std1Ref].selected)
 						parent.displayProtein(stdArray[std1Ref]);
-					System.out.println("btn1 selected");
 
 				}
 				if (source == standard2) {
 					stdArray[std2Ref].selected = standard2.isSelected();
 					if (stdArray[std2Ref].selected)
 						parent.displayProtein(stdArray[std2Ref]);
-					System.out.println("btn 2");
 
 				}
 				if (source == standard3) {
 					stdArray[std3Ref].selected = standard3.isSelected();
 					if (stdArray[std3Ref].selected)
 						parent.displayProtein(stdArray[std3Ref]);
-					System.out.println("btn 2");
 
 				}
 				if (source == standard4) {
 					stdArray[std4Ref].selected = standard4.isSelected();
 					if (stdArray[std4Ref].selected)
 						parent.displayProtein(stdArray[std4Ref]);
-					System.out.println("btn 2");
 
 				}
 				if (source == standard5) {
 					stdArray[std5Ref].selected = standard5.isSelected();
 					if (stdArray[std5Ref].selected)
 						parent.displayProtein(stdArray[std5Ref]);
-					System.out.println("btn 2");
 
 				}
 				if (source == standard6) {
 					stdArray[std6Ref].selected = standard6.isSelected();
 					if (stdArray[std6Ref].selected)
 						parent.displayProtein(stdArray[std6Ref]);
-					System.out.println("btn 2");
 
 				}
 				if (source == standard7) {
@@ -480,19 +634,15 @@ public class Parameters extends JPanel {
 					if (stdArray[std7Ref].selected)
 						parent.displayProtein(stdArray[std7Ref]);
 
-					System.out.println("btn 2");
-
 				}
 				if (e.getStateChange() == ItemEvent.DESELECTED) {
 
-					System.out.println("Item Deslected");
 				}
 
 			}
 
 		}// end class StandardsListListener
 		StandardsListListener sll = new StandardsListListener();
-
 		standard1.addItemListener(sll);
 		standard2.addItemListener(sll);
 		standard3.addItemListener(sll);
@@ -527,6 +677,7 @@ public class Parameters extends JPanel {
 			}
 			if (unknown5.name.equals(e)) {
 				selectedSample = unknown5;
+				// lol
 				parent.displayProtein(unknown5);
 
 			}
@@ -631,47 +782,4 @@ public class Parameters extends JPanel {
 
 	}
 
-	class RadioButtonsHandler implements ItemListener {
-
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			// TODO Auto-generated method stub
-
-			e.getStateChange();
-			if (e.equals(fiftyV)) {
-				selectedSpeed = low;
-				setSpeed(selectedSpeed);
-				System.out.println("lol");
-
-			}
-			if (e.equals(hundredV)) {
-				selectedSpeed = medium;
-				setSpeed(selectedSpeed);
-
-			}
-			if (e.equals(oneFiftyV)) {
-				selectedSpeed = high;
-				setSpeed(selectedSpeed);
-
-			}
-			if (e.equals(twoHundredV)) {
-				selectedSpeed = highX2;
-				setSpeed(selectedSpeed);
-
-			}
-			if (e.getSource().equals(slow)) {
-
-				setAnimationSpeed(slow);
-			}
-			if (e.getSource().equals(moderate)) {
-				setAnimationSpeed(moderate);
-			}
-			if (e.getSource().equals(fast)) {
-				setAnimationSpeed(fast);
-				System.out.println("llkjbjhv");
-			}
-
-		}
-
-	}// end class RadioButtonsHandler
 }

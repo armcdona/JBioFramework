@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * @author Bader Alharbi
  *
  */
 public class Sample

@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.GridLayout;
@@ -35,6 +36,7 @@ public class Electrophoresis extends JFrame {
 	}
 
 	public Electrophoresis() {
+
 		buttonPanel = new JPanel();
 		masterPanel = new JPanel();
 		leftPanel = new JPanel();
@@ -43,8 +45,7 @@ public class Electrophoresis extends JFrame {
 		// test
 
 		rightPanel = new JPanel();
-		rightPanel.setPreferredSize(new Dimension(250, 500));
-		JTabbedPane tabPane = new JTabbedPane();
+		rightPanel.setPreferredSize(new Dimension(300, 480));
 
 		paramPanel = new Parameters(this);
 		simPanel = new Simulation(this);
@@ -107,6 +108,7 @@ public class Electrophoresis extends JFrame {
 		rightPanel.setLayout(rightLayout);
 		rightPanel.add("simulation", simPanel);
 		rightPanel.add("data", dataPanel);
+		
 		leftLayout = new CardLayout();
 		leftPanel.setLayout(leftLayout);
 		leftPanel.add("parameters", paramPanel);
@@ -120,9 +122,10 @@ public class Electrophoresis extends JFrame {
 		add("Center", masterPanel);
 		paramPanel.setDefaults();
 
-		tabPane.addTab("1ED", masterPanel);
-		tabPane.addTab("Emty", new JPanel());
-		add(tabPane);
+//		tabPane.addTab("1ED", masterPanel);
+//		tabPane.addTab("Data Panel", dataPanel);
+//		tabPane.addTab("Plot panel", plotPanel);
+//		add(tabPane);
 	}
 
 	public void addStandard() {
@@ -137,32 +140,32 @@ public class Electrophoresis extends JFrame {
 		rightLayout.show(rightPanel, "Simulation");
 	}
 
-	public boolean action(Event event, Object obj) {
-		if (event.target instanceof JButton)
-			return handleButton(obj);
-		else
-			return false;
-	}
-
-	public boolean handleButton(Object obj) {
-		if ("Set Parameters".equals(obj)) {
-			leftLayout.show(leftPanel, "parameters");
-			return true;
-		}
-		if ("Protein Info".equals(obj)) {
-			rightLayout.show(rightPanel, "data");
-			return true;
-		}
-		if ("Simulation".equals(obj)) {
-			rightLayout.show(rightPanel, "simulation");
-			return true;
-		}
-		if ("Plot Results".equals(obj)) {
-			leftLayout.show(leftPanel, "dataplot");
-			return true;
-		} else
-			return false; // TODO testing
-	}
+	// public boolean action(Event event, Object obj) {
+	// if (event.target instanceof JButton)
+	// return handleButton(obj);
+	// else
+	// return false;
+	// }
+	//
+	// public boolean handleButton(Object obj) {
+	// if ("Set Parameters".equals(obj)) {
+	// leftLayout.show(leftPanel, "parameters");
+	// return true;
+	// }
+	// if ("Protein Info".equals(obj)) {
+	// rightLayout.show(rightPanel, "data");
+	// return true;
+	// }
+	// if ("Simulation".equals(obj)) {
+	// rightLayout.show(rightPanel, "simulation");
+	// return true;
+	// }
+	// if ("Plot Results".equals(obj)) {
+	// leftLayout.show(leftPanel, "dataplot");
+	// return true;
+	// } else
+	// return false; // TODO testing
+	// }
 
 	public void setAcrylaminde(Acrylamide acrylamide) {
 		simPanel.setAcrylamide(acrylamide);
