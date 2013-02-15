@@ -1,8 +1,10 @@
 /**
- *  The main applet class, responsible for GUI setup and more.
+ * GUI and main class for 2D Electrophoresis simulation
  *
- * @author Adam Bazinet
- * @author Jill Zapoticznyj
+ * @author  Adam Bazinet
+ * @author  Jill Zapoticznyj
+ * @contrib Benjamin Russell (brr1922@rit.edu)
+ * @contrib Aidan Sawyer (aks5238@rit.edu)
  *
  * Created 4/17/03
  */
@@ -22,28 +24,21 @@ import java.awt.Font;
  */
 public class Electro2D extends JPanel implements ActionListener {
 
-    private FileFrame fileFrame;          //pop up for loading file data
-    private SingleProteinListFrame proteinListFrame;       //pop up for displaying protein lists
-    private ProteinListButton proteinListButton;
-    
+    private FileFrame                     fileFrame;        //pop up for loading file data
+    private SingleProteinListFrame        proteinListFrame; //pop up for displaying protein lists
+
     /** components of the main applet **/
-    private JButton about;
-    private JButton help;
     private GelCanvas gelCanvas;          //area where animation takes place
-    private AddProteinButtonSwingVersion addProteinButton;   //brings up file frame
-    private RemoveProteinButton removeProteinButton;  //removes proteins
     private PlayButtonSwingVersion playButton;        //starts/pauses animation
     private StopButtonSwingVersion stopButton;        //stops animation
     private RestartButtonSwingVersion restartButton;  //restarts animation
     private JButton csvButton;          //writes to csv file
-    private CompareProteinsButtonSwingVersion secondProt; //loads second file for comparison
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
     private AnimationChooserSwingVersion animationChooser;      //select animation to control
     private RangeChoiceSwingVersion rangeChooser;     //select the range for IEF
     private DotThread dotThread;          //thread controlling the SDS-PAGE
                                           //animation
-    private ColorKeyButtonSwingVersion colorkey;      //protein color key
     private IEFThread iefThread;          //thread controlling IEF animation
     private boolean resetPressed;         //detects whether reset was pressed
                                           //or not 
@@ -51,259 +46,311 @@ public class Electro2D extends JPanel implements ActionListener {
     private Graphics graphics;
     private boolean rangeReload;      //determines whether or not the user 
                                       //enters a pH range manually or not
-    private SearchProteinFieldButtonSwingVersion searchButton; //opens a frame which allows the
-    //user to search through the proteins for specific information
 
-    private PercentAcrylamideSwingVersion percentAcrylamide;  //the Choices for entering the
-                                          //% acrylamide for the gel
-    private Vector<JLabel> rangeLabels;
-    private Vector<JLabel> mwLabels;
-    private WebGenerator web;             //generates the website
-    private GenerateHTMLButtonSwingVersion webButton;
+    private PercentAcrylamideSwingVersion  percentAcrylamide; //the Choices for entering the
+                                                              //% acrylamide for the gel
+    private Vector<JLabel>                 rangeLabels;
+    private Vector<JLabel>                 mwLabels;
+    private WebGenerator                   web;               //generates the website
     
-
-
     /** protein data vectors **/
-    private String lastFileLoaded = "";   //name of the last data file loaded
-    private double minMW;
-    private double maxMW;
-    private double minPi;
-    private double maxPi;
-    private Vector sequences;             //sequence data    
-    private Vector sequenceTitles;        //sequence titles
-    private Vector molecularWeights;      //molecular weights of proteins
-    private Vector piValues;              //pI values of proteins  
-    private Vector functions;             //functions of proteins
+    private String        lastFileLoaded    = "";           //name of the last data file loaded
+    private double        minMW;
+    private double        maxMW;
+    private double        minPi;
+    private double        maxPi;
+    private Vector        sequences;                        //sequence data
+    private Vector        sequenceTitles;                   //sequence titles
+    private Vector        molecularWeights;                 //molecular weights of proteins
+    private Vector        piValues;                         //pI values of proteins
+    private Vector        functions;                        //functions of proteins
 
-    private boolean set2ndFile = false;
+    private boolean       set2ndFile        = false;
     private java.awt.List proteinList2;
-    private Vector sequences2;
-    private Vector sequenceTitles2 = new Vector();
-    private Vector functions2;
-    private Vector molecularWeights2;
-    private Vector piValues2;
-    private FileFrame fileFrame2;
-    private boolean sequencesReady;
+    private Vector        sequences2;
+    private Vector        sequenceTitles2   = new Vector();
+    private Vector        functions2;
+    private Vector        molecularWeights2;
+    private Vector        piValues2;
+    private FileFrame     fileFrame2;
+    private boolean       sequencesReady;
 
-    private JPanel header;
-    private JLabel header0;
-    private JPanel leftPanel;
-    private JPanel pHPanel;
-    private JPanel mWPanel;
+    private JPanel        header;
+    private JLabel        header0;
+    private JPanel        leftPanel;
+    private JPanel        pHPanel;
+    private JPanel        mWPanel;
 
     /**
      * This method initializes all GUI components.
      */
-    public Electro2D() {	
+    public Electro2D() {
 
-	proteinListFrame = new SingleProteinListFrame( "Protein Lists", this);
-	fileFrame = new FileFrame(this, 1);  //init frame
-	fileFrame2 = new FileFrame(this, 2);
-	fileFrame.setResizable(false);    //don't allow user to change size
-        proteinList = new java.awt.List();
+        proteinListFrame = new SingleProteinListFrame("Protein Lists", this);
+        fileFrame        = new FileFrame(this, 1);                            //init frame
+        fileFrame2       = new FileFrame(this, 2);
+        fileFrame.setResizable(false); //don't allow user to change size
+        proteinList  = new java.awt.List();
         proteinList2 = new java.awt.List();
 
-	web = new WebGenerator( this );
-	webButton = new GenerateHTMLButtonSwingVersion(this);
+        web          = new WebGenerator(this);
+        JButton webButton = new JButton("Generate HTML Page");
+        webButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new HTMLGenScreen(Electro2D.this);
+            }
+        });
 	
-	//read in deactivated range Image
-	rangeImage = new RangeImage(
-		     Toolkit.getDefaultToolkit().getImage(
-					    "rangeSelectDeactivated.jpg" ) );
+	    //read in deactivated range Image
+        rangeImage          = new RangeImage(
+                Toolkit.getDefaultToolkit().getImage(
+                        "rangeSelectDeactivated.jpg"));
 
-	rangeLabels = new Vector<JLabel>();
-	mwLabels = new Vector();
-	resetPressed = false;
-	rangeReload = false;
-	gelCanvas = new GelCanvas(this);
-	secondProt = new CompareProteinsButtonSwingVersion(this);
-	searchButton = new SearchProteinFieldButtonSwingVersion(this);
-	csvButton = new JButton("Record to CSV");
-    csvButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            writeToCSV(); //really confused as to why we don't put the logic right here
-        }
-    });
-	addProteinButton = new AddProteinButtonSwingVersion(this);
-	removeProteinButton = new RemoveProteinButton(this);
-	colorkey = new ColorKeyButtonSwingVersion();
+        rangeLabels         = new Vector<JLabel>();
+	    mwLabels            = new Vector();
+	    resetPressed        = false;
+	    rangeReload         = false;
+	    gelCanvas           = new GelCanvas(this);
+        JButton compareButton = new JButton("Compare Proteins");
+        compareButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getSequenceData2();
+                PlayButtonSwingVersion.setCompare(true);
+            }
+        });
+
+        csvButton           = new JButton("Record to CSV");
+        csvButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                writeToCSV(); //really confused as to why we don't put the logic right here
+            }
+        });
+
+        // Help/About buttons
+        JButton aboutButton = new JButton("About");
+        aboutButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File f = new File( "HTML Files" + File.separator + "about.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                }catch(IOException i){
+                    JOptionPane.showMessageDialog(Electro2D.this, "The help files could not be loaded!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        JButton helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                } catch(IOException i){
+                    JOptionPane.showMessageDialog(Electro2D.this, "The help files could not be loaded!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        // Add/Remove/List/Search protein buttons
+        // @TODO: Consider consolidating all protein actions into a singular dialog for protein "Management"
+        JButton addProteinButton    = new JButton("Add Proteins");
+        addProteinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                getSequenceData();
+            }
+        });
+
+        JButton removeProteinButton = new JButton("Remove Proteins");
+        removeProteinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                removeHighlightedProteins();
+            }
+        });
+
+        JButton searchButton = new JButton("Search Protein Field");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                openProteinSearch();
+            }
+        });
+
+        JButton displayProteinsButton = new JButton("Display Protein List");
+        displayProteinsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                displayProteinList();
+            }
+        });
+
+        JButton colorKey = new JButton("Color Key");
+        colorKey.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new ColorFrame().showKey();
+            }
+        });
 	
-	playButton = new PlayButtonSwingVersion(this);
-	stopButton = new StopButtonSwingVersion(this);
-	restartButton = new RestartButtonSwingVersion(this);
+        playButton       = new PlayButtonSwingVersion(this);
+        stopButton       = new StopButtonSwingVersion(this);
+        restartButton    = new RestartButtonSwingVersion(this);
 
-	animationChooser = new AnimationChooserSwingVersion();
+        animationChooser = new AnimationChooserSwingVersion();
 
-	rangeChooser = new RangeChoiceSwingVersion( this );
+        rangeChooser     = new RangeChoiceSwingVersion(this);
 
-	// init %Acrylamide field and set initial value to 15
-	percentAcrylamide = new PercentAcrylamideSwingVersion();
+	    // init %Acrylamide field and set initial value to 15
+        percentAcrylamide = new PercentAcrylamideSwingVersion();
 
-	sequences = new Vector();
-	sequenceTitles = new Vector();
-	molecularWeights = new Vector();
-	piValues = new Vector();
-        sequencesReady = false;
+        sequences         = new Vector();
+        sequenceTitles    = new Vector();
+        molecularWeights  = new Vector();
+        piValues          = new Vector();
+        sequencesReady    = false;
 
-	proteinListFrame = new SingleProteinListFrame( "Protein Lists", this);
-	proteinListButton = new ProteinListButton( this );
+        proteinListFrame  = new SingleProteinListFrame("Protein Lists", this);
 
+        
        /*
         * new code for designing a Swing GUI; uses JPanels and layout managers
         * to arrange the buttons and labels to look similar to how the old awt
         * code did it
         */
 
-       this.setLayout(new GridBagLayout());
-       GridBagConstraints c = new GridBagConstraints();
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
        
-       leftPanel = new JPanel();
-       leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
-       JPanel rightPanel = new JPanel();
-       rightPanel.setLayout(new GridBagLayout());
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(new GridBagLayout());
 
-       c.weightx = 1.0;
-       c.weighty = 1.0;
-       c.gridx = 0;
-       c.gridy = 0;
-       c.insets = (new Insets(0, 10, 0, 10));
-       this.add(leftPanel, c);
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.gridx   = 0;
+        c.gridy   = 0;
+        c.insets  = (new Insets(0, 10, 0, 10));
+        this.add(leftPanel, c);
 
-       c.gridx = 1;
-       c.gridy = 0;
-       this.add(rightPanel, c);
+        c.gridx = 1;
+        c.gridy = 0;
+        this.add(rightPanel, c);
 
-       GridBagConstraints constraint = new GridBagConstraints();
+        GridBagConstraints constraint = new GridBagConstraints();
 
-       constraint.gridx = 1;
-       constraint.gridy = 0;
-       constraint.fill = GridBagConstraints.BOTH;
-       constraint.ipady = 50;
-       constraint.ipadx = 650;
-       pHPanel = new JPanel();
-       pHPanel.setLayout(null);
-       rightPanel.add(pHPanel, constraint);
+        constraint.gridx =   1;
+        constraint.gridy =   0;
+        constraint.fill  = GridBagConstraints.BOTH;
+        constraint.ipady =  50;
+        constraint.ipadx = 650;
+        pHPanel          = new JPanel();
+        pHPanel.setLayout(null);
+        rightPanel.add(pHPanel, constraint);
 
-       constraint.gridx = 0;
-       constraint.gridy = 1;
-       constraint.ipady = 10;
-       constraint.ipadx = 40;
-       mWPanel = new JPanel();
-       mWPanel.setLayout(null);
-       rightPanel.add(mWPanel, constraint);
+        constraint.gridx =  0;
+        constraint.gridy =  1;
+        constraint.ipady = 10;
+        constraint.ipadx = 40;
+        mWPanel          = new JPanel();
+        mWPanel.setLayout(null);
+        rightPanel.add(mWPanel, constraint);
 
-       constraint.gridx = 1;
-       constraint.gridy = 1;
-       constraint.ipady = 450;
-       constraint.ipadx = 650;
-       rightPanel.add(gelCanvas, constraint);
+        constraint.gridx =   1;
+        constraint.gridy =   1;
+        constraint.ipady = 450;
+        constraint.ipadx = 650;
+        rightPanel.add(gelCanvas, constraint);
 
-       JPanel header = new JPanel(new GridBagLayout());
-       c.gridy = 0;
-       header0 = new JLabel("2-Dimensional Electrophoresis");
-       header0.setFont(new Font("SansSerif", Font.BOLD, 18));
-       header.add(header0,c);
-       leftPanel.add(header);
+        JPanel header = new JPanel(new GridBagLayout());
+        c.gridy = 0;
+        header0 = new JLabel("2-Dimensional Electrophoresis");
+        header0.setFont(new Font("SansSerif", Font.BOLD, 18));
+        header.add(header0,c);
+        leftPanel.add(header);
 
-       JPanel firstPanel = new JPanel();
-       c.gridy = 1;
-       help = new JButton("Help");
-       help.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
-                try{
-                    BrowserLauncher.openHTMLFile(f);
-                } catch(IOException i){
-                    System.err.println( i.getMessage());
-                }
-            }
-       });
-       firstPanel.add(help);
-       about = new JButton("About");
-       about.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                File f = new File( "HTML Files" + File.separator + "about.html" );
-                try{
-                    BrowserLauncher.openHTMLFile(f);
-                }catch(IOException i){
-                    System.err.println(i.getMessage());
-                    i.printStackTrace();
-                }
-            }
-       });
-       firstPanel.add(about);
-       leftPanel.add(firstPanel);
+        JPanel firstPanel = new JPanel();
+        c.gridy = 1;
+        firstPanel.add(helpButton);
+        firstPanel.add(aboutButton);
+        leftPanel.add(firstPanel);
 
 
-       JPanel secondPanel = new JPanel();
-       secondPanel.add(addProteinButton);
-       leftPanel.add(secondPanel);
+        JPanel secondPanel = new JPanel();
+        secondPanel.add(addProteinButton);
+        leftPanel.add(secondPanel);
 
-       JPanel thirdPanel = new JPanel();
-       thirdPanel.setLayout(new GridLayout(1, 1, 0, 0));
-       JPanel innerPanel = new JPanel();
-       innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
-       thirdPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Current Animation", TitledBorder.CENTER, TitledBorder.TOP));
-       innerPanel.add(animationChooser);
-       thirdPanel.add(innerPanel);
-       leftPanel.add(thirdPanel);
+        JPanel thirdPanel = new JPanel();
+        thirdPanel.setLayout(new GridLayout(1, 1, 0, 0));
+        JPanel innerPanel = new JPanel();
+        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+        thirdPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Current Animation", TitledBorder.CENTER, TitledBorder.TOP));
+        innerPanel.add(animationChooser);
+        thirdPanel.add(innerPanel);
+        leftPanel.add(thirdPanel);
 
-       JPanel fourthPanel = new JPanel();
-       fourthPanel.setLayout(new GridLayout(1, 3, 2, 2));
-       fourthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Animation Buttons", TitledBorder.CENTER, TitledBorder.TOP));
-       fourthPanel.add(playButton);
-       fourthPanel.add(stopButton);
-       fourthPanel.add(restartButton);
-       leftPanel.add(fourthPanel);
+        JPanel fourthPanel = new JPanel();
+        fourthPanel.setLayout(new GridLayout(1, 3, 2, 2));
+        fourthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Animation Buttons", TitledBorder.CENTER, TitledBorder.TOP));
+        fourthPanel.add(playButton   );
+        fourthPanel.add(stopButton   );
+        fourthPanel.add(restartButton);
+        leftPanel.add(fourthPanel);
 
-       JPanel fifthPanel = new JPanel();
-       fifthPanel.setLayout(new GridLayout(1, 1, 0, 0));
-       fifthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Choose pH", TitledBorder.CENTER, TitledBorder.TOP));
-       fifthPanel.add(rangeChooser);
-       leftPanel.add(fifthPanel);
+        JPanel fifthPanel = new JPanel();
+        fifthPanel.setLayout(new GridLayout(1, 1, 0, 0));
+        fifthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Choose pH", TitledBorder.CENTER, TitledBorder.TOP));
+        fifthPanel.add(rangeChooser);
+        leftPanel.add(fifthPanel);
 
-       JPanel sixthPanel = new JPanel();
-       sixthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Choose Acrylamide %", TitledBorder.CENTER, TitledBorder.TOP));
-       sixthPanel.setLayout(new GridLayout(1, 1, 0, 0));
-       sixthPanel.add(percentAcrylamide);
-       leftPanel.add(sixthPanel);
+        JPanel sixthPanel = new JPanel();
+        sixthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Choose Acrylamide %", TitledBorder.CENTER, TitledBorder.TOP));
+        sixthPanel.setLayout(new GridLayout(1, 1, 0, 0));
+        sixthPanel.add(percentAcrylamide);
+        leftPanel.add(sixthPanel);
        
-       JPanel seventhPanel = new JPanel();
-       JLabel additionalOptions = new JLabel("Additional Options");
-       additionalOptions.setFont(new Font("SansSerif", Font.BOLD, 16));
-       seventhPanel.add(additionalOptions);
-       leftPanel.add(seventhPanel);
+        JPanel seventhPanel = new JPanel();
+        JLabel additionalOptions = new JLabel("Additional Options");
+        additionalOptions.setFont(new Font("SansSerif", Font.BOLD, 16));
+        seventhPanel.add(additionalOptions);
+        leftPanel.add(seventhPanel);
 
-       JPanel eighthPanel = new JPanel();
-       eighthPanel.add(proteinListButton);
-       leftPanel.add(eighthPanel);
+        JPanel eighthPanel = new JPanel();
+        eighthPanel.add(displayProteinsButton);
+        leftPanel.add(eighthPanel);
 
-       JPanel ninthPanel = new JPanel();
-       ninthPanel.add(secondProt);
-       //leftPanel.add(ninthPanel); Removed compare protein functionality until it is useful.
+        // @TODO: This code is dead. Will we be actually using it anytime?
+        JPanel ninthPanel = new JPanel();
+        ninthPanel.add(compareButton);
+        //leftPanel.add(ninthPanel); Removed compare protein functionality until it is useful.
 
-       JPanel tenthPanel = new JPanel();
-       tenthPanel.add(searchButton);
-       leftPanel.add(tenthPanel);
+        JPanel tenthPanel = new JPanel();
+        tenthPanel.add(searchButton);
+        leftPanel.add(tenthPanel);
 
-       JPanel eleventhPanel = new JPanel();
-       eleventhPanel.add(webButton);
-       leftPanel.add(eleventhPanel);
+        JPanel eleventhPanel = new JPanel();
+        eleventhPanel.add(webButton);
+        leftPanel.add(eleventhPanel);
 
-       JPanel twelfPanel = new JPanel();
-       twelfPanel.add(csvButton);
-       leftPanel.add(twelfPanel);
+        JPanel twelfPanel = new JPanel();
+        twelfPanel.add(csvButton);
+        leftPanel.add(twelfPanel);
 
-       JPanel thirteenthPanel = new JPanel();
-       thirteenthPanel.add(colorkey);
-       leftPanel.add(thirteenthPanel);
+        JPanel thirteenthPanel = new JPanel();
+        thirteenthPanel.add(colorKey);
+        leftPanel.add(thirteenthPanel);
 
     }
 
     /**
      * Accessor method for the leftPanel instance variable so that
-     * GelCanvasSwingVersion can correctly set its getMinimumSize() method.
+     * GelCanvas can correctly set its getMinimumSize() method.
      *
      * @return the leftPanel variable that holds all of the buttons
      */
@@ -315,43 +362,43 @@ public class Electro2D extends JPanel implements ActionListener {
      * Any drawing on the applet panel itself is done here.
      */
 
-    public void displayProtList(){
-	
-	proteinListFrame.setVisible(true);
-	proteinListFrame.validate();
+    public void displayProteinList() {
+
+        proteinListFrame.setVisible(true);
+        proteinListFrame.validate();
     }
 
     /**
      * displays the incrementing pH values above the gel after the IEF
      * animation.
      *
-     * parameter loc - the location of the label
-     * parameter value - the value to be placed on the label
+     * @param loc - the location of the label
+     * @param value - the value to be placed on the label
      */
     public ArrayList<Integer> showPH() {
 
-        double minPH = getMinRange();
-        double maxPH = getMaxRange();
+        double             minPH         = getMinRange();
+        double             maxPH         = getMaxRange();
         ArrayList<Integer> linePositions = new ArrayList<Integer>();
 
-        double pHOffset = (maxPH-minPH)/7;
-        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        double             pHOffset      = (maxPH - minPH) / 7;
+        DecimalFormat      twoDForm      = new DecimalFormat("#.##");
         pHOffset = Double.valueOf(twoDForm.format(pHOffset));
 
-        int labelOffset = pHPanel.getWidth()/7;
+        int labelOffset = pHPanel.getWidth() / 7;
         for(int i = 0; i < 8; i++) {
             JLabel newLabel;
-            if(i==7) {
+            if (i == 7) {
                 newLabel = new JLabel(twoDForm.format(maxPH));
-                newLabel.setBounds(pHPanel.getWidth() - 35, pHPanel.getHeight()-15, 35, 10);
-            } else {
-                newLabel = new JLabel(twoDForm.format(minPH + i*pHOffset));
-                newLabel.setBounds(1 + i*labelOffset, pHPanel.getHeight()-15, 35, 10);
+                newLabel.setBounds(pHPanel.getWidth() - 35, pHPanel.getHeight() - 15, 35, 10);
+            }else {
+                newLabel = new JLabel(twoDForm.format(minPH + i * pHOffset));
+                newLabel.setBounds(1 + i * labelOffset, pHPanel.getHeight() - 15, 35, 10);
             }
             pHPanel.add(newLabel);
             rangeLabels.add(newLabel);
-            if(i != 0) {
-                linePositions.add((gelCanvas.getX() +(i*labelOffset) -9));
+            if (i != 0) {
+                linePositions.add((gelCanvas.getX() + (i*labelOffset) - 9));
             }
             newLabel.repaint();
         }
@@ -362,22 +409,22 @@ public class Electro2D extends JPanel implements ActionListener {
      * This method removes the labels that show the pH values.  It is called
      * when the restart button is pressed to clear the canvas.
      */
-    public void clearpH(){
+    public void clearpH() {
 
 
 	// remove each of the labels from the applet's image
-	for( int i = 0; i < rangeLabels.size(); i++ ){
-	    pHPanel.remove( (JLabel)rangeLabels.elementAt( i ) );
-	}
+        for( int i = 0; i < rangeLabels.size(); i++ ) {
+            pHPanel.remove((JLabel) rangeLabels.elementAt(i));
+        }
 	
 	//remove all of the labels from the vector
-	rangeLabels.removeAllElements();
+        rangeLabels.removeAllElements();
 	//clear the molecular weight labels as well (since this method is
 	// only called from the restart button)
-	clearMW();
+        clearMW();
         pHPanel.removeAll();
 	//repaint the applet to reflect the change
-	this.repaint();
+        this.repaint();
     }
 
     /**
@@ -385,16 +432,16 @@ public class Electro2D extends JPanel implements ActionListener {
      * It is called every time the dot animation is stopped in order to reflect
      * the change in position of the dots.
      */
-    public void clearMW(){
+    public void clearMW() {
 	//remove all of the labels from the applet's image
-	for( int i = 0; i < mwLabels.size(); i++ ){
-	    this.remove((JLabel)mwLabels.elementAt(i));
-	}
+        for( int i = 0; i < mwLabels.size(); i++ ) {
+            this.remove((JLabel) mwLabels.elementAt(i));
+        }
 	//remove all of the labels from the vector
-	mwLabels.removeAllElements();
+        mwLabels.removeAllElements();
 	//repaint the applet to reflect the change
         mWPanel.removeAll();
-	this.repaint();
+        this.repaint();
     }
 
     /**
@@ -411,28 +458,28 @@ public class Electro2D extends JPanel implements ActionListener {
     public void showMW(int loc100, int loc50, int loc25, int loc10, boolean reMake) {
 
         JLabel hundredK = new JLabel("100K");
-	mwLabels.add(hundredK);
+        mwLabels.add(hundredK);
         mWPanel.add(hundredK);
-	((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 10, loc100, 40, 15);
-	((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
+        ((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 10, loc100, 40, 15);
+        ((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
 
-	JLabel fiftyK = new JLabel("50K");
+        JLabel fiftyK = new JLabel("50K");
         mwLabels.add(fiftyK);
         mWPanel.add(fiftyK);
-	((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc50, 30, 15);
-	((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
+        ((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc50, 30, 15);
+        ((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
 
-	JLabel twentyfiveK = new JLabel("25K");
+        JLabel twentyfiveK = new JLabel("25K");
         mwLabels.add(twentyfiveK);
         mWPanel.add(twentyfiveK);
-	((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc25, 30, 15);
-	((JLabel)mwLabels.elementAt(mwLabels.size() - 1 )).setForeground(Color.BLACK);
+        ((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc25, 30, 15);
+        ((JLabel)mwLabels.elementAt(mwLabels.size() - 1 )).setForeground(Color.BLACK);
 
-	JLabel tenK = new JLabel("10K");
+        JLabel tenK = new JLabel("10K");
         mwLabels.add(tenK);
         mWPanel.add(tenK);
-	((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc10, 30, 15);
-	((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
+        ((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc10, 30, 15);
+        ((JLabel)mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
 
     }
 
@@ -440,19 +487,19 @@ public class Electro2D extends JPanel implements ActionListener {
      * Changes the choice selected on the animationChooser Choice box to
      * SDS-PAGE after the IEF animation is completed.
      */
-    public void setSDS(){
+    public void setSDS() {
 
 	//chose the SDS-PAGE value in animationChooser
-	animationChooser.setText( "SDS-PAGE" );
+        animationChooser.setText("SDS-PAGE");
     }
 
     /**
      * Changes the choice selected on the animationChooser Choice box to
      * IEF after the reset button is pressed.
      */
-    public void setIEF(){
+    public void setIEF() {
 	//choose the IEF value in animationChooser
-	animationChooser.setText( "IEF" );
+        animationChooser.setText("IEF");
     }
 
     /**
@@ -460,46 +507,46 @@ public class Electro2D extends JPanel implements ActionListener {
      * component, or null if there is no top-level frame.
      */
     Frame getFrame(Component comp) {
-	Component theTop = null;
-	Component parent = comp;
+        Component theTop = null;
+        Component parent = comp;
 
-	while (parent != null) {
-	    theTop = parent;
-	    parent = parent.getParent();
-	}
+        while (parent != null) {
+            theTop = parent;
+            parent = parent.getParent();
+        }
 
-	return (theTop instanceof Frame ? (Frame)theTop : null);
+        return (theTop instanceof Frame ? (Frame) theTop : null);
     }
 
     /**
      * Brings up the TextField to enable a user to enter a range for
      * the IEF animation.
      */
-    public void allowSelectRange(){
-	if( !rangeReload ){
+    public void allowSelectRange() {
+        if (!rangeReload) {
 	    
 	    // remove the image and add the two text fields to allow the user
 	    // to enter a range
 
-	    remove( rangeImage );
-	    update( graphics );
-	    rangeReload = true;
-	}
+            remove(rangeImage);
+            update(graphics);
+            rangeReload = true;
+        }
     }
 
     /**
      * Disables the TextField that allows a range to be entered
      */
-    public void disableSelectRange(){
-	if( rangeReload ){
+    public void disableSelectRange() {
+        if (rangeReload) {
 	    
 	    // remove the two text fields and add the image to disable the
 	    // manual entry of a range
 
-	    add( rangeImage );
-	    update( graphics );
-	    rangeReload = false;
-	}
+            add(rangeImage);
+            update(graphics);
+            rangeReload = false;
+        }
     }
 
     /**
@@ -510,38 +557,37 @@ public class Electro2D extends JPanel implements ActionListener {
      *  Currently, supported file types are .fasta, .faa, .gbk, and .pdb.
      */
     public void getSequenceData() {
-
-	// display the fileFrame
-	fileFrame.toFront();
-	fileFrame.setVisible(true);
+	    // display the fileFrame
+        fileFrame.toFront();
+        fileFrame.setVisible(true);
     }
 
-    public void getSequenceData2(){
-	fileFrame2.toFront();
-	fileFrame2.setVisible(true);
+    public void getSequenceData2() {
+        fileFrame2.toFront();
+        fileFrame2.setVisible(true);
     }
 
     /**
      * Brings up a SwissProt-TrEMBL search for the particular protein
      * id provided
      */
-    public void showSwsSearchPage( String id ){
+    public void showSwsSearchPage(String id) {
 
-        BufferedReader buffer = null;
-        String searchID = new String();
+        BufferedReader buffer   = null;
+        String         searchID = new String();
 
         // Read in the address of Swiss search from the Search Addresses csv file
         // in the HTML files folder. It is on the third line in the csv file.
 
         try {
-            FileInputStream fileStream = new FileInputStream("HTML Files/Search Addresses.csv");
+            FileInputStream   fileStream  = new FileInputStream("HTML Files/Search Addresses.csv");
             InputStreamReader inputStream = new InputStreamReader(fileStream);
             buffer = new BufferedReader(inputStream);
         } catch (IOException ex) {
             System.out.println("File not found.");
         }
 
-        if(buffer != null) {
+        if (buffer != null) {
             try {
                 String line = buffer.readLine();
                 line = buffer.readLine();
@@ -559,40 +605,40 @@ public class Electro2D extends JPanel implements ActionListener {
         // Now use the read-in address with the protein sequence as an
         // extension as the URL of a webpage.
 
-        try{
-            searchPage = new URL( searchID );
-	}catch( MalformedURLException e ){
-	    System.err.println( "The error was " + e );
-	}
+        try {
+            searchPage = new URL(searchID);
+        }catch( MalformedURLException e ) {
+            System.err.println("The error was " + e);
+        }
 
-        if( searchPage != null ){
-	    try{
-	    BrowserLauncher.openURL( searchID );
-	    }catch(IOException e){System.err.println( e.getMessage());}
-	}
+        if (searchPage != null) {
+            try {
+                BrowserLauncher.openURL(searchID);
+            }catch(IOException e) {System.err.println(e.getMessage()); }
+        }
     }
 
    /**
      * Brings up a Blast search for the particular protein
      * sequence provided
      */
-    public void showBlastSearchPage( String seq ){
+    public void showBlastSearchPage(String seq) {
 
-        BufferedReader buffer = null;
-        String searchID = new String();
+        BufferedReader buffer   = null;
+        String         searchID = new String();
 
         // Read in the address of Blast search from the Search Addresses csv file
         // in the HTML files folder. It is on the second line in the csv file.
 
         try {
-            FileInputStream fileStream = new FileInputStream("HTML Files/Search Addresses.csv");
+            FileInputStream   fileStream  = new FileInputStream("HTML Files/Search Addresses.csv");
             InputStreamReader inputStream = new InputStreamReader(fileStream);
             buffer = new BufferedReader(inputStream);
         } catch (IOException ex) {
             System.out.println("File not found.");
         }
 
-        if(buffer != null) {
+        if (buffer != null) {
             try {
                 String line = buffer.readLine();
                 line = buffer.readLine();
@@ -609,40 +655,40 @@ public class Electro2D extends JPanel implements ActionListener {
         // Now use the read-in address with the protein sequence as an
         // extension as the URL of a webpage.
 
-        try{
-            searchPage = new URL( searchID );
-	}catch( MalformedURLException e ){
-	    System.err.println( "The error was " + e );
-	}
+        try {
+            searchPage = new URL(searchID);
+        }catch( MalformedURLException e ) {
+            System.err.println("The error was " + e);
+        }
 
-        if( searchPage != null ){
-	    try{
-	    BrowserLauncher.openURL( searchID );
-	    }catch(IOException e){System.err.println( e.getMessage());}
-	}
+        if (searchPage != null) {
+            try {
+                BrowserLauncher.openURL(searchID);
+            }catch(IOException e) {System.err.println(e.getMessage()); }
+        }
     }
 
     /**
      * Brings up GenBank search for the particular protein
      * id provided
      */
-    public void showSearchPage( String id ){
+    public void showSearchPage(String id) {
 
-        BufferedReader buffer = null;
-        String searchID = new String();
+        BufferedReader buffer   = null;
+        String         searchID = new String();
 
         // Read in the address of GenBank search from the Search Addresses csv file
         // in the HTML files folder. It is on the fifth line in the csv file.
 
         try {
-            FileInputStream fileStream = new FileInputStream("HTML Files/Search Addresses.csv");
+            FileInputStream   fileStream  = new FileInputStream("HTML Files/Search Addresses.csv");
             InputStreamReader inputStream = new InputStreamReader(fileStream);
             buffer = new BufferedReader(inputStream);
         } catch (IOException ex) {
             System.out.println("File not found.");
         }
 
-        if(buffer != null) {
+        if (buffer != null) {
             try {
                 String line = buffer.readLine();
                 line = buffer.readLine();
@@ -652,19 +698,19 @@ public class Electro2D extends JPanel implements ActionListener {
                 String[] brokenLine = line.split(",");
 
                 //get the name of the loaded file and figure out the extention
-                String filename = getLastFileLoaded();
-                String extention = filename.substring( filename.indexOf( "." ) + 1 );
+                String filename  = getLastFileLoaded();
+                String extention = filename.substring(filename.indexOf(".") + 1);
 
                 // if the extention is .pdb, create the proper search string for the
                 // URL by searching for the name of the pdb file.
-                if(extention.equals("pdb")) {
-        	    id = filename.substring( 0, filename.indexOf( "." ) );
-                    searchID = new String(brokenLine[4]+ id);
+                if (extention.equals("pdb")) {
+                    id       = filename.substring(0, filename.indexOf("."));
+                    searchID = new String(brokenLine[4] + id);
                 }
-                else{
+                else {
         	    // otherwise, use the id passed to the method as the name for
                     // the search.
-                    searchID = new String(brokenLine[5]+ id);
+                    searchID = new String(brokenLine[5] + id);
                 }
                 buffer.close();
             } catch (IOException ex) {
@@ -677,17 +723,17 @@ public class Electro2D extends JPanel implements ActionListener {
         // Now use the read-in address with the protein sequence as an
         // extension as the URL of a webpage.
 
-        try{
-            searchPage = new URL( searchID );
-	}catch( MalformedURLException e ){
-	    System.err.println( "The error was " + e );
-	}
+        try {
+            searchPage = new URL(searchID);
+        }catch( MalformedURLException e ) {
+            System.err.println("The error was " + e);
+        }
 
-        if( searchPage != null ){
-	    try{
-	    BrowserLauncher.openURL( searchID );
-	    }catch(IOException e){System.err.println( e.getMessage());}
-	}
+        if (searchPage != null) {
+            try {
+                BrowserLauncher.openURL(searchID);
+            }catch(IOException e) {System.err.println(e.getMessage()); }
+        }
 
 	/**
 	//create a URL object
@@ -737,89 +783,96 @@ public class Electro2D extends JPanel implements ActionListener {
      * Brings up Enzyme Commission search for the particular protein
      * id provided
      */
-    public void showECSearchPage( String id ){
+    public void showECSearchPage(String id) {
 	
-	int index = 0;
+        int index = 0;
 	//create a URL object
 	//URL searchPage = null;
-	String searchId = "";  //the name used in the search
-	Vector ecNums = new Vector(); //holds the EC numbers contained in the
-	                              // id string
+        String searchId = "";           //the name used in the search
+        Vector ecNums   = new Vector(); //holds the EC numbers contained in the
+                                        // id string
 	
-	while( id.length() > 0 && id.indexOf( "\u003B" ) != -1 ){
-	    ecNums.addElement( id.substring( 0, id.indexOf( "\u003B" ) ) );
-	    index = id.indexOf( "\u003B" );
-	    if( index + 1 == id.length() ){
-		id = "";
-	    }
-	    else{
-		id = id.substring( id.indexOf( "\u003B" ) + 1 );
-		id = id.trim();
-	    }
-	}
+        while (id.length() > 0 && id.indexOf("\u003B") != -1) {
+            ecNums.addElement(id.substring(0, id.indexOf("\u003B")));
+            index = id.indexOf("\u003B");
+            if (index + 1 == id.length()) {
+                id = "";
+            }
+            else {
+                id = id.substring(id.indexOf("\u003B") + 1);
+                id = id.trim();
+            }
+        }
 
-	searchId = "http\u003A\u002F\u002Fwww.genome.ad.jp\u002Fdbget-bin"+
-		"\u002Fwww_bget?enzyme+";
-	    for( int d = 0; d < ecNums.size(); d++ ){
-		ecNums.insertElementAt( (searchId +
-					 (String)ecNums.elementAt(d)), d );
-		ecNums.removeElementAt( d + 1 );
-	    }
+        searchId = "http\u003A\u002F\u002Fwww.genome.ad.jp\u002Fdbget-bin" +
+                   "\u002Fwww_bget?enzyme+";
+        for( int d = 0; d < ecNums.size(); d++ ) {
+            ecNums.insertElementAt((searchId                     +
+                                    (String) ecNums.elementAt(d)  ), d);
+            ecNums.removeElementAt(d + 1);
+        }
 
-	try{
+        try {
 	    //assign the search information to the URL
-	    for( int d = 0; d < ecNums.size(); d++ ){
-		ecNums.insertElementAt( (new URL((String)ecNums.elementAt(d))),
-					d );
-		ecNums.removeElementAt( d + 1 );
-	    }
-	}catch( MalformedURLException e ){
+            for( int d = 0; d < ecNums.size(); d++ ) {
+                ecNums.insertElementAt((new URL((String) ecNums.elementAt(d))),
+                                       d                                       );
+                ecNums.removeElementAt(d + 1);
+            }
+        }catch( MalformedURLException e ) {
 	    //catch and display any errors that occurred when assigning the
 	    //information to the URL
-	    System.err.println( "Bad URL: " + searchId );
-	}
-	catch( Exception f ){
-	    System.err.println( "The error was " + f.getMessage() );
-	}
+            System.err.println("Bad URL: " + searchId);
+        }
+        catch( Exception f ) {
+            System.err.println("The error was " + f.getMessage());
+        }
 
 	//if no errors occurred, open a new window with the search results
-	if( ecNums.size() != 0 ){
-	    try{
-	    for( int d = 0; d < ecNums.size(); d++ ){
-		BrowserLauncher.openURL( ((URL)ecNums.elementAt(d)).toString());
-	    }
-	    }catch(IOException e ){System.err.println( e.getMessage() );}
-	}
+        if (ecNums.size() != 0) {
+            try {
+                for( int d = 0; d < ecNums.size(); d++ ) {
+                    BrowserLauncher.openURL(((URL)ecNums.elementAt(d)).toString());
+                }
+            }catch(IOException e ) {System.err.println(e.getMessage()); }
+        }
     }
-    
+
     /**
      *  Cycles through the list and removes any highlighted proteins.
      */
     public void removeHighlightedProteins() {
-	selectedIndexes = proteinList.getSelectedIndexes();
-	String[] selectedItems = proteinList.getSelectedItems();
-	for(int x = 0; x < selectedIndexes.length; x++) {
-	    removeProteinbyTitle( selectedItems[ x ] );
-	    proteinList.remove(selectedIndexes[x] - x);
+        selectedIndexes = proteinList.getSelectedIndexes();
+        String[] selectedItems = proteinList.getSelectedItems();
+        for(int x = 0; x < selectedIndexes.length; x++) {
+            removeProteinbyTitle(selectedItems[ x ]);
+            proteinList.remove(selectedIndexes[x] - x);
 	    
-	}
-	if( sequenceTitles2 != null ){
-	    int[] selectedIndexes2 = proteinList2.getSelectedIndexes();
-	    selectedItems = proteinList2.getSelectedItems();
-	    for( int x = 0; x < selectedIndexes2.length; x++ ){
-		removeProteinbyTitle2( selectedItems[x] );
-		proteinList2.remove( selectedIndexes2[x]-x );
-	    }
-	}
+        }
+        if (sequenceTitles2 != null) {
+            int[] selectedIndexes2 = proteinList2.getSelectedIndexes();
+            selectedItems = proteinList2.getSelectedItems();
+            for( int x = 0; x < selectedIndexes2.length; x++ ) {
+                removeProteinbyTitle2(selectedItems[x]);
+                proteinList2.remove(selectedIndexes2[x] - x);
+            }
+        }
     }
-    
+
+    /**
+     * Opens the protein search dialog box
+     */
+    public void openProteinSearch() {
+        SearchProteinFunction proteinSearch = new SearchProteinFunction(this);
+    }
+
     /**
      * this method returns the voltage selected by the user
      *
      * @return a string
      */
-    public String getVoltage(){
-	return "50 V";
+    public String getVoltage() {
+        return "50 V";
     }
 
     /**
@@ -827,31 +880,31 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return max the maximum pH to be used in the simulation
      */
-    public double getMaxRange(){
+    public double getMaxRange() {
 	// set up the default maximum range of 10
-	Double max = new Double(10);
-	String ranges = (String) rangeChooser.getSelectedItem();
+        Double max    = new Double(10);
+        String ranges = (String) rangeChooser.getSelectedItem();
 	// if the user selected a range from the list, supply the correct max
-	if( ranges.equals( "3 - 10" ) ){
-	    max = 10.0;
+        if (ranges.equals("3 - 10")) {
+            max = 10.0;
             return (double) max;
-	}
+        }
 	
-	else if( ranges.equals( "4 - 7" ) ){
-	    max = 7.0;
+        else if (ranges.equals("4 - 7")) {
+            max = 7.0;
             return (double) max;
-	}
+        }
 	/**
          * if the user chose to enter their own value, first check to make sure
          * it is in the correct format
 	 */
-        else if (ranges.matches("\\d+.?\\d*-\\d+.?\\d*")){
+        else if (ranges.matches("\\d+.?\\d*-\\d+.?\\d*")) {
             /**
              * split the user's range into a String array so that Scanner can
              * find the correct Double
              */
             String[] lowAndHigh = ranges.split("-");
-            Scanner scan = new Scanner(lowAndHigh[1]);
+            Scanner  scan       = new Scanner(lowAndHigh[1]);
             max = scan.nextDouble();
             /**
              * the maximum pH cannot be below 0 or above 14 because a pH of any
@@ -860,13 +913,13 @@ public class Electro2D extends JPanel implements ActionListener {
             if ((max < 0) || (max > 14)) {
 
                 MessageFrame mess = new MessageFrame();
-                String m = max + " is not a valid number.  Please " +
-                    "press restart and try again using values between 0" +
-                    "and 14.";
-                mess.setMessage( m );
+                String       m    = max + " is not a valid number.  Please " +
+                                    "press restart and try again using values between 0" +
+                                    "and 14.";
+                mess.setMessage(m);
                 mess.setVisible(true);
 
-            } else {
+            }else {
                 // return the user's maximum pH
                 return (double) max;
 
@@ -879,56 +932,56 @@ public class Electro2D extends JPanel implements ActionListener {
          */
         return (double) max;
     }
-    
+
     /**
      * this method returns the minimum pH range that the user selected
      *
      * @return min the minimum pH to be used in the simulation
      */
 
-    public double getMinRange(){
+    public double getMinRange() {
         // set up the default minimum pH of 3
-        Double min = new Double(3);
-	String ranges = (String) rangeChooser.getSelectedItem();
+        Double min    = new Double(3);
+        String ranges = (String) rangeChooser.getSelectedItem();
         /**
          * if the user selected one of the provided choices set the minimum pH
          * to the appropriate value
          */
-	if( ranges.equals( "3 - 10" )){
-	    min = 3.0;
+        if (ranges.equals("3 - 10")) {
+            min = 3.0;
             return (double) min;
-	}
+        }
 
-	else if( ranges.equals( "4 - 7" ) ){
-	    min = 4.0;
+        else if (ranges.equals("4 - 7")) {
+            min = 4.0;
             return (double) min;
-	}
+        }
         /**
          * if the user chose to enter their own value, check to make sure that
          * it is in the correct format
          */
-	else if (ranges.matches("\\d+.?\\d*-\\d+.?\\d*")){
+        else if (ranges.matches("\\d+.?\\d*-\\d+.?\\d*")) {
             // make the scanner object to find the correct Double
             String[] lowAndHigh = ranges.split("-");
-            Scanner scan = new Scanner(lowAndHigh[0]);
+            Scanner  scan       = new Scanner(lowAndHigh[0]);
             min = scan.nextDouble();
             /**
              * the minimum pH cannot be below 0 or above 14 because a pH of any
              * other value is a physical impossibility
              */
             if ((min < 0) || (min > 14)) {
-                    
+
                 MessageFrame mess = new MessageFrame();
-                String m = min + " is not a valid number.  Please " +
-                    "press restart and try again using values between 0" +
-                    "and 14.";
-                mess.setMessage( m );
+                String       m    = min + " is not a valid number.  Please " +
+                                    "press restart and try again using values between 0" +
+                                    "and 14.";
+                mess.setMessage(m);
                 mess.setVisible(true);
-                    
-            } else {
+
+            }else {
                 // return the user's minimum pH value
                 return (double) min;
-                    
+
             }
 
         }
@@ -945,32 +998,32 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return percent
      */
-    public double getLowPercent(){
+    public double getLowPercent() {
 	// get the value in the text box
-	String value = (String) percentAcrylamide.getSelectedItem();
-	value = value.trim();
+        String value = (String) percentAcrylamide.getSelectedItem();
+        value = value.trim();
 	//return value;
-	double percent = -1;
+        double percent = -1;
 	
-	if( value.indexOf( "-" ) != -1 ){
-	    value = value.substring( 0, value.indexOf( "-" ) );
-	    value = value.trim();
-	}
+        if (value.indexOf("-") != -1) {
+            value = value.substring(0, value.indexOf("-"));
+            value = value.trim();
+        }
          // try to change the value into a number
-        try{
-	    percent = Double.parseDouble( value );
-	}catch( NumberFormatException e ){
+        try {
+            percent = Double.parseDouble(value);
+        }catch( NumberFormatException e ) {
 	    //if the value was not a valid number, display the error
 	    // message in a new frame
-	    MessageFrame mess = new MessageFrame();
-	    String m = value + " is not a valid number.  Please " +
-		"press restart and try again.";
-	    mess.setMessage( m );
-	    mess.setVisible(true);
+            MessageFrame mess = new MessageFrame();
+            String       m    = value + " is not a valid number.  Please " +
+                                		"press restart and try again.";
+            mess.setMessage(m);
+            mess.setVisible(true);
 	
-	}
+        }
 	
-	return percent;
+        return percent;
     }
 
     /**
@@ -978,34 +1031,34 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return percent
      */
-    public double getHighPercent(){
+    public double getHighPercent() {
 	// get the value in the text box
-	String value = (String) percentAcrylamide.getSelectedItem();
-	value = value.trim();
+        String value = (String) percentAcrylamide.getSelectedItem();
+        value = value.trim();
 	//return value;
-	double percent = -1;
+        double percent = -1;
 	
-	if( value.indexOf( "-" ) != -1 ){
-	    value = value.substring( value.indexOf( "-" ) + 1 );
-	    value = value.trim();
-	}
+        if (value.indexOf("-") != -1) {
+            value = value.substring(value.indexOf("-") + 1);
+            value = value.trim();
+        }
          // try to change the value into a number
-        try{
-	    percent = Double.parseDouble( value );
-	}catch( NumberFormatException e ){
+        try {
+            percent = Double.parseDouble(value);
+        }catch( NumberFormatException e ) {
 	    //if the value was not a valid number, display the error
 	    // message in a new frame
-	    MessageFrame mess = new MessageFrame();
-	    String m = value + " is not a valid number.  Please " +
-		"press restart and try again.";
-	    mess.setMessage( m );
-	    mess.setVisible(true);
+            MessageFrame mess = new MessageFrame();
+            String       m    = value + " is not a valid number.  Please " +
+                                		"press restart and try again.";
+            mess.setMessage(m);
+            mess.setVisible(true);
 	
-	}
+        }
 	
-	return percent;
+        return percent;
     }
-    
+
     
 
     /**
@@ -1013,15 +1066,15 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return a string
      */
-    public String getAnimationChoice(){
-	return (String) animationChooser.getText();
+    public String getAnimationChoice() {
+        return (String) animationChooser.getText();
     }
 
     /**
      * this method resets the play button's image to the play image
      */
-    public void resetPlay(){
-	playButton.resetPlay();
+    public void resetPlay() {
+        playButton.resetPlay();
     }
 
     /**
@@ -1031,14 +1084,14 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public void refreshProteinList() {
 	// removes everything from the list of proteins
-	proteinList.removeAll();
+        proteinList.removeAll();
 	// refreshes the list with the new protein titles
-	for(int x = 0; x < sequenceTitles.size(); x++) {
-	    proteinList.add((String)sequenceTitles.elementAt(x));
-	}
+        for(int x = 0; x < sequenceTitles.size(); x++) {
+            proteinList.add((String) sequenceTitles.elementAt(x));
+        }
         proteinListFrame.updateSequences(sequenceTitles, sequenceTitles2);
     }
-    
+
     /**
      * Given a protein title from proteinList, removes the protein's 
      * information from the vectors.
@@ -1046,16 +1099,16 @@ public class Electro2D extends JPanel implements ActionListener {
      * @param title the title to be removed
      */
     public boolean removeProteinbyTitle(String title) {
-	for(int x = 0; x < sequenceTitles.size(); x++) {
-	    if(((String)sequenceTitles.elementAt(x)).equals(title)) {
-		molecularWeights.removeElementAt(x);
-		piValues.removeElementAt(x);
-		sequenceTitles.removeElementAt(x);
-		return true;
-	    }
-	}
+        for(int x = 0; x < sequenceTitles.size(); x++) {
+            if (((String)sequenceTitles.elementAt(x)).equals(title)) {
+                molecularWeights.removeElementAt(x);
+                piValues.removeElementAt(x);
+                sequenceTitles.removeElementAt(x);
+                return true;
+            }
+        }
 	
-	return false;
+        return false;
     }
 
     /**
@@ -1064,26 +1117,26 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @param title the title to be removed
      */
-    public boolean removeProteinbyTitle2( String title ){
-	if( sequenceTitles2 != null ){
-	    for( int x = 0; x < sequenceTitles2.size(); x++ ){
-		if(((String)sequenceTitles2.elementAt(x)).equals(title)){
-		    molecularWeights2.removeElementAt(x);
-		    piValues2.removeElementAt(x);
-		    sequenceTitles2.removeElementAt(x);
-		    return true;
-		}
-	    }
-	}
-	return false;
+    public boolean removeProteinbyTitle2(String title) {
+        if (sequenceTitles2 != null) {
+            for( int x = 0; x < sequenceTitles2.size(); x++ ) {
+                if (((String)sequenceTitles2.elementAt(x)).equals(title)) {
+                    molecularWeights2.removeElementAt(x);
+                    piValues2.removeElementAt(x);
+                    sequenceTitles2.removeElementAt(x);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-    
+
     /***/
     public void refreshProteinList2() {
-	proteinList2.removeAll();
-	for( int x = 0; x < sequenceTitles2.size(); x++ ){
-	    proteinList2.add((String)sequenceTitles2.elementAt(x));
-	}
+        proteinList2.removeAll();
+        for( int x = 0; x < sequenceTitles2.size(); x++ ) {
+            proteinList2.add((String) sequenceTitles2.elementAt(x));
+        }
         proteinListFrame.updateSequences(sequenceTitles, sequenceTitles2);
     }
 
@@ -1093,14 +1146,14 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
 	//set up a new frame, give it ref. to the applet and the protein name
-	ProteinFrame proteinFrame = new ProteinFrame(this,
-						     e.getActionCommand(), 1);
+        ProteinFrame proteinFrame = new ProteinFrame(this,
+                                                     e.getActionCommand(), 1);
 	//proteinFrame.setResizable(false);
-	proteinFrame.setVisible(true);
+        proteinFrame.setVisible(true);
 	
-	if( playButton.getSdsStatus() ){
-	    gelCanvas.drawLocation( e.getActionCommand() );
-	}
+        if (playButton.getSdsStatus()) {
+            gelCanvas.drawLocation(e.getActionCommand());
+        }
     }
 
     /**
@@ -1108,34 +1161,34 @@ public class Electro2D extends JPanel implements ActionListener {
      * actionListener know that the SDS-PAGE portion of the animation
      * has not been drawn
      */
-    public void resetSdsStatus(){
-	playButton.resetSdsStatus();
+    public void resetSdsStatus() {
+        playButton.resetSdsStatus();
     }
 
     /**
      * Reinitializes the dotThread 
      */
-    public void restartThread(){
+    public void restartThread() {
 	//initializes the thread, sets a value, and calls the start method
-	dotThread = new DotThread( gelCanvas, this );
-	dotThread.startDots();
-	dotThread.start();
+        dotThread = new DotThread(gelCanvas, this);
+        dotThread.startDots();
+        dotThread.start    ();
     }
-    
+
     /**
      * this method is called by the reset button once it is pressed.
      * it lets the applet know it should reload the protein information
      */
-    public void setBool(){
-	resetPressed = true;
+    public void setBool() {
+        resetPressed = true;
     }
-    
+
     /**
      * This method lets the applet know that the information has already been
      * loaded and the reset button has not been pressed.
      */
-    public void resetBool(){
-	resetPressed = false;
+    public void resetBool() {
+        resetPressed = false;
     }
 
     /**
@@ -1144,18 +1197,18 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return resetPressed - state of reset button
      */
-    public boolean getBool(){
-	return resetPressed;
+    public boolean getBool() {
+        return resetPressed;
     }
 
     /**
      * This method reinitializes the IEFThread in charge of the IEF animation.
      */
-    public void restartIEF(){
+    public void restartIEF() {
 	//initializes the thread, sets a value and calls the start method
-	iefThread = new IEFThread( gelCanvas, this );
-	iefThread.setIEF();
-	iefThread.start();
+        iefThread = new IEFThread(gelCanvas, this);
+        iefThread.setIEF();
+        iefThread.start();
     }
 
     /**
@@ -1163,23 +1216,23 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return iefThread
      */
-    public IEFThread getIEFThread(){
-	return iefThread;
+    public IEFThread getIEFThread() {
+        return iefThread;
     }
 
     /**
      * This method resets a value for the IEF animation in the PlayButton class
      */
-    public void resetIEF(){
-	playButton.resetIEF();
+    public void resetIEF() {
+        playButton.resetIEF();
     }
-	
+
 
     /**
      * Stops the dotThread
      */
-    public void stopThread(){
-	dotThread.stopDots();
+    public void stopThread() {
+        dotThread.stopDots();
     }
 
     /**
@@ -1188,7 +1241,7 @@ public class Electro2D extends JPanel implements ActionListener {
      * @return lastFileLoaded
      */
     public String getLastFileLoaded() {
-	return lastFileLoaded;
+        return lastFileLoaded;
     }
 
     /**
@@ -1197,7 +1250,7 @@ public class Electro2D extends JPanel implements ActionListener {
      * @return gelCanvas
      */
     public GelCanvas getGel() {
-	return gelCanvas;
+        return gelCanvas;
     }
 
     /**
@@ -1208,15 +1261,15 @@ public class Electro2D extends JPanel implements ActionListener {
     public Vector getSequences() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copySequences = (Vector)sequences.clone();
+            Vector copySequences = (Vector) sequences.clone();
             sequences.clear();
-            if(positionsOne.get(0) > -1) {
+            if (positionsOne.get(0) > -1) {
                 for(int x = 0; x < positionsOne.size(); x++) {
                     sequences.add(copySequences.get(positionsOne.get(x)));
                 }
             }
         }
-	return sequences;
+        return sequences;
     }
 
     /**
@@ -1227,18 +1280,18 @@ public class Electro2D extends JPanel implements ActionListener {
     public Vector getSequenceTitles() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copySequenceTitles = (Vector)sequenceTitles.clone();
+            Vector copySequenceTitles = (Vector) sequenceTitles.clone();
             sequenceTitles.clear();
-            if(positionsOne.get(0) > -1) {
+            if (positionsOne.get(0) > -1) {
                 for(int x = 0; x < positionsOne.size(); x++) {
                     Integer temp = positionsOne.get(x);
-                    Object next = copySequenceTitles.get(temp);
+                    Object  next = copySequenceTitles.get(temp);
                     sequenceTitles.add(next);
                     //sequenceTitles.add(copySequenceTitles.get(positionsOne.get(x)));
                 }
             }
         }
-	return sequenceTitles;
+        return sequenceTitles;
     }
 
     /**
@@ -1246,8 +1299,8 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return dotThread
      */
-    public DotThread getThread(){
-	return dotThread;
+    public DotThread getThread() {
+        return dotThread;
     }
 
     /**
@@ -1258,15 +1311,15 @@ public class Electro2D extends JPanel implements ActionListener {
     public Vector getMolecularWeights() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copyMolecularWeights = (Vector)molecularWeights.clone();
+            Vector copyMolecularWeights = (Vector) molecularWeights.clone();
             molecularWeights.clear();
-            if(positionsOne.get(0) > -1) {
+            if (positionsOne.get(0) > -1) {
                 for(int x = 0; x < positionsOne.size(); x++) {
                     molecularWeights.add(copyMolecularWeights.get(positionsOne.get(x)));
                 }
             }
         }
-	return molecularWeights;
+        return molecularWeights;
     }
 
     /**
@@ -1275,20 +1328,20 @@ public class Electro2D extends JPanel implements ActionListener {
      * @return a string
      */
     public String getMWbyTitle(String title) {
-	for(int x = 0; x < sequenceTitles.size(); x++) {
-	    if(((String)sequenceTitles.elementAt(x)).equals(title)) {
-		return (String)molecularWeights.elementAt(x);
-	    }
-	}
+        for(int x = 0; x < sequenceTitles.size(); x++) {
+            if (((String)sequenceTitles.elementAt(x)).equals(title)) {
+                return (String) molecularWeights.elementAt(x);
+            }
+        }
 
-	if( sequenceTitles2 != null ){
-	    for( int x = 0; x < sequenceTitles2.size(); x++ ){
-		if(((String)sequenceTitles2.elementAt(x)).equals(title)){
-		    return (String)molecularWeights2.elementAt(x);
-		}
-	    }
-	}
-	return "";
+        if (sequenceTitles2 != null) {
+            for( int x = 0; x < sequenceTitles2.size(); x++ ) {
+                if (((String)sequenceTitles2.elementAt(x)).equals(title)) {
+                    return (String) molecularWeights2.elementAt(x);
+                }
+            }
+        }
+        return "";
     }
 
     /** 
@@ -1297,20 +1350,20 @@ public class Electro2D extends JPanel implements ActionListener {
      * @return a string
      */
     public String getFunctionbyTitle(String title) {
-	for(int x = 0; x < sequenceTitles.size(); x++) {
-	    if(((String)sequenceTitles.elementAt(x)).equals(title)) {
-		return (String)functions.elementAt(x);
-	    }
-	}
+        for(int x = 0; x < sequenceTitles.size(); x++) {
+            if (((String)sequenceTitles.elementAt(x)).equals(title)) {
+                return (String) functions.elementAt(x);
+            }
+        }
 
-	if( sequenceTitles2 != null ){
-	    for( int x = 0; x < sequenceTitles2.size(); x++ ){
-		if(((String)sequenceTitles2.elementAt(x)).equals(title)){
-		    return (String)functions2.elementAt(x);
-		}
-	    }
-	}
-	return "";
+        if (sequenceTitles2 != null) {
+            for( int x = 0; x < sequenceTitles2.size(); x++ ) {
+                if (((String)sequenceTitles2.elementAt(x)).equals(title)) {
+                    return (String) functions2.elementAt(x);
+                }
+            }
+        }
+        return "";
     }
 
     /**
@@ -1319,19 +1372,19 @@ public class Electro2D extends JPanel implements ActionListener {
      * @return a string
      */
     public String getPIbyTitle(String title) {
-	for(int x = 0; x < sequenceTitles.size(); x++) {
-	    if(((String)sequenceTitles.elementAt(x)).equals(title)) {
-		return (String)piValues.elementAt(x);
-	    }
-	}
-	if( sequenceTitles2 != null ){
-	    for( int x = 0; x < sequenceTitles2.size(); x++ ){
-		if(((String)sequenceTitles2.elementAt(x)).equals(title)){
-		    return (String)piValues2.elementAt(x);
-		}
-	    }
-	}
-	return "";
+        for(int x = 0; x < sequenceTitles.size(); x++) {
+            if (((String)sequenceTitles.elementAt(x)).equals(title)) {
+                return (String) piValues.elementAt(x);
+            }
+        }
+        if (sequenceTitles2 != null) {
+            for( int x = 0; x < sequenceTitles2.size(); x++ ) {
+                if (((String)sequenceTitles2.elementAt(x)).equals(title)) {
+                    return (String) piValues2.elementAt(x);
+                }
+            }
+        }
+        return "";
     }
 
     /**
@@ -1340,19 +1393,19 @@ public class Electro2D extends JPanel implements ActionListener {
      * @return a string
      */
     public String getSequencebyTitle(String title) {
-	for(int x = 0; x < sequenceTitles.size(); x++) {
-	    if(((String)sequenceTitles.elementAt(x)).equals(title)) {
-		return (String)sequences.elementAt(x);
-	    }
-	}
-	if( sequenceTitles2 != null ){
-	    for( int x = 0; x < sequenceTitles2.size(); x++ ){
-		if(((String)sequenceTitles2.elementAt(x)).equals(title)){
-		    return (String)sequences2.elementAt(x);
-		}
-	    }
-	}
-	return "";
+        for(int x = 0; x < sequenceTitles.size(); x++) {
+            if (((String)sequenceTitles.elementAt(x)).equals(title)) {
+                return (String) sequences.elementAt(x);
+            }
+        }
+        if (sequenceTitles2 != null) {
+            for( int x = 0; x < sequenceTitles2.size(); x++ ) {
+                if (((String)sequenceTitles2.elementAt(x)).equals(title)) {
+                    return (String) sequences2.elementAt(x);
+                }
+            }
+        }
+        return "";
     }
 
     /**
@@ -1363,28 +1416,28 @@ public class Electro2D extends JPanel implements ActionListener {
      * @param minpi the min pI val
      * @param maxpi the max pI val
      */
-    public void setMaxAndMinVals( double maxmw, double minmw, double maxpi, 
-				  double minpi ){
-	maxMW = maxmw;
-	minMW = minmw;
-	maxPi = maxpi;
-	minPi = minpi;
+    public void setMaxAndMinVals(double maxmw, double minmw, double maxpi,
+                                 double minpi                              ) {
+        maxMW = maxmw;
+        minMW = minmw;
+        maxPi = maxpi;
+        minPi = minpi;
     }
 
-    public double getMaxPi(){
-	return maxPi;
-    }
-    
-    public double getMinPi(){
-	return minPi;
-    }
-    
-    public double getMaxMW(){
-	return maxMW;
+    public double getMaxPi() {
+        return maxPi;
     }
 
-    public double getMinMW(){
-	return minMW;
+    public double getMinPi() {
+        return minPi;
+    }
+
+    public double getMaxMW() {
+        return maxMW;
+    }
+
+    public double getMinMW() {
+        return minMW;
     }
 
     /**
@@ -1395,15 +1448,15 @@ public class Electro2D extends JPanel implements ActionListener {
     public Vector getPiValues() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copyPiValues = (Vector)piValues.clone();
+            Vector copyPiValues = (Vector) piValues.clone();
             piValues.clear();
-            if(positionsOne.get(0) > -1) {
+            if (positionsOne.get(0) > -1) {
                 for(int x = 0; x < positionsOne.size(); x++) {
                     piValues.add(copyPiValues.get(positionsOne.get(x)));
                 }
             }
         }
-	return piValues;
+        return piValues;
     }
 
     /**
@@ -1411,40 +1464,40 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return functions
      */
-    public Vector getFunctions(){
+    public Vector getFunctions() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copyFunctions = (Vector)functions.clone();
+            Vector copyFunctions = (Vector) functions.clone();
             functions.clear();
-            if(positionsOne.get(0) > -1) {
+            if (positionsOne.get(0) > -1) {
                 for(int x = 0; x < positionsOne.size(); x++) {
                     functions.add(copyFunctions.get(positionsOne.get(x)));
                 }
             }
         }
-	return functions;
+        return functions;
     }
 
-    public Vector getPiValues2(){
+    public Vector getPiValues2() {
         Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
-            Vector copyPiValues2 = (Vector)piValues2.clone();
+            Vector copyPiValues2 = (Vector) piValues2.clone();
             piValues2.clear();
-            if(positionsTwo.get(0) > -1) {
+            if (positionsTwo.get(0) > -1) {
                 for(int x = 0; x < positionsTwo.size(); x++) {
                     piValues2.add(copyPiValues2.get(positionsTwo.get(x)));
                 }
             }
         }
-	return piValues2;
+        return piValues2;
     }
 
-    public Vector getSequences2(){
+    public Vector getSequences2() {
         Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
-            Vector copySequences2 = (Vector)sequences2.clone();
+            Vector copySequences2 = (Vector) sequences2.clone();
             sequences2.clear();
-            if(positionsTwo.get(0) > -1) {
+            if (positionsTwo.get(0) > -1) {
                 for(int x = 0; x < positionsTwo.size(); x++) {
                     sequences2.add(copySequences2.get(positionsTwo.get(x)));
                 }
@@ -1453,13 +1506,13 @@ public class Electro2D extends JPanel implements ActionListener {
         return sequences2;
     }
 
-    public Vector getSequenceTitles2(){
-        if(sequenceTitles2 != null) {
+    public Vector getSequenceTitles2() {
+        if (sequenceTitles2 != null) {
             Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
             if (positionsTwo.size() > 0) {
-                Vector copySequenceTitles2 = (Vector)sequenceTitles2.clone();
+                Vector copySequenceTitles2 = (Vector) sequenceTitles2.clone();
                 sequenceTitles2.clear();
-                if(positionsTwo.get(0) > -1) {
+                if (positionsTwo.get(0) > -1) {
                     for(int x = 0; x < positionsTwo.size(); x++) {
                         sequenceTitles2.add(copySequenceTitles2.get(positionsTwo.get(x)));
                     }
@@ -1470,52 +1523,52 @@ public class Electro2D extends JPanel implements ActionListener {
         return new Vector();
     }
 
-    public Vector getMolecularWeights2(){
+    public Vector getMolecularWeights2() {
         Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
-            Vector copyMolecularWeights2 = (Vector)molecularWeights2.clone();
+            Vector copyMolecularWeights2 = (Vector) molecularWeights2.clone();
             molecularWeights2.clear();
-            if(positionsTwo.get(0) > -1) {
+            if (positionsTwo.get(0) > -1) {
                 for(int x = 0; x < positionsTwo.size(); x++) {
                     molecularWeights2.add(copyMolecularWeights2.get(positionsTwo.get(x)));
                 }
             }
         }
-	return molecularWeights2;
+        return molecularWeights2;
     }
 
-    public Vector getFunctions2(){
+    public Vector getFunctions2() {
         Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
-            Vector copyFunctions2 = (Vector)functions2.clone();
+            Vector copyFunctions2 = (Vector) functions2.clone();
             functions2.clear();
-            if(positionsTwo.get(0) > -1) {
+            if (positionsTwo.get(0) > -1) {
                 for(int x = 0; x < positionsTwo.size(); x++) {
                     functions2.add(copyFunctions2.get(positionsTwo.get(x)));
                 }
             }
         }
-	return functions2;
+        return functions2;
     }
 
     /**
      * stores the name of the last file loaded
      */
     public void setLastFileLoaded(String l) {
-	lastFileLoaded = l;
+        lastFileLoaded = l;
     }
 
     /**
      * stores the vector of sequence data
      */
-    public void setSequences(Vector s){
-	sequences = s;
+    public void setSequences(Vector s) {
+        sequences      = s;
         sequencesReady = true;
     }
 
     /**
      * This method is used by ProteinListFrame to let Electro2D and
-     * GelCanvasSwingVersion know whether or not there are sequences available for
+     * GelCanvas know whether or not there are sequences available for
      * animiation.
      *
      * @param bool
@@ -1538,60 +1591,60 @@ public class Electro2D extends JPanel implements ActionListener {
      * sets the vector of sequence titles
      */
     public void setSequenceTitles(Vector st) {
-	sequenceTitles = st;
+        sequenceTitles = st;
     }
 
     /**
      * sets the vector of molecular weights
      */
     public void setMolecularWeights(Vector mw) {
-	molecularWeights = mw;
+        molecularWeights = mw;
     }
 
     /**
      * sets the vector of protein functions
      */
-    public void setFunctionValues( Vector fcn ){
-	functions = fcn;
+    public void setFunctionValues(Vector fcn) {
+        functions = fcn;
     }
 
     /**
      * sets the vector of pI values
      */
     public void setPiValues(Vector pi) {
-	piValues = pi;
+        piValues = pi;
     }
 
-    public void setSequences2( Vector s ){
-	sequences2 = new Vector();
-	sequences2 = s;
+    public void setSequences2(Vector s) {
+        sequences2     = new Vector();
+        sequences2     = s;
         sequencesReady = true;
     }
 
-    public void setSequenceTitles2( Vector st ){
-	sequenceTitles2 = new Vector();
-	sequenceTitles2 = st;
+    public void setSequenceTitles2(Vector st) {
+        sequenceTitles2 = new Vector();
+        sequenceTitles2 = st;
     }
 
-    public void setMolecularWeights2( Vector mw ){
-	molecularWeights2 = new Vector();
-	molecularWeights2 = mw;
+    public void setMolecularWeights2(Vector mw) {
+        molecularWeights2 = new Vector();
+        molecularWeights2 = mw;
     }
 
-    public void setPiValues2( Vector pi ){
-	piValues2 = new Vector();
-	piValues2 = pi;
+    public void setPiValues2(Vector pi) {
+        piValues2 = new Vector();
+        piValues2 = pi;
     }
-    public void setFunctionValues2( Vector fcn ){
-	functions2 = new Vector();
-	functions2 = fcn;
+    public void setFunctionValues2(Vector fcn) {
+        functions2 = new Vector();
+        functions2 = fcn;
     }
 
     /**
      * Standard applet methods.
      */
     public void start() { }
-    public void stop() { }
+    public void stop   () { }
     public void destroy() { }
 
     /**
@@ -1600,24 +1653,23 @@ public class Electro2D extends JPanel implements ActionListener {
      * @return a string
      */
     public String getAppletInfo() {
-	return "Electro2D...copyright" +
-                "" +
-                " 2003 Adam L Bazinet & Jill Zapoticznyj";
-    }   
-    
-    public void writeToCSV(){
-	CSVCreator csv = new CSVCreator( this );
-	csv.writeToCSV();
+        return "Electro2D...copyright" +
+               "" +
+               " 2003 Adam L Bazinet & Jill Zapoticznyj";
     }
     
-    public void generateWebPage(){
-	web.genFile( this.getLastFileLoaded() );
+    public void writeToCSV() {
+        CSVCreator csv = new CSVCreator(this);
+        csv.writeToCSV();
+    }
+
+    public void generateWebPage() {
+        web.genFile(this.getLastFileLoaded());
     }
 
     public void resetBothProteinLists() {
-        proteinList = new java.awt.List();
-        proteinList2 = new java.awt.List();
+        proteinList    = new java.awt.List();
+        proteinList2   = new java.awt.List();
         sequencesReady = false;
     }
-
-} //Electro2D
+}
