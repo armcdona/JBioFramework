@@ -8,7 +8,7 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class ProteinDotSwingVersion extends Component {
+public class ProteinDot extends Component {
 
     private Graphics graphic;
     private E2DProtein myProtein;
@@ -31,7 +31,7 @@ public class ProteinDotSwingVersion extends Component {
      * @param x the x coordinate for this dot
      * @param y the y coordinate for this dot
      */
-    public ProteinDotSwingVersion(E2DProtein pro, JPanel panel, double x, double y) {
+    public ProteinDot(E2DProtein pro, JPanel panel, double x, double y) {
         myProtein = pro;
 	myMolecularWeight = myProtein.getMW();
 	myColor = myProtein.getColor();
@@ -40,7 +40,7 @@ public class ProteinDotSwingVersion extends Component {
 	myY = y;
     }
 
-    public ProteinDotSwingVersion( Color c, JPanel panel, double x, double y) {
+    public ProteinDot(Color c, JPanel panel, double x, double y) {
 	myColor = c;
 	myPanel = panel;
 	myX = x;

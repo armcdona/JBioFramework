@@ -27,8 +27,8 @@ public class RestartButtonSwingVersion extends JButton implements ActionListener
 	electro2D.resetIEF();
 	IEFProtein.resetProtein();
 
-	if( ProteinDotSwingVersion.getShow() ){
-	    ProteinDotSwingVersion.setShow();
+	if( ProteinDot.getShow() ){
+	    ProteinDot.setShow();
 	    electro2D.stopThread();
 	}
 	g.restartCanvas();
