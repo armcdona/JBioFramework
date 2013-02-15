@@ -15,9 +15,10 @@ public class JBioFrameworkMain extends JFrame {
 
     public static final long serialVersionUID = 1L;
     private JTabbedPane tabbedPane;
+
+    private Welcome welcome;
     private Electro2D electro2D;
     private MainPanelGUI spectrometer;
-    private Welcome welcome;
     private Tutorial tutorial;
     /*private [NameOfClass] [user-created reference];*/
 

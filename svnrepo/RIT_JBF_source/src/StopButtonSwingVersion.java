@@ -19,7 +19,7 @@ public class StopButtonSwingVersion extends JButton implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-        GelCanvas g = electro2D.getGel();
+    GelCanvas g = electro2D.getGel();
 	g.clearIEF();
 	g.resetLocation();
 	g.resetRanges();

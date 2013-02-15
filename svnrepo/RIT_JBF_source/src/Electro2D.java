@@ -28,21 +28,17 @@ public class Electro2D extends JPanel implements ActionListener {
     private SingleProteinListFrame        proteinListFrame; //pop up for displaying protein lists
 
     /** components of the main applet **/
-    private JButton about;
-    private JButton help;
     private GelCanvas gelCanvas;          //area where animation takes place
     private PlayButtonSwingVersion playButton;        //starts/pauses animation
     private StopButtonSwingVersion stopButton;        //stops animation
     private RestartButtonSwingVersion restartButton;  //restarts animation
     private JButton csvButton;          //writes to csv file
-    private JButton secondProt; //loads second file for comparison
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
     private JLabel animationChooser;      //select animation to control
     private JComboBox rangeChooser;     //select the range for IEF
     private DotThread dotThread;          //thread controlling the SDS-PAGE
                                           //animation
-    private JButton colorkey;      //protein color key
     private IEFThread iefThread;          //thread controlling IEF animation
     private boolean resetPressed;         //detects whether reset was pressed
                                           //or not 
@@ -56,7 +52,7 @@ public class Electro2D extends JPanel implements ActionListener {
     private Vector<JLabel>                 rangeLabels;
     private Vector<JLabel>                 mwLabels;
     private WebGenerator                   web;               //generates the website
-    private JButton webButton;
+//    private GenerateHTMLButtonSwingVersion webButton;
     
     /** protein data vectors **/
     private String        lastFileLoaded    = "";           //name of the last data file loaded
@@ -101,10 +97,10 @@ public class Electro2D extends JPanel implements ActionListener {
         proteinList2 = new java.awt.List();
 
         web          = new WebGenerator(this);
-        webButton    = new JButton("Generate HTML Page");
+        JButton webButton = new JButton("Generate HTML Page");
         webButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    new HTMLGenScreen(electro2D);
+                new HTMLGenScreen(Electro2D.this);
             }
         });
 	
@@ -118,13 +114,14 @@ public class Electro2D extends JPanel implements ActionListener {
 	    resetPressed        = false;
 	    rangeReload         = false;
 	    gelCanvas           = new GelCanvas(this);
-	    secondProt          = new JButton("Compare Proteins");
-        secondProt.addActionListener(new ActionListener() {
+        JButton compareButton = new JButton("Compare Proteins");
+        compareButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    getSequenceData2();
-                    PlayButtonSwingVersion.setCompare(true);
+                getSequenceData2();
+                PlayButtonSwingVersion.setCompare(true);
             }
         });
+
         csvButton           = new JButton("Record to CSV");
         csvButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -132,10 +129,38 @@ public class Electro2D extends JPanel implements ActionListener {
             }
         });
 
+        // Help/About buttons
+        JButton aboutButton = new JButton("About");
+        aboutButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File f = new File( "HTML Files" + File.separator + "about.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                }catch(IOException i){
+                    JOptionPane.showMessageDialog(Electro2D.this, "The help files could not be loaded!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        JButton helpButton = new JButton("Help");
+        helpButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                } catch(IOException i){
+                    JOptionPane.showMessageDialog(Electro2D.this, "The help files could not be loaded!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         // Add/Remove/List/Search protein buttons
         // @TODO: Consider consolidating all protein actions into a singular dialog for protein "Management"
         JButton addProteinButton    = new JButton("Add Proteins");
         addProteinButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 getSequenceData();
             }
@@ -143,6 +168,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JButton removeProteinButton = new JButton("Remove Proteins");
         removeProteinButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 removeHighlightedProteins();
             }
@@ -150,6 +176,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JButton searchButton = new JButton("Search Protein Field");
         searchButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 openProteinSearch();
             }
@@ -157,20 +184,20 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JButton displayProteinsButton = new JButton("Display Protein List");
         displayProteinsButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 displayProteinList();
             }
         });
 
-        colorkey = new JButton("Color Key");
-        colorkey.addActionListener(new ActionListener() {
+        JButton colorKey = new JButton("Color Key");
+        colorKey.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ColorFrame key;
-                key = new ColorFrame();
-                key.showKey();
+                new ColorFrame().showKey();
             }
         });
-
+	
         playButton       = new PlayButtonSwingVersion(this);
         stopButton       = new StopButtonSwingVersion(this);
         restartButton    = new RestartButtonSwingVersion(this);
@@ -261,32 +288,10 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JPanel firstPanel = new JPanel();
         c.gridy = 1;
-        help = new JButton("Help");
-        help.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
-                try{
-                    BrowserLauncher.openHTMLFile(f);
-                } catch(IOException i){
-                    System.err.println( i.getMessage());
-                }
-            }
-        });
-        firstPanel.add(help);
-        about = new JButton("About");
-        about.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                File f = new File( "HTML Files" + File.separator + "about.html" );
-                try{
-                    BrowserLauncher.openHTMLFile(f);
-                }catch(IOException i){
-                    System.err.println(i.getMessage());
-                    i.printStackTrace();
-                }
-            }
-        });
-        firstPanel.add(about);
+        firstPanel.add(helpButton);
+        firstPanel.add(aboutButton);
         leftPanel.add(firstPanel);
+
 
         JPanel secondPanel = new JPanel();
         secondPanel.add(addProteinButton);
@@ -331,8 +336,9 @@ public class Electro2D extends JPanel implements ActionListener {
         eighthPanel.add(displayProteinsButton);
         leftPanel.add(eighthPanel);
 
+        // @TODO: This code is dead. Will we be actually using it anytime?
         JPanel ninthPanel = new JPanel();
-        ninthPanel.add(secondProt);
+        ninthPanel.add(compareButton);
         //leftPanel.add(ninthPanel); Removed compare protein functionality until it is useful.
 
         JPanel tenthPanel = new JPanel();
@@ -348,7 +354,7 @@ public class Electro2D extends JPanel implements ActionListener {
         leftPanel.add(twelfPanel);
 
         JPanel thirteenthPanel = new JPanel();
-        thirteenthPanel.add(colorkey);
+        thirteenthPanel.add(colorKey);
         leftPanel.add(thirteenthPanel);
 
     }
