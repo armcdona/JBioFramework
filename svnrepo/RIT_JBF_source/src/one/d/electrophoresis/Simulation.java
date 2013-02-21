@@ -1,4 +1,5 @@
 package one.d.electrophoresis;
+
 /*
  *Updated By Bader AlHarbi
  * Decompiled by Mocha from Simulation.class 
@@ -6,7 +7,6 @@ package one.d.electrophoresis;
  */
 
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -128,7 +128,7 @@ public class Simulation extends JPanel implements Runnable {
 	protected DecimalFormat twoDigits;
 
 	Simulation(Electrophoresis electrophoresis) {
-		
+
 		animationModifier = 1.0F;
 		modifier = 1.0F;
 		stdSamples = new Protein[7];
@@ -162,80 +162,7 @@ public class Simulation extends JPanel implements Runnable {
 		Jlabels[5] = "5";
 		Jlabels[6] = "6";
 		twoDigits = new DecimalFormat("0.00");
-		class MouseClickListener  implements MouseListener{
-	
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				 System.out.println(e + ", i: " + e.getX() + ", j: " + e.getY());
-					if (stopAnimation && notAtBottom) {
-						for (int k = 0; k < numOfStds; k++) {
-							if (stdSamples[k].matchPosition(e.getX(),e.getY())) {
-								System.out.println("hello");
-								stdSamples[k].relativeMigration = stdSamples[k]
-										.GetDistance() / dye1.GetDistance();
-								proteinName = stdSamples[k].fullName;
-								proteinMW = "MW = "
-										+ String.valueOf((int) stdSamples[k].mw);
-								proteinDist = "mm travel = "
-										+ twoDigits.format(stdSamples[k].GetDistance());
-								relMigration = "RM = "
-										+ twoDigits.format(stdSamples[k].relativeMigration);
-								addInfo = true;
-								repaint();
-								break;
-							}
-						}
-						if (sample.matchPosition(e.getX(), e.getY())) {
-							proteinName = sample.name;
-							proteinMW = "MW = tbd";
-							proteinDist = "mm travel = "
-									+ twoDigits.format(sample.GetDistance());
-							// relMigration = "RM = tbd";
-							relMigration = "RM = "
-									+ twoDigits.format(sample.GetDistance()
-											/ dye1.GetDistance());
-							addInfo = true;
-							repaint();
-						} else if (dye1.matchPosition(e.getX(), e.getY()) || dye2.matchPosition(e.getX(), e.getY())) {
-							proteinName = dye1.name;
-							proteinMW = "  ";
-							proteinDist = "mm travel = "
-									+ twoDigits.format(dye1.GetDistance());
-							relMigration = "  ";
-							addInfo = true;
-							repaint();
-						}
-					}
-	
-			}
-	
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-	
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-	
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-	
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		}
-	
+
 		MouseClickListener msl = new MouseClickListener();
 		this.addMouseListener(msl);
 	}
@@ -458,50 +385,6 @@ public class Simulation extends JPanel implements Runnable {
 		endHeight = probeHeight / 2;
 	}
 
-/*	public boolean mouseDown(Event event, int x, int y) {
-		// System.out.println(event + ", i: " + i + ", j: " + j);
-		if (stopAnimation && notAtBottom) {
-			for (int k = 0; k < numOfStds; k++) {
-				if (stdSamples[k].matchPosition(x, y)) {
-					stdSamples[k].relativeMigration = stdSamples[k]
-							.GetDistance() / dye1.GetDistance();
-					proteinName = stdSamples[k].fullName;
-					proteinMW = "MW = "
-							+ String.valueOf((int) stdSamples[k].mw);
-					proteinDist = "mm travel = "
-							+ twoDigits.format(stdSamples[k].GetDistance());
-					relMigration = "RM = "
-							+ twoDigits.format(stdSamples[k].relativeMigration);
-					addInfo = true;
-					repaint();
-					break;
-				}
-			}
-			if (sample.matchPosition(x, y)) {
-				proteinName = sample.name;
-				proteinMW = "MW = tbd";
-				proteinDist = "mm travel = "
-						+ twoDigits.format(sample.GetDistance());
-				// relMigration = "RM = tbd";
-				relMigration = "RM = "
-						+ twoDigits.format(sample.GetDistance()
-								/ dye1.GetDistance());
-				addInfo = true;
-				repaint();
-			} else if (dye1.matchPosition(x, y) || dye2.matchPosition(x, y)) {
-				proteinName = dye1.name;
-				proteinMW = "  ";
-				proteinDist = "mm travel = "
-						+ twoDigits.format(dye1.GetDistance());
-				relMigration = "  ";
-				addInfo = true;
-				repaint();
-			}
-		}
-
-		return true;
-	} // mouseDown
-*/
 	public void setPause(String string) {
 		byte b = 100;
 		float f1 = 2.0F;
@@ -579,7 +462,7 @@ public class Simulation extends JPanel implements Runnable {
 		g.drawLine(polarityPlusHorizontalX1, polarityPlusY,
 				polarityPlusHorizontalX2, polarityPlusY);
 		g.setColor(Color.red);
-		g.drawString("  ELECTROPHORESIS CELL", plateX, cellLabelY);
+		g.drawString(" ELECTROPHORESIS CELL", plateX, cellLabelY);
 	}
 
 	public void addSample() {
@@ -640,7 +523,6 @@ public class Simulation extends JPanel implements Runnable {
 			try {
 				Thread.sleep((long) pause);
 			} catch (InterruptedException e) {
-				System.out.println("thread interrupted");
 			}
 			repaint();
 		}
@@ -697,5 +579,80 @@ public class Simulation extends JPanel implements Runnable {
 		} else
 			drawGraph(offScreenGraphics);
 		g.drawImage(offScreenImage, 0, 0, this);
+	}
+
+	// class handle mouse events when user clicks the protein bands
+	class MouseClickListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// System.out.println(e + ", i: " + e.getX() + ", j: " + e.getY());
+			if (stopAnimation && notAtBottom) {
+				for (int k = 0; k < numOfStds; k++) {
+					if (stdSamples[k].matchPosition(e.getX(), e.getY())) {
+
+						stdSamples[k].relativeMigration = stdSamples[k]
+								.GetDistance() / dye1.GetDistance();
+						proteinName = stdSamples[k].fullName;
+						proteinMW = "MW = "
+								+ String.valueOf((int) stdSamples[k].mw);
+						proteinDist = "mm travel = "
+								+ twoDigits.format(stdSamples[k].GetDistance());
+						relMigration = "RM = "
+								+ twoDigits
+										.format(stdSamples[k].relativeMigration);
+						addInfo = true;
+						repaint();
+						break;
+					}
+				}
+				if (sample.matchPosition(e.getX(), e.getY())) {
+					proteinName = sample.name;
+					proteinMW = "MW = tbd";
+					proteinDist = "mm travel = "
+							+ twoDigits.format(sample.GetDistance());
+					relMigration = "RM = "
+							+ twoDigits.format(sample.GetDistance()
+									/ dye1.GetDistance());
+					addInfo = true;
+					repaint();
+				} else if (dye1.matchPosition(e.getX(), e.getY())
+						|| dye2.matchPosition(e.getX(), e.getY())) {
+					proteinName = dye1.name;
+					proteinMW = "";
+					proteinDist = "mm Travel = "
+							+ twoDigits.format(dye1.GetDistance());
+					relMigration = "";
+					addInfo = true;
+					repaint();
+				}
+			}
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 }

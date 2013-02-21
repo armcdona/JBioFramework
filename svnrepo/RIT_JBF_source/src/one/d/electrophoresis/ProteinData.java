@@ -22,8 +22,8 @@ public class ProteinData extends JPanel {
 	JPanel logMolWtPanel;
 
 	/*
-	 * setting the protein info to be deployed in the simulation panel
-	 * note1: method name is m
+	 * setting the protein info to be deployed in the simulation panel note1:
+	 * method name is m
 	 */
 
 	public void displayData(Protein protein) {
@@ -54,19 +54,19 @@ public class ProteinData extends JPanel {
 		logMolWtPanel.setBackground(Color.lightGray);
 		titlePanel.add(new JLabel("PROTEIN DATA"));
 		namePanel.add(new JLabel("Identifier"));
-		name = new JTextField(13);
+		name = new JTextField(8);
 		namePanel.add(name);
 		fullNamePanel.add(new JLabel("Protein Name"));
-		fullName = new JTextField(28);
+		fullName = new JTextField(15);
 		fullNamePanel.add(fullName);
 		abbrPanel.add(new JLabel("Abbreviation"));
-		abbr = new JTextField(10);
+		abbr = new JTextField(5);
 		abbrPanel.add(abbr);
 		molWtPanel.add(new JLabel("Molecular Wt"));
-		molwt = new JTextField(10);
+		molwt = new JTextField(5);
 		molWtPanel.add(molwt);
 		logMolWtPanel.add(new JLabel("Log Mol Wt"));
-		logMolWt = new JTextField(10);
+		logMolWt = new JTextField(5);
 		logMolWtPanel.add(logMolWt);
 		name.setEditable(false);
 		fullName.setEditable(false);
