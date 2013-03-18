@@ -62,6 +62,7 @@ public class Spectrometer {
                 for (String ion : ionStrings) {
                     Ion newIon = Converter.convert(ion);
                     newIon.setCharge(1);
+                    newIon.setSequence(ion);
                     if(newIon.getMass() != 0) {
                         ions.add(newIon);
                     }
