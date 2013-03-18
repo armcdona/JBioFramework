@@ -145,7 +145,7 @@ public class Plot extends Panel implements Runnable {
 
 	public void stop() {
 		if (runner != null) {
-			runner.stop();
+			this.stopAnimation = true;
 			runner = null;
 		}
 	} // stop
@@ -168,7 +168,7 @@ public class Plot extends Panel implements Runnable {
 	private void showNotBracket(Graphics g) {
 		if (showNotBracketed)
 			g.drawString("RM not bracketed by Standards", xArray[leftGridCol],
-					size().height / 8);
+					getSize().height / 8);
 	}
 
 	private void resetSums() {
@@ -544,7 +544,6 @@ public class Plot extends Panel implements Runnable {
 	}
 
 	public boolean mouseDown(Event event, int i, int j) {
-		// parent.playClick1();
 		if (standardsSet) {
 			for (int k = 0; k < numberOfStds; k++) {
 				if (stds[k].matchPlotPosition(i, j)) {

@@ -37,7 +37,7 @@ public class Electrophoresis extends JFrame {
 		tabPane2 = new JTabbedPane();
 
 		tabPane2.add("Casting Tray ", simPanel);
-		tabPane2.add("Pot Results", plotPanel);
+		tabPane2.add("Plot", plotPanel);
 
 		pane.add(tabPane);
 		pane.add(tabPane2);
