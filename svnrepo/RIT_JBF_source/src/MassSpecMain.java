@@ -31,7 +31,7 @@ import java.text.DecimalFormat;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
-public class MainPanelGUI extends JPanel {
+public class MassSpecMain extends JPanel {
 
     private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
         "Thermolysin"};
@@ -54,7 +54,7 @@ public class MainPanelGUI extends JPanel {
      * the label OR, the button to load a sequence, the protease selection
      * drop down box, the info label, the big graph and the small graph.
      */
-    public MainPanelGUI() {
+    public MassSpecMain() {
         super();
         GridBagLayout grid = new GridBagLayout();
         GridBagConstraints constraints = new GridBagConstraints();
