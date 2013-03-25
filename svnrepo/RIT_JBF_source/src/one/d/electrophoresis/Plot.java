@@ -5,12 +5,13 @@ package one.d.electrophoresis;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.io.PrintStream;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.text.DecimalFormat;
 
 import javax.swing.JPanel;
 
-public class Plot extends Panel implements Runnable {
+public class Plot extends JPanel implements Runnable {
 	Font plotFont;
 	Thread runner;
 	int pause;
@@ -20,8 +21,7 @@ public class Plot extends Panel implements Runnable {
 	Protein sample;
 	Protein dye;
 	private Image offScreenImage;
-	private Graphics offScreenGraphics;
-	FontMetrics fm;
+    FontMetrics fm;
 	Font font;
 	protected boolean imageCreated;
 	protected boolean standardsSet;
@@ -95,8 +95,6 @@ public class Plot extends Panel implements Runnable {
 	protected int fitLineX2;
 	protected int fitLineY1;
 	protected int fitLineY2;
-	protected String cursorPos;
-	protected int dotPos;
 	protected double errorMargin;
 	protected DecimalFormat twoDigits;
 
@@ -134,6 +132,60 @@ public class Plot extends Panel implements Runnable {
 		bottomGridRow = rows - 1;
 		topGridRow = bottomGridRow - gridRows;
 		twoDigits = new DecimalFormat("0.00");
+
+        // Create mouse listeners for the canvas
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Grab the x/y position
+                int x = e.getX();
+                int y = e.getY();
+
+                if (standardsSet) {
+                    for (int k = 0; k < numberOfStds; k++) {
+                        if (stds[k].matchPlotPosition(x, y)) {
+                            parent.displayProtein(stds[k]);
+                            return;
+                        }
+                    }
+                    if (mouseOnXAxis(x, y)) {
+                        xPlot = xMouse;
+                        plotRM = mouseRM;
+                        paintUserRM = true;
+                        stopAnimation = false;
+                        showExperimentalMW = false;
+                        showSampleMW = false;
+                        questionRCorr = false;
+                        showLogMW = false;
+                        showNotBracketed = false;
+                        graphVerticalLine = false;
+                        graphHorizontalLine = false;
+                        start();
+                    }
+                }
+            }
+            @Override
+            public void mousePressed(MouseEvent e) { }
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+            @Override
+            public void mouseExited(MouseEvent e) { }
+        });
+
+        // Add a listener for the mouse movement
+        this.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) { }
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if (standardsSet) {
+                    paintRM = mouseOnXAxis(e.getX(), e.getY());
+                    repaint();
+                }
+            }
+        });
 	} // Plot
 
 	public void start() {
@@ -203,7 +255,7 @@ public class Plot extends Panel implements Runnable {
 		}
 		logMwMax = Math.log((double) i) / ln10;
 		logMwMin = Math.log((double) j) / ln10;
-		mDelta = (float) ((double) 1.1 * (logMwMax - logMwMin));
+		mDelta = (float) (1.1 * (logMwMax - logMwMin));
 		for (yDivision = 0; 10 * yDivision < mDelta; yDivision += .05) {
 		}
 		for (test = (int) logMwMax; test <= logMwMax; test += yDivision) {
@@ -228,8 +280,6 @@ public class Plot extends Panel implements Runnable {
 	}
 
 	private void showExpMW(Graphics g) {
-		DecimalFormat fiveDigits = new DecimalFormat("00000.");
-
 		if (showExperimentalMW)
 			g.drawString(
 					"Experimental MW = " + String.valueOf((int) experimentalMW),
@@ -251,8 +301,8 @@ public class Plot extends Panel implements Runnable {
 	} // sumYsqs
 
 	private void calcStdCoords() {
-		Point point = new Point(0, 0);
-		for (int i = 0; i < numberOfStds; i++) {
+		Point point;    // This defaults to (0,0)
+        for (int i = 0; i < numberOfStds; i++) {
 			if (stds[i].selected) {
 				point = calcLinePoint(stds[i].relativeMigration);
 				stds[i].plotXPos = point.x;
@@ -263,8 +313,7 @@ public class Plot extends Panel implements Runnable {
 
 	public void plotStandards(Graphics g) {
 		byte b1 = 6;
-		byte b2 = b1;
-		int i = b2 / 2;
+		int i = b1 / 2;
 		int j = b1 / 2;
 		new Point(0, 0);
 		if (standardsSet) {
@@ -272,10 +321,10 @@ public class Plot extends Panel implements Runnable {
 				if (stds[k].selected) {
 					g.setColor(stds[k].color);
 					g.fillOval(stds[k].plotXPos - j, stds[k].plotYPos - i, b1,
-							b2);
+							b1);
 					g.setColor(Color.black);
 					g.drawOval(stds[k].plotXPos - j, stds[k].plotYPos - i, b1,
-							b2);
+							b1);
 				}
 			}
 			g.drawLine(fitLineX1, fitLineY1, fitLineX2, fitLineY2);
@@ -371,7 +420,7 @@ public class Plot extends Panel implements Runnable {
 				imageCreated = true;
 			}
 		}
-		offScreenGraphics = offScreenImage.getGraphics();
+        Graphics offScreenGraphics = offScreenImage.getGraphics();
 		offScreenGraphics.setColor(Color.white);
 		offScreenGraphics.fillRect(0, 0, getSize().width, getSize().height);
 		offScreenGraphics.setColor(Color.black);
@@ -381,7 +430,7 @@ public class Plot extends Panel implements Runnable {
 		drawYScale(offScreenGraphics);
 		plotStandards(offScreenGraphics);
 		displayRM(offScreenGraphics);
-		plotUserRM(offScreenGraphics);
+		plotUserRM();
 		showExpMW(offScreenGraphics);
 		showSampMW(offScreenGraphics);
 		showLgMW(offScreenGraphics);
@@ -413,7 +462,6 @@ public class Plot extends Panel implements Runnable {
 			parent.displayProtein(sample);
 			if (!harpPlayed) {
 				harpPlayed = true;
-				return;
 			}
 		} else if (questionRCorr) {
 			g.drawString("No match! RM was OK, poor line fit?",
@@ -464,7 +512,7 @@ public class Plot extends Panel implements Runnable {
 		sumY += d;
 	}
 
-	private void plotUserRM(Graphics g) {
+	private void plotUserRM() {
 		if (paintUserRM) {
 			logMw = calcLogMw(plotRM);
 			lineCoord = calcLinePoint(plotRM);
@@ -496,7 +544,6 @@ public class Plot extends Panel implements Runnable {
 					stop();
 					resetFlags();
 					paintUserRM = false;
-					return;
 				}
 			} else if (userLineY <= lineCoord.y + 2) {
 				showNotBracketed = true;
@@ -543,38 +590,12 @@ public class Plot extends Panel implements Runnable {
 		}
 	}
 
-	public boolean mouseDown(Event event, int i, int j) {
-		if (standardsSet) {
-			for (int k = 0; k < numberOfStds; k++) {
-				if (stds[k].matchPlotPosition(i, j)) {
-					parent.displayProtein(stds[k]);
-					return true;
-				}
-			}
-			if (mouseOnXAxis(i, j)) {
-				xPlot = xMouse;
-				plotRM = mouseRM;
-				paintUserRM = true;
-				stopAnimation = false;
-				showExperimentalMW = false;
-				showSampleMW = false;
-				questionRCorr = false;
-				showLogMW = false;
-				showNotBracketed = false;
-				graphVerticalLine = false;
-				graphHorizontalLine = false;
-				start();
-			}
-		}
-		return true;
-	}
-
 	private void sumProds(double d1, double d2) {
 		sumProd += d1 * d2;
 	}
 
 	private void calcLineCoords() {
-		Point point = new Point(0, 0);
+		Point point;    // Defaults to (0,0)
 		point = calcLinePoint(0.01);
 		fitLineX1 = point.x;
 		fitLineY1 = point.y;
@@ -608,16 +629,4 @@ public class Plot extends Panel implements Runnable {
 		Played = false;
 		harpPlayed = false;
 	}
-
-	public boolean mouseMove(Event event, int i, int j) {
-		if (standardsSet) {
-			if (mouseOnXAxis(i, j))
-				paintRM = true;
-			else
-				paintRM = false;
-			repaint();
-		}
-		return true;
-	}
-
 }
