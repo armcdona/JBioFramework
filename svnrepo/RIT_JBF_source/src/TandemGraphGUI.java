@@ -351,7 +351,7 @@ public class TandemGraphGUI extends JPanel {
     }
 
     /**
-     * Used by MainPanelGUI's JCheckBoxes to toggle whether b fragments are seen.
+     * Used by MassSpecMain's JCheckBoxes to toggle whether b fragments are seen.
      * 
      * @param state State of the check box.
      */
@@ -360,7 +360,7 @@ public class TandemGraphGUI extends JPanel {
     }
 
     /**
-     * Used by MainPanelGUI's JCheckBoxes to toggle whether y fragments are seen.
+     * Used by MassSpecMain's JCheckBoxes to toggle whether y fragments are seen.
      *
      * @param state State of the check box.
      */

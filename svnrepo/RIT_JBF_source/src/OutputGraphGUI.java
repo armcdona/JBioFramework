@@ -21,7 +21,7 @@ import java.awt.event.MouseEvent;
 public class OutputGraphGUI extends JPanel implements MouseListener {
 
     private ArrayList<Ion> peakLines;
-    private MainPanelGUI mainPanel;
+    private MassSpecMain mainPanel;
     double mostHits;
     int width;
     int height;
@@ -37,7 +37,7 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      * The constructor's only purpose is to add itself as its own mouse
      * listener, so the user's clicks can be registered.
      */
-    public OutputGraphGUI(MainPanelGUI mP) {
+    public OutputGraphGUI(MassSpecMain mP) {
         super();
         addMouseListener(this);
         mainPanel = mP;

@@ -29,9 +29,9 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /** components of the main applet **/
     private GelCanvas gelCanvas;          //area where animation takes place
-    private PlayButtonSwingVersion playButton;        //starts/pauses animation
-    private StopButtonSwingVersion stopButton;        //stops animation
-    private RestartButtonSwingVersion restartButton;  //restarts animation
+    private PlayE2AnimationButton playButton;        //starts/pauses animation
+    private StopE2DAnimationButton stopButton;        //stops animation
+    private RestartE2DAnimationButton restartButton;  //restarts animation
     private JButton csvButton;          //writes to csv file
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
@@ -118,7 +118,7 @@ public class Electro2D extends JPanel implements ActionListener {
         compareButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 getSequenceData2();
-                PlayButtonSwingVersion.setCompare(true);
+                PlayE2AnimationButton.setCompare(true);
             }
         });
 
@@ -198,9 +198,9 @@ public class Electro2D extends JPanel implements ActionListener {
             }
         });
 	
-        playButton       = new PlayButtonSwingVersion(this);
-        stopButton       = new StopButtonSwingVersion(this);
-        restartButton    = new RestartButtonSwingVersion(this);
+        playButton       = new PlayE2AnimationButton(this);
+        stopButton       = new StopE2DAnimationButton(this);
+        restartButton    = new RestartE2DAnimationButton(this);
 
         animationChooser = new JLabel("IEF");
 
@@ -1589,7 +1589,7 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * This method is used by PlayButtonSwingVersion to determine when the user
+     * This method is used by PlayE2AnimationButton to determine when the user
      * clicks play if there are sequences ready to animate.
      * 
      * @return sequencesReady

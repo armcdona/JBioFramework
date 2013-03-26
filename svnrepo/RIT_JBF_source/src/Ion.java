@@ -91,7 +91,11 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 
     /**
      * Used to return the Ion's mass.
+<<<<<<< Updated upstream
      * 
+=======
+     *
+>>>>>>> Stashed changes
      * @return totalMass.
      */
     public double getMass() {

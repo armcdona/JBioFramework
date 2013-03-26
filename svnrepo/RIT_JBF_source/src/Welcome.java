@@ -1,201 +1,275 @@
 /**
- *  - Welcome - @aidan[aks5238]
- *  # description (goal...in development):
- *  	-main function for "Welcome" tab.
- *  	-creates gui with working buttons (all code native), initializes rP and 
- *  	 calls Tutorial to fill it.
- *  	-contains links and info about JBF and its use
- *  # calls: 
- *  	-/BrowserLauncher/ to open webpage.
- *  	-/Tutorial/ to populate rightPanel (rP) of Welcome. 
- *  # called by: 
- *  	-/JBioFrameworkSwingVersion/ 
- *  # envelope: Welcome
- *  # package: Welcome
- *  |!| extends JFrame and therefore will not merge with JBF
- *  	^extends JPanel and 'super's changed to 'this'. -@aidan[aks5238]
- *  ! formating (layout and appearance) should directly match other simulations 
- *  ! buttons are not linked to any functionality in rightPanel (rP, /Tutorial/)
- *  ! code should be cleaned up after the former is resolved.
+ * Welcome Tab
  */
-
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
- 
-public class Welcome extends JPanel{ 
-	
-	private JPanel lP; // button panel for general use and 
-	private JPanel rP; // where the actual tutorial will be displayed
-	
-	/*Head panel*/
-	private JPanel headP; //head panel with about and problem sheets?
-	private JLabel head; // simple welcome text
-	private JButton help; // opens up site -- will be outdated eventually %%
-	private JButton about; //button
+import java.io.*;
 
-	/*Tutorial interface panel*/
-	private JPanel tutPan; //can you stack panels like that? // next+previous, search, etc.
-	private JPanel tutPanE2D; //panel for the E2D tutorial
-	private JPanel tutPanMS; //panel for MassSpec tutorial 
-	private JPanel tutPanIonex; //panel for Ionex tutorial
-	
-	private JLabel e2DtutHead;
-	private JLabel MStutHead;
-	private JLabel ionexTutHead;
-	private JButton prev;
-	private JButton next;
-	private JTextField search;
-	private JButton searchButton;
-	
-	/*Tutorial itself*/
-	private Tutorial tutorial; //for calling /Tutorial/ class
-	
-	/*Tail panel*/
-	private JPanel tailP; //tail panel with contact and credits
-	private JButton credits; //
-	private JButton contact; // displays email %%not copy-able
-	private JButton probSheets; // will eventually
-	
-	//////////////////////////////
-	public Welcome(){
-	//////////////////////////////
-		GridBagConstraints c = new GridBagConstraints();
+public class Welcome extends JPanel{
+    JLabel headLink = new JLabel();
 
-		/*left panel*/
-		lP = new JPanel(new GridBagLayout());
-		lP.setBackground(Color.gray);;
+    public Welcome(){
 
-//	    c.insets = new Insets(<top>, <bottom>, <left>, <right>)
-	    c.insets = new Insets(5, 5, 5, 5); //spacing between
-//	    c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 1.0;
+        super(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-	    
-	    this.add(lP,c);
-	    
-	    /*headP*/
-	    headP = new JPanel();
-	    headP.setBackground(Color.gray);
+	    /*head Panel*/
+        c.gridy = 0;
+        JPanel headP = new JPanel();
+        JLabel head = new JLabel("Welcome to JBioframework!");
+        head.setFont(new Font("SansSerif", Font.BOLD, 26));
+        headP.add(head);
+        super.add(headP, c);
 
-		head = new JLabel("Welcome to JBioFramework!");  //Header
-		c.anchor = GridBagConstraints.CENTER;
-		c.gridy = 0;
-		lP/*headP*/.add(head,c);
-	    
-		help = new JButton("Help");
-		c.gridy = 1;
-//		c.anchor = new GridBagConstraints.PAGE_START;
-		help.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
-				try{
-				    BrowserLauncher.openHTMLFile(f);
-				} catch(IOException i){
-			            System.err.println( i.getMessage());
-			        }  
-			}
-		});
-		lP/*headP*/.add(help,c);
+        JPanel subHeadP = new JPanel();
+        c.gridy = 1;
+        String s = "<html>JBioFramework (JBF) is a set of chemical separations simulations frequently used in " +
+                "chemistry, biochemistry and proteomics research. It is written in the Java programming language and will " +
+                "run on any and all systems that have the JVM installed. A copy of the source code is available "+
+                "online on SourceForge, or by clicking 'Contact Us' > 'Source Code'. Click on the 'Electro2D' tab "+
+                "in the upper left to get started.";
+        String html1 = "<html><body style='width: ";
+        String html2 = "px'>";
+        JLabel head1 = new JLabel(html1+"500"+html2+s);
+        String s2 = "<html><a href=https://sourceforge.net/projects/jbf/>here</a>.</body>";
+        headLink = new JLabel(s2);
+        headLink.addMouseListener(new MouseListener() {
+            public void mouseClicked(MouseEvent e) {
+                String url1 = "https://sourceforge.net/projects/jbf/";
+                try{
+                    BrowserLauncher.openURL(url1);
+                }catch(IOException i){
+                    System.err.println( i.getMessage());}
+            }
+            public void mouseReleased(MouseEvent arg0) {}
+            public void mousePressed(MouseEvent arg0) {}
+            public void mouseExited(MouseEvent arg0) {
+                headLink.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+            public void mouseEntered(MouseEvent arg0) {
+                headLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }});
+        head1.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        subHeadP.add(head1,c);
+//        subHeadP.add(headLink);
 
-		about = new JButton("About");
-		c.anchor = GridBagConstraints.CENTER;
-		c.gridy = 1;
-		about.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				File f = new File( "HTML Files" + File.separator + "about.html" );
-				try{
-			            BrowserLauncher.openHTMLFile(f);
-				}catch(IOException i){
-			            System.err.println(i.getMessage());
-			            i.printStackTrace();
-			    }
+        super.add(subHeadP,c);
+
+        /*body panel*/
+        JPanel body = new JPanel();
+
+        c.gridy = 2;
+        JButton help = new JButton("Help");
+        help.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                } catch(IOException i){
+                    System.err.println( i.getMessage());
                 }
-		    });
-		lP/*headP*/.add(about,c);
+            }
+        });
+        help.setToolTipText("Opens help files in browser");
+        body.add(help,c);
 
-		
-		/*tutPan*/
-		prev = new JButton("Previous");
-		c.gridy = 3;
-		c.anchor = GridBagConstraints.CENTER;
-		lP/*tutPan*/.add(prev,c);
-		
-		next = new JButton("Next");
-		c.gridy = 3;	
-		c.anchor = GridBagConstraints.LINE_START;
-	    c.insets = new Insets(5, 5, 5, 5); //spacing between
-		lP/*tutPan*/.add(next,c);
-		
-		search = new JTextField("[Search Help Files]"); //exists currently as a text field
-		c.gridy = 2;
-//		c.gridwidth = 2;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		lP/*tutPan*/.add(search,c);
-		
-		searchButton = new JButton("Search");
-		c.fill = GridBagConstraints.NONE;
-		c.anchor = GridBagConstraints.LINE_END;
-		c.gridy = 2;
-		lP/*tutPan*/.add(searchButton,c);
+        JButton about = new JButton("About");
+        c.gridy = 2;
+        about.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                File f = new File( "HTML Files" + File.separator + "about.html" );
+                try{
+                    BrowserLauncher.openHTMLFile(f);
+                }catch(IOException i){
+                    System.err.println(i.getMessage());
+                    i.printStackTrace();
+                }
+            }
+        });
+//        body.add(about,c);
+
+        JButton prev = new JButton("Previous");
+        c.gridy = 3;
+//        body.add(prev,c);
+
+        JButton next = new JButton("Next");
+        c.gridy = 3;
+//        body.add(next,c);
+
+        JTextField search = new JTextField("[Search Help Files]"); //exists currently as a text field
+        c.gridy = 2;
+//        body.add(search,c);
+
+        JButton searchButton = new JButton("Search");
+        c.gridy = 2;
+
+//        body.add(searchButton,c);
 		
 		/*tailP*/
-		probSheets = new JButton("Problem Sheets");
-		c.anchor = GridBagConstraints.CENTER;
-		c.gridy = 4;
-		probSheets.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				JOptionPane.showMessageDialog(null, "opening problem sheets...");
-				/**
-				 * opens files we tack into the program much like we did with opening the
-				 * gene bank files.
-				 */
-			}
-		});
-		lP/*tailP*/.add(probSheets,c);
-	
-		contact = new JButton("Contact Us");
-		contact.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				JOptionPane.showMessageDialog(null,"paul.craig.rit.edu");
-			}
-		});
-		c.anchor = GridBagConstraints.CENTER;
-		c.gridy = 5;
-		lP/*tailP*/.add(contact,c);
-		
-		credits = new JButton("Credits");
-		c.anchor = GridBagConstraints.CENTER;
-		c.gridy = 6;
-		credits.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				JOptionPane.showMessageDialog(null, "matlab and intelliJ");
-			}
-		});
-		lP/*tailP*/.add(credits,c);
+        JButton probSheets = new JButton("Problem Sets");
+        c.gridy = 3;
+        probSheets.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                /**
+                 * opens files we tack into the program much like we did with opening the
+                 * gene bank files.
+                 */
+                JFrame pSf = new JFrame("Problem Sets");
+                JPanel pSp = new JPanel();
+                JLabel pSl = new JLabel("Choose a problem set to open [mouse over for details]. \n");
+                pSp.add(pSl);
+                JButton pSb1 = new JButton("Problem Set 1");
+                pSb1.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String directory  = "C:\\Users\\Aidan\\Desktop\\"; //Research with Paul Craig\\mainstream code\\git repo\\svnrepo\\RIT_JBF_source\\src\\";// folder where word documents are present.
+                        String fileName = "RevisedProblemSet1";
+                        Desktop desktop = Desktop.getDesktop();
+                        try {
+                            File f = new File( directory + fileName  +  ".rtf");
+                            desktop.open(f);  // opens application (MSWord) associated with .doc file
+                        }
+                        catch(Exception ex) {
+                            // WordDocument.this is to refer to outer class's instance from inner class
+                            JOptionPane.showMessageDialog(null,"Error"); }
+                    }});
+                pSb1.setToolTipText("High School and First Year College level");
+                pSp.add(pSb1);
+                JButton pSb2 = new JButton("Problem Set 2");
+                pSb2.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String directory  = "C:\\Users\\Aidan\\Desktop\\"; //Research with Paul Craig\\mainstream code\\git repo\\svnrepo\\RIT_JBF_source\\src\\";// folder where word documents are present.
+                        String fileName = "RevisedProblemSet2";
+                        Desktop desktop = Desktop.getDesktop();
+                        try {
+                            File f = new File( directory + fileName  +  ".rtf");
+                            desktop.open(f);  // opens application (MSWord) associated with .doc file
+                        }
+                        catch(Exception ex) {
+                            // WordDocument.this is to refer to outer class's instance from inner class
+                            JOptionPane.showMessageDialog(null,"Error"); }
+                    }});
+                pSb2.setToolTipText("Upper Division Bio and Chem Students");
+                pSp.add(pSb2);
+                pSf.setVisible(true);
+                pSf.setSize(350,100);
+                pSf.add(pSp);
+            }});
+        probSheets.setToolTipText("Open included problem sets");
+        body.add(probSheets,c);
 
-		/*right panel*/
-		rP = new JPanel();
-		rP.setBackground(Color.darkGray);
-		rP.setLayout(new GridBagLayout());
-		rP.setSize(900,700);
+        super.add(body, c);
 
-		tutorial = new Tutorial(); //JLabel("Main tutorial window");
-		c.gridy = 0;
-//		c.anchor = GridBagConstraints.CENTER;
-		c.ipadx = 105;
-		c.ipady = 205;
-		rP.add(tutorial,c);
-		
-		
-		/*add panel to frame*/
-		this.add(lP);
-		this.add(rP);
-        this.setVisible(true);
-	}
+        /*tail panel*/
+        JPanel tail = new JPanel();
+        JButton contact = new JButton("Contact Us");
+        contact.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                JFrame f = new JFrame("Contact Us");
+                JPanel p = new JPanel();
+                JLabel l = new JLabel("Ask a Question, Review the Software, View/Edit the Source");
+                p.add(l);
+                JButton email = new JButton("Email Address");
+                email.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String emailAddress = "paul.craig@rit.edu";
+                        JFrame emailFrame = new JFrame("Email Address");
+                        JPanel panel = new JPanel();
+                        JLabel label = new JLabel("Please Copy/Paste the following: ");
+
+                        JTextArea email = new JTextArea(emailAddress);
+
+                        panel.add(label);
+                        panel.add(email);
+                        emailFrame.add(panel);
+                        emailFrame.setSize(350,100);
+                        emailFrame.setVisible(true);
+                    }
+
+                });
+                email.setToolTipText("Copy email address to clipboard");
+                p.add(email);
+
+                JButton review = new JButton("Review JBF");
+                review.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String url = "https://sourceforge.net/projects/jbf/reviews/?source=navbar";
+                        try{
+                            BrowserLauncher.openURL(url);
+                        } catch(IOException i){
+                            System.err.println( i.getMessage());}
+                    }});
+                review.setToolTipText("Opens review page on sourceforge");
+                p.add(review);
+
+                JButton bug = new JButton("Bug Report");
+                bug.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, "will copy information about program");}});
+                bug.setToolTipText("Report an issue with the software");
+//                p.add(bug);
+
+                JButton source = new JButton("Source Code");
+                source.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String url = "https://sourceforge.net/p/jbf/code/76/tree/";
+                        try{
+                            BrowserLauncher.openURL(url);
+                        }catch (IOException i){
+                            System.err.println( i.getMessage());}
+                    }
+                });
+                source.setToolTipText("Link to available source code");
+                p.add(source);
+
+                f.setVisible(true);
+                f.setSize(400,100);
+                f.add(p);
+            }
+        });
+        contact.setToolTipText("Contact, review, or view source code");
+        c.gridy = 4;
+        tail.add(contact,c);
+
+        JButton credits = new JButton("Credits");
+        c.gridy = 5;
+        credits.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JFrame frame = new JFrame("Credits");
+                String mrvn = "<html> <u>Marvin</u> was used for drawing, displaying and " +
+                        "characterizing chemical structures, substructures and reactions, " +
+                        "Marvin 5.11.5, 2013, ChemAxon (http://www.chemaxon.com)</body>";
+                String srch = "<html> The <u>Blast</u> [National Library of Medicine], "+
+                        "<u>NCBI</u> [National Center for Biotechnology Information], and " +
+                        "<u>Uniprot</u> [The Uniprot Consortium] " +
+                        "search engines. </body>";
+                String rt = "This software was developed at Rochester Institute of Technology (<u>RIT</u>). ";
+                String html1 = "<html><body style='width: ";
+                String html2 = "px'>";
+                JLabel head = new JLabel("..............................................");
+                JLabel tail = new JLabel("..............................................");
+                JLabel marvin = new JLabel(html1+"250"+html2+'-'+mrvn);
+                JLabel search = new JLabel(html1+"250"+html2+'-'+srch);
+                JLabel rit = new JLabel(html1+"250"+html2+'-'+rt);
+                JPanel panel = new JPanel();
+                panel.add(head);
+                panel.add(marvin);
+                panel.add(search);
+                panel.add(rit);
+                panel.add(tail);
+                frame.add(panel);
+                frame.setVisible(true);
+                frame.setSize(400,250);
+
+            }
+        });
+        credits.setToolTipText("Citations");
+        tail.add(credits,c);
+
+        this.add(tail,c);
+
+    }
 }

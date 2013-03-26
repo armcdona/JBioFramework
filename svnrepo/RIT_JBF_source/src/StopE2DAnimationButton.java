@@ -7,11 +7,11 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-public class StopButtonSwingVersion extends JButton implements ActionListener {
+public class StopE2DAnimationButton extends JButton implements ActionListener {
 
     Electro2D electro2D;
 
-    public StopButtonSwingVersion(Electro2D e) {
+    public StopE2DAnimationButton(Electro2D e) {
         super("Stop");
         addActionListener(this);
         electro2D = e;

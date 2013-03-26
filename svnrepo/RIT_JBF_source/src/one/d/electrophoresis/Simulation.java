@@ -2,8 +2,8 @@ package one.d.electrophoresis;
 
 /*
  *Updated By Bader AlHarbi
- * Decompiled by Mocha from Simulation.class 
- * Originally compiled from D:\Dave\Java\Electrophoresis\Simulation.java 
+ * Decompiled by Mocha from Simulation.class
+ * Originally compiled from D:\Dave\Java\Electrophoresis\Simulation.java
  */
 
 import java.awt.Color;

@@ -7,7 +7,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-public class PlayButtonSwingVersion extends JButton implements ActionListener {
+public class PlayE2AnimationButton extends JButton implements ActionListener {
 
     Electro2D electro2D;
     boolean playing;
@@ -17,7 +17,7 @@ public class PlayButtonSwingVersion extends JButton implements ActionListener {
     String choice;
     boolean isPlaying;
 
-    public PlayButtonSwingVersion(Electro2D e) {
+    public PlayE2AnimationButton(Electro2D e) {
 
         super("Run");
         addActionListener(this);

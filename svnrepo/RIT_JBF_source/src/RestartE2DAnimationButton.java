@@ -8,12 +8,13 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class RestartButtonSwingVersion extends JButton implements ActionListener {
+public class RestartE2DAnimationButton extends JButton implements ActionListener {
 
     Electro2D electro2D;
 
-    public RestartButtonSwingVersion(Electro2D e) {
+    public RestartE2DAnimationButton(Electro2D e) {
         super("Restart");
+        setToolTipText("Restart animation");
         addActionListener(this);
         electro2D = e;
     }
@@ -42,7 +43,7 @@ public class RestartButtonSwingVersion extends JButton implements ActionListener
 	GelCanvas.setGreen();
 	GelCanvas.setBlue();
 	IEFProtein.resetTempWidth();
-        PlayButtonSwingVersion.setCompare(false);
+        PlayE2AnimationButton.setCompare(false);
         electro2D.resetBothProteinLists();
         electro2D.setSequences(new Vector());
         electro2D.setSequenceTitles(new Vector());

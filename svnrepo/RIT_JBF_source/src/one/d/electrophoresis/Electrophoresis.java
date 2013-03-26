@@ -9,11 +9,9 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
-public class Electrophoresis extends JFrame {
+public class Electrophoresis extends JPanel {
 	JTabbedPane tabPane, tabPane2;
 	Parameters paramPanel;
 	Simulation simPanel;

@@ -19,9 +19,9 @@ public class FastaParser {
      * The parse method is given a file to read from, line by line. It passes
      * each line to the process static method to get rid of any white spaces and
      * to check if the line is a comment. Parse returns the sequence to the
-     * MainPanelGUI to be put into the inputArea.
+     * MassSpecMain to be put into the inputArea.
      *
-     * @param file Selected by the user in MainPanelGUI.
+     * @param file Selected by the user in MassSpecMain.
      * @return Sequence data.
      */
     public static String parse(File file) {
@@ -47,7 +47,7 @@ public class FastaParser {
      * @param line Given by the prase method as it reads lines from the user
      *             supplied file.
      * @return String to be added to the end of the sequence to be sent to
-     *         MainPanelGUI.
+     *         MassSpecMain.
      */
     private static String process(String line) {
         if(line.charAt(0) != ';' && line.charAt(0) != '>') {

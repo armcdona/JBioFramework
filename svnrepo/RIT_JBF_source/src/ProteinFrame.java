@@ -21,17 +21,16 @@ import java.io.*;
 
 public class ProteinFrame extends JFrame {
 
-    private Electro2D electro2D;          //reference to calling applet
-    private String proteinTitle;          //name of the protein
-    private String ptTruncated;           //name truncated
-    private JPanel proteinInfoPanel;           //panel to add components to
+    private Electro2D electro2D;           //reference to calling applet
+    private String proteinTitle;           //name of the protein
+    private String ptTruncated;            //name truncated
+    private JPanel proteinInfoPanel;       //panel to add components to
     private JPanel searchPanel;
     private JLabel titleLabel;             //holds protein name
     private JLabel mwLabel;                //protein MW
     private JLabel piLabel;                //protein pI
-    private SearchProteinButton search;   // button clicked to search for info
-    private SwissProtSearchButton swsSearch;//button clicked to search for info
-    private BlastSearchButton blstSearch; //button clicked to search Blast site
+    private JButton search;   // button clicked to search for info
+    private JButton swsSearch;//button clicked to search for info
     private String searchID = null;       // the id for the GenBank search
     private String swsSearchID = null;    // id for the SwissProt search
     private int fileNum;                  // while file the proteins came from
@@ -103,11 +102,20 @@ public class ProteinFrame extends JFrame {
             }
         }
 
-	// create a new BlastSearchButton based on the sequence of the protein
-	// whose name was provided
 	sequenceString = electro2D.getSequencebyTitle( proteinTitle );
-	blstSearch = new BlastSearchButton( electro2D, sequenceString, oneText);
-	
+
+
+    // Performs a BLAST search for the protein sequence given to it from
+    // ProteinFrame.
+    JButton blstSearch = new JButton("Blast Search"); //button clicked to search Blast site
+    blstSearch.setToolTipText("Performs BLAST search for the protein sequence.");
+    blstSearch.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            electro2D.showBlastSearchPage(sequenceString);
+        }
+    });
+
+
 	String fileName = electro2D.getLastFileLoaded();
 
 	//depending on the database file used, extract the name of the protein
@@ -126,8 +134,14 @@ public class ProteinFrame extends JFrame {
 		if( index != -1 ){
 			searchID = searchID.substring( index + 1 );
 		}
-	    search = new SearchProteinButton( electro2D, searchID, twoText);
+	    search = new JButton("Search Protein Field"); //SearchProteinButton( electro2D, searchID, twoText);
+	    search.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                electro2D.showSearchPage(searchID);
+
 	}
+        });
+    }
 	else if( index == -1 ){
 	    //if the protein is not from a fasta file...
 
@@ -151,14 +165,25 @@ public class ProteinFrame extends JFrame {
 	
 	if( proteinTitle.indexOf( "|" ) < 0 ){
 	    swsSearchID = proteinTitle;
-	    swsSearch = new SwissProtSearchButton( electro2D, swsSearchID, threeText);
+	    swsSearch = new JButton(threeText); //( electro2D, swsSearchID, threeText);
+        swsSearch.setToolTipText("Search for more information on the protein.");
+        swsSearch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                electro2D.showSwsSearchPage(swsSearchID);
+	}
+        });
 	}
 	else {
 	    swsSearchID = proteinTitle.substring( 4,
 				    proteinTitle.lastIndexOf( "|" ));
 	    swsSearchID = swsSearchID.substring(
 				    swsSearchID.lastIndexOf( "|" ) + 1 );
-	    swsSearch = new SwissProtSearchButton( electro2D, swsSearchID, threeText);
+	    swsSearch = new JButton(threeText); //electro2D, swsSearchID, threeText);
+        swsSearch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                electro2D.showSwsSearchPage(swsSearchID);
+	}
+        });
 	}
 
 
@@ -201,7 +226,7 @@ public class ProteinFrame extends JFrame {
          * @param e Unused.
          */
         public void actionPerformed(ActionEvent e) {
-            JTextArea input = MainPanelGUI.getInputArea();
+            JTextArea input = MassSpecMain.getInputArea();
             input.setText(sequenceString);
             JOptionPane.showMessageDialog(null, "Protein sequence sent to mass spectrometer simulation. Click mass spectrometer tab.");
         }
