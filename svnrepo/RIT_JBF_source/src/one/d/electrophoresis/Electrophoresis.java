@@ -11,7 +11,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-public class Electrophoresis extends JPanel {
+public class Electrophoresis extends JFrame {
 	JTabbedPane tabPane, tabPane2;
 	Parameters paramPanel;
 	Simulation simPanel;

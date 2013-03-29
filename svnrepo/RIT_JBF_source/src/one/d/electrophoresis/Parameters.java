@@ -135,8 +135,7 @@ public class Parameters extends JPanel implements Constants {
 		stdProteinArray[std7Ref] = new Protein("Standard #7",
 				"Trypsin Inhibitor", "BPTI", 6500, Color.red);
 		// create borders subtitles
-		Border border = BorderFactory
-				.createTitledBorder("ELECTROPHORESIS PARAMETERS");
+		Border border = BorderFactory.createTitledBorder("ELECTROPHORESIS PARAMETERS");
 		Border border1 = BorderFactory.createTitledBorder("Animation Speed");
 
 		// helper methods
@@ -233,13 +232,24 @@ public class Parameters extends JPanel implements Constants {
 
 		dropPanel.setLayout(new GridLayout(3, 1));
 		labelPanel1.setLayout(new GridLayout(1, 2));
-		labelPanel1.add(new JLabel("Unknown Proteins"));
-		labelPanel1.add(new JLabel("% Acrylamide"));
-		labelPanel2.add(new JLabel("Standards"));
+
+        JLabel unknownLabel = new JLabel("Unknown Proteins");
+        unknownLabel.setToolTipText("Set of unknown samples");
+        labelPanel1.add(unknownLabel);
+
+		JLabel percentAcrylamideLabel = new JLabel("% Acrylamide");
+        percentAcrylamideLabel.setToolTipText("Affects the density of the gel");
+        labelPanel1.add(percentAcrylamideLabel);
+
+		JLabel standardsLabel = new JLabel("Standards");
+        standardsLabel.setToolTipText("Set of known values for comparison");
+        labelPanel2.add(standardsLabel);
+
 		selectionPanel1.setLayout(new GridLayout(1, 2));
 		selectionPanel2.setLayout(new GridLayout(1, 2));
 
 		voltagePanel.setLayout(new BorderLayout());
+        voltagePanel.setToolTipText("Affects how quickly proteins travel across the gel");
 		voltageSub2Panel.setLayout(new GridLayout(1, 4));
 		voltage.add(volt1);
 		voltage.add(volt2);
@@ -287,7 +297,8 @@ public class Parameters extends JPanel implements Constants {
 		// end check boxes
 		helperMethod1();
 
-		JButton addStandard = new JButton("Add Strandard");
+		JButton addStandard = new JButton("Add Standard");
+        addStandard.setToolTipText("Pipette selected standards into well 1");
 		addStandard.addActionListener(new ActionListener() {
 
 			@Override
@@ -297,6 +308,7 @@ public class Parameters extends JPanel implements Constants {
 			}
 		});
 		JButton addSample = new JButton("Add Sample");
+        addSample.setToolTipText("Pipette selected unknown into well 2");
 		addSample.addActionListener(new ActionListener() {
 
 			@Override
@@ -307,6 +319,7 @@ public class Parameters extends JPanel implements Constants {
 			}
 		});
 		JButton startButton = new JButton("Start Run");
+        startButton.setToolTipText("Powers on the battery to begin run");
 		startButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -318,6 +331,7 @@ public class Parameters extends JPanel implements Constants {
 			}
 		});
 		JButton stopButton = new JButton("Stop Run");
+        stopButton.setToolTipText("Ends current to stop the run");
 		stopButton.addActionListener(new ActionListener() {
 
 			@Override
