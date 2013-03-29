@@ -227,6 +227,7 @@ public class Parameters extends JPanel implements Constants {
 		headerSub2.add(speed2button);
 		headerSub2.add(speed3button);
 		headerSub2.setBorder(border1);
+        headerSub2.setToolTipText("Affects how quickly the animations run");
 		// headerPanel.add(headerSub1);
 		headerPanel.add(headerSub2);
 

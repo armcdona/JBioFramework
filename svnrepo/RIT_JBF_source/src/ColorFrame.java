@@ -59,7 +59,7 @@ public class ColorFrame {
 	labels.add( new Label( "transduction in Function", Label.CENTER ) );
 	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "transduction in Function" ) );
 	colorPanel.add( (Label)labels.get(labels.size() - 1) );
-	
+
 	colorFrame.setBounds( 0, 0, 400, 300 );
 	colorPanel.setBounds( 0, 0, 400, 300 );
 	colorFrame.add( colorPanel );
