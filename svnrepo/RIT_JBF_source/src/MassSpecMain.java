@@ -10,10 +10,8 @@
  * @author Amanda Fisher
  */
 import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
+import java.awt.*;
 import javax.swing.JLabel;
-import java.awt.Insets;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
@@ -61,6 +59,13 @@ public class MassSpecMain extends JPanel {
         setLayout(grid);
         constraints.insets = new Insets(1, 5, 1, 5);
 
+        JPanel headP = new JPanel();
+        JLabel head = new JLabel("Tandem Mass Spectrometer");
+        head.setFont(new Font("SansSerif", Font.BOLD, 18));
+        constraints.gridy = 0;
+        headP.add(head);
+        super.add(headP, constraints);
+
         JPanel infoButtonsPanel = new JPanel();
         help = new JButton("Help");
         help.setToolTipText("Opens Help files for Mass Spectrometer");
@@ -89,12 +94,12 @@ public class MassSpecMain extends JPanel {
         infoButtonsPanel.add(help);
         infoButtonsPanel.add(about);
         constraints.gridx = 0;
-        constraints.gridy = 0;
+        constraints.gridy = 1;
         grid.setConstraints(infoButtonsPanel, constraints);
         add(infoButtonsPanel);
 
         JLabel inputLabel = new JLabel("Input protein sequence to be analyzed: ");
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         grid.setConstraints(inputLabel, constraints);
         add(inputLabel);
 
@@ -102,12 +107,12 @@ public class MassSpecMain extends JPanel {
         inputArea.setToolTipText("type or paste protein sequence here");
         inputArea.setLineWrap(true);
         JScrollPane scrollPane = new JScrollPane(inputArea);
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         grid.setConstraints(scrollPane, constraints);
         add(scrollPane);
 
         JLabel orLabel = new JLabel("OR");
-        constraints.gridy = 3;
+        constraints.gridy = 4;
         grid.setConstraints(orLabel, constraints);
         add(orLabel);
 
@@ -125,22 +130,22 @@ public class MassSpecMain extends JPanel {
                     inputArea.setText(parsedSequence);
                 }            }
         });
-        constraints.gridy = 4;
+        constraints.gridy = 5;
         grid.setConstraints(loadButton, constraints);
         add(loadButton);
 
         JLabel proteaseLabel = new JLabel("Select protease: ");
-        constraints.gridy = 5;
+        constraints.gridy = 6;
         grid.setConstraints(proteaseLabel, constraints);
         add(proteaseLabel);
 
         proteaseBox = new JComboBox(proteaseChoices);
-        constraints.gridy = 6;
+        constraints.gridy = 7;
         grid.setConstraints(proteaseBox, constraints);
         add(proteaseBox);
 
         JLabel selectRangeLabel = new JLabel("Enter m/e range: ");
-        constraints.gridy = 7;
+        constraints.gridy = 8;
         grid.setConstraints(selectRangeLabel, constraints);
         add(selectRangeLabel);
 
@@ -149,7 +154,7 @@ public class MassSpecMain extends JPanel {
         JLabel lowerRangeLabel = new JLabel("Lower Limit: ");
         rangeSelectionUpperPanel.add(lowerRangeLabel);
         rangeSelectionUpperPanel.add(lowerRange);
-        constraints.gridy = 8;
+        constraints.gridy = 9;
         grid.setConstraints(rangeSelectionUpperPanel, constraints);
         add(rangeSelectionUpperPanel);
 
@@ -158,7 +163,7 @@ public class MassSpecMain extends JPanel {
         JLabel upperRangeLabel = new JLabel("Upper Limit: ");
         rangeSelectionLowerPanel.add(upperRangeLabel);
         rangeSelectionLowerPanel.add(upperRange);
-        constraints.gridy = 9;
+        constraints.gridy = 10;
         grid.setConstraints(rangeSelectionLowerPanel, constraints);
         add(rangeSelectionLowerPanel);
 
@@ -169,22 +174,22 @@ public class MassSpecMain extends JPanel {
                 Spectrometer.runAnalysis(inputArea.getText(), outputGraph,
                         proteaseBox.getSelectedItem().toString());
                 }});
-        constraints.gridy = 10;
+        constraints.gridy = 11;
         grid.setConstraints(runButton, constraints);
         add(runButton);
 
         massDisplay = new JLabel("<html> Mass: N/A <P>");
-        constraints.gridy = 11;
+        constraints.gridy = 12;
         grid.setConstraints(massDisplay, constraints);
         add(massDisplay);
 
         blueBs = new ToggleFragmentButton("B fragments", true);
-        constraints.gridy = 12;
+        constraints.gridy = 13;
         grid.setConstraints(blueBs, constraints);
         add(blueBs);
 
         redYs = new ToggleFragmentButton("Y fragments", true);
-        constraints.gridy = 13;
+        constraints.gridy = 14;
         grid.setConstraints(redYs, constraints);
         add(redYs);
 

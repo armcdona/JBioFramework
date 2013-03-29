@@ -16,20 +16,19 @@ public class Welcome extends JPanel{
         GridBagConstraints c = new GridBagConstraints();
 
 	    /*head Panel*/
-        c.gridy = 0;
         JPanel headP = new JPanel();
         JLabel head = new JLabel("Welcome to JBioframework!");
         head.setFont(new Font("SansSerif", Font.BOLD, 26));
+        c.gridy = 0;
         headP.add(head);
         super.add(headP, c);
 
         JPanel subHeadP = new JPanel();
-        c.gridy = 1;
         String s = "<html>JBioFramework (JBF) is a set of chemical separations simulations frequently used in " +
                 "chemistry, biochemistry and proteomics research. It is written in the Java programming language and will " +
                 "run on any and all systems that have the JVM installed. A copy of the source code is available "+
                 "online on SourceForge, or by clicking 'Contact Us' > 'Source Code'. Click on one of the tabs  "+
-                "in the upper left to get started.";
+                "in the upper left to get started."; //@todo: review opening message
         String html1 = "<html><body style='width: ";
         String html2 = "px'>";
         JLabel head1 = new JLabel(html1+"500"+html2+s);
@@ -52,6 +51,7 @@ public class Welcome extends JPanel{
                 headLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }});
         head1.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        c.gridy = 1;
         subHeadP.add(head1,c);
 //        subHeadP.add(headLink);
 
@@ -60,8 +60,8 @@ public class Welcome extends JPanel{
         /*body panel*/
         JPanel body = new JPanel();
 
-        c.gridy = 2;
         JButton help = new JButton("Help");
+        help.setToolTipText("Opens help files in browser");
         help.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
@@ -72,11 +72,10 @@ public class Welcome extends JPanel{
                 }
             }
         });
-        help.setToolTipText("Opens help files in browser");
+        c.gridy = 2;
         body.add(help,c);
 
         JButton about = new JButton("About");
-        c.gridy = 2;
         about.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 File f = new File( "HTML Files" + File.separator + "about.html" );
@@ -88,6 +87,7 @@ public class Welcome extends JPanel{
                 }
             }
         });
+//        c.gridy = 2;
 //        body.add(about,c);
 
         JButton prev = new JButton("Previous");
@@ -108,8 +108,8 @@ public class Welcome extends JPanel{
 //        body.add(searchButton,c);
 		
 		/*tailP*/
-        JButton probSheets = new JButton("Problem Sets");
-        c.gridy = 3;
+        JButton probSheets = new JButton("Problem Sets"); //@todo: standardize file locations for all users
+        probSheets.setToolTipText("Open included problem sets");
         probSheets.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 /**
@@ -120,7 +120,9 @@ public class Welcome extends JPanel{
                 JPanel pSp = new JPanel();
                 JLabel pSl = new JLabel("Choose a problem set to open [mouse over for details]. \n");
                 pSp.add(pSl);
+
                 JButton pSb1 = new JButton("Problem Set 1");
+                pSb1.setToolTipText("High School and First Year College level");
                 pSb1.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String directory  = "C:\\Users\\Aidan\\Desktop\\"; //Research with Paul Craig\\mainstream code\\git repo\\svnrepo\\RIT_JBF_source\\src\\";// folder where word documents are present.
@@ -134,9 +136,10 @@ public class Welcome extends JPanel{
                             // WordDocument.this is to refer to outer class's instance from inner class
                             JOptionPane.showMessageDialog(null,"Error"); }
                     }});
-                pSb1.setToolTipText("High School and First Year College level");
                 pSp.add(pSb1);
+
                 JButton pSb2 = new JButton("Problem Set 2");
+                pSb2.setToolTipText("Upper Division Bio and Chem Students");
                 pSb2.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String directory  = "C:\\Users\\Aidan\\Desktop\\"; //Research with Paul Craig\\mainstream code\\git repo\\svnrepo\\RIT_JBF_source\\src\\";// folder where word documents are present.
@@ -150,13 +153,12 @@ public class Welcome extends JPanel{
                             // WordDocument.this is to refer to outer class's instance from inner class
                             JOptionPane.showMessageDialog(null,"Error"); }
                     }});
-                pSb2.setToolTipText("Upper Division Bio and Chem Students");
                 pSp.add(pSb2);
                 pSf.setVisible(true);
                 pSf.setSize(350,100);
                 pSf.add(pSp);
             }});
-        probSheets.setToolTipText("Open included problem sets");
+        c.gridy = 3;
         body.add(probSheets,c);
 
         super.add(body, c);
@@ -164,6 +166,7 @@ public class Welcome extends JPanel{
         /*tail panel*/
         JPanel tail = new JPanel();
         JButton contact = new JButton("Contact Us");
+        contact.setToolTipText("Contact, review, or view source code");
         contact.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 JFrame f = new JFrame("Contact Us");
@@ -171,6 +174,7 @@ public class Welcome extends JPanel{
                 JLabel l = new JLabel("Ask a Question, Review the Software, View/Edit the Source");
                 p.add(l);
                 JButton email = new JButton("Email Address");
+                email.setToolTipText("Copy email address to clipboard");
                 email.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String emailAddress = "paul.craig@rit.edu";
@@ -188,10 +192,10 @@ public class Welcome extends JPanel{
                     }
 
                 });
-                email.setToolTipText("Copy email address to clipboard");
                 p.add(email);
 
                 JButton review = new JButton("Review JBF");
+                review.setToolTipText("Opens review page on sourceforge");
                 review.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String url = "https://sourceforge.net/projects/jbf/reviews/?source=navbar";
@@ -200,17 +204,17 @@ public class Welcome extends JPanel{
                         } catch(IOException i){
                             System.err.println( i.getMessage());}
                     }});
-                review.setToolTipText("Opens review page on sourceforge");
                 p.add(review);
 
                 JButton bug = new JButton("Bug Report");
+                bug.setToolTipText("Report an issue with the software");
                 bug.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         JOptionPane.showMessageDialog(null, "will copy information about program");}});
-                bug.setToolTipText("Report an issue with the software");
 //                p.add(bug);
 
                 JButton source = new JButton("Source Code");
+                source.setToolTipText("Link to available source code");
                 source.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String url = "https://sourceforge.net/p/jbf/code/76/tree/";
@@ -220,7 +224,6 @@ public class Welcome extends JPanel{
                             System.err.println( i.getMessage());}
                     }
                 });
-                source.setToolTipText("Link to available source code");
                 p.add(source);
 
                 f.setVisible(true);
@@ -228,17 +231,16 @@ public class Welcome extends JPanel{
                 f.add(p);
             }
         });
-        contact.setToolTipText("Contact, review, or view source code");
         c.gridy = 4;
         tail.add(contact,c);
 
         JButton credits = new JButton("Credits");
-        c.gridy = 5;
+        credits.setToolTipText("Citations");
         credits.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                JFrame frame = new JFrame("Credits");
+                JFrame frame = new JFrame("Credits"); //@todo: update for marvin usage
                 String mrvn = "<html> <u>Marvin</u> was used for drawing, displaying and " +
                         "characterizing chemical structures, substructures and reactions, " +
                         "Marvin 5.11.5, 2013, ChemAxon (http://www.chemaxon.com)</body>";
@@ -263,10 +265,9 @@ public class Welcome extends JPanel{
                 frame.add(panel);
                 frame.setVisible(true);
                 frame.setSize(400,250);
-
             }
         });
-        credits.setToolTipText("Citations");
+        c.gridy = 5;
         tail.add(credits,c);
 
         this.add(tail,c);

@@ -291,7 +291,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JPanel header = new JPanel(new GridBagLayout());
         c.gridy = 0;
-        header0 = new JLabel("2-Dimensional Electrophoresis");
+        header0 = new JLabel("2-D Electrophoresis");
         header0.setFont(new Font("SansSerif", Font.BOLD, 18));
         header.add(header0,c);
         leftPanel.add(header);
