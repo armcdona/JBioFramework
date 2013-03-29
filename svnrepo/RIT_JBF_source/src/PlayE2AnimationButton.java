@@ -20,6 +20,14 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
     public PlayE2AnimationButton(Electro2D e) {
 
         super("Run");
+
+        String hoverText;
+        if(iefDrawn == false){
+            hoverText = "Run IEF animation";
+            }else{
+                hoverText = "Run SDS Page animation";
+            }
+        super.setToolTipText(hoverText);
         addActionListener(this);
         electro2D = e;
         playing = false;

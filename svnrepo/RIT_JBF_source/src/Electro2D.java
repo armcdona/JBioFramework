@@ -103,7 +103,8 @@ public class Electro2D extends JPanel implements ActionListener {
                 new HTMLGenScreen(Electro2D.this);
             }
         });
-	
+        webButton.setToolTipText("Creates an HTML file of proteins and values");
+
 	    //read in deactivated range Image
         rangeImage          = new RangeImage(
                 Toolkit.getDefaultToolkit().getImage(
@@ -115,6 +116,7 @@ public class Electro2D extends JPanel implements ActionListener {
 	    rangeReload         = false;
 	    gelCanvas           = new GelCanvas(this);
         JButton compareButton = new JButton("Compare Proteins");
+        compareButton.setToolTipText("Compares multiple proteins to eacho ther");
         compareButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 getSequenceData2();
@@ -123,6 +125,7 @@ public class Electro2D extends JPanel implements ActionListener {
         });
 
         csvButton           = new JButton("Record to CSV");
+        csvButton.setToolTipText("Creates a spreadsheet of proteins and their values");
         csvButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 writeToCSV(); //really confused as to why we don't put the logic right here
@@ -131,6 +134,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
         // Help/About buttons
         JButton aboutButton = new JButton("About");
+        aboutButton.setToolTipText("About the program");
         aboutButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,6 +148,7 @@ public class Electro2D extends JPanel implements ActionListener {
         });
 
         JButton helpButton = new JButton("Help");
+        helpButton.setToolTipText("Opens Help files for Electro2D");
         helpButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -159,6 +164,7 @@ public class Electro2D extends JPanel implements ActionListener {
         // Add/Remove/List/Search protein buttons
         // @TODO: Consider consolidating all protein actions into a singular dialog for protein "Management"
         JButton addProteinButton    = new JButton("Add Proteins");
+        addProteinButton.setToolTipText("Load proteins from file");
         addProteinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -167,6 +173,7 @@ public class Electro2D extends JPanel implements ActionListener {
         });
 
         JButton removeProteinButton = new JButton("Remove Proteins");
+        removeProteinButton.setToolTipText("Remove unwanted proteins from field by name");
         removeProteinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -175,6 +182,7 @@ public class Electro2D extends JPanel implements ActionListener {
         });
 
         JButton searchButton = new JButton("Search Protein Field");
+        searchButton.setToolTipText("Refine protein field with these search options");
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -183,6 +191,7 @@ public class Electro2D extends JPanel implements ActionListener {
         });
 
         JButton displayProteinsButton = new JButton("Display Protein List");
+        displayProteinsButton.setToolTipText("Display editable list of all the proteins in field");
         displayProteinsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -191,6 +200,7 @@ public class Electro2D extends JPanel implements ActionListener {
         });
 
         JButton colorKey = new JButton("Color Key");
+        colorKey.setToolTipText("Pop-up color key explaining dots in field");
         colorKey.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

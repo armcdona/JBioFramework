@@ -44,8 +44,8 @@ public class JBioFrameworkMain extends JFrame {
         tabbedPane.add("Electro1D", oneDE);
         tabbedPane.addTab("Electro2D", electro2D);
         tabbedPane.addTab("Mass Spectrometer", spectrometer);
+//        tabbedPane.addTab("Marvin Sketch", new JPanel());
 
-//        tabbedPane.addTab("test", tutorial);
         /*tabbedPane.addTab(["user-created name (to be displayed)], [user-created reference]);*/
 
         add(tabbedPane);

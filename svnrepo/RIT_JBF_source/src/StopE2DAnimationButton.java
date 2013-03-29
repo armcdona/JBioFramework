@@ -13,6 +13,7 @@ public class StopE2DAnimationButton extends JButton implements ActionListener {
 
     public StopE2DAnimationButton(Electro2D e) {
         super("Stop");
+        super.setToolTipText("Stop Animation");
         addActionListener(this);
         electro2D = e;
     }

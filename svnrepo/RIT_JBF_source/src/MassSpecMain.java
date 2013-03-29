@@ -63,6 +63,7 @@ public class MassSpecMain extends JPanel {
 
         JPanel infoButtonsPanel = new JPanel();
         help = new JButton("Help");
+        help.setToolTipText("Opens Help files for Mass Spectrometer");
         help.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
@@ -74,6 +75,7 @@ public class MassSpecMain extends JPanel {
             }
         });
         about = new JButton("About");
+        about.setToolTipText("About the program");
         about.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
@@ -97,6 +99,7 @@ public class MassSpecMain extends JPanel {
         add(inputLabel);
 
         inputArea = new JTextArea(7, 20);
+        inputArea.setToolTipText("type or paste protein sequence here");
         inputArea.setLineWrap(true);
         JScrollPane scrollPane = new JScrollPane(inputArea);
         constraints.gridy = 2;
@@ -108,7 +111,20 @@ public class MassSpecMain extends JPanel {
         grid.setConstraints(orLabel, constraints);
         add(orLabel);
 
-        LoadButton loadButton = new LoadButton();
+        JButton loadButton = new JButton("Load Sequence From File");
+        loadButton.setToolTipText("Load from protein file"); //@todo: include file types?
+        loadButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files",
+                        "fasta");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showOpenDialog(chooser);
+                if(returnVal == JFileChooser.APPROVE_OPTION) {
+                    String parsedSequence = FastaParser.parse(chooser.getSelectedFile());
+                    inputArea.setText(parsedSequence);
+                }            }
+        });
         constraints.gridy = 4;
         grid.setConstraints(loadButton, constraints);
         add(loadButton);
@@ -146,7 +162,13 @@ public class MassSpecMain extends JPanel {
         grid.setConstraints(rangeSelectionLowerPanel, constraints);
         add(rangeSelectionLowerPanel);
 
-        RunButton runButton = new RunButton();
+        JButton runButton = new JButton("Run Spectrum");
+        runButton.setToolTipText("Outputs the mass spectrum data on right panel");
+        runButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Spectrometer.runAnalysis(inputArea.getText(), outputGraph,
+                        proteaseBox.getSelectedItem().toString());
+                }});
         constraints.gridy = 10;
         grid.setConstraints(runButton, constraints);
         add(runButton);
@@ -198,69 +220,6 @@ public class MassSpecMain extends JPanel {
         massDisplay.setText("<html> Mass: " + mass);
         tandemGraph.drawSequencePeaks(ion);
     }
-
-   /**
-     * Inner class that loads a protein file selected by the user.
-     */
-    private class LoadButton extends JButton implements ActionListener {
-
-        /**
-         * Constructor passes the String to be displayed on the button to
-         * JButton's constructor and registers itself as its own actionListener.
-         */
-        public LoadButton() {
-            super("Load Sequence From File");
-            addActionListener(this);
-        }
-
-        /**
-         * The actionPerformed method is called when the user clicks on the button.
-         * It opens a JFileChooser so the user may select which file they would
-         * like to obtain sequence information from.
-         *
-         * @param e Unused.
-         */
-        public void actionPerformed(ActionEvent e) {
-            JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files",
-                "fasta");
-            chooser.setFileFilter(filter);
-            int returnVal = chooser.showOpenDialog(this);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-                String parsedSequence = FastaParser.parse(chooser.getSelectedFile());
-                inputArea.setText(parsedSequence);
-            }
-
-        }
-
-    } // End of LoadButton
-
-    /**
-     * Inner class that starts the simulation running once the user clicks on it.
-     */
-    private class RunButton extends JButton implements ActionListener {
-
-        /**
-         * Constructor passes the String to be displayed on the button to
-         * JButton's constructor and registers itself as its own actionListener.
-         */
-        public RunButton() {
-            super("Run Spectrum");
-            addActionListener(this);
-        }
-
-        /**
-         * The actionPerformed method is called when the user clicks on the button.
-         * It begins the simulation.
-         *
-         * @param e Unused.
-         */
-        public void actionPerformed(ActionEvent e) {
-            Spectrometer.runAnalysis(inputArea.getText(), outputGraph,
-                    proteaseBox.getSelectedItem().toString());
-        }
-
-    } // End of RunButton
 
     /**
      * Inner class that repaints the TandemGraphGUI when the user clicks on it.
