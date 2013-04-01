@@ -10,6 +10,7 @@
  */
 import javax.swing.*;
 import java.awt.*;
+import one.d.electrophoresis.Electrophoresis;
 
 public class JBioFrameworkMain extends JFrame {
 

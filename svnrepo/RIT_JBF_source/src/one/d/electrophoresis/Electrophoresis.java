@@ -11,20 +11,20 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-public class Electrophoresis extends JFrame {
+public class Electrophoresis extends JPanel {
 	JTabbedPane tabPane, tabPane2;
 	Parameters paramPanel;
 	Simulation simPanel;
 	ProteinData dataPanel;
 	Plot plotPanel;
 
-	public Electrophoresis(Container pane) {
+	public Electrophoresis() {
 		paramPanel = new Parameters(this);
 		simPanel = new Simulation(this);
 		dataPanel = new ProteinData(this);
 		plotPanel = new Plot(this);
 
-		pane.setLayout(new GridLayout(0, 2, 5, 0));
+		this.setLayout(new GridLayout(0, 2, 5, 0));
 
 		// set up left Panel
 		tabPane = new JTabbedPane();
@@ -37,8 +37,8 @@ public class Electrophoresis extends JFrame {
 		tabPane2.add("Casting Tray ", simPanel);
 		tabPane2.add("Plot", plotPanel);
 
-		pane.add(tabPane);
-		pane.add(tabPane2);
+		this.add(tabPane);
+		this.add(tabPane2);
 
 		paramPanel.setDefaults();
 
@@ -86,18 +86,4 @@ public class Electrophoresis extends JFrame {
 	public void displayProtein(Protein protein) {
 		dataPanel.displayData(protein);
 	}
-
-	public static void main(String... args) {
-
-		// Create and set up the window.
-		JFrame frame = new JFrame("Electrophoresis");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// Set up the content pane.
-		new Electrophoresis(frame.getContentPane());
-		frame.setPreferredSize(new Dimension(622, 500));
-		frame.pack();
-		frame.setVisible(true);
-
-	}
-
 }
