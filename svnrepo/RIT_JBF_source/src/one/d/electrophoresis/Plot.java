@@ -15,7 +15,7 @@ public class Plot extends JPanel implements Runnable {
 	Font plotFont;
 	Thread runner;
 	int pause;
-	Electrophoresis parent;
+	Electro1DMain parent;
 	int numberOfStds;
 	Protein stds[];
 	Protein sample;
@@ -98,7 +98,7 @@ public class Plot extends JPanel implements Runnable {
 	protected double errorMargin;
 	protected DecimalFormat twoDigits;
 
-	Plot(Electrophoresis electrophoresis) {
+	Plot(Electro1DMain electro1DMain) {
 		pause = 20;
 		numberOfStds = 7;
 		stds = new Protein[numberOfStds];
@@ -125,7 +125,7 @@ public class Plot extends JPanel implements Runnable {
 		xPos = 1;
 		lineCoord = new Point(0, 0);
 		errorMargin = 0.2;
-		parent = electrophoresis;
+		parent = electro1DMain;
 		ln10 = Math.log(10.0);
 		rightGridCol = cols - 1;
 		leftGridCol = rightGridCol - gridCols;

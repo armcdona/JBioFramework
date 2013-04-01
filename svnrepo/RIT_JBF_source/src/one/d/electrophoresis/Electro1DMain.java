@@ -2,7 +2,7 @@ package one.d.electrophoresis;
 
 /**
  * @author  updated  by Bader Alharbi
- *The Swing version 1D Electrophoresis simulation, as Desktop application
+ *The Swing version 1D Electro1DMain simulation, as Desktop application
  */
 
 import java.awt.Container;
@@ -11,14 +11,14 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-public class Electrophoresis extends JFrame {
+public class Electro1DMain extends JFrame {
 	JTabbedPane tabPane, tabPane2;
 	Parameters paramPanel;
 	Simulation simPanel;
 	ProteinData dataPanel;
 	Plot plotPanel;
 
-	public Electrophoresis(Container pane) {
+	public Electro1DMain(Container pane) {
 		paramPanel = new Parameters(this);
 		simPanel = new Simulation(this);
 		dataPanel = new ProteinData(this);
@@ -90,10 +90,10 @@ public class Electrophoresis extends JFrame {
 	public static void main(String... args) {
 
 		// Create and set up the window.
-		JFrame frame = new JFrame("Electrophoresis");
+		JFrame frame = new JFrame("Electro1D");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Set up the content pane.
-		new Electrophoresis(frame.getContentPane());
+		new Electro1DMain(frame.getContentPane());
 		frame.setPreferredSize(new Dimension(622, 500));
 		frame.pack();
 		frame.setVisible(true);

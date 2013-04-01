@@ -16,7 +16,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
 /**
@@ -47,10 +46,10 @@ public class Parameters extends JPanel implements Constants {
 	Protein unknown9;
 	Protein unknown10;
 
-	Electrophoresis parent;
+	Electro1DMain parent;
 	Protein stdProteinArray[] = new Protein[7];
 
-	Parameters(Electrophoresis electrophoresis) {
+	Parameters(Electro1DMain electro1DMain) {
 
 		selectedSpeed = medium;
 
@@ -118,7 +117,7 @@ public class Parameters extends JPanel implements Constants {
 		color5Panel = new JPanel();
 		color6Panel = new JPanel();
 		color7Panel = new JPanel();
-		parent = electrophoresis;
+		parent = electro1DMain;
 
 		stdProteinArray[std1Ref] = new Protein("Standard #1",
 				"beta-Galactosidase", "b-gal", 0x1c58b, Color.blue);

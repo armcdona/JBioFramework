@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ProteinData extends JPanel {
-	Electrophoresis parent;
+	Electro1DMain parent;
 	String mw;
 	JTextField name;
 	JTextField fullName;
@@ -36,7 +36,7 @@ public class ProteinData extends JPanel {
 		logMolWt.setText(String.valueOf(d));
 	}
 
-	ProteinData(Electrophoresis electrophoresis) {
+	ProteinData(Electro1DMain electro1DMain) {
 		mw = "0";
 		titlePanel = new JPanel();
 		namePanel = new JPanel();
@@ -44,7 +44,7 @@ public class ProteinData extends JPanel {
 		abbrPanel = new JPanel();
 		molWtPanel = new JPanel();
 		logMolWtPanel = new JPanel();
-		parent = electrophoresis;
+		parent = electro1DMain;
 		setLayout(new GridLayout(6, 1));
 		titlePanel.setBackground(Color.lightGray);
 		namePanel.setBackground(Color.lightGray);

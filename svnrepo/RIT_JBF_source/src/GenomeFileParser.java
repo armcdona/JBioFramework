@@ -58,7 +58,7 @@ public class GenomeFileParser {
                 // Celis, J., Reference points for comparisons of two-dimensional
                 // maps of proteins from different human cell types defined in a
                 // pH scale where isoelectric points correlate with polypeptide
-                // compositions, Electrophoresis 1994, 15, 529-539.
+                // compositions, Electro1DMain 1994, 15, 529-539.
                 switch ( pro.charAt( a ) ) {
                 case 'R': type = 'b'; pK = 12; break;
                 case 'D': type = 'a';pK=4.05; break;
