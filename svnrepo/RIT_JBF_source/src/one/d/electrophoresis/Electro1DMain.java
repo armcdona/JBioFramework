@@ -4,11 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Omega
- * Date: 4/1/13
- * Time: 7:23 PM
- * To change this template use File | Settings | File Templates.
+ * This is a main method for the 1D Electrophoresis. It basically allows for
+ * easy way to launch/test the 1D Electrophoresis component
+ * @author  Benjamin Russell (brr1922@rit.edu)
  */
 public class Electro1DMain extends JFrame {
     private Electro1DMain() {
