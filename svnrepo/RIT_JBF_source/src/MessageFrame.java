@@ -8,9 +8,11 @@
  * @author Jill Zapoticznyj
  */
 
-import java.awt.*;
-import java.awt.event.*;
-
+import java.awt.Frame;
+import java.awt.Panel;
+import java.awt.Label;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 public class MessageFrame extends Frame {
 
  /** variables for the file reading pop-up frame **/

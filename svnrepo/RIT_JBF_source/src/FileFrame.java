@@ -9,11 +9,19 @@
  * @author Jill Zapoticznyj
  * @author Adam Bazinet
  */
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import java.awt.BorderLayout;
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.io.*;
-import java.net.*;
 
 public class FileFrame extends JFrame implements ActionListener {
 

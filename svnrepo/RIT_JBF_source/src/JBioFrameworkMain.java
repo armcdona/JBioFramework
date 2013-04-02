@@ -8,9 +8,10 @@
  *
  * @author Amanda Fisher
  */
-import javax.swing.*;
-import java.awt.*;
-//import one.d.electrophoresis.Electro1DMain;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import java.awt.Toolkit;
+import one.d.electrophoresis.Electrophoresis;
 
 public class JBioFrameworkMain extends JFrame {
 

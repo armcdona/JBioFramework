@@ -7,10 +7,17 @@
  * @author Amanda Fisher
  */
 
-import javax.swing.*;
-import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.util.Vector;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Insets;
 
 public class ProteinListFrame extends JFrame {
 

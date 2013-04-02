@@ -4,8 +4,9 @@
  * @author Amanda Fisher
  */
 
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StopE2DAnimationButton extends JButton implements ActionListener {
 

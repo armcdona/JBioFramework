@@ -8,9 +8,12 @@
  * @author     Jill Zapoticznyj
  */
 
-import java.io.*;
-import java.util.*;
-import java.net.MalformedURLException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
+import java.util.Vector;
 
 public class WebGenerator{
     

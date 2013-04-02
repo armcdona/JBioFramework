@@ -10,10 +10,17 @@
  * @author Adam Bazinet - author of ProteinFrame
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
+import java.awt.Frame;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.Label;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Vector;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class IEFFrame extends Frame {
 

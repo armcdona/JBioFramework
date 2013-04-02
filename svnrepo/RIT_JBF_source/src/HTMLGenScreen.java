@@ -7,8 +7,16 @@
  * Created: 11/06/2003
  */
 
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.ActionListener;
 
 public class HTMLGenScreen extends JFrame implements ActionListener,
 						    MouseListener{

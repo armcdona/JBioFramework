@@ -8,11 +8,20 @@
  * @author Amanda Fisher
  */
 
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.*;
-import java.awt.*;
-import java.io.*;
+import javax.swing.JPanel;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.AWTException;
+import java.awt.Rectangle;
+import java.awt.Image;
+import java.awt.Dimension;
+import java.util.Vector;
+import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.FileOutputStream;
 
 public class GelCanvas extends JPanel implements MouseListener {
 

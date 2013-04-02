@@ -1,7 +1,22 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Vector;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
+import javax.swing.JOptionPane;
+
 
 public class SearchProteinFunction implements MouseListener, ActionListener{
     
@@ -87,7 +102,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	buttonPane.add( buttonLabelPane, BorderLayout.NORTH );
 	buttonPane.add( buttonSelectionPane, BorderLayout.CENTER );
 	searchLabelPane.setLayout( new GridLayout(0,1));
-	Label searchLabel = new Label( "Enter Search Term" );
+	JLabel searchLabel = new JLabel( "Enter Search Term" );
 	searchLabelPane.add( searchLabel );
 	searchFieldPane.setLayout( new GridLayout(0,1) );
 	searchFieldPane.add( includesLabel );

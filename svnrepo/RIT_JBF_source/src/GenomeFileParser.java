@@ -9,9 +9,14 @@
  * @author     Janine Garnham
  */
 
-import java.io.*;  // input/output package
-import java.util.*; // utiliies
-import java.net.URL;
+//import java.io.;  // input/output package
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Hashtable;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 public class GenomeFileParser {
     /**

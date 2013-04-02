@@ -3,7 +3,8 @@
  * displayed in hte HTML file.
  */
 
-import java.util.*;
+import java.util.Vector;
+import java.util.TreeSet;
 
 public class HTMLSorter{
     

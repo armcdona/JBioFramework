@@ -9,15 +9,33 @@
  * Created 4/17/03
  */
 
-import java.text.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
-import java.net.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.Insets;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Component;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
+import javax.swing.border.TitledBorder;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Vector;
 
 /**
  * The main electro2D class.
@@ -601,7 +619,7 @@ public class Electro2D extends JPanel implements ActionListener {
         // in the HTML files folder. It is on the third line in the csv file.
 
         try {
-            FileInputStream   fileStream  = new FileInputStream("HTML Files/Search Addresses.csv");
+            FileInputStream fileStream  = new FileInputStream("HTML Files/Search Addresses.csv");
             InputStreamReader inputStream = new InputStreamReader(fileStream);
             buffer = new BufferedReader(inputStream);
         } catch (IOException ex) {
@@ -925,7 +943,7 @@ public class Electro2D extends JPanel implements ActionListener {
              * find the correct Double
              */
             String[] lowAndHigh = ranges.split("-");
-            Scanner  scan       = new Scanner(lowAndHigh[1]);
+            Scanner scan       = new Scanner(lowAndHigh[1]);
             max = scan.nextDouble();
             /**
              * the maximum pH cannot be below 0 or above 14 because a pH of any

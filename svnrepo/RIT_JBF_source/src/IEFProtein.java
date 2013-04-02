@@ -7,8 +7,13 @@
  * @author Adam Bazinet
  * @author Amanda Fisher
  */
-import java.awt.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.util.Vector;
+import java.util.Random;
+import java.util.Collection;
+
 
 public class IEFProtein extends Component {
 

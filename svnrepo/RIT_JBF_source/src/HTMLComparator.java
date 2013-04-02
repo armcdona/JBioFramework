@@ -3,7 +3,8 @@
  * HTML document.
  */
 
-import java.util.*;
+import java.util.Vector;
+import java.util.Comparator;
 
 public class HTMLComparator implements Comparator{
     

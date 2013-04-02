@@ -4,9 +4,10 @@
  * @author Amanda Fisher
  */
 
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.*;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class RestartE2DAnimationButton extends JButton implements ActionListener {
 

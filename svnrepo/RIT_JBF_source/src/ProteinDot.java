@@ -5,8 +5,10 @@
  * @author Amanda Fisher
  */
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Graphics;
+import java.awt.Component;
+import java.awt.Color;
+import javax.swing.JPanel;
 
 public class ProteinDot extends Component {
 

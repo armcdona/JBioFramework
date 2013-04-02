@@ -4,7 +4,10 @@
  * @author Jill Zapoticznyj
  */
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Canvas;
+import java.awt.Image;
+
 
 public class RangeImage extends Canvas{
 

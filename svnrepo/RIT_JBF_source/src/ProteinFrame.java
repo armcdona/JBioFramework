@@ -12,12 +12,22 @@
  * tandem mass spec simulation. @author Amanda Fisher
  */
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.JTextArea;
+import javax.swing.JOptionPane;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.*;
 
 public class ProteinFrame extends JFrame {
 
