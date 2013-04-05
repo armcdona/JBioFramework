@@ -61,9 +61,9 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if(playing == true) {
-	    playing = false;
 	    electro2D.stopThread();
-	}
+        playing = false;
+        }
 	// otherwise determine which parts of the animation need to be drawn
 	// and start the appropriate thread.
 	else {
@@ -90,6 +90,7 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 			electro2D.restartIEF();
 			iefDrawn = true;
 			electro2D.getGel().resetReLine();
+            new ColorFrame().showKey(); //@Todo: set position on screen
 		    }
 		}
 		//if the user selected SDS-PAGE animation, and the IEF is
