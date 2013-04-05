@@ -3,11 +3,18 @@ package one.d.electrophoresis;
 /* Decompiled by Mocha from Plot.class */
 /* Originally compiled from Plot.java */
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Point;
+import java.awt.Graphics;
+import java.awt.Color;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.text.DecimalFormat;
+import one.d.electrophoresis.Electrophoresis;
 
 import javax.swing.JPanel;
 
@@ -15,7 +22,7 @@ public class Plot extends JPanel implements Runnable {
 	Font plotFont;
 	Thread runner;
 	int pause;
-	Electro1DMain parent;
+	Electrophoresis parent;
 	int numberOfStds;
 	Protein stds[];
 	Protein sample;
@@ -98,7 +105,7 @@ public class Plot extends JPanel implements Runnable {
 	protected double errorMargin;
 	protected DecimalFormat twoDigits;
 
-	Plot(Electro1DMain electro1DMain) {
+	Plot(Electrophoresis electrophoresis) {
 		pause = 20;
 		numberOfStds = 7;
 		stds = new Protein[numberOfStds];
@@ -125,7 +132,7 @@ public class Plot extends JPanel implements Runnable {
 		xPos = 1;
 		lineCoord = new Point(0, 0);
 		errorMargin = 0.2;
-		parent = electro1DMain;
+		parent = electrophoresis;
 		ln10 = Math.log(10.0);
 		rightGridCol = cols - 1;
 		leftGridCol = rightGridCol - gridCols;

@@ -1,6 +1,13 @@
-import java.awt.*;
-import java.awt.color.*;
-import java.awt.event.*;
+//import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 /**
  * Searches for EC number of proteins whose function is enzyme
  *

@@ -6,7 +6,7 @@
  * @author Jill Zapoticznyj
  */
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;  // randomly generates colors for protein
 import java.util.HashMap;
 

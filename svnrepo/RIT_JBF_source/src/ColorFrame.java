@@ -5,8 +5,13 @@
 
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Frame;
+import java.awt.Panel;
+import java.awt.Label;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ColorFrame {
     

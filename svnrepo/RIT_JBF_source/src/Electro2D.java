@@ -1,5 +1,5 @@
 /**
- * GUI and main class for 2D Electro1DMain simulation
+ * GUI and main class for 2D Electrophoresis simulation
  *
  * @author  Adam Bazinet
  * @author  Jill Zapoticznyj
@@ -94,7 +94,6 @@ public class Electro2D extends JPanel implements ActionListener {
     private FileFrame     fileFrame2;
     private boolean       sequencesReady;
 
-    private JPanel        header;
     private JLabel        header0;
     private JPanel        leftPanel;
     private JPanel        pHPanel;
@@ -309,7 +308,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
         JPanel header = new JPanel(new GridBagLayout());
         c.gridy = 0;
-        header0 = new JLabel("2-D Electro1DMain");
+        header0 = new JLabel("2D Electrophoresis");
         header0.setFont(new Font("SansSerif", Font.BOLD, 18));
         header.add(header0,c);
         leftPanel.add(header);

@@ -3,7 +3,7 @@ package one.d.electrophoresis;
 /*
  *Updated By Bader AlHarbi
  * Decompiled by Mocha from Simulation.class
- * Originally compiled from D:\Dave\Java\Electro1DMain\Simulation.java
+ * Originally compiled from D:\Dave\Java\Electrophoresis\Simulation.java
  */
 
 import java.awt.Color;
@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 public class Simulation extends JPanel implements Runnable {
 	private final int numOfStds = 7;
 	Thread runner;
-	Electro1DMain parent;
+	Electrophoresis parent;
 	int pause;
 	float animationModifier;
 	float modifier;
@@ -127,7 +127,7 @@ public class Simulation extends JPanel implements Runnable {
 	boolean noLoadError;
 	protected DecimalFormat twoDigits;
 
-	Simulation(Electro1DMain electro1DMain) {
+	Simulation(Electrophoresis electrophoresis) {
 
 		animationModifier = 1.0F;
 		modifier = 1.0F;
@@ -153,7 +153,7 @@ public class Simulation extends JPanel implements Runnable {
 		loaded = 2;
 		sampLoadState = notLoaded;
 		stdLoadState = notLoaded;
-		parent = electro1DMain;
+		parent = electrophoresis;
 		Jlabels[0] = "0";
 		Jlabels[1] = "1";
 		Jlabels[2] = "2";

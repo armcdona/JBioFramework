@@ -5,7 +5,7 @@
  * @author Jill Zapoticznyj
  */
 
-import java.util.*;
+import java.util.Comparator;
 
 public class CompIEF implements Comparator{
     

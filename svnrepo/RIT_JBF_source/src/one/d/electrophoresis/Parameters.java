@@ -46,10 +46,10 @@ public class Parameters extends JPanel implements Constants {
 	Protein unknown9;
 	Protein unknown10;
 
-	Electro1DMain parent;
+	Electrophoresis parent;
 	Protein stdProteinArray[] = new Protein[7];
 
-	Parameters(Electro1DMain electro1DMain) {
+	Parameters(Electrophoresis electrophoresis) {
 
 		selectedSpeed = medium;
 
@@ -117,7 +117,7 @@ public class Parameters extends JPanel implements Constants {
 		color5Panel = new JPanel();
 		color6Panel = new JPanel();
 		color7Panel = new JPanel();
-		parent = electro1DMain;
+		parent = electrophoresis;
 
 		stdProteinArray[std1Ref] = new Protein("Standard #1",
 				"beta-Galactosidase", "b-gal", 0x1c58b, Color.blue);
