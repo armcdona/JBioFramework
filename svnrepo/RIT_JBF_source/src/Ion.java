@@ -15,18 +15,13 @@
  *
  * @author Amanda Fisher
  */
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.io.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class Ion extends ArrayList<SpecAminoAcid> {
 
@@ -71,6 +66,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 	    
     	JFrame frame = new JFrame("Name for MarvinSketch");
     	JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
     	JTextArea proteinSet = new JTextArea("",250,500);
 		proteinSet.append(
 	       "Instructions: Select the name of the Sequence and Copy and Paste it into MarvinSketch.\n \n" + 
@@ -80,14 +76,23 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 	       "To display the structure properly, go to Edit> Transformation > Flip> Flip Horizontally.\n \n" +
 	       "Note: The longer the sequence the more likely it is to display diagonally, simply select all the atoms in the structure and move it where you would like it to be."
 	       
-	     );
+	    );
+        panel.add(proteinSet, BorderLayout.CENTER);
+
+        // Add a button that will load the protein in Marvin Sketch
+        JButton marvinButton = new JButton("Show in MarvinSketch");
+        marvinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // DO SOMETHING WITH MARVIN SKETCH!!!
+            }
+        });
+        panel.add(marvinButton, BorderLayout.SOUTH);
+
 		frame.add(panel);
-		frame.add(proteinSet);
 		frame.setSize(900,250);
     	frame.setVisible(true);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-
     }
    
     	

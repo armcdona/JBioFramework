@@ -35,7 +35,7 @@ public class MarvinTab extends JPanel {
 		return settings;
 	}
 
-	public JComponent createMainPanel() {
+	public JPanel createMainPanel() {
 		JPanel topPanel = new JPanel();
 		MSketchPane sketch = createSketchPane();
 		JPanel sketchPanel = new JPanel();
@@ -47,23 +47,5 @@ public class MarvinTab extends JPanel {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.add(topPanel);
 		return mainPanel;
-	}
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-	}
-
-	private static void createAndShowGUI() {
-		JFrame frame = new JFrame();
-		MarvinTab example = new MarvinTab();
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		frame.add(example.createMainPanel());
-		frame.pack();
-		frame.setVisible(true);
 	}
 }
