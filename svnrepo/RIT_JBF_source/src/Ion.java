@@ -64,7 +64,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
     	// this is the code that gives the pop up box for the chemical structure to put in Marvin Sketch
     	// there is a text area inside of a panel and frame that allows the size to be changed.
 	    
-    	JFrame frame = new JFrame("Name for MarvinSketch");
+    	final JFrame frame = new JFrame("Name for MarvinSketch");
     	JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
     	JTextArea proteinSet = new JTextArea("",250,500);
@@ -84,7 +84,8 @@ public class Ion extends ArrayList<SpecAminoAcid> {
         marvinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // DO SOMETHING WITH MARVIN SKETCH!!!
+                MarvinTab.getSketchPane().setMol(sequence);
+                frame.dispose();
             }
         });
         panel.add(marvinButton, BorderLayout.SOUTH);
@@ -92,7 +93,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 		frame.add(panel);
 		frame.setSize(900,250);
     	frame.setVisible(true);
-    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
    
     	

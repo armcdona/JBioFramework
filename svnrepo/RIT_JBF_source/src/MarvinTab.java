@@ -17,10 +17,11 @@ public class MarvinTab extends JPanel {
 
 	private JTextArea textarea = new JTextArea(10,50);
 
+    private static MSketchPane marvinPane;
+
 	private MSketchPane createSketchPane() {
 		MSketchPane pane = new MSketchPane(createUserSettings());
-		pane.setMol("AspGluLysArg");
-		pane.setPreferredSize(new Dimension(500, 500));
+		pane.setPreferredSize(new Dimension(900, 500));
 		return pane;
 	}
 
@@ -37,9 +38,9 @@ public class MarvinTab extends JPanel {
 
 	public JPanel createMainPanel() {
 		JPanel topPanel = new JPanel();
-		MSketchPane sketch = createSketchPane();
+		marvinPane = createSketchPane();
 		JPanel sketchPanel = new JPanel();
-		sketchPanel.add(sketch);
+		sketchPanel.add(marvinPane);
 		
 		topPanel.add(sketchPanel);
 
@@ -48,4 +49,8 @@ public class MarvinTab extends JPanel {
 		mainPanel.add(topPanel);
 		return mainPanel;
 	}
+
+    public static MSketchPane getSketchPane() {
+        return marvinPane;
+    }
 }
