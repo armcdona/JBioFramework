@@ -85,6 +85,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MarvinTab.getSketchPane().setMol(sequence);
+                JBioFrameworkMain.getTabs().setSelectedIndex(3);
                 frame.dispose();
             }
         });

@@ -14,7 +14,7 @@ import java.awt.*;
 public class JBioFrameworkMain extends JFrame {
 
     public static final long serialVersionUID = 1L;
-    private JTabbedPane tabbedPane;
+    private static JTabbedPane tabbedPane;
     private Electro2D electro2D;
     private MainPanelGUI spectrometer;
     private Welcome welcome;
@@ -55,5 +55,9 @@ public class JBioFrameworkMain extends JFrame {
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         this.pack();
+    }
+
+    public static JTabbedPane getTabs() {
+        return tabbedPane;
     }
 }
