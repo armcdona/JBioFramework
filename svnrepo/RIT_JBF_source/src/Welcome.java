@@ -76,12 +76,13 @@ public class Welcome extends JPanel{
         JPanel body = new JPanel();
 
         JButton help = new JButton("Help");
-        help.setToolTipText("Opens help files in browser");
+        help.setToolTipText("Opens a link to our wiki");
         help.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+//                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                String url = "http://sourceforge.net/p/jbf/wiki/";
                 try{
-                    BrowserLauncher.openHTMLFile(f);
+                    BrowserLauncher.openURL(url);
                 } catch(IOException i){
                     System.err.println( i.getMessage());
                 }

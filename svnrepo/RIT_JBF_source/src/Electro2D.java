@@ -11,7 +11,11 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -41,7 +45,6 @@ import java.util.Vector;
  * The main electro2D class.
  */
 public class Electro2D extends JPanel implements ActionListener {
-
     private FileFrame                     fileFrame;        //pop up for loading file data
     private SingleProteinListFrame        proteinListFrame; //pop up for displaying protein lists
 
@@ -165,15 +168,16 @@ public class Electro2D extends JPanel implements ActionListener {
         });
 
         JButton helpButton = new JButton("Help");
-        helpButton.setToolTipText("Opens Help files for Electro2D");
+        helpButton.setToolTipText("Opens help wiki for Electro2D");
         helpButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+//                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                String url = "https://sourceforge.net/p/jbf/wiki/Electro2D/";
                 try{
-                    BrowserLauncher.openHTMLFile(f);
+                    BrowserLauncher.openURL(url);
                 } catch(IOException i){
-                    JOptionPane.showMessageDialog(Electro2D.this, "The help files could not be loaded!", "Error", JOptionPane.ERROR_MESSAGE);
+                    System.err.println( i.getMessage());
                 }
             }
         });

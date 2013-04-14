@@ -71,12 +71,12 @@ public class MassSpecMain extends JPanel {
 
         JPanel infoButtonsPanel = new JPanel();
         help = new JButton("Help");
-        help.setToolTipText("Opens Help files for Mass Spectrometer");
+        help.setToolTipText("Opens Help wiki for Mass Spectrometer");
         help.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                String url = "https://sourceforge.net/p/jbf/wiki/MassSpec/";
                 try{
-                    BrowserLauncher.openHTMLFile(f);
+                    BrowserLauncher.openURL(url);
                 } catch(IOException i){
                     System.err.println( i.getMessage());
                 }
@@ -219,7 +219,7 @@ public class MassSpecMain extends JPanel {
      * when a user clicks on a peak in the OutputGraphGUI. It also alerts
      * TandemGraphGUI that there is peptide sequencing to be done.
      *
-     * @param ion The ion the user selected for peptide sequencing.
+     * @param selected The ion the user selected for peptide sequencing.
      */
     public void runTandem(Ion selected) {
         ion = selected;
