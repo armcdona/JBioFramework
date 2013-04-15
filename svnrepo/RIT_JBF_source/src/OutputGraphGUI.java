@@ -123,7 +123,7 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
             g.drawString(markNumber, xPos-10, yEnd + 11);
         }
 
-        //draw verticle axis hash marks and numbers
+        //draw vertical axis hash marks and numbers
         int xStart = xAxisStartingPoint - halfHashMarkLength;
         int xEnd = xAxisStartingPoint + halfHashMarkLength;
         for(int i = 0; i < 3; i++) {
@@ -218,6 +218,13 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
             for(Ion ion : peakLines) {
                 if(ion.getXCoordinate()+ 2 > x && ion.getXCoordinate() - 2 < x) {
                     mainPanel.runTandem(ion);
+                  //display popup from ion here
+                    boolean printed = false;
+                    if (!printed){
+                    	ion.displaySequence();
+                    	
+                    	printed = true;
+                    }
                 }
             }
         }
