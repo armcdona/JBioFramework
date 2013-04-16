@@ -8,8 +8,7 @@
  *
  * @author Amanda Fisher
  */
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 import java.awt.Toolkit;
 import one.d.electrophoresis.Electrophoresis;
 
