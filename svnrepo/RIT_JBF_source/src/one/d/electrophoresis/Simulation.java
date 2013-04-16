@@ -6,11 +6,7 @@ package one.d.electrophoresis;
  * Originally compiled from D:\Dave\Java\Electrophoresis\Simulation.java
  */
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
@@ -128,7 +124,7 @@ public class Simulation extends JPanel implements Runnable {
 	protected DecimalFormat twoDigits;
 
 	Simulation(Electrophoresis electrophoresis) {
-
+        this.setPreferredSize(new Dimension(450,450));
 		animationModifier = 1.0F;
 		modifier = 1.0F;
 		stdSamples = new Protein[7];
