@@ -1,5 +1,6 @@
-import javax.swing.*;
-import java.awt.event.*;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 /**
  * Removes highlighted proteins from the protein list.
  *
