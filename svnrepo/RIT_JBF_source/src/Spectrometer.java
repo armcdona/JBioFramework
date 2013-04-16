@@ -1,4 +1,18 @@
 /*
+ * Copyright (C) 2013 Rochester Institute of Technology
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * See the GNU General Public License for more details.
+ */
+/*
  * This class repsonds when a user wishes to run a sequence. After error checking
  * the sequence, Spectrometer retrieves the protease the user wants to cut with
  * and directs it to chop up the sequence. The sequences are then given to Converter
