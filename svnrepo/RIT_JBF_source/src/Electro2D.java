@@ -11,7 +11,6 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,7 +32,6 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;
 import java.awt.Font;
@@ -118,12 +116,12 @@ public class Electro2D extends JPanel implements ActionListener {
 
         web          = new WebGenerator(this);
         JButton webButton = new JButton("Generate HTML Page");
+        webButton.setToolTipText("Creates an HTML file of proteins and values");
         webButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new HTMLGenScreen(Electro2D.this);
             }
         });
-        webButton.setToolTipText("Creates an HTML file of proteins and values");
 
 	    //read in deactivated range Image
         rangeImage          = new RangeImage(
@@ -155,16 +153,14 @@ public class Electro2D extends JPanel implements ActionListener {
         // Help/About buttons
         JButton aboutButton = new JButton("About");
         aboutButton.setToolTipText("About the program");
-        aboutButton.addActionListener(new ActionListener(){
-            @Override
+        aboutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                File f = new File( "HTML Files" + File.separator + "about.html" );
+//                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
                 try{
-                    BrowserLauncher.openHTMLFile(f);
-                }catch(IOException i){
-                    JOptionPane.showMessageDialog(Electro2D.this, "The help files could not be loaded!", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+                    BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
+                } catch(IOException i){
+                    System.err.println( i.getMessage());
+                }}
         });
 
         JButton helpButton = new JButton("Help");

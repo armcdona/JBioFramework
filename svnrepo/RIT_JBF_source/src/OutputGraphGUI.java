@@ -1,4 +1,19 @@
 /*
+ * Copyright (C) 2013 Rochester Institute of Technology
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * See the GNU General Public License for more details.
+ */
+
+/*
  * This class extends JPanel to override the paintComponent method in order to
  * represent the output of the spectrometer on a graph. This OutputGraphGUI will
  * be added to the MainPanelGUI. OutputGraphGUI also sets each Ion's xCoordinate
@@ -10,6 +25,7 @@
  *
  * @author Amanda Fisher
  */
+
 import javax.swing.JPanel;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;

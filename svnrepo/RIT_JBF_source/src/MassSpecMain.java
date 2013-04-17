@@ -1,4 +1,19 @@
 /*
+ * Copyright (C) 2013 Rochester Institute of Technology
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * See the GNU General Public License for more details.
+ */
+
+/*
  * This class extends JPanel so that the Spectrometer simulation can be added to
  * the JBioFramework program interface. It holds the main user interface for
  * the Spectrometer simulation.
@@ -26,7 +41,6 @@ import java.awt.event.ItemEvent;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JCheckBox;
-import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import javax.swing.JTextField;
@@ -86,9 +100,9 @@ public class MassSpecMain extends JPanel {
         about.setToolTipText("About the program");
         about.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+//                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
                 try{
-                    BrowserLauncher.openHTMLFile(f);
+                    BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
                 } catch(IOException i){
                     System.err.println( i.getMessage());
                 }

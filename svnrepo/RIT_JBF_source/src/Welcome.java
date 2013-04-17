@@ -17,9 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Cursor;
-import java.awt.Desktop;
 import java.io.IOException;
-import java.io.File;
 
 
 public class Welcome extends JPanel{
@@ -92,19 +90,17 @@ public class Welcome extends JPanel{
         body.add(help,c);
 
         JButton about = new JButton("About");
-        about.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                File f = new File( "HTML Files" + File.separator + "about.html" );
-                try{
-                    BrowserLauncher.openHTMLFile(f);
-                }catch(IOException i){
-                    System.err.println(i.getMessage());
-                    i.printStackTrace();
-                }
-            }
-        });
-//        c.gridy = 2;
-//        body.add(about,c);
+        about.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+//                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
+                    try{
+                        BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
+                    } catch(IOException i){
+                        System.err.println( i.getMessage());
+                    }}
+            });
+        c.gridy = 2;
+        body.add(about,c);
 
         JButton prev = new JButton("Previous");
         c.gridy = 3;
@@ -128,10 +124,6 @@ public class Welcome extends JPanel{
         probSheets.setToolTipText("Open included problem sets");
         probSheets.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                /**
-                 * opens files we tack into the program much like we did with opening the
-                 * gene bank files.
-                 */
                 JFrame pSf = new JFrame("Problem Sets");
                 JPanel pSp = new JPanel();
                 JLabel pSl = new JLabel("Choose a problem set to open [mouse over for details]. \n");
@@ -141,34 +133,26 @@ public class Welcome extends JPanel{
                 pSb1.setToolTipText("High School and First Year College level");
                 pSb1.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String directory  = "C:\\Users\\Aidan\\Desktop\\"; //Research with Paul Craig\\mainstream code\\git repo\\svnrepo\\RIT_JBF_source\\src\\";// folder where word documents are present.
-                        String fileName = "RevisedProblemSet1";
-                        Desktop desktop = Desktop.getDesktop();
-                        try {
-                            File f = new File( directory + fileName  +  ".rtf");
-                            desktop.open(f);  // opens application (MSWord) associated with .doc file
-                        }
-                        catch(Exception ex) {
-                            // WordDocument.this is to refer to outer class's instance from inner class
-                            JOptionPane.showMessageDialog(null,"Error"); }
-                    }});
+                        String url = "https://sourceforge.net/p/jbf/wiki/miscFiles/attachment/RevisedProblemSet1.docx";
+                        try{
+                            BrowserLauncher.openURL(url);
+                        } catch(IOException i){
+                            System.err.println( i.getMessage());
+                        }}});
                 pSp.add(pSb1);
 
                 JButton pSb2 = new JButton("Problem Set 2");
                 pSb2.setToolTipText("Upper Division Bio and Chem Students");
                 pSb2.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String directory  = "C:\\Users\\Aidan\\Desktop\\"; //Research with Paul Craig\\mainstream code\\git repo\\svnrepo\\RIT_JBF_source\\src\\";// folder where word documents are present.
-                        String fileName = "RevisedProblemSet2";
-                        Desktop desktop = Desktop.getDesktop();
-                        try {
-                            File f = new File( directory + fileName  +  ".rtf");
-                            desktop.open(f);  // opens application (MSWord) associated with .doc file
+                        String url = "https://sourceforge.net/p/jbf/wiki/miscFiles/attachment/RevisedProblemSet2.docx";
+                        try{
+                            BrowserLauncher.openURL(url);
+                        } catch(IOException i){
+                            System.err.println( i.getMessage());
                         }
-                        catch(Exception ex) {
-                            // WordDocument.this is to refer to outer class's instance from inner class
-                            JOptionPane.showMessageDialog(null,"Error"); }
-                    }});
+                    }
+                });
                 pSp.add(pSb2);
                 pSf.setVisible(true);
                 pSf.setSize(350,100);

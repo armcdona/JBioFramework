@@ -5,6 +5,7 @@ package one.d.electrophoresis;
  *The Swing version 1D Electrophoresis simulation, as Desktop application
  */
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,12 +35,14 @@ public class Electrophoresis extends JPanel {
     }
 
     public Electrophoresis() {
+        super.setPreferredSize(new Dimension(550, 450));
 
         paramPanel = new Parameters(this);
         simPanel = new Simulation(this);
         dataPanel = new ProteinData(this);
         plotPanel = new Plot(this);
 
+//        super.setSize(20,35);
         this.setLayout(new GridLayout(0, 2, 5, 0));
 
         // set up left Panel
