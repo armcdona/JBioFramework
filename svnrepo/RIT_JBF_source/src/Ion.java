@@ -15,15 +15,21 @@
  *
  * @author Amanda Fisher
  */
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.awt.Color;
+import java.io.*;
+
+import javax.swing.*;
 
 public class Ion extends ArrayList<SpecAminoAcid> {
 
-    double totalMass = 0;
-    int totalCharge = 0;
-    double hits = 0;
-    int xCoordinate = 0;
+    private double totalMass = 0;
+    private int totalCharge = 0;
+    private double hits = 0;
+    private int xCoordinate = 0;
+    private String sequence;
     Color color = Color.BLACK;
 
     /**
@@ -47,8 +53,63 @@ public class Ion extends ArrayList<SpecAminoAcid> {
         }
         return true;
     }
-
     /**
+     *  This is used to get the pop-up window to display the
+     *  amino acid sequence that is translated from the Amino Acid Translator 
+     *  after it is sent from the ion setters and getters
+     * 
+     */
+    
+    public void displaySequence() {
+    	// this is the code that gives the pop up box for the chemical structure to put in Marvin Sketch
+    	// there is a text area inside of a panel and frame that allows the size to be changed.
+	    
+    	final JFrame frame = new JFrame("Name for MarvinSketch");
+    	JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+    	JTextArea proteinSet = new JTextArea("",150,300);
+		proteinSet.append(
+	       "Instructions: " +
+	       "\n" +
+	       "\n To display the structure properly, go to Edit> Transformation > Flip> Flip Horizontally.\n \n" +
+	       "Note: The longer the sequence the more likely it is to display diagonally,"+
+	       "\n simply select all the atoms in the structure and move it where you would like it to be."
+	       
+	    );
+        panel.add(proteinSet, BorderLayout.CENTER);
+
+        // Add a button that will load the protein in Marvin Sketch
+        JButton marvinButton = new JButton("Show in MarvinSketch");
+        marvinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequence));
+                JBioFrameworkMain.getTabs().setSelectedIndex(4);
+                frame.dispose();
+            }
+        });
+        panel.add(marvinButton, BorderLayout.SOUTH);
+
+		frame.add(panel);
+		frame.setSize(480,175);
+    	frame.setVisible(true);
+    	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+   
+    	
+    private void setSize(int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
+	private Font newFont(String string, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private Dimension newDimension(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
      * Used by Ion in add method to keep a running total of the mass, and by
      * TandemGraphGUI to adjust the molecular weight of an ion after
      * sequencing fragmentation (single H gets taken away/put on depending on
@@ -58,6 +119,15 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      */
     public void setMass(double mass) {
         totalMass = mass;
+    }
+    
+    // This will set the sequence given from the ion fragment in the bottom peaks of the graph
+    public void setSequence(String sequence) {
+    	this.sequence = sequence;
+    }
+    // Gets the Sequence to be used in the Translator
+    public String getSequence() {
+    	return sequence;
     }
 
     /**

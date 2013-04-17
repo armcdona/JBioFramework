@@ -8,19 +8,21 @@
  *
  * @author Amanda Fisher
  */
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 import java.awt.Toolkit;
 import one.d.electrophoresis.Electrophoresis;
 
 public class JBioFrameworkMain extends JFrame {
 
     public static final long serialVersionUID = 1L;
-    private JTabbedPane tabbedPane;
+    private static JTabbedPane tabbedPane;
 
     private Welcome welcome;
     private Electrophoresis oneDE;
     private Electro2D electro2D;
     private MassSpecMain spectrometer;
+    private MarvinTab marvin;
     /*private [NameOfClass] [user-created reference]*/
 
     public static void main(String[] args) {
@@ -34,19 +36,20 @@ public class JBioFrameworkMain extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         welcome = new Welcome();
+        marvin = new MarvinTab();
         electro2D = new Electro2D();
         spectrometer = new MassSpecMain();
         oneDE = new Electrophoresis();
 
         /*[user-created reference] = new [name of class]()*/
 
-        /**/tabbedPane = new JTabbedPane();/**/
+        tabbedPane = new JTabbedPane();
+
         tabbedPane.addTab("Welcome", welcome);
         tabbedPane.add("Electro1D", oneDE);
         tabbedPane.addTab("Electro2D", electro2D);
         tabbedPane.addTab("Mass Spectrometer", spectrometer);
-//        tabbedPane.addTab("Marvin Sketch", new JPanel());
-
+        tabbedPane.addTab("Marvin Sketch", marvin.createMainPanel());
         /*tabbedPane.addTab(["user-created name (to be displayed)], [user-created reference]);*/
 
         add(tabbedPane);
@@ -59,5 +62,9 @@ public class JBioFrameworkMain extends JFrame {
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         this.pack();
+    }
+
+    public static JTabbedPane getTabs() {
+        return tabbedPane;
     }
 }
