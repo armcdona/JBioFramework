@@ -1,3 +1,4 @@
+
 /*
  * @(#)GIFEncoder.java    0.90 4/21/96 Adam Doppelt
  */
