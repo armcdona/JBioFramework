@@ -140,7 +140,6 @@ public class Electro2D extends JPanel implements ActionListener {
                 new HTMLGenScreen(Electro2D.this);
             }
         });
-        webButton.setToolTipText("Creates an HTML file of proteins and values");
 
 	    //read in deactivated range Image
         rangeImage          = new RangeImage(
