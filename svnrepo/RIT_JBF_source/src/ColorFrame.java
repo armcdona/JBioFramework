@@ -3,13 +3,9 @@
  * gel's final product.
  */
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.awt.Frame;
-import java.awt.Panel;
-import java.awt.Label;
-import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -24,6 +20,7 @@ public class ColorFrame {
 	colorkey = E2DProtein.getColorGuide();
 	
 	colorFrame = new Frame( "Color Key" );
+    colorFrame.setPreferredSize(new Dimension(200,225));
 	colorFrame.addWindowListener( new WindowAdapter(){
 		public void windowClosing( WindowEvent e ){
 		    colorFrame.hide();

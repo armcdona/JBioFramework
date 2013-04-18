@@ -1,3 +1,17 @@
+/*
+ * Copyright (C) 2013 Rochester Institute of Technology
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * See the GNU General Public License for more details.
+ */
 /**
  * GUI and main class for 2D Electrophoresis simulation
  *
@@ -15,6 +29,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -32,6 +48,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.border.TitledBorder;
 import java.awt.Font;
@@ -43,6 +60,7 @@ import java.util.Vector;
  * The main electro2D class.
  */
 public class Electro2D extends JPanel implements ActionListener {
+
     private FileFrame                     fileFrame;        //pop up for loading file data
     private SingleProteinListFrame        proteinListFrame; //pop up for displaying protein lists
 
@@ -122,6 +140,7 @@ public class Electro2D extends JPanel implements ActionListener {
                 new HTMLGenScreen(Electro2D.this);
             }
         });
+        webButton.setToolTipText("Creates an HTML file of proteins and values");
 
 	    //read in deactivated range Image
         rangeImage          = new RangeImage(
@@ -231,7 +250,21 @@ public class Electro2D extends JPanel implements ActionListener {
 
         animationChooser = new JLabel("IEF");
 
+        // Add the pH range chooser
         rangeChooser     = new JComboBox();
+        rangeChooser.addItem("3 - 10");
+        rangeChooser.addItem("4- 7");
+        rangeChooser.addItem("Enter A Range");
+        rangeChooser.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(rangeChooser.getSelectedItem().equals("Enter A Range")) {
+                    rangeChooser.setEditable(true);
+                } else {
+                    rangeChooser.setEditable(false);
+                }
+            }
+        });
 
 	    // init %Acrylamide field and set initial value to 15
         percentAcrylamide = new JComboBox();
