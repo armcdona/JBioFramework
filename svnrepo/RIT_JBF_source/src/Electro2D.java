@@ -25,6 +25,8 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -245,7 +247,21 @@ public class Electro2D extends JPanel implements ActionListener {
 
         animationChooser = new JLabel("IEF");
 
+        // Add the pH range chooser
         rangeChooser     = new JComboBox();
+        rangeChooser.addItem("3 - 10");
+        rangeChooser.addItem("4- 7");
+        rangeChooser.addItem("Enter A Range");
+        rangeChooser.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(rangeChooser.getSelectedItem().equals("Enter A Range")) {
+                    rangeChooser.setEditable(true);
+                } else {
+                    rangeChooser.setEditable(false);
+                }
+            }
+        });
 
 	    // init %Acrylamide field and set initial value to 15
         percentAcrylamide = new JComboBox();
