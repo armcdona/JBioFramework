@@ -90,38 +90,21 @@ public class Welcome extends JPanel{
         body.add(help,c);
 
         JButton about = new JButton("About");
+        about.setToolTipText("Open project page on sourceforge.");
         about.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-//                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
                     try{
                         BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
-                    } catch(IOException i){
+                    }catch(IOException i){
                         System.err.println( i.getMessage());
                     }}
             });
         c.gridy = 2;
         body.add(about,c);
 
-        JButton prev = new JButton("Previous");
-        c.gridy = 3;
-//        body.add(prev,c);
-
-        JButton next = new JButton("Next");
-        c.gridy = 3;
-//        body.add(next,c);
-
-        JTextField search = new JTextField("[Search Help Files]"); //exists currently as a text field
-        c.gridy = 2;
-//        body.add(search,c);
-
-        JButton searchButton = new JButton("Search");
-        c.gridy = 2;
-
-//        body.add(searchButton,c);
-		
 		/*tailP*/
-        JButton probSheets = new JButton("Problem Sets"); //@todo: standardize file locations for all users
-        probSheets.setToolTipText("Open included problem sets");
+        JButton probSheets = new JButton("Problem Sets");
+        probSheets.setToolTipText("Download one of our pre-made problem sets");
         probSheets.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 JFrame pSf = new JFrame("Problem Sets");

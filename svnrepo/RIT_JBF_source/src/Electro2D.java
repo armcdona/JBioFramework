@@ -365,6 +365,7 @@ public class Electro2D extends JPanel implements ActionListener {
         thirdPanel.add(innerPanel);
         leftPanel.add(thirdPanel);
 
+
         JPanel fourthPanel = new JPanel();
         fourthPanel.setLayout(new GridLayout(1, 3, 2, 2));
         fourthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Animation Buttons", TitledBorder.CENTER, TitledBorder.TOP));
