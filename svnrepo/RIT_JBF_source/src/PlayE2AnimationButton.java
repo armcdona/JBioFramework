@@ -65,15 +65,15 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
     }
 
     public void setHoverText(){
-        if(sdsPlaying == true){
+        if(sdsPlaying){
             super.setText("Stop");
             setToolTipText("Stop separation");
         }
-        else if(iefDrawn == false && sdsDrawn == false){
+        else if(!iefDrawn && !sdsDrawn){
             super.setToolTipText("Start IEF pH separation");
-        }else if(iefDrawn == true && sdsDrawn == false){
+        }else if(iefDrawn && !sdsDrawn){
             super.setToolTipText("Start SDS-Page separation");
-        }else if(iefDrawn == true && sdsDrawn == true && sdsPlaying == false){
+        }else if(iefDrawn && sdsDrawn && !sdsPlaying){
             super.setToolTipText("Press 'Restart' to start over.");
         }else{
             super.setToolTipText("Press 'Add Proteins' to begin");
@@ -82,7 +82,7 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-        if(sdsPlaying == true) {
+        if(sdsPlaying) {
         super.setText("Stop");
         super.setToolTipText("Stop Separation");
 	    electro2D.stopThread();
@@ -111,7 +111,7 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 		// already displayed on the screen, perform the IEF
 		// animation
 		if( choice.equals( "IEF") ){
-		    if( iefDrawn == false ){
+		    if( !iefDrawn ){
 			electro2D.restartIEF();
 			iefDrawn = true;
 			electro2D.getGel().resetReLine();
@@ -121,7 +121,7 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 		//if the user selected SDS-PAGE animation, and the IEF is
 		// already drawn, perform the SDS-PAGE animation
 		else if( choice.equals( "SDS-PAGE" )){
-                    if( iefDrawn == true ){
+                    if( iefDrawn ){
 			electro2D.getGel().clearCanvas();
                         electro2D.getGel().clearIEF();
 			electro2D.getGel().resetLocation();
