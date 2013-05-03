@@ -109,7 +109,7 @@ public class MassSpecMain extends JPanel {
             }
         });
         infoButtonsPanel.add(help);
-        infoButtonsPanel.add(about);
+//        infoButtonsPanel.add(about);
         constraints.gridx = 0;
         constraints.gridy = 1;
         grid.setConstraints(infoButtonsPanel, constraints);

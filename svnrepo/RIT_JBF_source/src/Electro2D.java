@@ -67,7 +67,6 @@ public class Electro2D extends JPanel implements ActionListener {
     /** components of the main applet **/
     private GelCanvas gelCanvas;          //area where animation takes place
     private PlayE2AnimationButton playButton;        //starts/pauses animation
-    private StopE2DAnimationButton stopButton;        //stops animation
     private RestartE2DAnimationButton restartButton;  //restarts animation
     private JButton csvButton;          //writes to csv file
     private java.awt.List proteinList;    //current protein list
@@ -201,7 +200,6 @@ public class Electro2D extends JPanel implements ActionListener {
         JButton addProteinButton    = new JButton("Add Proteins");
         addProteinButton.setToolTipText("Load proteins from file");
         addProteinButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 getSequenceData();
             }
@@ -244,7 +242,6 @@ public class Electro2D extends JPanel implements ActionListener {
         });
 	
         playButton       = new PlayE2AnimationButton(this);
-        stopButton       = new StopE2DAnimationButton(this);
         restartButton    = new RestartE2DAnimationButton(this);
 
         animationChooser = new JLabel("IEF");
@@ -348,7 +345,7 @@ public class Electro2D extends JPanel implements ActionListener {
         JPanel firstPanel = new JPanel();
         c.gridy = 1;
         firstPanel.add(helpButton);
-        firstPanel.add(aboutButton);
+//        firstPanel.add(aboutButton);
         leftPanel.add(firstPanel);
 
 
@@ -367,10 +364,10 @@ public class Electro2D extends JPanel implements ActionListener {
 
 
         JPanel fourthPanel = new JPanel();
-        fourthPanel.setLayout(new GridLayout(1, 3, 2, 2));
+        fourthPanel.setLayout(new GridLayout(1, 2, 2, 2));
         fourthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Animation Buttons", TitledBorder.CENTER, TitledBorder.TOP));
         fourthPanel.add(playButton   );
-        fourthPanel.add(stopButton   );
+//        fourthPanel.add(stopButton   );
         fourthPanel.add(restartButton);
         leftPanel.add(fourthPanel);
 
