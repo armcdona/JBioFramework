@@ -25,30 +25,22 @@ import java.awt.event.ActionListener;
 public class PlayE2AnimationButton extends JButton implements ActionListener {
 
     Electro2D electro2D;
-    boolean playing;
+    boolean sdsPlaying;
     private boolean iefDrawn;
     private boolean sdsDrawn;
     private static boolean compareFiles;
     String choice;
-    boolean isPlaying;
 
     public PlayE2AnimationButton(Electro2D e) {
 
-        super("Run");
-
-        String hoverText;
-        if(iefDrawn == false){
-            hoverText = "Run IEF animation";
-            }else{
-                hoverText = "Run SDS Page animation";
-            }
-        super.setToolTipText(hoverText);
+        super("Start");
         addActionListener(this);
         electro2D = e;
-        playing = false;
+        sdsPlaying = false;
         iefDrawn = false;
         sdsDrawn = false;
         compareFiles = false;
+        setHoverText();
     }
 
     public boolean getSdsStatus(){
@@ -56,8 +48,8 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
     }
 
     public void resetPlay(){
-	playing = false;
-        this.setText("Run");
+	sdsPlaying = false;
+        this.setText("Start");
     }
 
     public void resetIEF(){
@@ -72,17 +64,36 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 	compareFiles = bool;
     }
 
+    public void setHoverText(){
+        if(sdsPlaying == true){
+            super.setText("Stop");
+            setToolTipText("Stop separation");
+        }
+        else if(iefDrawn == false && sdsDrawn == false){
+            super.setToolTipText("Start IEF pH separation");
+        }else if(iefDrawn == true && sdsDrawn == false){
+            super.setToolTipText("Start SDS-Page separation");
+        }else if(iefDrawn == true && sdsDrawn == true && sdsPlaying == false){
+            super.setToolTipText("Press 'Restart' to start over.");
+        }else{
+            super.setToolTipText("Press 'Add Proteins' to begin");
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
-        
-        if(playing == true) {
+
+        if(sdsPlaying == true) {
+        super.setText("Stop");
+        super.setToolTipText("Stop Separation");
 	    electro2D.stopThread();
-        playing = false;
+        sdsPlaying = false;
+
         }
 	// otherwise determine which parts of the animation need to be drawn
 	// and start the appropriate thread.
 	else {
 	    //get the animation the user wishes to see
-            electro2D.clearpH();
+        electro2D.clearpH();
 	    choice = electro2D.getAnimationChoice();
 	    if( electro2D.getSequencesReady()){
 
@@ -91,9 +102,9 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 		    if( choice.equals( "IEF" )){
 			electro2D.getGel().prepare();
 			electro2D.resetBool();
-                        if( compareFiles ){
-			    electro2D.getGel().prepare2();
-			}
+                if( compareFiles ){
+			        electro2D.getGel().prepare2();
+			    }
 		    }
 
 		//if the user selected IEF animation and the image is not
@@ -104,9 +115,9 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 			electro2D.restartIEF();
 			iefDrawn = true;
 			electro2D.getGel().resetReLine();
-            new ColorFrame().showKey(); //@Todo: set position on screen
 		    }
-		}
+        new ColorFrame().showKey(); //@Todo: set position on screen
+        }
 		//if the user selected SDS-PAGE animation, and the IEF is
 		// already drawn, perform the SDS-PAGE animation
 		else if( choice.equals( "SDS-PAGE" )){
@@ -115,20 +126,15 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
                         electro2D.getGel().clearIEF();
 			electro2D.getGel().resetLocation();
                         electro2D.clearpH();
-			playing = true;
+			sdsPlaying = true;
 			electro2D.restartThread();
 			sdsDrawn = true;
-		    }
+
+            }
 		}
-	    }
-	}
+        setHoverText();
 
-        // let the user know whether they can pause or play the animation
-        if(playing == false) {
-	    this.setText("Run");
-	} else {
-	    this.setText("Pause");
+        }
 	}
-
     }
 }

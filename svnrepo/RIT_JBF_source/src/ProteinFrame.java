@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2013 Rochester Institute of Technology
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * See the GNU General Public License for more details.
+ */
+
 /**
  * ProteinFrame.java
  *
@@ -40,10 +55,6 @@ public class ProteinFrame extends JFrame {
     private JLabel titleLabel;             //holds protein name
     private JLabel mwLabel;                //protein MW
     private JLabel piLabel;                //protein pI
-    private SearchProteinButton search;
-    //    private JButton ncbiSearch;   // button clicked to search for info
-    private SwissProtSearch swsSearch;//button clicked to search for info
-    //    private JButton blstSearch; //button clicked to search Blast site
     private String searchID = null;       // the id for the GenBank search
     private String swsSearchID = null;    // id for the SwissProt search
     private int fileNum;                  // while file the proteins came from
@@ -86,7 +97,7 @@ public class ProteinFrame extends JFrame {
 
         // Performs a BLAST search for the protein sequence given to it from
         // ProteinFrame.
-        JButton blstSearch = new JButton("Blast Search"); //BlastSearch(electro2D, sequenceString, "Blast Search"); //button clicked to search Blast site
+        JButton blstSearch = new JButton("Blast Search");
         blstSearch.setToolTipText("Performs BLAST search for the protein sequence.");
         blstSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
