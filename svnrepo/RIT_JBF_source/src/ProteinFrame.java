@@ -98,7 +98,7 @@ public class ProteinFrame extends JFrame {
         // Performs a BLAST search for the protein sequence given to it from
         // ProteinFrame.
         JButton blstSearch = new JButton("Blast Search");
-        blstSearch.setToolTipText("Performs BLAST search for the protein sequence.");
+        blstSearch.setToolTipText("Performs BLAST search for the protein sequence");
         blstSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String urlPre = "http://web.expasy.org/cgi-bin/blast/blast.pl?sequence=";
@@ -144,7 +144,7 @@ public class ProteinFrame extends JFrame {
         }
 
         JButton ncbiSearch = new JButton("NCBI Search");
-        ncbiSearch.setToolTipText("      ");
+        ncbiSearch.setToolTipText("Performs NCBI search for the protein sequence");
         ncbiSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String urlPre = "http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=protein&cmd=search&term=";;
@@ -171,7 +171,7 @@ public class ProteinFrame extends JFrame {
 
 
         JButton uniSearch = new JButton("Uniprot Search");
-        uniSearch.setToolTipText("   ");
+        uniSearch.setToolTipText("Performs Uniprot search for the protein sequence");
         uniSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -213,6 +213,7 @@ public class ProteinFrame extends JFrame {
     private class sendToSpec extends JButton implements ActionListener {
         public sendToSpec() {
             super("Run Mass Spectrum");
+            super.setToolTipText("Send protein sequence to Mass Spec for analysis");
             addActionListener(this);
         }
 
