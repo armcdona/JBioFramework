@@ -30,31 +30,49 @@ import java.io.IOException;
 /**
  * Welcome Tab - First tab of JBFSuite. 
  * -Contains all code for the Welcome tab. (no code in other classes)
- * -Organized into 3 panels 
+ * -Organized into 3 subpanels {Head, Body, Tail}. 
+ * -the code is organized in such a way that each subpanel is created independently
+ *  in the methods below, and is added to the main 'super' panel it extends
+ *  in the constructor itself. this makes the code easier to read and/or modify
  * -extends JPanel to facilitate its addition to main JFrame in /JBioFrameworkMain/
- * -it is formatted in such a way that it first constructs all of the panels, and then 
- *  systematically adds them to the 'super' one (the larger one it extends)
+ *
  */
-
 public class Welcome extends JPanel{
     
     //no instance variable declarations needed 
     //(all declared and initialized inline)
 
+    /**
+     * Constructor for Welcome class fills main panel with desired subpanels
+     * which have been constructed below.
+     * 
+     * main panel uses GridLayout with 3 rows and 1 column.
+     */ 
     public Welcome(){
 
 	//adds GridBagLayout with GridBagConstraints 'c' to the JPanel it's extending
-        super(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        super(new GridLayout(3,1));
+        //GridBagConstraints c = new GridBagConstraints();
 
-	/*head Panel - contains welcome and description*/
-         JPanel headP = new JPanel();
+	//c.gridy = 0;
+	super.add( mkHeadPanel() ); //, c );
+    	super.add( mkBodyPanel() ); //, c );
+    	super.add( mkTailPanel() ); //, c );
+    }
+
+    /**
+     * Constructs and returns JPanel containing welcome message and description.
+     */
+    public JPanel mkHeadPanel(){
+	JPanel headP = new JPanel();
+	
+	//Formatted Header text (JLabel)
          JLabel head = new JLabel("Welcome to JBioframework!");
          head.setFont(new Font("SansSerif", Font.BOLD, 26));
-         c.gridy = 0;
-         headP.add(head);
+         
+	 headP.add(head);
 	 
-	 /* subHead Panel contains the large description */
+	//Formatted Description (contained in a smaller panel)
           JPanel subHeadP = new JPanel();
 
           //java takes in html-style formatting. This increases readbility and aesthetics.
@@ -69,7 +87,8 @@ public class Welcome extends JPanel{
 
 	  //main webpage for the program
 	  String url1 = "https://sourceforge.net/projects/jbf/"
-          String s2 = "<html><a href=" + url1 ">here</a>.</body>";
+          
+	  String s2 = "<html><a href=" + url1 ">here</a>.</body>";
           
 	  JLabel headLink = new JLabel(s2);
           
@@ -99,58 +118,60 @@ public class Welcome extends JPanel{
               }
           });
 
-         head1.setFont(new Font("SansSerif", Font.PLAIN, 14));
-         subHeadP.add(head1);
+          head1.setFont(new Font("SansSerif", Font.PLAIN, 14));
+          subHeadP.add(head1);
 
-        heapP.add(subHeadP);
+         headP.add(subHeadP);
         
-	c.gridy = 1;
-        super.add(heapP,c)
+	return headP;
+    }
 
-
-        /*body panel - contains help and about buttons*/
+    /**
+     * Constructs and returns BodyPanel containing help and about buttons
+     */
+    public JPanel mkBodyPanel(){
          JPanel body = new JPanel();
 
 	 //help button uses /BrowserLauncher/ to open our main wiki page on sourceforge.net 
-         JButton help = new JButton("Help");
-         help.setToolTipText("Opens a link to our wiki");
-         help.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent e) {
-                 String url = "http://sourceforge.net/p/jbf/wiki/";
-                 try{
-                     BrowserLauncher.openURL(url);
-                 } catch(IOException i){
-                     System.err.println( i.getMessage());
-                 }
-             }
-         }); 
-         c.gridy = 2;
-         body.add(help,c);
- 	 
-	 //about button uses /BrowserLauncher/ to open our main project page on sourceforge.net
-         JButton about = new JButton("About");
-         about.setToolTipText("Open project page on sourceforge.");
-         about.addActionListener(new ActionListener() {
-                 public void actionPerformed(ActionEvent e) {
-                     try{
-                         BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
-                     }catch(IOException i){
-                         System.err.println( i.getMessage());
-                     }}
-             });        c.gridy = 2;
-         body.add(about,c);
+          JButton help = new JButton("Help");
+          help.setToolTipText("Opens a link to our wiki");
+          help.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent e) {
+                  String url = "http://sourceforge.net/p/jbf/wiki/";
+                  try{
+                      BrowserLauncher.openURL(url);
+                  } catch(IOException i){
+                      System.err.println( i.getMessage());
+                  }
+              }
+          }); 
+
+          body.add(help);
+  	 
+ 	 //about button uses /BrowserLauncher/ to open our main project page on sourceforge.net
+          JButton about = new JButton("About");
+          about.setToolTipText("Open project page on sourceforge.");
+          about.addActionListener(new ActionListener() {
+                  public void actionPerformed(ActionEvent e) {
+                      try{
+                          BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
+                      }catch(IOException i){
+                          System.err.println( i.getMessage());
+                      }}
+              });
+          body.add(about);
 
 	 //probSheets button brings up a small new frame (pop-up) asking the user to click on either of our problem sets
-         JButton probSheets = new JButton("Problem Sets");
-         probSheets.setToolTipText("Download one of our pre-made problem sets");
-         probSheets.addActionListener(new ActionListener(){
-             public void actionPerformed(ActionEvent e){
-                 JFrame pSf = new JFrame("Problem Sets");
-                 JPanel pSp = new JPanel();
-                 JLabel pSl = new JLabel("Choose a problem set to open [mouse over for details]. \n");
-                 pSp.add(pSl);
- 		
-		 //pSb1 is the button for opening Problem Set 1 geared more towards beginners.
+          JButton probSheets = new JButton("Problem Sets");
+          probSheets.setToolTipText("Download one of our pre-made problem sets");
+          probSheets.addActionListener(new ActionListener(){
+              public void actionPerformed(ActionEvent e){
+                  JFrame pSf = new JFrame("Problem Sets");
+                  JPanel pSp = new JPanel();
+                  JLabel pSl = new JLabel("Choose a problem set to open [mouse over for details]. \n");
+                  pSp.add(pSl);
+  		
+ 		 //pSb1 is the button for opening Problem Set 1 geared more towards beginners.
 		 //  it does this by using /BrowserLancher/ to open the .docx page stored with our help files on sourceforge
 		 //  by default, this should download and open the file in their default word processor.
                  JButton pSb1 = new JButton("Problem Set 1");
@@ -185,130 +206,134 @@ public class Welcome extends JPanel{
                  pSf.setSize(350,100);
                  pSf.add(pSp);
              }});
-	 body.add(probSheets,c);
-
-         c.gridy = 3;
-         super.add(body, c);
+	  
+	  body.add(probSheets);
+    
+        return body;
+    }
  
-        /*tail panel - contains contact information, review, bug reports, and source code access*/
-         JPanel tail = new JPanel();
+
+    /**
+     * Constructs and returns TailPanel containing contact and credit buttons.
+     */
+    public JPanel mkTailPanel(){
+        JPanel tail = new JPanel();
 
 	 //'contact' button opens a new frame (pop-up) containing buttons for review, source, and bug reporting.
-         JButton contact = new JButton("Contact Us");
-         contact.setToolTipText("Contact, review, or view source code");
-         contact.addActionListener(new ActionListener(){
-             public void actionPerformed(ActionEvent e){
-                 JFrame f = new JFrame("Contact Us");
-                 JPanel p = new JPanel();
-                 JLabel l = new JLabel("Ask a Question, Review the Software, View/Edit the Source");
-                 p.add(l);
-                 JButton email = new JButton("Email Address");
-                 email.setToolTipText("Copy email address to clipboard");
-                 email.addActionListener(new ActionListener() {
-                     public void actionPerformed(ActionEvent e) {
-                         String emailAddress = "paul.craig@rit.edu";
-                         JFrame emailFrame = new JFrame("Email Address");
-                         JPanel panel = new JPanel();
-                         JLabel label = new JLabel("Please Copy/Paste the following: ");
+          JButton contact = new JButton("Contact Us");
+          contact.setToolTipText("Contact, review, or view source code");
+          contact.addActionListener(new ActionListener(){
+              public void actionPerformed(ActionEvent e){
+                  JFrame f = new JFrame("Contact Us");
+                  JPanel p = new JPanel();
+                  JLabel l = new JLabel("Ask a Question, Review the Software, View/Edit the Source");
+                  p.add(l);
+                  JButton email = new JButton("Email Address");
+                  email.setToolTipText("Copy email address to clipboard");
+                  email.addActionListener(new ActionListener() {
+                      public void actionPerformed(ActionEvent e) {
+                          String emailAddress = "paul.craig@rit.edu";
+                          JFrame emailFrame = new JFrame("Email Address");
+                          JPanel panel = new JPanel();
+                          JLabel label = new JLabel("Please Copy/Paste the following: ");
+  
+                          JTextArea email = new JTextArea(emailAddress);
+  
+                          panel.add(label);
+                          panel.add(email);
+                          emailFrame.add(panel);
+                          emailFrame.setSize(350,100);
+                          emailFrame.setVisible(true);
+                      }
+  
+                  });
+                  p.add(email);
+  		
+ 		 //'review' uses /BrowserLauncher/ to open the page for a new, blank review on sourceforge
+                  JButton review = new JButton("Review JBF");
+                  review.setToolTipText("Opens review page on sourceforge");
+                  review.addActionListener(new ActionListener() {
+                      public void actionPerformed(ActionEvent e) {
+                          String url = "https://sourceforge.net/projects/jbf/reviews/?source=navbar";
+                          try{
+                              BrowserLauncher.openURL(url);
+                          } catch(IOException i){
+                              System.err.println( i.getMessage());}
+                      }});
+                  p.add(review);
+  
+ 		 //'bug' is a currently inactive button I (AidanSawyer) was thinking of making 
+ 		 // for reporting problems with the software. ideally it would store the current 
+ 		 // state of the program and contain a /JTextField/ (import) where a user could
+ 		 // briefly describe the issue. It would then bundle all of that into one format
+ 		 // and send it to a server or website and notify us that there was a message waiting
+ 		 
+ 		 //@todo implement
+                  JButton bug = new JButton("Bug Report");
+                  bug.setToolTipText("Report an issue with the software");
+                  bug.addActionListener(new ActionListener() {
+                      public void actionPerformed(ActionEvent e) {
+                          JOptionPane.showMessageDialog(null, "will copy information about program");}});
+ //                 p.add(bug);
+  
+ 		 //'source' button uses /BrowserLauncher/ to open up the GIT page on sourceforge
+                  JButton source = new JButton("Source Code");
+                  source.setToolTipText("Link to available source code");
+                  source.addActionListener(new ActionListener() {
+                      public void actionPerformed(ActionEvent e) {
+                          try{
+                              BrowserLauncher.openURL("https://sourceforge.net/p/jbf/git/ci/master/tree/");
+                          }catch (IOException i){
+                              System.err.println( i.getMessage());}
+                      }
+                  });
+                  p.add(source);
  
-                         JTextArea email = new JTextArea(emailAddress);
- 
-                         panel.add(label);
-                         panel.add(email);
-                         emailFrame.add(panel);
-                         emailFrame.setSize(350,100);
-                         emailFrame.setVisible(true);
-                     }
- 
-                 });
-                 p.add(email);
- 		
-		 //'review' uses /BrowserLauncher/ to open the page for a new, blank review on sourceforge
-                 JButton review = new JButton("Review JBF");
-                 review.setToolTipText("Opens review page on sourceforge");
-                 review.addActionListener(new ActionListener() {
-                     public void actionPerformed(ActionEvent e) {
-                         String url = "https://sourceforge.net/projects/jbf/reviews/?source=navbar";
-                         try{
-                             BrowserLauncher.openURL(url);
-                         } catch(IOException i){
-                             System.err.println( i.getMessage());}
-                     }});
-                 p.add(review);
- 
-		 //'bug' is a currently inactive button I (AidanSawyer) was thinking of making 
-		 // for reporting problems with the software. ideally it would store the current 
-		 // state of the program and contain a /JTextField/ (import) where a user could
-		 // briefly describe the issue. It would then bundle all of that into one format
-		 // and send it to a server or website and notify us that there was a message waiting
-		 
-		 //@todo implement
-                 JButton bug = new JButton("Bug Report");
-                 bug.setToolTipText("Report an issue with the software");
-                 bug.addActionListener(new ActionListener() {
-                     public void actionPerformed(ActionEvent e) {
-                         JOptionPane.showMessageDialog(null, "will copy information about program");}});
-//                 p.add(bug);
- 
-		 //'source' button uses /BrowserLauncher/ to open up the GIT page on sourceforge
-                 JButton source = new JButton("Source Code");
-                 source.setToolTipText("Link to available source code");
-                 source.addActionListener(new ActionListener() {
-                     public void actionPerformed(ActionEvent e) {
-                         try{
-                             BrowserLauncher.openURL("https://sourceforge.net/p/jbf/git/ci/master/tree/");
-                         }catch (IOException i){
-                             System.err.println( i.getMessage());}
-                     }
-                 });
-                 p.add(source);
-
-                 f.setVisible(true);
-                 f.setSize(400,100);
-                 f.add(p);
-             }
-         });
-         c.gridy = 4;
-         tail.add(contact,c);
- 
+                  f.setVisible(true);
+                  f.setSize(400,100);
+                  f.add(p);
+              }
+          });
+          
+ 	 tail.add(contact);
+  
 	 //'credits' button opens a new frame (pop-up) containing formatted text for the citations
-         JButton credits = new JButton("Credits");
-         credits.setToolTipText("Citations");
-         credits.addActionListener(new ActionListener()
-         {
-             public void actionPerformed(ActionEvent e)
-             {
-                 JFrame frame = new JFrame("Credits"); //@todo: update for marvin usage
-                 String mrvn = "<html> <u>Marvin</u> was used for drawing, displaying and " +
-                         "characterizing chemical structures, substructures and reactions, " +
-                         "Marvin 5.11.5, 2013, ChemAxon (http://www.chemaxon.com)</body>";
-                 String srch = "<html> The <u>Blast</u> [National Library of Medicine], "+
-                         "<u>NCBI</u> [National Center for Biotechnology Information], and " +
-                         "<u>Uniprot</u> [The Uniprot Consortium] " +
-                         "search engines. </body>";
-                 String rt = "This software was developed at Rochester Institute of Technology (<u>RIT</u>). ";
-                 Stri ng html1 = "<html><body style='width: ";
-                 String html2 = "px'>";
-                 JLabel head = new JLabel("..............................................");
-                 JLabel tail = new JLabel("..............................................");
-                 JLabel marvin = new JLabel(html1+"250"+html2+'-'+mrvn);
-                 JLabel search = new JLabel(html1+"250"+html2+'-'+srch);
-                 JLabel rit = new JLabel(html1+"250"+html2+'-'+rt);
-                 JPanel panel = new JPanel();
-                 panel.add(head);
-                 panel.add(marvin);
-                 panel.add(search);
-                 panel.add(rit);
-                 panel.add(tail);
-                 frame.add(panel);
-                 frame.setVisible(true);
-                 frame.setSize(400,250);
-             }
-         });
-         c.gridy = 5;
-         tail.add(credits,c);
+          JButton credits = new JButton("Credits");
+          credits.setToolTipText("Citations");
+          credits.addActionListener(new ActionListener()
+          {
+              public void actionPerformed(ActionEvent e)
+              {
+                  JFrame frame = new JFrame("Credits"); //@todo: update for marvin usage
+                  String mrvn = "<html> <u>Marvin</u> was used for drawing, displaying and " +
+                          "characterizing chemical structures, substructures and reactions, " +
+                          "Marvin 5.11.5, 2013, ChemAxon (http://www.chemaxon.com)</body>";
+                  String srch = "<html> The <u>Blast</u> [National Library of Medicine], "+
+                          "<u>NCBI</u> [National Center for Biotechnology Information], and " +
+                          "<u>Uniprot</u> [The Uniprot Consortium] " +
+                          "search engines. </body>";
+                  String rt = "This software was developed at Rochester Institute of Technology (<u>RIT</u>). ";
+                  Stri ng html1 = "<html><body style='width: ";
+                  String html2 = "px'>";
+                  JLabel head = new JLabel("..............................................");
+                  JLabel tail = new JLabel("..............................................");
+                  JLabel marvin = new JLabel(html1+"250"+html2+'-'+mrvn);
+                  JLabel search = new JLabel(html1+"250"+html2+'-'+srch);
+                  JLabel rit = new JLabel(html1+"250"+html2+'-'+rt);
+                  JPanel panel = new JPanel();
+                  panel.add(head);
+                  panel.add(marvin);
+                  panel.add(search);
+                  panel.add(rit);
+                  panel.add(tail);
+                  frame.add(panel);
+                  frame.setVisible(true);
+                  frame.setSize(400,250);
+              }
+          });
+          tail.add(credits);
  
-         this.add(tail,c);
- 
+         return tail
+
      }
 }
