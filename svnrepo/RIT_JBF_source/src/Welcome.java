@@ -18,10 +18,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Font;
+import java.awt.Dimension;
 
 //import other utilities and listeners
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Cursor;
@@ -51,26 +54,29 @@ public class Welcome extends JPanel{
     public Welcome(){
 
 	//adds GridBagLayout with GridBagConstraints 'c' to the JPanel it's extending
-        super(new GridLayout(3,1));
-        //GridBagConstraints c = new GridBagConstraints();
+        super(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-	//c.gridy = 0;
-	super.add( mkHeadPanel() ); //, c );
-    	super.add( mkBodyPanel() ); //, c );
-    	super.add( mkTailPanel() ); //, c );
+	c.gridy = 0;
+	super.add( mkHeadPanel(), c );
+    	c.gridy = 1;
+	super.add( mkBodyPanel(), c );
+    	c.gridy = 2;
+	super.add( mkTailPanel(), c );
     }
 
     /**
      * Constructs and returns JPanel containing welcome message and description.
      */
     public JPanel mkHeadPanel(){
-	JPanel headP = new JPanel();
+	JPanel headP = new JPanel(new GridBagLayout());
+	GridBagConstraints con = new GridBagConstraints();
 	
 	//Formatted Header text (JLabel)
          JLabel head = new JLabel("Welcome to JBioframework!");
          head.setFont(new Font("SansSerif", Font.BOLD, 26));
-         
-	 headP.add(head);
+         con.gridy = 0;
+	 headP.add(head,con);
 	 
 	//Formatted Description (contained in a smaller panel)
           JPanel subHeadP = new JPanel();
@@ -86,11 +92,11 @@ public class Welcome extends JPanel{
           JLabel head1 = new JLabel(html1+"500"+html2+s);
 
 	  //main webpage for the program
-	  String url1 = "https://sourceforge.net/projects/jbf/"
+	  final String  url1 = "https://sourceforge.net/projects/jbf/";
           
-	  String s2 = "<html><a href=" + url1 ">here</a>.</body>";
+	  String s2 = "<html><a href=" + url1 + ">here</a>.</body>";
           
-	  JLabel headLink = new JLabel(s2);
+	  final JLabel headLink = new JLabel(s2);
           
 	  //code to make the hyperlink "headLink" respond to mouse events
 	  headLink.addMouseListener(new MouseListener() {
@@ -121,8 +127,9 @@ public class Welcome extends JPanel{
           head1.setFont(new Font("SansSerif", Font.PLAIN, 14));
           subHeadP.add(head1);
 
-         headP.add(subHeadP);
-        
+	 con.gridy = 1; 
+         headP.add(subHeadP,con);
+         //headP.setPreferredSize(new Dimension(500,800));
 	return headP;
     }
 
@@ -313,7 +320,7 @@ public class Welcome extends JPanel{
                           "<u>Uniprot</u> [The Uniprot Consortium] " +
                           "search engines. </body>";
                   String rt = "This software was developed at Rochester Institute of Technology (<u>RIT</u>). ";
-                  Stri ng html1 = "<html><body style='width: ";
+                  String html1 = "<html><body style='width: ";
                   String html2 = "px'>";
                   JLabel head = new JLabel("..............................................");
                   JLabel tail = new JLabel("..............................................");
@@ -333,7 +340,7 @@ public class Welcome extends JPanel{
           });
           tail.add(credits);
  
-         return tail
+         return tail;
 
      }
 
@@ -341,8 +348,10 @@ public class Welcome extends JPanel{
      * Main class for WelcomeTab made to test look and functionality without rest of suite.
      */ 
     public static void main(String[] args){
-        JFrame welcomeTest = new JFrame();
-	welcomeTest.add( new Welcome(); );
+        JFrame welcomeTest = new JFrame("Welcome!");
+	welcomeTest.add( new Welcome() );
+	welcomeTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	welcomeTest.pack();
 	welcomeTest.setVisible(true);
 
     }
