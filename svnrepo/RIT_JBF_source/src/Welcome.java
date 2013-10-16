@@ -336,4 +336,14 @@ public class Welcome extends JPanel{
          return tail
 
      }
+
+    /**
+     * Main class for WelcomeTab made to test look and functionality without rest of suite.
+     */ 
+    public static void main(String[] args){
+        JFrame welcomeTest = new JFrame();
+	welcomeTest.add( new Welcome(); );
+	welcomeTest.setVisible(true);
+
+    }
 }
