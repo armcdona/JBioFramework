@@ -1,6 +1,14 @@
 /**
- * Welcome Tab
+ * Welcome Tab - First tab of JBFSuite. 
+ * Contains description and contacts, credits, and links to 
+ * sourceforge main page, help files, review page, etc. as well
+ * as contact information for PaulCraig.
+ *
+ * @author Aidan Sawyer [rit: aks5238 | sf: daniels-ai]
+ *
  */
+
+//import GUI components/layouts
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,75 +16,106 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
-
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
+import java.awt.Font;
+
+//import other utilities and listeners
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Cursor;
 import java.io.IOException;
 
+/**
+ * Welcome Tab - First tab of JBFSuite. 
+ * -Contains all code for the Welcome tab. (no code in other classes)
+ * -Organized into 3 panels 
+ * -extends JPanel to facilitate its addition to main JFrame in /JBioFrameworkMain/
+ * -it is formatted in such a way that it first constructs all of the panels, and then 
+ *  systematically adds them to the 'super' one (the larger one it extends)
+ */
 
 public class Welcome extends JPanel{
-    JLabel headLink = new JLabel();
+    
+    //no instance variable declarations needed 
+    //(all declared and initialized inline)
 
     public Welcome(){
 
+	//adds GridBagLayout with GridBagConstraints 'c' to the JPanel it's extending
         super(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-	/*head Panel*/
+	/*head Panel - contains welcome and description*/
          JPanel headP = new JPanel();
          JLabel head = new JLabel("Welcome to JBioframework!");
          head.setFont(new Font("SansSerif", Font.BOLD, 26));
          c.gridy = 0;
          headP.add(head);
-         super.add(headP, c);
+	 
+	 /* subHead Panel contains the large description */
+          JPanel subHeadP = new JPanel();
 
-         JPanel subHeadP = new JPanel();
-         String s = "<html>JBioFramework (JBF) is a set of chemical separations simulations frequently used in " +
+          //java takes in html-style formatting. This increases readbility and aesthetics.
+          String s = "<html>JBioFramework (JBF) is a set of chemical separations simulations frequently used in " +
                  "chemistry, biochemistry and proteomics research. It is written in the Java programming language and will " +
                  "run on any and all systems that have the JVM installed. A copy of the source code is available "+
                  "online on SourceForge, or by clicking 'Contact Us' > 'Source Code'. Click on one of the tabs  "+
                  "in the upper left to get started."; //@todo: review opening message
-         String html1 = "<html><body style='width: ";
-         String html2 = "px'>";
-         JLabel head1 = new JLabel(html1+"500"+html2+s);
-         String s2 = "<html><a href=https://sourceforge.net/projects/jbf/>here</a>.</body>";
-         headLink = new JLabel(s2);
-         headLink.addMouseListener(new MouseListener() {
-             public void mouseClicked(MouseEvent e) {
-                 String url1 = "https://sourceforge.net/projects/jbf/";
-                 try{
-                     BrowserLauncher.openURL(url1);
-                 }catch(IOException i){
-                     System.err.println( i.getMessage());}
-             }
-             public void mouseReleased(MouseEvent arg0) {}
-             public void mousePressed(MouseEvent arg0) {}
-             public void mouseExited(MouseEvent arg0) {
-                 headLink.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-             }
-             public void mouseEntered(MouseEvent arg0) {
-                 headLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
-             }});
+          String html1 = "<html><body style='width: ";
+          String html2 = "px'>";
+          JLabel head1 = new JLabel(html1+"500"+html2+s);
+
+	  //main webpage for the program
+	  String url1 = "https://sourceforge.net/projects/jbf/"
+          String s2 = "<html><a href=" + url1 ">here</a>.</body>";
+          
+	  JLabel headLink = new JLabel(s2);
+          
+	  //code to make the hyperlink "headLink" respond to mouse events
+	  headLink.addMouseListener(new MouseListener() {
+
+	      //clicking on the link triggers an attempt to use /BrowserLauncher/ to open webpage
+              public void mouseClicked(MouseEvent e) {
+                  try{
+                      BrowserLauncher.openURL(url1);
+                  }catch(IOException i){
+                      System.err.println( i.getMessage());}
+              }
+              
+	      //don't do anything special when mouse in pressed or released
+	      public void mouseReleased(MouseEvent arg0) {}
+              public void mousePressed(MouseEvent arg0) {}
+	      
+	      //when cursor is hovering over the link, switch it to the hand
+	      public void mouseEntered(MouseEvent arg0){
+	          headLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	      }
+	      
+	      //when cursor leaves the link (stops hovering over it), return it to default.
+              public void mouseExited(MouseEvent arg0) {
+                  headLink.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+              }
+          });
+
          head1.setFont(new Font("SansSerif", Font.PLAIN, 14));
-         c.gridy = 1;
-         subHeadP.add(head1,c);
+         subHeadP.add(head1);
 
-         super.add(subHeadP,c);
+        heapP.add(subHeadP);
+        
+	c.gridy = 1;
+        super.add(heapP,c)
 
-        /*body panel*/
+
+        /*body panel - contains help and about buttons*/
          JPanel body = new JPanel();
 
+	 //help button uses /BrowserLauncher/ to open our main wiki page on sourceforge.net 
          JButton help = new JButton("Help");
          help.setToolTipText("Opens a link to our wiki");
          help.addActionListener(new ActionListener() {
              public void actionPerformed(ActionEvent e) {
-//                 File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
                  String url = "http://sourceforge.net/p/jbf/wiki/";
                  try{
                      BrowserLauncher.openURL(url);
@@ -87,7 +126,8 @@ public class Welcome extends JPanel{
          }); 
          c.gridy = 2;
          body.add(help,c);
- 
+ 	 
+	 //about button uses /BrowserLauncher/ to open our main project page on sourceforge.net
          JButton about = new JButton("About");
          about.setToolTipText("Open project page on sourceforge.");
          about.addActionListener(new ActionListener() {
@@ -100,7 +140,7 @@ public class Welcome extends JPanel{
              });        c.gridy = 2;
          body.add(about,c);
 
-	/*tailP*/
+	 //probSheets button brings up a small new frame (pop-up) asking the user to click on either of our problem sets
          JButton probSheets = new JButton("Problem Sets");
          probSheets.setToolTipText("Download one of our pre-made problem sets");
          probSheets.addActionListener(new ActionListener(){
@@ -109,7 +149,10 @@ public class Welcome extends JPanel{
                  JPanel pSp = new JPanel();
                  JLabel pSl = new JLabel("Choose a problem set to open [mouse over for details]. \n");
                  pSp.add(pSl);
- 
+ 		
+		 //pSb1 is the button for opening Problem Set 1 geared more towards beginners.
+		 //  it does this by using /BrowserLancher/ to open the .docx page stored with our help files on sourceforge
+		 //  by default, this should download and open the file in their default word processor.
                  JButton pSb1 = new JButton("Problem Set 1");
                  pSb1.setToolTipText("High School and First Year College level");
                  pSb1.addActionListener(new ActionListener() {
@@ -122,6 +165,9 @@ public class Welcome extends JPanel{
                          }}});
                  pSp.add(pSb1);
  
+		 //pSb2 is the button for opening Problem Set 2 geared toward more advanced users
+		 //  it does this by using /BrowserLancher/ to open the .docx page stored with our help files on sourceforge
+		 //  by default, this should download and open the file in their default word processor.
                  JButton pSb2 = new JButton("Problem Set 2");
                  pSb2.setToolTipText("Upper Division Bio and Chem Students");
                  pSb2.addActionListener(new ActionListener() {
@@ -139,13 +185,15 @@ public class Welcome extends JPanel{
                  pSf.setSize(350,100);
                  pSf.add(pSp);
              }});
+	 body.add(probSheets,c);
+
          c.gridy = 3;
-         body.add(probSheets,c);
- 
          super.add(body, c);
  
-        /*tail panel*/
+        /*tail panel - contains contact information, review, bug reports, and source code access*/
          JPanel tail = new JPanel();
+
+	 //'contact' button opens a new frame (pop-up) containing buttons for review, source, and bug reporting.
          JButton contact = new JButton("Contact Us");
          contact.setToolTipText("Contact, review, or view source code");
          contact.addActionListener(new ActionListener(){
@@ -174,7 +222,8 @@ public class Welcome extends JPanel{
  
                  });
                  p.add(email);
- 
+ 		
+		 //'review' uses /BrowserLauncher/ to open the page for a new, blank review on sourceforge
                  JButton review = new JButton("Review JBF");
                  review.setToolTipText("Opens review page on sourceforge");
                  review.addActionListener(new ActionListener() {
@@ -187,6 +236,13 @@ public class Welcome extends JPanel{
                      }});
                  p.add(review);
  
+		 //'bug' is a currently inactive button I (AidanSawyer) was thinking of making 
+		 // for reporting problems with the software. ideally it would store the current 
+		 // state of the program and contain a /JTextField/ (import) where a user could
+		 // briefly describe the issue. It would then bundle all of that into one format
+		 // and send it to a server or website and notify us that there was a message waiting
+		 
+		 //@todo implement
                  JButton bug = new JButton("Bug Report");
                  bug.setToolTipText("Report an issue with the software");
                  bug.addActionListener(new ActionListener() {
@@ -194,13 +250,13 @@ public class Welcome extends JPanel{
                          JOptionPane.showMessageDialog(null, "will copy information about program");}});
 //                 p.add(bug);
  
+		 //'source' button uses /BrowserLauncher/ to open up the GIT page on sourceforge
                  JButton source = new JButton("Source Code");
                  source.setToolTipText("Link to available source code");
                  source.addActionListener(new ActionListener() {
                      public void actionPerformed(ActionEvent e) {
-                         String url = "https://sourceforge.net/p/jbf/code/76/tree/";
                          try{
-                             BrowserLauncher.openURL(url);
+                             BrowserLauncher.openURL("https://sourceforge.net/p/jbf/git/ci/master/tree/");
                          }catch (IOException i){
                              System.err.println( i.getMessage());}
                      }
@@ -215,6 +271,7 @@ public class Welcome extends JPanel{
          c.gridy = 4;
          tail.add(contact,c);
  
+	 //'credits' button opens a new frame (pop-up) containing formatted text for the citations
          JButton credits = new JButton("Credits");
          credits.setToolTipText("Citations");
          credits.addActionListener(new ActionListener()
@@ -230,7 +287,7 @@ public class Welcome extends JPanel{
                          "<u>Uniprot</u> [The Uniprot Consortium] " +
                          "search engines. </body>";
                  String rt = "This software was developed at Rochester Institute of Technology (<u>RIT</u>). ";
-                 String html1 = "<html><body style='width: ";
+                 Stri ng html1 = "<html><body style='width: ";
                  String html2 = "px'>";
                  JLabel head = new JLabel("..............................................");
                  JLabel tail = new JLabel("..............................................");
