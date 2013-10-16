@@ -13,13 +13,8 @@
  * See the GNU General Public License for more details.
  */
 
-/*
- * The main frame for the JBioFramework program
- * Adds Electro2D, Electrophoresis, and Ionex applications to itself
- * with a JTabbedPane.
- */
-
 /**
+ * The main frame of the entire suite. 
  *
  * @author Amanda Fisher
  * @contrib Aidan Sawyer [rit: aks5238 | sf daniels-ai]
@@ -30,6 +25,11 @@ import javax.swing.JTabbedPane;
 import java.awt.Toolkit;
 import one.d.electrophoresis.Electrophoresis;
 
+/**
+ * The main frame for the JBioFramework program.
+ *  -Adds Welcome, Electrophoresis, Electro2D, MassSpec and MarvinSketch
+ *   applications to itself with a JTabbedPane.
+ */
 public class JBioFrameworkMain extends JFrame {
 
     public static final long serialVersionUID = 1L;
@@ -42,11 +42,20 @@ public class JBioFrameworkMain extends JFrame {
     private MarvinTab marvin;
     /*private [NameOfClass] [user-created reference]*/
 
+    /**
+     * Main method for entire program.
+     */ 
     public static void main(String[] args) {
         JBioFrameworkMain jbfMain = new JBioFrameworkMain();
     }
 
+    /**
+     * Constructor for JBioFrameworkMain Frame object.
+     * -sets frame to visible, sets some general behaviors, adds 
+     *  panels from Electro1D, Electro2d, etc. and adjusts size.
+     */ 
     public JBioFrameworkMain() {
+
         super("JBioFramework");
 
         super.setVisible(true);
@@ -64,15 +73,18 @@ public class JBioFrameworkMain extends JFrame {
         add(tabbedPane);
 
         /**
-         * Use a toolit to find the screen size of the user's monitor and set
-         * the window size to it.
+         * Use a toolkit to find the screen size of the user's monitor
+	 * and set the window size to it.
          */
 
-        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        super.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         this.pack();
     }
 
+    /**
+     * returns the JTabbedPane which holds all of our simulation panels.
+     */ 
     public static JTabbedPane getTabs() {
         return tabbedPane;
     }
