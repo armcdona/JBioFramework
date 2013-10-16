@@ -22,6 +22,7 @@
 /**
  *
  * @author Amanda Fisher
+ * @contrib Aidan Sawyer [rit: aks5238 | sf daniels-ai]
  */
 
 import javax.swing.JFrame;
@@ -48,25 +49,17 @@ public class JBioFrameworkMain extends JFrame {
     public JBioFrameworkMain() {
         super("JBioFramework");
 
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        welcome = new Welcome();
-        marvin = new MarvinTab();
-        electro2D = new Electro2D();
-        spectrometer = new MassSpecMain();
-        oneDE = new Electrophoresis();
-
-        /*[user-created reference] = new [name of class]()*/
+        super.setVisible(true);
+        super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         tabbedPane = new JTabbedPane();
 
-        tabbedPane.addTab("Welcome", welcome);
-        tabbedPane.add("Electro1D", oneDE);
-        tabbedPane.addTab("Electro2D", electro2D);
-        tabbedPane.addTab("Mass Spectrometer", spectrometer);
-        tabbedPane.addTab("Marvin Sketch", marvin.createMainPanel());
-        /*tabbedPane.addTab(["user-created name (to be displayed)], [user-created reference]);*/
+        tabbedPane.addTab("Welcome", new Welcome());
+        tabbedPane.add("Electro1D", new Electrophoresis());
+        tabbedPane.addTab("Electro2D", new Electro2D());
+        tabbedPane.addTab("Mass Spectrometer", new MassSpecMain());
+        tabbedPane.addTab("Marvin Sketch", new MarvinTab().createMainPanel());
+        /*tabbedPane.addTab(["name (to be displayed)"], [object]);*/
 
         add(tabbedPane);
 
