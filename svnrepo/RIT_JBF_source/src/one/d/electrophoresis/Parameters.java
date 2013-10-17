@@ -483,7 +483,7 @@ public class Parameters extends JPanel implements Constants {
 	}
 
 	public void setDefaults() {
-		parent.setAcrylaminde(gel1);
+		parent.setAcrylamide(gel1);
 		selectedGel = gel1;
 		setAcrylamideEffect();
 
@@ -635,24 +635,24 @@ public class Parameters extends JPanel implements Constants {
 
 			if (gel1.percentGel.equals(item.getSelectedItem())) {
 				selectedGel = gel1;
-				parent.setAcrylaminde(gel1);
+				parent.setAcrylamide(gel1);
 				selectedGel.setSuppressor(gel1.getConc());
 				setAcrylamideEffect();
 			} else if (gel2.percentGel.equals(item.getSelectedItem())) {
 				selectedGel = gel2;
-				parent.setAcrylaminde(gel2);
+				parent.setAcrylamide(gel2);
 				selectedGel.setSuppressor(gel2.getConc());
 				setAcrylamideEffect();
 
 			} else if (gel3.percentGel.equals(item.getSelectedItem())) {
 				selectedGel = gel3;
-				parent.setAcrylaminde(gel3);
+				parent.setAcrylamide(gel3);
 				selectedGel.setSuppressor(gel3.getConc());
 				setAcrylamideEffect();
 
 			} else if (gel4.percentGel.equals(item.getSelectedItem())) {
 				selectedGel = gel4;
-				parent.setAcrylaminde(gel4);
+				parent.setAcrylamide(gel4);
 				selectedGel.setSuppressor(gel4.getConc());
 				setAcrylamideEffect();
 
