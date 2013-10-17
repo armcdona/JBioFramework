@@ -1,7 +1,7 @@
 package one.d.electrophoresis;
 
-/*
- *Updated By Bader AlHarbi
+/**
+ *@contrib Bader AlHarbi
  * Decompiled by Mocha from Simulation.class
  * Originally compiled from D:\Dave\Java\Electrophoresis\Simulation.java
  */
@@ -13,6 +13,9 @@ import java.text.DecimalFormat;
 
 import javax.swing.JPanel;
 
+/**
+ *
+ */
 public class Simulation extends JPanel implements Runnable {
 	private final int numOfStds = 7;
 	Thread runner;

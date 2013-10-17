@@ -1,8 +1,9 @@
 package one.d.electrophoresis;
 
 /**
- * @author  updated  by Bader Alharbi
- *The Swing version 1D Electrophoresis simulation, as Desktop application
+ * @author Bader Alharbi
+ *The Swing version 1D Electrophoresis simulation,
+ *  Desktop application
  */
 
 import java.awt.Dimension;
@@ -21,7 +22,8 @@ public class Electrophoresis extends JPanel {
     ProteinData dataPanel;
     Plot plotPanel;
 
-    public void Header(){ // @TODO: figure out where we want to put the help button on E1D
+    public void Header(){
+    // @TODO: figure out where we want to put the help button on E1D
         JPanel headPanel = new JPanel();
         JButton help = new JButton("Help");
         help.setToolTipText("Open Help wiki for Electro1D");
@@ -34,6 +36,9 @@ public class Electrophoresis extends JPanel {
         super.add(headPanel);
     }
 
+    /**
+     * default constructor
+     */
     public Electrophoresis() {
         super.setPreferredSize(new Dimension(550, 450));
 
@@ -64,45 +69,86 @@ public class Electrophoresis extends JPanel {
 
     }
 
+    /**
+     *  addStandard() add standards proteins
+     */
     public void addStandard() {
         simPanel.addStandard();
     }
 
+    /**
+     * Stop running the simulation on the gel
+     */
     public void stopRun() {
         simPanel.stopRun();
     }
 
+    /**
+     * display the simulation panel
+     */
     public void displaySim() {
         tabPane.setVisible(true);
     }
 
-    public void setAcrylaminde(Acrylamide acrylamide) {
+    /**
+     *  set the acrylamide percentage
+     * @param acrylamide
+     */
+    public void setAcrylamide(Acrylamide acrylamide) {
         simPanel.setAcrylamide(acrylamide);
     }
 
+    /**
+     * start running the simulation
+     * @param aprotein
+     * @param protein
+     * @param protein1
+     * @param protein2
+     */
     public void startRun(Protein aprotein[], Protein protein, Protein protein1,
                          Protein protein2) {
         simPanel.startRun(aprotein, protein, protein1, protein2);
     }
 
+    /**
+     *  setPlotData() set the plot data
+     * @param aprotein
+     * @param protein
+     * @param protein1
+     */
     public void setPlotData(Protein aprotein[], Protein protein,
                             Protein protein1) {
         plotPanel.setResults(aprotein, protein, protein1);
     }
 
+    /**
+     * displayData()display the data
+     */
     public void displayData() {
         tabPane2.setVisible(true);
 
     }
 
+    /**
+     *  adding the sample
+     */
     public void addSample() {
         simPanel.addSample();
     }
 
+    /**
+     * configure the animation speed
+     * @param s
+     */
     public void setAnimationSpeed(String s) {
         simPanel.setPause(s);
     }
 
+    /**
+     *    displayProtein(Protein protein)
+     *   display protein info on the plotting panel
+     * @param protein
+     */
     public void displayProtein(Protein protein) {
         dataPanel.displayData(protein);
     }
