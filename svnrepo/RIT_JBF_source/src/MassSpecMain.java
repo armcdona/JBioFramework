@@ -13,11 +13,11 @@
  * See the GNU General Public License for more details.
  */
 
-/*
+/**
  * This class extends JPanel so that the Spectrometer simulation can be added to
- * the JBioFramework program interface. It holds the main user interface for
- * the Spectrometer simulation.
+ * the JBioFramework program interface.
  *
+ * Holds the main user interface for the Spectrometer simulation.
  */
 
 /**

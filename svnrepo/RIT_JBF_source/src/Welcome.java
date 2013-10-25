@@ -129,7 +129,7 @@ public class Welcome extends JPanel{
 
 	 con.gridy = 1; 
          headP.add(subHeadP,con);
-         //headP.setPreferredSize(new Dimension(500,800));
+        
 	return headP;
     }
 
@@ -235,7 +235,10 @@ public class Welcome extends JPanel{
                   JPanel p = new JPanel();
                   JLabel l = new JLabel("Ask a Question, Review the Software, View/Edit the Source");
                   p.add(l);
-                  JButton email = new JButton("Email Address");
+                  
+		  //'email' button opens a new frame (pop-up) with an editable TextArea containing a
+		  //a copy/paste-able email address.
+		  JButton email = new JButton("Email Address");
                   email.setToolTipText("Copy email address to clipboard");
                   email.addActionListener(new ActionListener() {
                       public void actionPerformed(ActionEvent e) {

@@ -13,6 +13,12 @@
  * See the GNU General Public License for more details.
  */
 
+/**
+ * Main GUI class for Marvin integration with JBioFramework.
+ * Instantiated by /JBioFrameworkMain/ as a JPanel object (extends JPanel) then
+ * added to main frame.
+ */
+
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
@@ -28,9 +34,13 @@ import chemaxon.marvin.beans.MSketchPane;
 import chemaxon.marvin.common.UserSettings;
 import chemaxon.marvin.sketch.SketchParameterConstants;
 
+/**
+ * Extends JPanel so that the 
+ *
+ */
 public class MarvinTab extends JPanel {
 
-	private JTextArea textarea = new JTextArea(10,50);
+    private JTextArea textarea = new JTextArea(10,50);
 
     private static MSketchPane marvinPane;
 
@@ -41,7 +51,8 @@ public class MarvinTab extends JPanel {
 	}
 
 	private UserSettings createUserSettings() {
-		UserSettings settings = new UserSettings(this.getClass().getResourceAsStream("marvin.properties"));
+		UserSettings settings = new UserSettings(
+				            this.getClass().getResourceAsStream("marvin.properties"));
 		settings.setProperty(SketchParameterConstants.MENU_CUSTOMIZATION_FILE,
 				System.getProperty("user.dir") + "/src/customization.xml");
 		settings.setProperty(SketchParameterConstants.SHORTCUTS,
