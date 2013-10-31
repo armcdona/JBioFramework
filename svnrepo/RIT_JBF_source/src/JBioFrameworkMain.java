@@ -15,6 +15,8 @@
 
 /**
  * The main frame of the entire suite. 
+ * Calls for the main GUI panels for other classes and adds them to a tabbed
+ * frame.
  *
  * @author Amanda Fisher
  * @contrib Aidan Sawyer [rit: aks5238 | sf daniels-ai]
@@ -28,7 +30,7 @@ import one.d.electrophoresis.Electrophoresis;
 /**
  * The main frame for the JBioFramework program.
  *  -Adds Welcome, Electrophoresis, Electro2D, MassSpec and MarvinSketch
- *   applications to itself with a JTabbedPane.
+ *   applications to the JFrame it extends  with a JTabbedPane.
  */
 public class JBioFrameworkMain extends JFrame {
 
@@ -44,48 +46,64 @@ public class JBioFrameworkMain extends JFrame {
 
     /**
      * Main method for entire program.
-     */ 
+     * Creates a new instantiation of the JBioFramework class (calls constructor)
+     */
     public static void main(String[] args) {
         JBioFrameworkMain jbfMain = new JBioFrameworkMain();
     }
 
     /**
      * Constructor for JBioFrameworkMain Frame object.
-     * -sets frame to visible, sets some general behaviors, adds 
+     * -sets frame to visible, sets some general behaviors, adds
      *  panels from Electro1D, Electro2d, etc. and adjusts size.
-     */ 
+     */
     public JBioFrameworkMain() {
-
+	//calls JFrame constructor with String parametr which sets the displayed
+	//name at the top of the window.
         super("JBioFramework");
 
-        super.setVisible(true);
-        super.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+	//swing component which facilitates switching between different panels.
         tabbedPane = new JTabbedPane();
 
+	//add all of the relevant panels for each application's GUI to tabbedPane
         tabbedPane.addTab("Welcome", new Welcome());
-        tabbedPane.add("Electro1D", new Electrophoresis());
+        tabbedPane.addTab("Electro1D", new Electrophoresis());
         tabbedPane.addTab("Electro2D", new Electro2D());
         tabbedPane.addTab("Mass Spectrometer", new MassSpecMain());
         tabbedPane.addTab("Marvin Sketch", new MarvinTab().createMainPanel());
         /*tabbedPane.addTab(["name (to be displayed)"], [object]);*/
 
+	//add tabbedPane to frame
         add(tabbedPane);
 
-        /**
-         * Use a toolkit to find the screen size of the user's monitor
-	 * and set the window size to it.
-         */
 
-        super.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+	/**various last steps for the JFrame.*/
 
-        this.pack();
+	// Method inherited from Window by JFrame which "Causes this Window to be
+	// sized to fit the preferred size and layouts of its subcomponents.
+	super.pack();
+
+	// Use a toolkit to find the screen size of the user's monitor
+	// and set the window size to it.
+	super.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+
+	//ensure that the program stops when the Window for the GUI is closed.
+	//TODO create WindowManager to set prompt for review or session log.
+	super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	//make the completed, correctly-sized window visible.
+	// [should be the last thing called, to prevent the user from seeing
+	//  the window get resized]
+	super.setVisible(true);
     }
 
     /**
      * returns the JTabbedPane which holds all of our simulation panels.
-     */ 
+     * tabbedPane is a Swing component which facilitates the switching between
+     * multiple components.
+     */
     public static JTabbedPane getTabs() {
         return tabbedPane;
     }
+
 }
