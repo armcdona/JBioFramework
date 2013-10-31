@@ -14,16 +14,13 @@
  */
 
 /**
- * This class extends JPanel so that the Spectrometer simulation can be added to
- * the JBioFramework program interface.
- *
- * Holds the main user interface for the Spectrometer simulation.
- */
-
-/**
+ * Main GUI for the Spectrometer simulation contained in a JPanel.
+ * One of the tabs added to /JBioFrameworkMain/'s JTabbedPane.
  *
  * @author Amanda Fisher
- */
+*/
+
+//GUI Components
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -34,18 +31,25 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JCheckBox;
+
+//Listeners and Event handlers
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JCheckBox;
+
+//etc.
 import java.io.IOException;
 import java.text.DecimalFormat;
-import javax.swing.JTextField;
-import javax.swing.JOptionPane;
 
+/**
+ *
+ */
 public class MassSpecMain extends JPanel {
 
     private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
@@ -70,51 +74,71 @@ public class MassSpecMain extends JPanel {
      * drop down box, the info label, the big graph and the small graph.
      */
     public MassSpecMain() {
-        super();
-        GridBagLayout grid = new GridBagLayout();
+	//set the layout of the JPanel it's extending.
+        super(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
-        setLayout(grid);
         constraints.insets = new Insets(1, 5, 1, 5);
 
+	//Head Panel including JLabel for the name.
         JPanel headP = new JPanel();
-        JLabel head = new JLabel("Tandem Mass Spectrometer");
-        head.setFont(new Font("SansSerif", Font.BOLD, 18));
-        constraints.gridy = 0;
-        headP.add(head);
+            JLabel head = new JLabel("Tandem Mass Spectrometer");
+            head.setFont(new Font("SansSerif", Font.BOLD, 18));
+
+	headP.add(head);
+	constraints.gridy = 0;
         super.add(headP, constraints);
 
+	//panel for the information buttons (help and about)
         JPanel infoButtonsPanel = new JPanel();
-        help = new JButton("Help");
-        help.setToolTipText("Opens Help wiki for Mass Spectrometer");
-        help.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String url = "https://sourceforge.net/p/jbf/wiki/MassSpec/";
-                try{
-                    BrowserLauncher.openURL(url);
-                } catch(IOException i){
-                    System.err.println( i.getMessage());
-                }
-            }
-        });
-        about = new JButton("About");
-        about.setToolTipText("About the program");
-        about.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-//                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
-                try{
-                    BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
-                } catch(IOException i){
-                    System.err.println( i.getMessage());
-                }
-            }
-        });
-        infoButtonsPanel.add(help);
-//        infoButtonsPanel.add(about);
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        grid.setConstraints(infoButtonsPanel, constraints);
-        add(infoButtonsPanel);
 
+         /*help Button which uses /BrowserLauncher/ to open help wiki for MassSpec.*/
+	  help = new JButton("Help");
+
+	  //add hovertext
+	  help.setToolTipText("Opens Help wiki for Mass Spectrometer");
+
+	  //set functionality
+	  help.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent e) {
+                  try{
+                      BrowserLauncher.openURL("https://sourceforge.net/p/jbf/wiki/MassSpec/");
+                  }catch(IOException i){
+                      System.err.println( i.getMessage());
+                  }
+              }
+          });
+
+	  //add 'help' to infoButtonPanel
+	  infoButtonsPanel.add(help);
+
+	 /*about button which uses /BrowserLauncher/ to open main page for JBF.*/
+	  about = new JButton("About");
+
+          //add hover text
+	  about.setToolTipText("About the program");
+
+	  //set functionality 
+	  about.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent e) {
+                  try{
+                      BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
+                  } catch(IOException i){
+                      System.err.println( i.getMessage());
+                  }
+              }
+	  });
+
+	  //add 'about' to infoButtonPanel
+	  infoButtonsPanel.add(about);
+
+        //add infoButtonsPanel to main MassSpec panel.
+	constraints.gridx = 0;
+        constraints.gridy = 1;
+        super.add(infoButtonsPanel,constraints);
+
+
+	/*Loading sequences. allows user to add custom sequence "OR" load one.
+	 * contains JLabels, JTextArea, . */
         JLabel inputLabel = new JLabel("Input protein sequence to be analyzed: ");
         constraints.gridy = 2;
         grid.setConstraints(inputLabel, constraints);
@@ -151,6 +175,7 @@ public class MassSpecMain extends JPanel {
         grid.setConstraints(loadButton, constraints);
         add(loadButton);
 
+        /*selecting the protease*/
         JLabel proteaseLabel = new JLabel("Select protease: ");
         constraints.gridy = 6;
         grid.setConstraints(proteaseLabel, constraints);
@@ -161,6 +186,7 @@ public class MassSpecMain extends JPanel {
         grid.setConstraints(proteaseBox, constraints);
         add(proteaseBox);
 
+	/*setting m/e range*/
         JLabel selectRangeLabel = new JLabel("Enter m/e range: ");
         constraints.gridy = 8;
         grid.setConstraints(selectRangeLabel, constraints);
@@ -184,6 +210,7 @@ public class MassSpecMain extends JPanel {
         grid.setConstraints(rangeSelectionLowerPanel, constraints);
         add(rangeSelectionLowerPanel);
 
+	/* Run Spectrum (button) */
         JButton runButton = new JButton("Run Spectrum");
         runButton.setToolTipText("Outputs the mass spectrum data on right panel");
         runButton.addActionListener(new ActionListener() {
@@ -200,6 +227,7 @@ public class MassSpecMain extends JPanel {
         grid.setConstraints(massDisplay, constraints);
         add(massDisplay);
 
+	/*toggle b/y fragments*/
         blueBs = new ToggleFragmentButton("B fragments", true);
         constraints.gridy = 13;
         grid.setConstraints(blueBs, constraints);
@@ -210,6 +238,7 @@ public class MassSpecMain extends JPanel {
         grid.setConstraints(redYs, constraints);
         add(redYs);
 
+	/*tandem (top) graph (upper right of MassSpec tab) */
         tandemGraph = new TandemGraphGUI();
         constraints.gridy = 0;
         constraints.gridx = 1;
@@ -220,6 +249,7 @@ public class MassSpecMain extends JPanel {
         grid.setConstraints(tandemGraph, constraints);
         add(tandemGraph);
 
+	/*output (bottom) graph (bottom right of MassSpec tab)*/
         outputGraph = new OutputGraphGUI(this);
         constraints.gridy = 8;
         constraints.gridheight = 6;
@@ -283,7 +313,7 @@ public class MassSpecMain extends JPanel {
             }
         }
 
-    } // End of FragmentToggleButton
+    } // End of p/ToggleFragmentButton/
 
     /**
      * The ProteinFrame class from the Electro2D simulation of JBioFramework
@@ -299,7 +329,7 @@ public class MassSpecMain extends JPanel {
     /**
      * Called by OutputGraphGUI's setPeaks method to sort out which ion peaks to
      * display based on the user specified m/e range.
-     * 
+     *
      * @return The lower limit of the user selected range.
      */
     public double getLowerLimit() {
