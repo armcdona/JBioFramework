@@ -1,7 +1,9 @@
 package one.d.electrophoresis;
 
-/* Decompiled by Mocha from Plot.class */
-/* Originally compiled from Plot.java */
+/**
+ * plot.java
+ * @contr
+ */
 
 import java.awt.Image;
 import java.awt.Font;

@@ -1,11 +1,4 @@
 package one.d.electrophoresis;
-
-/**
- * @author Bader Alharbi
- *The Swing version 1D Electrophoresis simulation,
- *  Desktop application
- */
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,7 +7,11 @@ import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
-
+/**
+ * @author Bader Alharbi
+ * Desktop application
+ * The Swing version 1D Electrophoresis simulation,
+ */
 public class Electrophoresis extends JPanel {
     JTabbedPane tabPane, tabPane2;
     Parameters paramPanel;

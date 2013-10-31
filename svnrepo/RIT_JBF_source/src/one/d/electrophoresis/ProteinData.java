@@ -1,11 +1,13 @@
 package one.d.electrophoresis;
-
 import java.awt.*;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author Bader Alharbi
+ * ProteinData.java class that handle the GUI components of the protein data panel
+ */
 public class ProteinData extends JPanel {
 	Electrophoresis parent;
 	String mw;
@@ -22,20 +24,8 @@ public class ProteinData extends JPanel {
 	JPanel logMolWtPanel;
 
 	/*
-	 * setting the protein info to be deployed in the simulation panel note1:
-	 * method name is m
+	 * DEFAULT constructor  initiate the main GUI components of the protein data panel
 	 */
-
-	public void displayData(Protein protein) {
-		name.setText(protein.name);
-		fullName.setText(protein.fullName);
-		abbr.setText(protein.abbr);
-		mw = String.valueOf(protein.mw);
-		molwt.setText(mw);
-		double d = Math.log(protein.mw) / Math.log(10D);
-		logMolWt.setText(String.valueOf(d));
-	}
-
 	ProteinData(Electrophoresis electrophoresis) {
 		mw = "0";
 		titlePanel = new JPanel();
@@ -81,4 +71,17 @@ public class ProteinData extends JPanel {
 		add(logMolWtPanel);
 	}
 
+    /**
+     * show protein information including protein name,abbreviation, molecular weight,
+     * @param protein
+     */
+    public void displayData(Protein protein) {
+        name.setText(protein.name);
+        fullName.setText(protein.fullName);
+        abbr.setText(protein.abbr);
+        mw = String.valueOf(protein.mw);
+        molwt.setText(mw);
+        double d = Math.log(protein.mw) / Math.log(10D);
+        logMolWt.setText(String.valueOf(d));
+    }
 }

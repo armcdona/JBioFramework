@@ -3,6 +3,10 @@ package one.d.electrophoresis;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 
+/**
+ * main class for 1d electrophoresis
+ * @author Bader Alharbi
+ */
 public class Electro1DMain extends JFrame {
     private Electro1DMain() {
         super("Electrophoresis");
