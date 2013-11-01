@@ -14,7 +14,10 @@
  */
 
 /**
+ * Play button on /Electro2D/. Calls /ColorFrame/ and uses /Electro2D/
+ * methods/states.
  *
+ * |Electro2D|
  * @author Amanda Fisher
  */
 
@@ -22,15 +25,24 @@ import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+* JButton object with window to /Electro2D/.
+* selectively set button functionality and readouts to fit the states
+* of current /Electro2D/ run.
+*/
 public class PlayE2AnimationButton extends JButton implements ActionListener {
 
-    Electro2D electro2D;
-    boolean sdsPlaying;
-    private boolean iefDrawn;
-    private boolean sdsDrawn;
-    private static boolean compareFiles;
-    String choice;
+        Electro2D electro2D;
+        boolean sdsPlaying;
+        private boolean iefDrawn;
+        private boolean sdsDrawn;
+        private static boolean compareFiles;
+        String choice;
 
+   /**
+    * constructor; initializes booleans, names button, gets access to /Electro2D/
+
+    */
     public PlayE2AnimationButton(Electro2D e) {
 
         super("Start");
@@ -43,27 +55,64 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
         setHoverText();
     }
 
+    /**
+     * standard accessor for the boolean of whether the sds animation has played.
+     */
+     public PlayE2AnimationButton(Electro2D e) {
+
+        super("Start");
+        addActionListener(this);
+        electro2D = e;
+        sdsPlaying = false;
+        iefDrawn = false;
+        sdsDrawn = false;
+        compareFiles = false;
+        setHoverText();
+    }
+
+    /**
+     * standard accessor for the boolean of whether the sdsPage animation
+     * has been drawn or not.
+     */
     public boolean getSdsStatus(){
 	return sdsDrawn;
     }
 
+    /**
+     * Change button name to "Start" and sdsPlaying boolean to false.
+     */
     public void resetPlay(){
 	sdsPlaying = false;
         this.setText("Start");
     }
 
+    /**
+     * set boolean for whether the ieF animation has been drawn
+     */
     public void resetIEF(){
 	iefDrawn = false;
     }
 
+    /**
+     * set boolean for whether the sds page animation has been drawn.
+     */
     public void resetSdsStatus(){
 	sdsDrawn = false;
     }
 
+    /**
+     * sets 'compareFiles' boolean to whatever truth value is passed in the parameter.
+     */
     public static void setCompare(boolean bool){
 	compareFiles = bool;
     }
 
+    /**
+     * Make the hovertext (ToolTipText) read differently to reflect how the draw states
+     * of both animations affect what the user wants to do.
+     *
+     * @author AidanSawyer
+     */
     public void setHoverText(){
         if(sdsPlaying){
             super.setText("Stop");
@@ -80,6 +129,11 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
         }
     }
 
+    /**
+     * Set the functionality of the Play button to start the next animation
+     * (either IEF or sdsPage) and open /ColorFrame/.
+     *
+     */
     public void actionPerformed(ActionEvent e) {
 
         if(sdsPlaying) {
@@ -116,7 +170,7 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 			iefDrawn = true;
 			electro2D.getGel().resetReLine();
 		    }
-        new ColorFrame().showKey(); //@Todo: set position on screen
+        new ColorFrame().showKey(); //TODO: set position of colorFrame popup on screen.
         }
 		//if the user selected SDS-PAGE animation, and the IEF is
 		// already drawn, perform the SDS-PAGE animation
