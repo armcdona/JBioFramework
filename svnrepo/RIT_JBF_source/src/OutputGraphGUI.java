@@ -22,7 +22,8 @@
  */
 
 /**
- *
+ * Output Graph for display in /MassSpecMain/.
+ * |MassSpec|
  * @author Amanda Fisher
  */
 
@@ -33,7 +34,16 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 
-
+/**
+ * Allow for the painting of the Output (bottom) graph in /MassSpecMain/ and
+ * sets each /Ion/ object's xCoordinate instance variable.
+ *
+ * This class extends JPanel to override the paintComponent method in order to
+ * represent the output of the spectrometer on a graph. This OutputGraphGUI will
+ * be added to the MainPanelGUI. OutputGraphGUI also sets each Ion's xCoordinate
+ * instance variable.
+ *
+ */
 public class OutputGraphGUI extends JPanel implements MouseListener {
 
     private ArrayList<Ion> peakLines;
@@ -224,9 +234,9 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
     /**
      * peakPick is called by the mouseClicked method to identify which peak, if
      * any, the user has clicked on (or around).
-     * 
+     *
      * Right now also displays the peak's m/e on standard output.
-     * 
+     *
      * @param x The x coordinate of the click.
      */
     private void pickPeak(int x) {
@@ -237,9 +247,9 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
                   //display popup from ion here
                     boolean printed = false;
                     if (!printed){
-                    	ion.displaySequence();
-                    	
-                    	printed = true;
+		        ion.displaySequence();
+
+		    printed = true;
                     }
                 }
             }
