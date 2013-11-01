@@ -1,20 +1,12 @@
 package one.d.electrophoresis;
-
-/**
- *@contrib Bader AlHarbi
- * Decompiled by Mocha from Simulation.class
- * Originally compiled from D:\Dave\Java\Electrophoresis\Simulation.java
- */
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
-
 import javax.swing.JPanel;
-
 /**
- *
+ *@contrib Bader AlHarbi
+ * Simulation class to initiate the simulation panel GUI
  */
 public class Simulation extends JPanel implements Runnable {
 	private final int numOfStds = 7;
@@ -126,6 +118,10 @@ public class Simulation extends JPanel implements Runnable {
 	boolean noLoadError;
 	protected DecimalFormat twoDigits;
 
+    /**
+     *  constructor that take instant of the electrophoresis parent class
+     * @param electrophoresis
+     */
 	Simulation(Electrophoresis electrophoresis) {
         this.setPreferredSize(new Dimension(450,450));
 		animationModifier = 1.0F;
@@ -166,6 +162,9 @@ public class Simulation extends JPanel implements Runnable {
 		this.addMouseListener(msl);
 	}
 
+    /**
+     * start thread
+     */
 	public void start() {
 		if (runner == null) {
 			runner = new Thread(this);
@@ -173,6 +172,9 @@ public class Simulation extends JPanel implements Runnable {
 		}
 	}
 
+    /**
+     * interrupt the running thread
+     */
 	public void stop() {
 		if (runner != null) {
 			runner.interrupt();
@@ -180,6 +182,10 @@ public class Simulation extends JPanel implements Runnable {
 		}
 	}
 
+    /**
+     * addStandard()method that's control the addition of the standard proteins,
+     * invoked by the Add standard button
+     */
 	public void addStandard() {
 		if (sampLoadState == loading) {
 			return;
@@ -203,6 +209,11 @@ public class Simulation extends JPanel implements Runnable {
 		start();
 	}
 
+    /**
+     *  paintData(Graphics g)
+     *  draw protein info on the simulation panel
+     * @param g
+     */
 	private void paintData(Graphics g) {
 		g.setColor(Color.black);
 		int i = charHeight - 3;
@@ -223,6 +234,13 @@ public class Simulation extends JPanel implements Runnable {
 		addInfo = false;
 	}
 
+    /**
+     * start the simulation on the gel panel , the protein bands moves after invoking this method
+     * @param aprotein    is an array of standard proteins (known)
+     * @param protein1    is a unknown protein (sample)
+     * @param protein2    is a dye
+     * @param protein3    is a dye
+     */
 	public void startRun(Protein aprotein[], Protein protein1,
 			Protein protein2, Protein protein3) {
 		stopRun();
@@ -271,11 +289,18 @@ public class Simulation extends JPanel implements Runnable {
 		start();
 	}
 
+    /**
+     * Stop the simulation
+     */
 	public void stopRun() {
 		stopAnimation = true;
 		stop();
 	}
 
+    /**
+     * calculate the dimension of the simulation panel, the location of the
+     * proteins bands relative to other panel edges
+     */
 	private void calcDimensions() {
 		int i1 = 0;
 		int j1 = 0;
@@ -384,6 +409,10 @@ public class Simulation extends JPanel implements Runnable {
 		endHeight = probeHeight / 2;
 	}
 
+    /**
+     * pause the simulation
+     * @param string
+     */
 	public void setPause(String string) {
 		byte b = 100;
 		float f1 = 2.0F;
@@ -404,6 +433,10 @@ public class Simulation extends JPanel implements Runnable {
 		pause = (int) ((float) b / modifier / animationModifier);
 	}
 
+    /**
+     * draw protein band
+     * @param g
+     */
 	private void drawCell(Graphics g) {
 		g.setColor(Color.black);
 		g.drawRect(0, 0, rightEdge, bottomEdge);
@@ -464,6 +497,9 @@ public class Simulation extends JPanel implements Runnable {
 		g.drawString(" ELECTROPHORESIS CELL", plateX, cellLabelY);
 	}
 
+    /**
+     * add sample
+     */
 	public void addSample() {
 		if (stdLoadState == loading) {
 			return;
@@ -487,11 +523,19 @@ public class Simulation extends JPanel implements Runnable {
 		start();
 	}
 
+    /**
+     * set the acrylamide gel properties
+     * @param acrylamide
+     */
 	public void setAcrylamide(Acrylamide acrylamide) {
 		gelLabel = acrylamide.percentGel + " Acrylamide";
 		repaint();
 	}
 
+    /**
+     * draw graph
+     * @param g
+     */
 	private void drawGraph(Graphics g) {
 		g.setColor(Color.black);
 		int i = 0;
@@ -500,6 +544,10 @@ public class Simulation extends JPanel implements Runnable {
 		while (++i < 7);
 	}
 
+    /**
+     * paint the protein sample band
+     * @param g
+     */
 	private void paintSample(Graphics g) {
 		int i = 0;
 		notAtBottom = false;
@@ -516,6 +564,9 @@ public class Simulation extends JPanel implements Runnable {
 			stopRun();
 	}
 
+    /**
+     * run the thread
+     */
 	public void run() {
 		Thread.currentThread().setPriority(1);
 		while (!stopAnimation) {
@@ -527,6 +578,10 @@ public class Simulation extends JPanel implements Runnable {
 		}
 	}
 
+    /**
+     *  change the standardized proteins loading status (per each simulation )
+     * @param g
+     */
 	private void paintAddition(Graphics g) {
 		if (!pipette.fillWell(g)) {
 			if (stdLoadState == loading)
@@ -537,6 +592,9 @@ public class Simulation extends JPanel implements Runnable {
 		}
 	}
 
+    /**
+     * reset the animation flags
+     */
 	private void ResetFlags() {
 		runSampleFlag = false;
 		addSampleFlag = false;
@@ -544,10 +602,18 @@ public class Simulation extends JPanel implements Runnable {
 		notAtBottom = false;
 	}
 
+    /**
+     * update the graphics (the simulation panel)
+     * @param g
+     */
 	public void update(Graphics g) {
 		paint(g);
 	}
 
+    /**
+     * the paint method
+     * @param g
+     */
 	public void paint(Graphics g) {
 		if (!imageCreated) {
 			offScreenImage = createImage(getSize().width, getSize().height);
@@ -580,7 +646,9 @@ public class Simulation extends JPanel implements Runnable {
 		g.drawImage(offScreenImage, 0, 0, this);
 	}
 
-	// class handle mouse events when user clicks the protein bands
+    /**
+     * inner class handle mouse events when user clicks the protein bands
+     */
 	class MouseClickListener implements MouseListener {
 
 		@Override

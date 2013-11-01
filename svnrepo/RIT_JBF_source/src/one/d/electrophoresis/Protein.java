@@ -1,6 +1,4 @@
 package one.d.electrophoresis;
-
-
 import java.awt.Color;
 import java.awt.Graphics;
 

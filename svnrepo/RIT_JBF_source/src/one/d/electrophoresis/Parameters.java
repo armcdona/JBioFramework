@@ -19,8 +19,10 @@ import javax.swing.JRadioButton;
 import javax.swing.border.Border;
 
 /**
- * @author updated Swing : Bader Alharbi
- * 
+ * @author Bader Alharbi
+ * updated Swing version
+ * the parameters class intiate the paramerters panels to contole various simulation parametrers
+ * the parameters defulat values are deleared in the Connstants.java interface
  */
 
 public class Parameters extends JPanel implements Constants {
@@ -49,6 +51,10 @@ public class Parameters extends JPanel implements Constants {
 	Electrophoresis parent;
 	Protein stdProteinArray[] = new Protein[7];
 
+    /**
+     * constructor
+     * @param electrophoresis
+     */
 	Parameters(Electrophoresis electrophoresis) {
 
 		selectedSpeed = medium;
@@ -388,10 +394,17 @@ public class Parameters extends JPanel implements Constants {
 		// create the control panel buttons & use anonymous inner handling
 	}
 
+    /**
+     * set the animation speed, take string parameter
+     * @param s
+     */
 	protected void setAnimationSpeed(String s) {
 		parent.setAnimationSpeed(s);
 	}
 
+    /**
+     * set the Acrylamide effect
+     */
 	protected void setAcrylamideEffect() {
 		int i = 0;
 		do
@@ -444,6 +457,11 @@ public class Parameters extends JPanel implements Constants {
 		}
 	}
 
+    /**
+     * set the proteins bands speed
+     * take double value
+     * @param d
+     */
 	protected void setSpeed(double d) {
 		dye1.speed = 0.94528800000000002D * d;
 		dye2.speed = 0.94528800000000002D * d;
@@ -466,6 +484,9 @@ public class Parameters extends JPanel implements Constants {
 		unknown10.speed = 0.63648000000000005D * d;
 	}
 
+    /**
+     * set the parameter panel colors
+     */
 	private void setPanelsColors() {
 
 		headerPanel.setBackground(Color.lightGray);
@@ -482,6 +503,9 @@ public class Parameters extends JPanel implements Constants {
 
 	}
 
+    /**
+     * set default values for acrylamide gel properties
+     */
 	public void setDefaults() {
 		parent.setAcrylamide(gel1);
 		selectedGel = gel1;
@@ -519,7 +543,9 @@ public class Parameters extends JPanel implements Constants {
 	JCheckBox standard6;
 	JCheckBox standard7;
 
-	// inner classes start here
+    /**
+     * StandardsListListener, inner class  to handle events invoked by GUI components in parameters panel
+     */
 	class StandardsListListener implements ItemListener {
 
 		@Override
@@ -577,7 +603,9 @@ public class Parameters extends JPanel implements Constants {
 		}
 
 	}// end class StandardsListListener
-
+    /**
+     * UnkownListHandler, inner class  to handle events invoked by GUI components in parameters panel
+     */
 	class UnkownListHandler implements ItemListener {
 
 		@Override
@@ -625,7 +653,9 @@ public class Parameters extends JPanel implements Constants {
 		}
 
 	}// end inner class UnkownListHandler
-
+    /**
+     * gelPercentageHandler, inner class  to handle events invoked by GUI components in parameters panel
+     */
 	class gelPercentageHandler implements ItemListener {
 
 		@Override

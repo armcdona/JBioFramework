@@ -1,13 +1,19 @@
 package one.d.electrophoresis;
-// Decompiled by DJ v3.10.10.93 Copyright 2007 Atanas Neshkov  Date: 3/13/2009 10:25:59 AM
-// Home Page: http://members.fortunecity.com/neshkov/dj.html  http://www.neshkov.com/dj.html - Check often for new version!
-// Decompiler options: packimports(3) 
-// Source File Name:   D:\Dave\Java\Electro1DMain\Acrylamide.java
 
+
+/**
+ * Acrylamide class
+ @contributor  Bader Alharbi
+ class is responsible for holding the Acclaimed gel parameters (the percentage & the numerical factor that affect the bands speed on
+ */
 
 public class Acrylamide
 {
-
+    /**
+     * default parametrized  constructor that take the percentage & numerical factor
+     * @param s the Acrylamide gel concentration percentage
+     * @param d numerical factor
+     */
     Acrylamide(String s, double d)
     {
         percentGel = "0.0%";
@@ -17,11 +23,19 @@ public class Acrylamide
         setSuppressor(concentration);
     }
 
+    /**\
+     * getConc() get the Acrylamide gel concentration
+     * @return concentration
+     */
     public double getConc()
     {
         return concentration;
     }
 
+    /**
+     * set the numerical factor (suppressor)
+     * @param d
+     */
     public void setSuppressor(double d)
     {
         if(d > 12D)
@@ -45,7 +59,7 @@ public class Acrylamide
         }
     }
 
-    private double concentration;
-    public String percentGel;
-    public int suppressor;
+    private double concentration; // gel concentration in double
+    public String percentGel; // gel percentage
+    public int suppressor; // numerical factor
 }

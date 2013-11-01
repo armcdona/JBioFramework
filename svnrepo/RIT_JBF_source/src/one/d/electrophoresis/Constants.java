@@ -6,8 +6,9 @@ package one.d.electrophoresis;
 import java.awt.Color;
 
 /**
- * @author Bader Alharbi Constants interface initiate many final attributes, by
- *         Parameters.java this will make locating these fixed values easier 
+ * @author Bader Alharbi
+ * Constants interface initiate many final attributes, by Parameters.java
+ * this will make locating these fixed values easier
  * 
  */
 public interface Constants {
