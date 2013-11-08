@@ -13,26 +13,27 @@
  * See the GNU General Public License for more details.
  */
 
-/*
- * Proteinase K cuts a peptide sequence after (C-terminal side) Alanine(A),
- * Phenylalanine(F), Isoleucine(I), Leucine(L), Valine(V), Tryptophan(W),
- * and Tyrosine(Y).
- */
-
 /**
- *
- * @author Amanda Fisher
+ * Proteinase K is a /Protease/ object which "cuts" a sequence.
+ * |proteins|
  */
 
 import java.util.ArrayList;
 
+/**
+ * Proteinase K cuts a peptide sequence after (C-terminal side) Alanine(A),
+ * Phenylalanine(F), Isoleucine(I), Leucine(L), Valine(V), Tryptophan(W),
+ * and Tyrosine(Y).
+ *
+ * @author Amanda Fisher
+ */
 public class ProteinaseK extends Protease {
 
     ArrayList<Character> buildingIons = new ArrayList<Character>();
     ArrayList<String> cutSequence = new ArrayList<String>();
 
     /**
-     * The cut method takes an input sequence and cuts it in to different Strings
+     * The cut method takes an input sequence and cuts it into different Strings
      * at points dependent on the type of Protease using the method. It uses
      * the makeIon method to turn the ArrayList of collectd characters in to
      * a String.
