@@ -13,15 +13,12 @@
  * See the GNU General Public License for more details.
  */
 
-/*
+/**
  * Protease is the abstract class inherited by all classes that are responsible for
  * cutting a protein's sequence at specific points. Only method they are required
  * to have is cut.
  *
- */
-
-/**
- *
+ * |proteins|
  * @author Amanda Fisher
  */
 import java.util.ArrayList;

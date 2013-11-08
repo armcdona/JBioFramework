@@ -16,6 +16,7 @@
 /**
  * Proteinase K is a /Protease/ object which "cuts" a sequence.
  * |proteins|
+ * @author Amanda Fisher
  */
 
 import java.util.ArrayList;
@@ -24,8 +25,6 @@ import java.util.ArrayList;
  * Proteinase K cuts a peptide sequence after (C-terminal side) Alanine(A),
  * Phenylalanine(F), Isoleucine(I), Leucine(L), Valine(V), Tryptophan(W),
  * and Tyrosine(Y).
- *
- * @author Amanda Fisher
  */
 public class ProteinaseK extends Protease {
 

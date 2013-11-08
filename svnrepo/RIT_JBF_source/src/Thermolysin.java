@@ -12,18 +12,19 @@
  *
  * See the GNU General Public License for more details.
  */
-/*
- * Thermolysin cuts before (N-terminal) Isoleucine(I), Leucine(L),
- * Methionine(M), or Valine(V).
- *
- */
 
 /**
+ * Thermolysin is a /Protease/ object which cuts before N, I, L, M, or V.
  *
+ * |proteins|
  * @author Amanda Fisher
  */
 import java.util.ArrayList;
 
+/**
+ * Thermolysin cuts before (N-terminal) Isoleucine(I), Leucine(L),
+ * Methionine(M), or Valine(V).
+ */
 public class Thermolysin extends Protease {
 
     ArrayList<Character> buildingIons = new ArrayList<Character>();

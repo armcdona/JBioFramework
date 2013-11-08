@@ -1,16 +1,16 @@
-/*
- * Trypsin cuts a protein sequence at Arginine(R) or Lysine(K), except when either is
- * followed by a Proline(P).
- *
- * version 2
- */
-
 /**
+ * Trypsin is a /Protease/ object which "cuts" a sequence at R or K.
  *
+ * |proteins|
  * @author Amanda Fisher
  */
 import java.util.ArrayList;
 
+/**
+ * Protease which cuts a protein sequence at Arginine(R) or Lysine(K),
+ * except when either is followd by a Proline(P).
+ *
+ */
 public class Trypsin extends Protease {
 
     ArrayList<Character> buildingIons = new ArrayList<Character>();
