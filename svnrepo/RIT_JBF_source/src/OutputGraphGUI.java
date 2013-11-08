@@ -13,14 +13,6 @@
  * See the GNU General Public License for more details.
  */
 
-/*
- * This class extends JPanel to override the paintComponent method in order to
- * represent the output of the spectrometer on a graph. This OutputGraphGUI will
- * be added to the MainPanelGUI. OutputGraphGUI also sets each Ion's xCoordinate
- * instance variable.
- *
- */
-
 /**
  * Output Graph for display in /MassSpecMain/.
  * |MassSpec|
@@ -115,6 +107,7 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      */
     protected void paintComponent(Graphics g) {
 
+	//set variables to be used
         width = getWidth();
         height = getHeight();
         xAxisWidth = width - width*3/20;
@@ -257,18 +250,14 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
     }
 
     /**
-     * The following four methods are stubbed out so the MouseListener class can
-     * be implemented.
+     * The following four methods are stubbed out so the MouseListener class
+     * can be implemented and mouseClicked can be declared.
      *
      * @param e unused.
      */
-    public void mouseEntered(MouseEvent e) {
-    }
-    public void mouseExited(MouseEvent e) {
-    }
-    public void mousePressed(MouseEvent e) {
-    }
-    public void mouseReleased(MouseEvent e) {
-    }
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e)  {}
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e){}
 
 }
