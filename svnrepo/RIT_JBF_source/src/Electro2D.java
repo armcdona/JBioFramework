@@ -240,7 +240,7 @@ public class Electro2D extends JPanel implements ActionListener {
                 new ColorFrame().showKey();
             }
         });
-	
+
         playButton       = new PlayE2AnimationButton(this);
         restartButton    = new RestartE2DAnimationButton(this);
 
@@ -283,7 +283,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
         proteinListFrame  = new SingleProteinListFrame("Protein Lists", this);
 
-        
+
        /*
         * new code for designing a Swing GUI; uses JPanels and layout managers
         * to arrange the buttons and labels to look similar to how the old awt
@@ -292,7 +292,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-       
+
         leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
@@ -382,7 +382,7 @@ public class Electro2D extends JPanel implements ActionListener {
         sixthPanel.setLayout(new GridLayout(1, 1, 0, 0));
         sixthPanel.add(percentAcrylamide);
         leftPanel.add(sixthPanel);
-       
+
         JPanel seventhPanel = new JPanel();
         JLabel additionalOptions = new JLabel("Additional Options");
         additionalOptions.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -484,7 +484,7 @@ public class Electro2D extends JPanel implements ActionListener {
         for( int i = 0; i < rangeLabels.size(); i++ ) {
             pHPanel.remove((JLabel) rangeLabels.elementAt(i));
         }
-	
+
 	//remove all of the labels from the vector
         rangeLabels.removeAllElements();
 	//clear the molecular weight labels as well (since this method is
@@ -574,7 +574,7 @@ public class Electro2D extends JPanel implements ActionListener {
      * Returns the top-level frame that contains the specified
      * component, or null if there is no top-level frame.
      */
-    Frame getFrame(Component comp) {
+    public Frame getFrame(Component comp) {
         Component theTop = null;
         Component parent = comp;
 
@@ -592,7 +592,7 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public void allowSelectRange() {
         if (!rangeReload) {
-	    
+
 	    // remove the image and add the two text fields to allow the user
 	    // to enter a range
 
@@ -607,7 +607,7 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public void disableSelectRange() {
         if (rangeReload) {
-	    
+
 	    // remove the two text fields and add the image to disable the
 	    // manual entry of a range
 
@@ -619,8 +619,8 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      *  Retrieves protein sequence information from a file.
-     *  This is achieved by popping up a new window with options for 
-     *  selecting a file from the server, or copying and pasting a file 
+     *  This is achieved by popping up a new window with options for
+     *  selecting a file from the server, or copying and pasting a file
      *  into a textbox.
      *  Currently, supported file types are .fasta, .faa, .gbk, and .pdb.
      */
@@ -776,7 +776,7 @@ public class Electro2D extends JPanel implements ActionListener {
                     searchID = new String(brokenLine[4] + id);
                 }
                 else {
-        	    // otherwise, use the id passed to the method as the name for
+                    // otherwise, use the id passed to the method as the name for
                     // the search.
                     searchID = new String(brokenLine[5] + id);
                 }
@@ -803,16 +803,16 @@ public class Electro2D extends JPanel implements ActionListener {
             }catch(IOException e) {System.err.println(e.getMessage()); }
         }
 
-	/**
+	/*
 	//create a URL object
 	URL searchPage = null;
 	String searchId = "";  //the name used in the search
-	
+
 	//get the name of the loaded file and figure out the extention
 	String filename = getLastFileLoaded();
 	String extention = filename.substring( filename.indexOf( "." ) + 1 );
 
-	// if the extention is .pdb, create the proper search string for the 
+	// if the extention is .pdb, create the proper search string for the
 	// URL by searching for the name of the pdb file.
 	if( extention.equals( "pdb" ) ){
 	    id = filename.substring( 0, filename.indexOf( "." ) );
@@ -830,7 +830,7 @@ public class Electro2D extends JPanel implements ActionListener {
 	    }
 
 	try{
-	    //assign the search information to the URL 
+	    //assign the search information to the URL
 	    searchPage = new URL( searchId );
 	}catch( MalformedURLException e ){
 	    //catch and display any errors that occurred when assigning the
@@ -852,14 +852,14 @@ public class Electro2D extends JPanel implements ActionListener {
      * id provided
      */
     public void showECSearchPage(String id) {
-	
+
         int index = 0;
 	//create a URL object
 	//URL searchPage = null;
         String searchId = "";           //the name used in the search
         Vector ecNums   = new Vector(); //holds the EC numbers contained in the
                                         // id string
-	
+
         while (id.length() > 0 && id.indexOf("\u003B") != -1) {
             ecNums.addElement(id.substring(0, id.indexOf("\u003B")));
             index = id.indexOf("\u003B");
@@ -915,7 +915,7 @@ public class Electro2D extends JPanel implements ActionListener {
         for(int x = 0; x < selectedIndexes.length; x++) {
             removeProteinbyTitle(selectedItems[ x ]);
             proteinList.remove(selectedIndexes[x] - x);
-	    
+
         }
         if (sequenceTitles2 != null) {
             int[] selectedIndexes2 = proteinList2.getSelectedIndexes();
@@ -957,7 +957,7 @@ public class Electro2D extends JPanel implements ActionListener {
             max = 10.0;
             return (double) max;
         }
-	
+
         else if (ranges.equals("4 - 7")) {
             max = 7.0;
             return (double) max;
@@ -1072,7 +1072,7 @@ public class Electro2D extends JPanel implements ActionListener {
         value = value.trim();
 	//return value;
         double percent = -1;
-	
+
         if (value.indexOf("-") != -1) {
             value = value.substring(0, value.indexOf("-"));
             value = value.trim();
@@ -1085,12 +1085,12 @@ public class Electro2D extends JPanel implements ActionListener {
 	    // message in a new frame
             MessageFrame mess = new MessageFrame();
             String       m    = value + " is not a valid number.  Please " +
-                                		"press restart and try again.";
+					"press restart and try again.";
             mess.setMessage(m);
             mess.setVisible(true);
-	
+
         }
-	
+
         return percent;
     }
 
@@ -1105,7 +1105,7 @@ public class Electro2D extends JPanel implements ActionListener {
         value = value.trim();
 	//return value;
         double percent = -1;
-	
+
         if (value.indexOf("-") != -1) {
             value = value.substring(value.indexOf("-") + 1);
             value = value.trim();
@@ -1121,13 +1121,13 @@ public class Electro2D extends JPanel implements ActionListener {
                                 		"press restart and try again.";
             mess.setMessage(m);
             mess.setVisible(true);
-	
+
         }
-	
+
         return percent;
     }
 
-    
+
 
     /**
      * this method returns the animation selected by the user
@@ -1146,8 +1146,8 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     *  Refreshes the protein list, called after reading in new proteins 
-     *  from a file. Currently, the list is cleared and re-filled with 
+     *  Refreshes the protein list, called after reading in new proteins
+     *  from a file. Currently, the list is cleared and re-filled with
      *  proteins from the latest file read in.
      */
     public void refreshProteinList() {
@@ -1161,7 +1161,7 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * Given a protein title from proteinList, removes the protein's 
+     * Given a protein title from proteinList, removes the protein's
      * information from the vectors.
      *
      * @param title the title to be removed
@@ -1175,7 +1175,7 @@ public class Electro2D extends JPanel implements ActionListener {
                 return true;
             }
         }
-	
+
         return false;
     }
 
@@ -1209,7 +1209,7 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     *  Responds to a double-click in the protein list by bringing up a 
+     *  Responds to a double-click in the protein list by bringing up a
      *  new window with information on that protein.
      */
     public void actionPerformed(ActionEvent e) {
@@ -1218,14 +1218,14 @@ public class Electro2D extends JPanel implements ActionListener {
                                                      e.getActionCommand(), 1);
 	//proteinFrame.setResizable(false);
         proteinFrame.setVisible(true);
-	
+
         if (playButton.getSdsStatus()) {
             gelCanvas.drawLocation(e.getActionCommand());
         }
     }
 
     /**
-     * Sets the SDS-PAGE status in playButton to false to let the 
+     * Sets the SDS-PAGE status in playButton to false to let the
      * actionListener know that the SDS-PAGE portion of the animation
      * has not been drawn
      */
@@ -1234,7 +1234,7 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * Reinitializes the dotThread 
+     * Reinitializes the dotThread
      */
     public void restartThread() {
 	//initializes the thread, sets a value, and calls the start method
@@ -1712,7 +1712,7 @@ public class Electro2D extends JPanel implements ActionListener {
      * Standard applet methods.
      */
     public void start() { }
-    public void stop   () { }
+    public void stop()  { }
     public void destroy() { }
 
     /**
@@ -1722,10 +1722,9 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public String getAppletInfo() {
         return "Electro2D...copyright" +
-               "" +
                " 2003 Adam L Bazinet & Jill Zapoticznyj";
     }
-    
+
     public void writeToCSV() {
         CSVCreator csv = new CSVCreator(this);
         csv.writeToCSV();
@@ -1733,6 +1732,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
     public void generateWebPage() {
         web.genFile(this.getLastFileLoaded());
+        JOptionPane.showMessageDialog(null, "Webpage created in 'HTML Files/' subdirectory");
     }
 
     public void resetBothProteinLists() {

@@ -74,13 +74,13 @@ public class HTMLGenScreen extends JFrame implements ActionListener,
 	buttons.add( piButton );
 	buttons.add( mwButton );
 	buttons.add( functionButton );
-	
+
 	submit = new JButton( "Generate HTML Document" );
 	submit.addMouseListener( this );
-    
+
 	contentPanel = new JPanel();
 	contentPanel.setLayout( new BoxLayout(
-				       contentPanel, BoxLayout.Y_AXIS ) ); 
+				       contentPanel, BoxLayout.Y_AXIS ) );
 	contentPanel.add( titleButton );
 	contentPanel.add( piButton );
 	contentPanel.add( mwButton );
