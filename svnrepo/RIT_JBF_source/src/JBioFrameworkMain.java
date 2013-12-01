@@ -84,10 +84,15 @@ public class JBioFrameworkMain extends JFrame {
 	super.pack();
 
 	// Use a toolkit to find the screen size of the user's monitor
-	// and set the window size to it.
-	super.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
-	//ensure that the program stops when the Window for the GUI is closed.
+        //scale window size so as to not take up the entire screen
+//    double newWidth = Toolkit.getDefaultToolkit().getScreenSize().width*(3/4);
+//    double newHeight = Toolkit.getDefaultToolkit().getScreenSize().height*(3/4);
+
+        //set size of application to the size of the screen
+//    super.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+
+        //ensure that the program stops when the Window for the GUI is closed.
 	//TODO create WindowManager to set prompt for review or session log.
 	super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
