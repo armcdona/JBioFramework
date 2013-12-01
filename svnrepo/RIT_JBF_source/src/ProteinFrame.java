@@ -226,7 +226,8 @@ public class ProteinFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             JTextArea input = MassSpecMain.getInputArea();
             input.setText(sequenceString);
-            JOptionPane.showMessageDialog(null, "Protein sequence sent to mass spectrometer simulation. Click mass spectrometer tab.");
+//            JOptionPane.showMessageDialog(null, "Protein sequence sent to mass spectrometer simulation. Click mass spectrometer tab.");
+            JBioFrameworkMain.getTabs().setSelectedIndex(3);
         }
     }
 
