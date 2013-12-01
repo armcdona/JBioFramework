@@ -56,21 +56,6 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
     }
 
     /**
-     * standard accessor for the boolean of whether the sds animation has played.
-     */
-     public PlayE2AnimationButton(Electro2D e) {
-
-        super("Start");
-        addActionListener(this);
-        electro2D = e;
-        sdsPlaying = false;
-        iefDrawn = false;
-        sdsDrawn = false;
-        compareFiles = false;
-        setHoverText();
-    }
-
-    /**
      * standard accessor for the boolean of whether the sdsPage animation
      * has been drawn or not.
      */
