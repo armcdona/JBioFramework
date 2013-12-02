@@ -25,10 +25,7 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.net.MalformedURLException;
@@ -43,13 +40,7 @@ import java.awt.Insets;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Component;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
-import javax.swing.BoxLayout;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -77,7 +68,7 @@ public class Electro2D extends JPanel implements ActionListener {
                                           //animation
     private IEFThread iefThread;          //thread controlling IEF animation
     private boolean resetPressed;         //detects whether reset was pressed
-                                          //or not 
+                                          //or not
     private RangeImage rangeImage;    //the disabled image for entering a range
     private Graphics graphics;
     private boolean rangeReload;      //determines whether or not the user 
@@ -345,7 +336,7 @@ public class Electro2D extends JPanel implements ActionListener {
         JPanel firstPanel = new JPanel();
         c.gridy = 1;
         firstPanel.add(helpButton);
-//        firstPanel.add(aboutButton);
+        firstPanel.add(aboutButton);
         leftPanel.add(firstPanel);
 
 
@@ -1741,3 +1732,4 @@ public class Electro2D extends JPanel implements ActionListener {
         sequencesReady = false;
     }
 }
+
