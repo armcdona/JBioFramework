@@ -155,7 +155,6 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 			iefDrawn = true;
 			electro2D.getGel().resetReLine();
 		    }
-        new ColorFrame().showKey(); //TODO: set position of colorFrame popup on screen.
         }
 		//if the user selected SDS-PAGE animation, and the IEF is
 		// already drawn, perform the SDS-PAGE animation
@@ -168,6 +167,8 @@ public class PlayE2AnimationButton extends JButton implements ActionListener {
 			sdsPlaying = true;
 			electro2D.restartThread();
 			sdsDrawn = true;
+
+            new ColorFrame().showKey(); //TODO: set position of colorFrame popup on screen.
 
             }
 		}

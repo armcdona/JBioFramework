@@ -95,8 +95,7 @@ public class ProteinFrame extends JFrame {
         sequenceString = electro2D.getSequencebyTitle( proteinTitle );
 
 
-        // Performs a BLAST search for the protein sequence given to it from
-        // ProteinFrame.
+        /*Blast Search Button*/
         JButton blstSearch = new JButton("Blast Search");
         blstSearch.setToolTipText("Performs BLAST search for the protein sequence");
         blstSearch.addActionListener(new ActionListener() {
@@ -143,6 +142,7 @@ public class ProteinFrame extends JFrame {
             }
         }
 
+        /*NCBI search button*/
         JButton ncbiSearch = new JButton("NCBI Search");
         ncbiSearch.setToolTipText("Performs NCBI search for the protein sequence");
         ncbiSearch.addActionListener(new ActionListener() {
@@ -169,7 +169,7 @@ public class ProteinFrame extends JFrame {
                     swsSearchID.lastIndexOf( "|" ) + 1 );
         }
 
-
+        /*Uniprot search button*/
         JButton uniSearch = new JButton("Uniprot Search");
         uniSearch.setToolTipText("Performs Uniprot search for the protein sequence");
         uniSearch.addActionListener(new ActionListener() {
@@ -183,6 +183,17 @@ public class ProteinFrame extends JFrame {
                     System.out.println("URL did not work");
                 }
             }   });
+
+        /*Send to MassSpec button*/
+        JButton sendToSpec = new JButton("Run Mass Spectrum");
+        sendToSpec.setToolTipText("Send protein sequence to Mass Spec for analysis");
+        sendToSpec.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JTextArea input = MassSpecMain.getInputArea();
+                input.setText(sequenceString);
+                JBioFrameworkMain.getTabs().setSelectedIndex(3);
+            }
+        });
 
         //create labels to display the protein information
         titleLabel = new JLabel(ptTruncated);
@@ -201,34 +212,13 @@ public class ProteinFrame extends JFrame {
         searchPanel.add(blstSearch);
         searchPanel.add(ncbiSearch);
         searchPanel.add(uniSearch);
-        searchPanel.add(new sendToSpec());
+        searchPanel.add(sendToSpec);
         this.setLayout(new BorderLayout());
         this.add(proteinInfoPanel, BorderLayout.NORTH);
         this.add(searchPanel, BorderLayout.CENTER);
 
         pack();
         //setSize(420, 150);
-    }
-
-    private class sendToSpec extends JButton implements ActionListener {
-        public sendToSpec() {
-            super("Run Mass Spectrum");
-            super.setToolTipText("Send protein sequence to Mass Spec for analysis");
-            addActionListener(this);
-        }
-
-        /**
-         * The actionPerformed method is called when the user clicks on the button.
-         * It begins the simulation.
-         *
-         * @param e Unused.
-         */
-        public void actionPerformed(ActionEvent e) {
-            JTextArea input = MassSpecMain.getInputArea();
-            input.setText(sequenceString);
-//            JOptionPane.showMessageDialog(null, "Protein sequence sent to mass spectrometer simulation. Click mass spectrometer tab.");
-            JBioFrameworkMain.getTabs().setSelectedIndex(3);
-        }
     }
 
 }
