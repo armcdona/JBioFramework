@@ -96,7 +96,7 @@ public class GelCanvas extends JPanel implements MouseListener {
 
 
     /**
-     * Sets up the gel canvas for animating the electrophoresis simulation
+     * Sets up the gel canvas for animating the electro1D simulation
      */
     public void prepare() {
         /**

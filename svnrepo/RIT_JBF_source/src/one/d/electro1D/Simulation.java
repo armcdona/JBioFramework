@@ -1,4 +1,4 @@
-package one.d.electrophoresis;
+package one.d.electro1D;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -119,7 +119,7 @@ public class Simulation extends JPanel implements Runnable {
 	protected DecimalFormat twoDigits;
 
     /**
-     *  constructor that take instant of the electrophoresis parent class
+     *  constructor that take instant of the electro1D parent class
      * @param electrophoresis
      */
 	Simulation(Electrophoresis electrophoresis) {

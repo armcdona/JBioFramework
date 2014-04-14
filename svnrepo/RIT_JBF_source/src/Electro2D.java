@@ -46,6 +46,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
+import utilities.*;
 
 /**
  * The main electro2D class.

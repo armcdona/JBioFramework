@@ -1,4 +1,4 @@
-package one.d.electrophoresis;
+package one.d.electro1D;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

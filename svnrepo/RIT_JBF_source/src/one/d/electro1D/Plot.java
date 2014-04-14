@@ -1,4 +1,4 @@
-package one.d.electrophoresis;
+package one.d.electro1D;
 
 /**
  * plot.java
@@ -16,7 +16,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.text.DecimalFormat;
-import one.d.electrophoresis.Electrophoresis;
 
 import javax.swing.JPanel;
 
