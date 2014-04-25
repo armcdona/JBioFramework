@@ -1,4 +1,4 @@
-package one.d.electro1D;
+package electro1D;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;

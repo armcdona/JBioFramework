@@ -31,6 +31,9 @@ import java.awt.Cursor;
 import java.io.IOException;
 import utilities.BrowserLauncher;
 
+//import jbf utilities
+import utilities.*;
+
 /**
  * Welcome Tab - First tab of JBFSuite. 
  * -Contains all code for the Welcome tab. (no code in other classes)
@@ -239,7 +242,61 @@ public class Welcome extends JPanel{
                   
 		  //'email' button opens a new frame (pop-up) with an editable TextArea containing a
 		  //a copy/paste-able email address.
-		  JButton email = new JButton("Email Address");
+		  JButton email = new JButton("Send an Email");
+
+                  email.setToolTipText("Send email to us from within the program");
+                  email.addActionListener(new ActionListener() {
+                      public void actionPerformed(ActionEvent e) {
+
+                          //create frame
+                          JFrame emailFrame = new JFrame("Send Email");
+                          JPanel emailPanel = new JPanel(new GridBagLayout());
+                          GridBagConstraints c = new GridBagConstraints();
+
+                          //set label, textArea, and textField dimensions
+                          Dimension dimTF = new Dimension(100,15);
+                          Dimension dimTA = new Dimension(200,300);
+
+                          //subject
+                          JLabel subLabel = new JLabel("Subject: ");
+                          JTextField subField = new JTextField();
+                          subField.setSize(dimTF);
+                          c.gridx = 0;
+                          c.gridy = 0;
+                          emailPanel.add(subLabel,c);
+                          c.gridx++;
+                          emailPanel.add(subField,c);
+
+                          //replyTo
+                          JLabel     fromLabel = new JLabel("From: ");
+                          JTextField fromTF    = new JTextField();
+                          fromTF.setSize(dimTF);
+                          c.gridx = 0;
+                          c.gridy++;
+                          emailPanel.add(fromLabel,c);
+                          c.gridx++;
+                          emailPanel.add(fromTF,c);
+
+                          //message
+                          JLabel    messageLabel = new JLabel("Message Body");
+                          JTextArea messageArea  = new JTextArea("");
+                          messageArea.setTabSize(4);
+                          messageArea.setSize(dimTA);
+
+                          c.gridx = 0;
+                          c.gridy++;
+                          emailPanel.add(messageLabel,c);
+                          c.gridx++;
+                          emailPanel.add(messageArea,c);
+
+                          emailFrame.add(emailPanel);
+                          emailFrame.pack();
+                          emailFrame.setVisible(true);
+
+                      }
+                  });
+
+                  /*
                   email.setToolTipText("Copy email address to clipboard");
                   email.addActionListener(new ActionListener() {
                       public void actionPerformed(ActionEvent e) {
@@ -258,6 +315,7 @@ public class Welcome extends JPanel{
                       }
   
                   });
+                  */
                   p.add(email);
   		
  		 //'review' uses /BrowserLauncher/ to open the page for a new, blank review on sourceforge

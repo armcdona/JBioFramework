@@ -25,7 +25,7 @@
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import one.d.electro1D.Electrophoresis;
+import electro1D.Electrophoresis;
 
 /**
  * The main frame for the JBioFramework program.

@@ -1,4 +1,5 @@
-package one.d.electrophoresis;
+package electro1D;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,10 @@ import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
+
+//
+import utilities.BrowserLauncher;
+
 /**
  * @author Bader Alharbi
  * Desktop application
