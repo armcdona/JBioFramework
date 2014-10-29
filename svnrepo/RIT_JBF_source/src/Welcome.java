@@ -165,7 +165,7 @@ public class Welcome extends JPanel{
           about.addActionListener(new ActionListener() {
                   public void actionPerformed(ActionEvent e) {
                       try{
-                          BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
+                          BrowserLauncher.openURL("http://www.rit.edu/cos/jbioframework/");
                       }catch(IOException i){
                           System.err.println( i.getMessage());
                       }}
@@ -174,12 +174,12 @@ public class Welcome extends JPanel{
 
 	 //probSheets button brings up a small new frame (pop-up) asking the user to click on either of our problem sets
           JButton probSheets = new JButton("Problem Sets");
-          probSheets.setToolTipText("Download one of our pre-made problem sets");
+          probSheets.setToolTipText("Download one of our pre-made problem sets:");
           probSheets.addActionListener(new ActionListener(){
               public void actionPerformed(ActionEvent e){
                   JFrame pSf = new JFrame("Problem Sets");
                   JPanel pSp = new JPanel();
-                  JLabel pSl = new JLabel("Choose a problem set to open [mouse over for details]. \n");
+                  JLabel pSl = new JLabel("Choose a problem set to open \n");
                   pSp.add(pSl);
   		
  		 //pSb1 is the button for opening Problem Set 1 geared more towards beginners.
@@ -189,7 +189,7 @@ public class Welcome extends JPanel{
                  pSb1.setToolTipText("High School and First Year College level");
                  pSb1.addActionListener(new ActionListener() {
                      public void actionPerformed(ActionEvent e) {
-                         String url = "https://sourceforge.net/p/jbf/wiki/miscFiles/attachment/RevisedProblemSet1.docx";
+                         String url = "https://docs.google.com/document/d/1sIvaC-tOh8Dm7c5P7t71OXytmwkna1Yp0zaxXcGsKms/edit?usp=sharing";
                          try{
                              BrowserLauncher.openURL(url);
                          } catch(IOException i){
@@ -204,7 +204,7 @@ public class Welcome extends JPanel{
                  pSb2.setToolTipText("Upper Division Bio and Chem Students");
                  pSb2.addActionListener(new ActionListener() {
                      public void actionPerformed(ActionEvent e) {
-                         String url = "https://sourceforge.net/p/jbf/wiki/miscFiles/attachment/RevisedProblemSet2.docx";
+                         String url = "https://docs.google.com/document/d/135rCzggvppfCvhCaAjUzZAB2NTO5sUV6vy_OtPTxeYc/edit?usp=sharing";
                          try{
                              BrowserLauncher.openURL(url);
                          } catch(IOException i){
@@ -213,11 +213,29 @@ public class Welcome extends JPanel{
                      }
                  });
                  pSp.add(pSb2);
-                 pSf.setVisible(true);
-                 pSf.setSize(350,100);
-                 pSf.add(pSp);
-             }});
-	  
+
+         //pSsurvey is the button for opening the SurveyMonkey survey.
+                 JLabel pSsl = new JLabel("Then take our brief ");
+                 JButton pSsurvey = new JButton("Survey.");
+                 pSsurvey.setToolTipText("Opens brief survey");
+                 pSsurvey.addActionListener(new ActionListener() {
+                     public void actionPerformed(ActionEvent e) {
+                         String url = "https://www.surveymonkey.com/s/8K7YR2C";
+                         try{
+                             BrowserLauncher.openURL(url);
+                         } catch(IOException i){
+                             System.err.println( i.getMessage());
+                         }
+                     }
+                 });
+                 pSp.add(pSsl);
+                 pSp.add(pSsurvey);
+
+          pSf.setVisible(true);
+          pSf.setSize(350,125);
+          pSf.add(pSp);
+          }});
+
 	  body.add(probSheets);
     
         return body;
@@ -373,7 +391,7 @@ public class Welcome extends JPanel{
           {
               public void actionPerformed(ActionEvent e)
               {
-                  JFrame frame = new JFrame("Credits"); //@todo: update for marvin usage
+                  JFrame frame = new JFrame("Credits");
                   String mrvn = "<html> <u>Marvin</u> was used for drawing, displaying and " +
                           "characterizing chemical structures, substructures and reactions, " +
                           "Marvin 5.11.5, 2013, ChemAxon (http://www.chemaxon.com)</body>";
