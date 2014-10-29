@@ -1,4 +1,4 @@
-/*
+package Exceptions;/*
  * This class is an exception thrown by AminoAcid when an incorrect input is
  * given to one of its two constructors.
  * 

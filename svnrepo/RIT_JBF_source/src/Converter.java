@@ -7,6 +7,8 @@
  * version 3
  */
 
+import Exceptions.AminoException;
+
 /**
  *
  * @author Amanda Fisher
