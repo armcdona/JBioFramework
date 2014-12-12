@@ -45,8 +45,8 @@ import utilities.FastaParser;
  */
 public class MassSpecMain extends JPanel {
 
-    private String[] proteaseChoices = {"MassSpec.Trypsin", "MassSpec.Chymotrypsin", "Proteinase K",
-        "MassSpec.Thermolysin"};
+    private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
+        "Thermolysin"};
     private JButton help;
     private JButton about;
     private static JTextArea inputArea; // static so Electro2D.ProteinFrame can interact with it.
@@ -74,7 +74,7 @@ public class MassSpecMain extends JPanel {
 
 	//Head Panel including JLabel for the name.
         JPanel headP = new JPanel();
-            JLabel head = new JLabel("Tandem Mass MassSpec.Spectrometer");
+            JLabel head = new JLabel("Tandem Mass Spectrometer");
             head.setFont(new Font("SansSerif", Font.BOLD, 18));
 
 	headP.add(head);
@@ -88,7 +88,7 @@ public class MassSpecMain extends JPanel {
 	  help = new JButton("Help");
 
 	  //add hovertext
-	  help.setToolTipText("Opens Help wiki for Mass MassSpec.Spectrometer");
+	  help.setToolTipText("Opens Help wiki for Mass Spectrometer");
 
 	  //set functionality
 	  help.addActionListener(new ActionListener() {
@@ -403,7 +403,7 @@ public class MassSpecMain extends JPanel {
      * @param args command line arguments unused
      */
     public static void main(String[] args){
-        JFrame frame = new JFrame("Mass MassSpec.Spectrometer");
+        JFrame frame = new JFrame("Mass Spectrometer");
         frame.add(new MassSpecMain());
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
