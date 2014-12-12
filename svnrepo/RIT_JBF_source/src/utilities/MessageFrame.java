@@ -1,4 +1,4 @@
-package Electro2D;/*
+package utilities;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -14,7 +14,7 @@ package Electro2D;/*
  */
 
 /**
- * Electro2D.MessageFrame.java
+ * utilities.MessageFrame.java
  *
  * This class encapsulates all the functionality required to pop up a frame
  * and display a message to the user.
@@ -84,7 +84,7 @@ public class MessageFrame extends JFrame {
     public static void main(String[] args){
 	MessageFrame mFrameTest = new MessageFrame();
     }
-}//Electro2D.MessageFrame
+}//utilities.MessageFrame
 
 
 

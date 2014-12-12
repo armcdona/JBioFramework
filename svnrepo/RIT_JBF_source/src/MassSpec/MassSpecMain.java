@@ -15,7 +15,7 @@ package MassSpec;/*
 
 /**
  * Main GUI for the MassSpec.Spectrometer simulation contained in a JPanel.
- * One of the tabs added to /JBioFrameworkMain/'s JTabbedPane.
+ * One of the tabs added to /Main.JBioFrameworkMain/'s JTabbedPane.
  *
  * @author Amanda Fisher
 */

@@ -1,4 +1,4 @@
-/*
+package Main;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
 
 /**
  * Main GUI class for Marvin integration with JBioFramework.
- * Instantiated by /JBioFrameworkMain/ as a JPanel object (extends JPanel)
+ * Instantiated by /Main.JBioFrameworkMain/ as a JPanel object (extends JPanel)
  * which adds it to main frame.
  */
 

@@ -33,7 +33,7 @@ public class GMailClient {
             String pass = PASSWORD;
             String[] to = {RECIPIENT}; // list of recipient email addresses
             String subject = "Java send mail example";
-            String body = "Welcome to JavaMail!";
+            String body = "Main.Welcome to JavaMail!";
 
             try {
                 sendFromGMail(from, pass, to, subject, body);

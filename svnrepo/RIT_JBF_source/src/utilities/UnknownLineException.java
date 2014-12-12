@@ -1,5 +1,5 @@
-/*
- * UnknownLineException.java
+package utilities;/*
+ * utilities.UnknownLineException.java
  *
  * Version:
  *     $Id$

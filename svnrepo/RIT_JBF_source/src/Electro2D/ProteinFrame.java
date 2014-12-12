@@ -29,6 +29,8 @@ package Electro2D;/*
  */
 
 import Electro2D.*;
+import Main.JBioFrameworkMain;
+
 import utilities.FastaParser;
 import utilities.GenomeFileParser;
 import MassSpec.MassSpecMain;

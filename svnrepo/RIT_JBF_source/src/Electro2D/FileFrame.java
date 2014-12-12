@@ -9,7 +9,6 @@ package Electro2D;
  * @author Jill Zapoticznyj
  * @author Adam Bazinet
  */
-import Electro2D.Electro2D;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -26,7 +25,7 @@ import java.awt.event.WindowListener;
 import java.io.*;
 
 import utilities.GenomeFileParser;
-import utilities.FastaParser;
+import utilities.MessageFrame;
 
 public class FileFrame extends JFrame implements ActionListener {
 

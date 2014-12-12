@@ -1,4 +1,4 @@
-/*
+package Main;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@ import MassSpec.MassSpecMain;
 
 /**
  * The main frame for the JBioFramework program.
- *  -Adds Welcome, Electrophoresis, Electro2D.Electro2D, MassSpec and MarvinSketch
+ *  -Adds Main.Welcome, Electrophoresis, Electro2D.Electro2D, MassSpec and MarvinSketch
  *   applications to the JFrame it extends  with a JTabbedPane.
  */
 public class JBioFrameworkMain extends JFrame {
@@ -39,7 +39,6 @@ public class JBioFrameworkMain extends JFrame {
     public static final long serialVersionUID = 1L;
     private static JTabbedPane tabbedPane;
 
-    private Welcome welcome;
     private Electrophoresis oneDE;
     private Electro2D electro2D;
     private MassSpecMain spectrometer;
@@ -55,7 +54,7 @@ public class JBioFrameworkMain extends JFrame {
     }
 
     /**
-     * Constructor for JBioFrameworkMain Frame object.
+     * Constructor for Main.JBioFrameworkMain Frame object.
      * -sets frame to visible, sets some general behaviors, adds
      *  panels from Electro1D, Electro2d, etc. and adjusts size.
      */
@@ -68,7 +67,7 @@ public class JBioFrameworkMain extends JFrame {
         tabbedPane = new JTabbedPane();
 
 	//add all of the relevant panels for each application's GUI to tabbedPane
-        tabbedPane.addTab("Welcome", new Welcome());
+        tabbedPane.addTab("Main.Welcome", new Welcome());
         tabbedPane.addTab("Electro1D", new Electrophoresis());
         tabbedPane.addTab("Electro2D", new Electro2D());
         tabbedPane.addTab("Mass MassSpec.Spectrometer", new MassSpecMain());

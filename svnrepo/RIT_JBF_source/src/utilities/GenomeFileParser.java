@@ -243,7 +243,7 @@ public class GenomeFileParser {
 		    fileData.addElement(temp1);
 		}
 	    }catch(Exception e) {
-		Electro2D.MessageFrame error = new Electro2D.MessageFrame();
+		MessageFrame error = new MessageFrame();
 		error.setMessage("Error reading from file.  Be sure you " +
 				 "typed the name correctly.");
 		error.show();
@@ -673,7 +673,7 @@ public class GenomeFileParser {
 		    fileData.addElement(temp1);
 		}
 	    }catch(Exception e) {
-		Electro2D.MessageFrame error = new Electro2D.MessageFrame();
+		MessageFrame error = new MessageFrame();
 		error.setMessage("Error reading from file.  Be sure you " +
 				 "typed the name correctly.");
 		error.show();
@@ -884,7 +884,7 @@ public class GenomeFileParser {
 		    fileData.addElement(temp1);
 		}
 	    }catch(Exception e) {
-		Electro2D.MessageFrame error = new Electro2D.MessageFrame();
+		MessageFrame error = new MessageFrame();
 		error.setMessage("Error reading from file.  Be sure you " +
 				 "typed the name correctly.");
 		error.show();
