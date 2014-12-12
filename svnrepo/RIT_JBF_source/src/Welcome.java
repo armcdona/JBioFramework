@@ -61,12 +61,12 @@ public class Welcome extends JPanel{
         super(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-	c.gridy = 0;
-	super.add( mkHeadPanel(), c );
-    	c.gridy = 1;
-	super.add( mkBodyPanel(), c );
-    	c.gridy = 2;
-	super.add( mkTailPanel(), c );
+	    c.gridy = 0;
+	        super.add( mkHeadPanel(), c );
+        c.gridy = 1;
+	        super.add( mkBodyPanel(), c );
+        c.gridy = 2;
+	        super.add( mkTailPanel(), c );
     }
 
     /**
@@ -260,81 +260,20 @@ public class Welcome extends JPanel{
                   
 		  //'email' button opens a new frame (pop-up) with an editable TextArea containing a
 		  //a copy/paste-able email address.
-		  JButton email = new JButton("Send an Email");
+		  JButton emailB = new JButton("Send an Email");
 
-                  email.setToolTipText("Send email to us from within the program");
-                  email.addActionListener(new ActionListener() {
+                  emailB.setToolTipText("Send email to us from within the program");
+                  emailB.addActionListener(new ActionListener() {
                       public void actionPerformed(ActionEvent e) {
 
-                          //create frame
-                          JFrame emailFrame = new JFrame("Send Email");
-                          JPanel emailPanel = new JPanel(new GridBagLayout());
-                          GridBagConstraints c = new GridBagConstraints();
-
-                          //set label, textArea, and textField dimensions
-                          Dimension dimTF = new Dimension(100,15);
-                          Dimension dimTA = new Dimension(200,300);
-
-                          //subject
-                          JLabel subLabel = new JLabel("Subject: ");
-                          JTextField subField = new JTextField();
-                          subField.setSize(dimTF);
-                          c.gridx = 0;
-                          c.gridy = 0;
-                          emailPanel.add(subLabel,c);
-                          c.gridx++;
-                          emailPanel.add(subField,c);
-
-                          //replyTo
-                          JLabel     fromLabel = new JLabel("From: ");
-                          JTextField fromTF    = new JTextField();
-                          fromTF.setSize(dimTF);
-                          c.gridx = 0;
-                          c.gridy++;
-                          emailPanel.add(fromLabel,c);
-                          c.gridx++;
-                          emailPanel.add(fromTF,c);
-
-                          //message
-                          JLabel    messageLabel = new JLabel("Message Body");
-                          JTextArea messageArea  = new JTextArea("");
-                          messageArea.setTabSize(4);
-                          messageArea.setSize(dimTA);
-
-                          c.gridx = 0;
-                          c.gridy++;
-                          emailPanel.add(messageLabel,c);
-                          c.gridx++;
-                          emailPanel.add(messageArea,c);
-
-                          emailFrame.add(emailPanel);
-                          emailFrame.pack();
+                          //create instance of /EmailForm/ from |utilities|
+                          JFrame emailFrame = new EmailForm();
                           emailFrame.setVisible(true);
 
                       }
                   });
 
-                  /*
-                  email.setToolTipText("Copy email address to clipboard");
-                  email.addActionListener(new ActionListener() {
-                      public void actionPerformed(ActionEvent e) {
-                          String emailAddress = "paul.craig@rit.edu";
-                          JFrame emailFrame = new JFrame("Email Address");
-                          JPanel panel = new JPanel();
-                          JLabel label = new JLabel("Please Copy/Paste the following: ");
-  
-                          JTextArea email = new JTextArea(emailAddress);
-  
-                          panel.add(label);
-                          panel.add(email);
-                          emailFrame.add(panel);
-                          emailFrame.setSize(350,100);
-                          emailFrame.setVisible(true);
-                      }
-  
-                  });
-                  */
-                  p.add(email);
+                  p.add(emailB);
   		
  		 //'review' uses /BrowserLauncher/ to open the page for a new, blank review on sourceforge
                   JButton review = new JButton("Review JBF");
@@ -349,11 +288,12 @@ public class Welcome extends JPanel{
                       }});
                   p.add(review);
   
- 		 //'bug' is a currently inactive button I (AidanSawyer) was thinking of making 
- 		 // for reporting problems with the software. ideally it would store the current 
- 		 // state of the program and contain a /JTextField/ (import) where a user could
+ 		 //'bug' is a currently inactive button I (aks5238) was thinking of making
+ 		 // for reporting problems with the software. ideally it would store the most recent
+ 		 // error logs in a .txt and contain a /JTextField/ (import) where a user could
  		 // briefly describe the issue. It would then bundle all of that into one format
- 		 // and send it to a server or website and notify us that there was a message waiting
+ 		 // and send it to jbioframework@gmail.com with a '-BUG-' flag in the subject  and
+ 		 // notify us that there was a message waiting
  		 
  		 //@todo implement
                   JButton bug = new JButton("Bug Report");
@@ -429,10 +369,10 @@ public class Welcome extends JPanel{
      */ 
     public static void main(String[] args){
         JFrame welcomeTest = new JFrame("Welcome!");
-	welcomeTest.add( new Welcome() );
-	welcomeTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	welcomeTest.pack();
-	welcomeTest.setVisible(true);
+	    welcomeTest.add( new Welcome() );
+	    welcomeTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    welcomeTest.pack();
+	    welcomeTest.setVisible(true);
 
     }
 }
