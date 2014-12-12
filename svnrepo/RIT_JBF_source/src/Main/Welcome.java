@@ -1,5 +1,5 @@
 package Main; /**
- * Main.Welcome Tab - First tab of JBFSuite.
+ * Welcome Tab - First tab of JBFSuite.
  * Contains description and contacts, credits, and links to 
  * sourceforge main page, help files, review page, etc. as well
  * as contact information for PaulCraig.
@@ -31,8 +31,8 @@ import utilities.BrowserLauncher;
 import utilities.*;
 
 /**
- * Main.Welcome Tab - First tab of JBFSuite.
- * -Contains all code for the Main.Welcome tab. (no code in other classes)
+ * Welcome Tab - First tab of JBFSuite.
+ * -Contains all code for the Welcome tab. (no code in other classes)
  * -Organized into 3 subpanels {Head, Body, Tail}. 
  * -the code is organized in such a way that each subpanel is created independently
  *  in the methods below, and is added to the main 'super' panel it extends
@@ -46,7 +46,7 @@ public class Welcome extends JPanel{
     //(all declared and initialized inline)
 
     /**
-     * Constructor for Main.Welcome class fills main panel with desired subpanels
+     * Constructor for Welcome class fills main panel with desired subpanels
      * which have been constructed below.
      * 
      * main panel uses GridLayout with 3 rows and 1 column.
@@ -73,7 +73,7 @@ public class Welcome extends JPanel{
 	GridBagConstraints con = new GridBagConstraints();
 	
 	//Formatted Header text (JLabel)
-         JLabel head = new JLabel("Main.Welcome to JBioframework!");
+         JLabel head = new JLabel("Welcome to JBioframework!");
          head.setFont(new Font("SansSerif", Font.BOLD, 26));
          con.gridy = 0;
 	 headP.add(head,con);
