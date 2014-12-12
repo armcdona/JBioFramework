@@ -327,6 +327,7 @@ public class Electro2D extends JPanel implements ActionListener {
         constraint.ipadx = 650;
         rightPanel.add(gelCanvas, constraint);
 
+        //header panel: label
         JPanel header = new JPanel(new GridBagLayout());
         c.gridy = 0;
         header0 = new JLabel("2D Electrophoresis");
@@ -334,17 +335,19 @@ public class Electro2D extends JPanel implements ActionListener {
         header.add(header0,c);
         leftPanel.add(header);
 
+        //first panel: help and about buttons
         JPanel firstPanel = new JPanel();
         c.gridy = 1;
         firstPanel.add(helpButton);
         firstPanel.add(aboutButton);
         leftPanel.add(firstPanel);
 
-
+        //second panel: protein buttons
         JPanel secondPanel = new JPanel();
         secondPanel.add(addProteinButton);
         leftPanel.add(secondPanel);
 
+        //third panel: animation information panel
         JPanel thirdPanel = new JPanel();
         thirdPanel.setLayout(new GridLayout(1, 1, 0, 0));
         JPanel innerPanel = new JPanel();
@@ -354,7 +357,7 @@ public class Electro2D extends JPanel implements ActionListener {
         thirdPanel.add(innerPanel);
         leftPanel.add(thirdPanel);
 
-
+        //fourth panel: animation control buttons
         JPanel fourthPanel = new JPanel();
         fourthPanel.setLayout(new GridLayout(1, 2, 2, 2));
         fourthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Animation Buttons", TitledBorder.CENTER, TitledBorder.TOP));
@@ -363,45 +366,53 @@ public class Electro2D extends JPanel implements ActionListener {
         fourthPanel.add(restartButton);
         leftPanel.add(fourthPanel);
 
+        //fifth panel: ph selection
         JPanel fifthPanel = new JPanel();
         fifthPanel.setLayout(new GridLayout(1, 1, 0, 0));
         fifthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Choose pH", TitledBorder.CENTER, TitledBorder.TOP));
         fifthPanel.add(rangeChooser);
         leftPanel.add(fifthPanel);
 
+        //sixth panel: acrylamide selection
         JPanel sixthPanel = new JPanel();
         sixthPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Choose Acrylamide %", TitledBorder.CENTER, TitledBorder.TOP));
         sixthPanel.setLayout(new GridLayout(1, 1, 0, 0));
         sixthPanel.add(percentAcrylamide);
         leftPanel.add(sixthPanel);
 
+        //seventh panel: additional options label (AO)
         JPanel seventhPanel = new JPanel();
         JLabel additionalOptions = new JLabel("Additional Options");
         additionalOptions.setFont(new Font("SansSerif", Font.BOLD, 16));
         seventhPanel.add(additionalOptions);
         leftPanel.add(seventhPanel);
 
+        //eigth panel: AO 'display proteins' button
         JPanel eighthPanel = new JPanel();
         eighthPanel.add(displayProteinsButton);
         leftPanel.add(eighthPanel);
 
-        // @TODO: This code is dead. Will we be actually using it anytime?
+        //ninth panel: AO 'compare proteins' button [inactive]
         JPanel ninthPanel = new JPanel();
         ninthPanel.add(compareButton);
         //leftPanel.add(ninthPanel); Removed compare protein functionality until it is useful.
 
+        //tenth panel: AO 'search' button
         JPanel tenthPanel = new JPanel();
         tenthPanel.add(searchButton);
         leftPanel.add(tenthPanel);
 
+        //eleventh panel: AO 'generate html page' button
         JPanel eleventhPanel = new JPanel();
         eleventhPanel.add(webButton);
         leftPanel.add(eleventhPanel);
 
+        //twelf panel: AO 'record to csv' button
         JPanel twelfPanel = new JPanel();
         twelfPanel.add(csvButton);
         leftPanel.add(twelfPanel);
 
+        //thirteenth panel: AO 'color key'
         JPanel thirteenthPanel = new JPanel();
         thirteenthPanel.add(colorKey);
         leftPanel.add(thirteenthPanel);
