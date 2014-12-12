@@ -7,9 +7,6 @@ package MassSpec;/*
  * version 3
  */
 
-import Exceptions.AminoException;
-import MassSpec.Ion;
-
 /**
  *
  * @author Amanda Fisher

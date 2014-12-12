@@ -335,6 +335,7 @@ public class Welcome extends JPanel{
                           "<u>NCBI</u> [National Center for Biotechnology Information], and " +
                           "<u>Uniprot</u> [The Uniprot Consortium] " +
                           "search engines. </body>";
+                  String nbCE = "NetbeansIDE <u>ContactEditor was used for the creation of some GUIs.";
                   String rt = "This software was developed at Rochester Institute of Technology (<u>RIT</u>). ";
                   String html1 = "<html><body style='width: ";
                   String html2 = "px'>";

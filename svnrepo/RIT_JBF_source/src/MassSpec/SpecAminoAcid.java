@@ -10,8 +10,6 @@ package MassSpec;/*
  *  ** pKa's obtained from http://www.cem.msu.edu/~cem252/sp97/ch24/ch24aa.html on 5/3/2011
  */
 
-import Exceptions.AminoException;
-
 /**
  *
  * @author Amanda Fisher
@@ -30,7 +28,7 @@ public class SpecAminoAcid {
      * Constructor for MassSpec.SpecAminoAcid when given a char. Passes to translate method.
      *
      * @param code Symbol to be turned into an MassSpec.SpecAminoAcid.
-     * @throws Exceptions.AminoException When given a symbol that doesn't represent an
+     * @throws AminoException When given a symbol that doesn't represent an
      *                        amino acid.
      */
 
