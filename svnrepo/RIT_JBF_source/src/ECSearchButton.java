@@ -1,4 +1,6 @@
 //import java.awt.*;
+import Electro2D.Electro2D;
+
 import java.awt.Canvas;
 import java.awt.Font;
 import java.awt.Image;
@@ -36,11 +38,11 @@ public class ECSearchButton extends Canvas implements MouseListener {
     /**
      * Constructor, performs some perfunctory tasks.
      *
-     * @param e - a reference to Electro2D
+     * @param e - a reference to Electro2D.Electro2D
      * @param id - the string being searched for
      */
     public ECSearchButton( Electro2D e, String id ) {
-	electro2D = e; //give the button a reference to Electro2D
+	electro2D = e; //give the button a reference to Electro2D.Electro2D
 	pro_id = id; //set the search value to the string passed to the method
 	//have the button register itself as a MouseListener in order to
 	//respond to mouse events from the user

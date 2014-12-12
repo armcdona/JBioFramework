@@ -13,6 +13,8 @@
  * See the GNU General Public License for more details.
  */
 
+import Electro2D.Electro2D;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -1,0 +1,71 @@
+package MassSpec; /**
+ * MassSpec.Trypsin is a /Electro2D.Protease/ object which "cuts" a sequence at R or K.
+ *
+ * |proteins|
+ * @author Amanda Fisher
+ */
+import Electro2D.Protease;
+import Electro2D.ProteaseException;
+
+import java.util.ArrayList;
+
+/**
+ * Electro2D.Protease which cuts a protein sequence at Arginine(R) or Lysine(K),
+ * except when either is followd by a Proline(P).
+ *
+ */
+public class Trypsin extends Protease {
+
+    ArrayList<Character> buildingIons = new ArrayList<Character>();
+    ArrayList<String> cutSequence = new ArrayList<String>();
+
+    /**
+     * The cut method takes an input sequence and cuts it in to different Strings
+     * at points dependent on the type of Electro2D.Protease using the method. It uses
+     * the makeIon method to turn the ArrayList of collected characters in to
+     * a String.
+     *
+     * @param sequence String sequence representing an amino acid chain.
+     * @return ArrayList of Strings, the cut sequence.
+     * @throws Electro2D.ProteaseException When given inappropriate input.
+     */
+    public ArrayList<String> cut(String sequence) throws ProteaseException {
+        if (sequence.contains(" ")) {
+            throw new ProteaseException("Sequence to be cut must not contain spaces.");
+        } else if (sequence.matches(".*\\d.*")) {
+            throw new ProteaseException("Sequence to be cut must not contain numbers.");
+        } else if (sequence.matches(".*[a-z].*")) {
+            throw new ProteaseException("Sequence to be cut must contain all upper case letters.");
+        }
+
+        char[] charSequence = sequence.toCharArray();
+        for(int i = 0; i < charSequence.length; i++) {
+            if(charSequence[i] == 'R' || charSequence[i] == 'K') {
+                buildingIons.add(charSequence[i]);
+                if(i < charSequence.length - 1 && charSequence[i+1] != 'P') {
+                    makeIon();
+                }
+            } else {
+                buildingIons.add(charSequence[i]);
+            }
+        }
+        makeIon();
+        return cutSequence;
+    }
+
+    /**
+     * makeIon takes the characters collected by cut and turns them in to a String
+     * representing an MassSpec.Ion's sequence.
+     */
+    private void makeIon() {
+        Character[] characterIon = new Character[buildingIons.size()];
+        characterIon = buildingIons.toArray(characterIon);
+        char[] charIon = new char[characterIon.length];
+        for(int j = 0; j < characterIon.length; j++) {
+            charIon[j] = characterIon[j].charValue();
+        }
+        String ion = new String(charIon);
+        cutSequence.add(ion);
+        buildingIons.clear();
+    }
+}

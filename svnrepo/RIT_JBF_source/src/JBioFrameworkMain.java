@@ -25,11 +25,13 @@
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import electro1D.Electrophoresis;
+import Electro1D.Electrophoresis;
+import Electro2D.Electro2D;
+import MassSpec.MassSpecMain;
 
 /**
  * The main frame for the JBioFramework program.
- *  -Adds Welcome, Electrophoresis, Electro2D, MassSpec and MarvinSketch
+ *  -Adds Welcome, Electrophoresis, Electro2D.Electro2D, MassSpec and MarvinSketch
  *   applications to the JFrame it extends  with a JTabbedPane.
  */
 public class JBioFrameworkMain extends JFrame {
@@ -69,7 +71,7 @@ public class JBioFrameworkMain extends JFrame {
         tabbedPane.addTab("Welcome", new Welcome());
         tabbedPane.addTab("Electro1D", new Electrophoresis());
         tabbedPane.addTab("Electro2D", new Electro2D());
-        tabbedPane.addTab("Mass Spectrometer", new MassSpecMain());
+        tabbedPane.addTab("Mass MassSpec.Spectrometer", new MassSpecMain());
         tabbedPane.addTab("Marvin Sketch", new MarvinTab().createMainPanel());
         /*tabbedPane.addTab(["name (to be displayed)"], [object]);*/
 

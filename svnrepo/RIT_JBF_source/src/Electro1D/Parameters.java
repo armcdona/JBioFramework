@@ -138,7 +138,7 @@ public class Parameters extends JPanel implements Constants {
 		stdProteinArray[std6Ref] = new Protein("Standard #6", "Lysozyme",
 				"Lyso", 14296, Color.white);
 		stdProteinArray[std7Ref] = new Protein("Standard #7",
-				"Trypsin Inhibitor", "BPTI", 6500, Color.red);
+				"MassSpec.Trypsin Inhibitor", "BPTI", 6500, Color.red);
 		// create borders subtitles
 		Border border = BorderFactory.createTitledBorder("ELECTROPHORESIS PARAMETERS");
 		Border border1 = BorderFactory.createTitledBorder("Animation Speed");
