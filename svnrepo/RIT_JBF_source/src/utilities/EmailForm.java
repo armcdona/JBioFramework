@@ -49,6 +49,7 @@ public class EmailForm extends javax.swing.JFrame {
         });
 
         //password
+        /* Decision to send emails from and to JBioFramework@gmail.com to avoid authentication
         passL = new javax.swing.JLabel("Password:");
         passL.setToolTipText("Password for authentication through Gmail servers");
 
@@ -58,6 +59,7 @@ public class EmailForm extends javax.swing.JFrame {
                 passTFActionPerformed(e);
             }
         });
+        */
 
         //message body
         bodyL = new javax.swing.JLabel("Message body:");
@@ -83,11 +85,13 @@ public class EmailForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        /*
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(passL)
                                 .addGap(1, 1, 1)
                                 .addComponent(passTF)
                                 .addContainerGap())
+                        */
                         .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -118,10 +122,12 @@ public class EmailForm extends javax.swing.JFrame {
                                         .addComponent(fromL)
                                         .addComponent(fromTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(8, 8, 8)
+                                /*
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(passL)
                                         .addComponent(passTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                */
                                 .addComponent(bodyL)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
@@ -140,11 +146,11 @@ public class EmailForm extends javax.swing.JFrame {
 
     /* sendB on click: prompt for authorization, then call GMailClient with necessary fields*/
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        String from = fromTF.getText();
-        String pass = passTF.getText();
+        String from = "JBioFramework@gmail.com";
+        String pass = "proteomics";
         String[] to = { "JBioFramework@gmail.com" };
         String subject = subjectTF.getText();
-        String body = bodyTA.getText();
+        String body = "[from: " + fromTF.getText() + "]\n\n" + bodyTA.getText();
 
         try {
             GMailClient.sendFromGMail(from, pass, to, subject, body);
@@ -158,7 +164,7 @@ public class EmailForm extends javax.swing.JFrame {
     private void fromTFActionPerformed(java.awt.event.ActionEvent evt) { }
 
     /* passTF has no necessary action to perform. it just holds relevant text */
-    private void passTFActionPerformed(java.awt.event.ActionEvent evt) { }
+    //private void passTFActionPerformed(java.awt.event.ActionEvent evt) { }
 
     /**
      * @param args the command line arguments
