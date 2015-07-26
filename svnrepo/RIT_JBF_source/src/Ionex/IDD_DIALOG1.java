@@ -33,6 +33,7 @@ package Ionex;
 //------------------------------------------------------------------------------
 
 
+import javax.swing.*;
 import java.awt.*;
 
 public class IDD_DIALOG1
@@ -44,10 +45,10 @@ public class IDD_DIALOG1
 	// Control definitions
 	//--------------------------------------------------------------------------
 	Label         IDC_STATIC1;
-	TextField     IDC_SOLVENTA;
+	JTextField IDC_SOLVENTA;
 	Label         IDC_STATIC2;
 	Label         IDC_STATIC3;
-	TextField     IDC_SOLVENTB;
+	JTextField     IDC_SOLVENTB;
 	Label         IDC_STATIC4;
 	Label         IDC_STATIC5;
 	CheckboxGroup group1;
@@ -61,7 +62,7 @@ public class IDD_DIALOG1
 	List          IDC_PROTEINS;
 	Button        IDC_REMOVE;
 	Button        IDC_ADD;
-	TextField     IDC_AMOUNT;
+	JTextField     IDC_AMOUNT;
 	Label         IDC_STATIC7;
 	Button        IDC_START;
 	Button        IDC_PAUSE;

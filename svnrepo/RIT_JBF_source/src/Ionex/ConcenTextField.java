@@ -1,8 +1,9 @@
 package Ionex;
 
-import java.awt.*;
+import javax.swing.JTextField;
+import java.awt.Event;
 
-class ConcenTextField extends TextField
+class ConcenTextField extends JTextField
 {
 	String lastValue;
 

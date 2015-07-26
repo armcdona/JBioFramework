@@ -91,7 +91,7 @@ ProteinFile[] m_arrAvailProteins;
         //----------------------------------------------------------------------
 		Image	imageBkgd;
 		setLayout(new BorderLayout());
-		
+
 		//get the image, wait until it's loaded
 		imageBkgd = getImage( getCodeBase(), "macro.gif");
 		MediaTracker tracker = new MediaTracker( this);
@@ -139,9 +139,10 @@ ProteinFile[] m_arrAvailProteins;
 	//--------------------------------------------------------------------------
 	public void paint(Graphics g)
 	{
+		this.m_imageCanvas.paint(g);
 	}
 
-	//		The start() method is called when the page containing the applet
+	//	The start() method is called when the page containing the applet
 	// first appears on the screen. The AppletWizard's initial implementation
 	// of this method starts execution of the applet's thread.
 	//--------------------------------------------------------------------------

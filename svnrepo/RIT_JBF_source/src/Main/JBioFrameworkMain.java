@@ -1,4 +1,6 @@
-package Main;/*
+package Main;
+
+/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -27,7 +29,9 @@ import javax.swing.JTabbedPane;
 
 import Electro1D.Electrophoresis;
 import Electro2D.Electro2D;
+import Ionex.Ionex;
 import MassSpec.MassSpecMain;
+import sun.awt.im.InputMethodJFrame;
 
 /**
  * The main frame for the JBioFramework program.
@@ -50,7 +54,7 @@ public class JBioFrameworkMain extends JFrame {
      * Creates a new instantiation of the JBioFramework class (calls constructor)
      */
     public static void main(String[] args) {
-        JBioFrameworkMain jbfMain = new JBioFrameworkMain();
+        new JBioFrameworkMain();
     }
 
     /**
@@ -68,6 +72,7 @@ public class JBioFrameworkMain extends JFrame {
 
 	//add all of the relevant panels for each application's GUI to tabbedPane
         tabbedPane.addTab("Welcome", new Welcome());
+        tabbedPane.addTab("IonExchange", new Ionex());
         tabbedPane.addTab("Electro1D", new Electrophoresis());
         tabbedPane.addTab("Electro2D", new Electro2D());
         tabbedPane.addTab("Spectrometer", new MassSpecMain());

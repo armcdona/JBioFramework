@@ -1,8 +1,9 @@
 package Ionex;
 
-import java.awt.*;
+import javax.swing.JTextField;
+import java.awt.Event;
 
-class AmountTextField extends TextField
+class AmountTextField extends JTextField
 {
     String lastValue;
 
