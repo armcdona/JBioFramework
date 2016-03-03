@@ -8,10 +8,21 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 
+/**
+ * The type Restart button swing version.
+ */
 public class RestartButtonSwingVersion extends JButton implements ActionListener {
 
+    /**
+     * The Electro 2 d.
+     */
     Electro2D electro2D;
 
+    /**
+     * Instantiates a new Restart button swing version.
+     *
+     * @param e the e
+     */
     public RestartButtonSwingVersion(Electro2D e) {
         super("Restart");
         addActionListener(this);

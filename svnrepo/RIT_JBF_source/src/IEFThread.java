@@ -13,35 +13,33 @@ public class IEFThread extends Thread{
                                 //selected the IEF animation
     private GelCanvasSwingVersion gel;      //a reference to GelCanvas
     private Electro2D electro2D;
-    
-    /**
-     * Constructor
-     *
-     * @param g a reference to the GelCanvas
-     */
 
-    public IEFThread( GelCanvasSwingVersion g, Electro2D e ){
+	/**
+	 * Constructor
+	 *
+	 * @param g a reference to the GelCanvas
+	 * @param e the e
+	 */
+	public IEFThread( GelCanvasSwingVersion g, Electro2D e ){
 	//assigns gel the value that was passed as a parameter to the method
 	gel = g;
 	electro2D = e;
     }
 
-    /**
-     * This method is called when the play button is pressed for
-     * the IEF animation.  Allows the thread to draw the IEFProteins
-     * to the GelCanvas' image
-     */
-    
-    public void setIEF(){
+	/**
+	 * This method is called when the play button is pressed for
+	 * the IEF animation.  Allows the thread to draw the IEFProteins
+	 * to the GelCanvas' image
+	 */
+	public void setIEF(){
 	go = true;
     }
 
-    /**
-     * This method is called after the IEFProteins were drawn to the
-     * image in GelCanvas.
-     */
-
-    public void resetIEF(){
+	/**
+	 * This method is called after the IEFProteins were drawn to the
+	 * image in GelCanvas.
+	 */
+	public void resetIEF(){
 	go = false;
     }
 

@@ -11,9 +11,18 @@
  */
 import java.util.ArrayList;
 
+/**
+ * The type Trypsin.
+ */
 public class Trypsin extends Protease {
 
+    /**
+     * The Building ions.
+     */
     ArrayList<Character> buildingIons = new ArrayList<Character>();
+    /**
+     * The Cut sequence.
+     */
     ArrayList<String> cutSequence = new ArrayList<String>();
 
     /**

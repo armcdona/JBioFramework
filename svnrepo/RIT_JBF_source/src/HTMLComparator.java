@@ -5,11 +5,19 @@
 
 import java.util.*;
 
+/**
+ * The type Html comparator.
+ */
 public class HTMLComparator implements Comparator{
     
     private int compBy;
-    
-    public HTMLComparator( int c ){
+
+	/**
+	 * Instantiates a new Html comparator.
+	 *
+	 * @param c the c
+	 */
+	public HTMLComparator( int c ){
 	compBy = c;
     }
 
@@ -72,7 +80,15 @@ public class HTMLComparator implements Comparator{
 	return -1000;
     }
 
-    public int compareDouble( Object a, Object b, int index ){
+	/**
+	 * Compare double int.
+	 *
+	 * @param a     the a
+	 * @param b     the b
+	 * @param index the index
+	 * @return the int
+	 */
+	public int compareDouble( Object a, Object b, int index ){
 	Vector objA = (Vector)a;
 	Vector objB = (Vector)b;
 	int retVal = -2;

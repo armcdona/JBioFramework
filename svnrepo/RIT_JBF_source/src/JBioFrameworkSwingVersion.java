@@ -11,17 +11,31 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type J bio framework swing version.
+ */
 public class JBioFrameworkSwingVersion extends JFrame {
 
+    /**
+     * The constant serialVersionUID.
+     */
     public static final long serialVersionUID = 1L;
     private JTabbedPane tabbedPane;
     private Electro2D electro2D;
     private MainPanelGUI spectrometer;
-    
+
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         JBioFrameworkSwingVersion jbfSwing = new JBioFrameworkSwingVersion();
     }
 
+    /**
+     * Instantiates a new J bio framework swing version.
+     */
     public JBioFrameworkSwingVersion() {
         super();
 

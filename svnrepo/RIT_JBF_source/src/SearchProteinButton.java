@@ -1,24 +1,24 @@
 import javax.swing.*;
 import java.awt.event.*;
+
 /**
  * Removes highlighted proteins from the protein list.
  *
- * @author Jill Zapoticznyj
- *
- * Much of this code is based off of the RemoveProteinButton class
+ * @author Jill Zapoticznyj Much of this code is based off of the RemoveProteinButton class
  * @author Adam Bazinet
- *
  */
 //public class SearchProteinButton extends Canvas implements MouseListener {
 public class SearchProteinButton extends JButton implements ActionListener {
 
     private Electro2D electro2D;
     private String pro_id = "";  //the ID of the protein
+
     /**
      * Constructor, performs some perfunctory tasks.
      *
-     * @param e - a reference to Electro2D
-     * @param id - the string being searched for
+     * @param e    - a reference to Electro2D
+     * @param id   - the string being searched for
+     * @param text the text
      */
     public SearchProteinButton( Electro2D e, String id, String text) {
         super(text);

@@ -1,11 +1,20 @@
 import java.awt.*;
 
+/**
+ * The type Blink thread.
+ */
 public class BlinkThread extends Thread {
 
     private ProteinDotSwingVersion theDot;
     private GelCanvasSwingVersion theGel;
-    
-    public BlinkThread( ProteinDotSwingVersion p, GelCanvasSwingVersion g ){
+
+	/**
+	 * Instantiates a new Blink thread.
+	 *
+	 * @param p the p
+	 * @param g the g
+	 */
+	public BlinkThread( ProteinDotSwingVersion p, GelCanvasSwingVersion g ){
 	theGel = g;
 	theDot = p;
     }

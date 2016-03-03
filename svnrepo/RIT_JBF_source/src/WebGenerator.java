@@ -12,6 +12,9 @@ import java.io.*;
 import java.util.*;
 import java.net.MalformedURLException;
 
+/**
+ * The type Web generator.
+ */
 public class WebGenerator{
     
     private Electro2D electro2D;
@@ -32,7 +35,12 @@ public class WebGenerator{
     private final String closeTR = "\u003C/TR\u003E";
     private final String directoryString = "HTML Files/";
 
-    public WebGenerator( Electro2D e ){
+	/**
+	 * Instantiates a new Web generator.
+	 *
+	 * @param e the e
+	 */
+	public WebGenerator( Electro2D e ){
 	
 	electro2D = e;
 	
@@ -42,11 +50,21 @@ public class WebGenerator{
 	minPi = "";
     }
 
-    public static void setSearch( int index ){
+	/**
+	 * Set search.
+	 *
+	 * @param index the index
+	 */
+	public static void setSearch( int index ){
 	searchVal = index;
     }
 
-    public void genFile( String filename ){
+	/**
+	 * Gen file.
+	 *
+	 * @param filename the filename
+	 */
+	public void genFile( String filename ){
 	try{
 		File fl = new File( directoryString );
 		if( !fl.exists() ){

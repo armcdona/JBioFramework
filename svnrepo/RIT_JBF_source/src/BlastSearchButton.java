@@ -9,6 +9,9 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * The type Blast search button.
+ */
 public class BlastSearchButton extends JButton implements ActionListener {
 
     private Electro2D electro2D;
@@ -17,8 +20,9 @@ public class BlastSearchButton extends JButton implements ActionListener {
     /**
      * Constructor, performs some perfunctory tasks.
      *
-     * @param e - a reference to Electro2D
-     * @param id - the string being searched for
+     * @param e    - a reference to Electro2D
+     * @param seq  the seq
+     * @param text the text
      */
     public BlastSearchButton( Electro2D e, String seq, String text) {
         super(text);

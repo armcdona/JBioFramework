@@ -10,9 +10,18 @@
  */
 import java.util.ArrayList;
 
+/**
+ * The type Thermolysin.
+ */
 public class Thermolysin extends Protease {
 
+    /**
+     * The Building ions.
+     */
     ArrayList<Character> buildingIons = new ArrayList<Character>();
+    /**
+     * The Cut sequence.
+     */
     ArrayList<String> cutSequence = new ArrayList<String>();
 
     /**

@@ -10,9 +10,18 @@
  */
 import java.util.ArrayList;
 
+/**
+ * The type Chymotrypsin.
+ */
 public class Chymotrypsin extends Protease {
 
+    /**
+     * The Building ions.
+     */
     ArrayList<Character> buildingIons = new ArrayList<Character>();
+    /**
+     * The Cut sequence.
+     */
     ArrayList<String> cutSequence = new ArrayList<String>();
 
     /**

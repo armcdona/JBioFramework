@@ -6,11 +6,21 @@
  */
 
 /**
+ * The type Protease exception.
  *
  * @author Amanda Fisher
  */
 public class ProteaseException extends Exception {
+    /**
+     * Instantiates a new Protease exception.
+     */
     public ProteaseException() {}
+
+    /**
+     * Instantiates a new Protease exception.
+     *
+     * @param message the message
+     */
     public ProteaseException(String message) {
         super(message);
     }

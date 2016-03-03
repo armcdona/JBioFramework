@@ -10,6 +10,9 @@ import java.awt.*;
 import java.util.Random;  // randomly generates colors for protein
 import java.util.HashMap;
 
+/**
+ * The type E 2 d protein.
+ */
 public class E2DProtein {
 
     // the color which will be presented by the protein
@@ -36,17 +39,16 @@ public class E2DProtein {
     private static Color transductionColor = new Color( 255, 216, 202 );
     private String myFunction;
 
-    /**
-     * constructor for protein
-     *
-     * @param id the protein's type
-     * @param molWt the molecular weight of the protein
-     * @param pI the pI value for the protein
-     * @param urls the URL for information about this protein
-     * @param fcn the function of this protein
-     */
-
-    public E2DProtein( String id, double molWt, double pI, String sequence, 
+	/**
+	 * constructor for protein
+	 *
+	 * @param id       the protein's type
+	 * @param molWt    the molecular weight of the protein
+	 * @param pI       the pI value for the protein
+	 * @param sequence the sequence
+	 * @param fcn      the function of this protein
+	 */
+	public E2DProtein( String id, double molWt, double pI, String sequence,
 		    String fcn ){
 	myID = id;
 	myMolWt = molWt;
@@ -81,48 +83,48 @@ public class E2DProtein {
 	}
     }
 
-    /**
-     * returns protein title
-     *
-     * @return myID
-     */
-    public String getID(){
+	/**
+	 * returns protein title
+	 *
+	 * @return myID string
+	 */
+	public String getID(){
 	return myID;
     }
 
-    /**
-     * returns molecular weight
-     *
-     * @return myMolWt
-     */
-    public double getMW(){
+	/**
+	 * returns molecular weight
+	 *
+	 * @return myMolWt double
+	 */
+	public double getMW(){
 	return myMolWt;
     }
 
-    /**
-     * returns color
-     *
-     * @return myColor
-     */
-    public Color getColor(){
+	/**
+	 * returns color
+	 *
+	 * @return myColor color
+	 */
+	public Color getColor(){
 	return myColor;
     }
 
-    /**
-     * returns pI value
-     *
-     * @return myPI
-     */
-    public double getPI(){
+	/**
+	 * returns pI value
+	 *
+	 * @return myPI double
+	 */
+	public double getPI(){
 	return myPI;
     }
-    
-    /**
-     * returns sequence data
-     *
-     * @return mySequence
-     */
-    public String getSequence(){
+
+	/**
+	 * returns sequence data
+	 *
+	 * @return mySequence string
+	 */
+	public String getSequence(){
 	return mySequence;
     }
 
@@ -135,21 +137,21 @@ public class E2DProtein {
 	return myID;
     }
 
-    /**
-     * returns protein function
-     *
-     * @return myFunction
-     */
-    public String getFunction(){
+	/**
+	 * returns protein function
+	 *
+	 * @return myFunction string
+	 */
+	public String getFunction(){
 	return myFunction;
     }
-    
-    /**
-     * returns colors
-     *
-     * @return HashMap of default colors
-     */
-    public static HashMap getColorGuide(){
+
+	/**
+	 * returns colors
+	 *
+	 * @return HashMap of default colors
+	 */
+	public static HashMap getColorGuide(){
 	
 	HashMap retVal = new HashMap();
 	

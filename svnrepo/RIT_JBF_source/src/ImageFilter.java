@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FilenameFilter;
 
+/**
+ * The type Image filter.
+ */
 /* ImageFilter.java is a 1.4 example used by FileChooserDemo2.java. */
 public class ImageFilter implements FilenameFilter {
 
@@ -22,7 +25,12 @@ public class ImageFilter implements FilenameFilter {
         return false;
     }
 
-    //The description of this filter
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
+//The description of this filter
     public String getDescription() {
         return "Just Images";
     }

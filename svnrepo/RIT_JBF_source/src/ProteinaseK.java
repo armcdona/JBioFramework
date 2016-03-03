@@ -10,9 +10,18 @@
  */
 import java.util.ArrayList;
 
+/**
+ * The type Proteinase k.
+ */
 public class ProteinaseK extends Protease {
 
+    /**
+     * The Building ions.
+     */
     ArrayList<Character> buildingIons = new ArrayList<Character>();
+    /**
+     * The Cut sequence.
+     */
     ArrayList<String> cutSequence = new ArrayList<String>();
 
     /**

@@ -14,6 +14,9 @@ import java.util.*;
 import java.awt.*;
 import java.io.*;
 
+/**
+ * The type Gel canvas swing version.
+ */
 public class GelCanvasSwingVersion extends JPanel implements MouseListener {
 
     private Electro2D electro2D;
@@ -78,8 +81,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
      * This method is used to ensure that GelCanvasSwingVersion will take up
      * enough space to allow the user to easily see its display.
      *
-     * @return the dimension object used by the JFrame to allocate the space for
-     *         the component
+     * @return the dimension object used by the JFrame to allocate the space for         the component
      */
     public Dimension getMinimiumSize() {
          return new Dimension(800, electro2D.getHeight());
@@ -116,6 +118,9 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
        fillBarProteinVector();
     }
 
+    /**
+     * Fill bar protein vector.
+     */
     public void fillBarProteinVector() {
         /**
          * Get all the information barProtein vector will need from electro2D
@@ -148,6 +153,9 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
         sortBarProteins();
     }
 
+    /**
+     * Sort bar proteins.
+     */
     public void sortBarProteins() {
         /**
          * This nested for loop will do a sort of collapsing exercise; every
@@ -179,6 +187,9 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
         makeDotProteins();
     }
 
+    /**
+     * Make dot proteins.
+     */
     public void makeDotProteins() {
 
         /**
@@ -413,9 +424,9 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     /**
      * This method is used to generate GIF files for when the user is not
      * viewing the gel canvas.
-     * 
+     *
      * @param dts     The vector of dots to create an image of.
-     * @param seconds Used in writing the file that stores the image. 
+     * @param seconds Used in writing the file that stores the image.
      */
     public void genGIFFile(Vector dts, int seconds) {
         ProteinDotSwingVersion.setShow();
@@ -437,7 +448,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     /**
      * returns the graphics object used to draw on the canvas
      *
-     * @return graphic
+     * @return graphic graphic
      */
     public Graphics getGraphic() {
 	return graphic;
@@ -644,7 +655,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     /**
      * Returns the red value for the background of the IEF animation.
      *
-     * @return IEFRED
+     * @return IEFRED red
      */
     public static int getRed() {
         return iefRed;
@@ -653,7 +664,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     /**
      * Returns the green value for the background of the IEF animation.
      *
-     * @return IEFGREEN
+     * @return IEFGREEN green
      */
     public static int getGreen() {
         return iefGreen;
@@ -662,7 +673,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     /**
      * Returns the blue value for the background of the IEF animation.
      *
-     * @return IEFBLUE
+     * @return IEFBLUE blue
      */
     public static int getBlue() {
         return iefBlue;
@@ -824,7 +835,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     /**
      * Returns the statis of blink.
      *
-     * @return blink
+     * @return blink blink
      */
     public static boolean getBlink() {
         return blink;
@@ -833,24 +844,24 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     /**
      * Sets blink to false.
      */
-     public static void stopBlink() {
+    public static void stopBlink() {
          blink = false;
      }
 
-     /**
-      * This method draws the location of a protein to the screen using its 
-      * xLoc and yLoc values.
-      */
-     public void redrawLocation() {
+    /**
+     * This method draws the location of a protein to the screen using its
+     * xLoc and yLoc values.
+     */
+    public void redrawLocation() {
 	bufferImageGraphics.setColor(Color.LIGHT_GRAY);
 	bufferImageGraphics.drawLine((int)xLoc+2, (int)yLoc, 0, (int)yLoc);
 	bufferImageGraphics.drawLine((int)xLoc+2, (int)yLoc, (int)xLoc+2, 0);
      }
 
-     /**
-      * Called during reset, sets indicateProteinPosition to false.
-      */
-     public void resetLocation(){
+    /**
+     * Called during reset, sets indicateProteinPosition to false.
+     */
+    public void resetLocation(){
 	indicateProteinPosition = false;
     }
 

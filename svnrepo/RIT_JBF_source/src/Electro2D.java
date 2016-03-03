@@ -92,7 +92,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * This method initializes all GUI components.
      */
-    public Electro2D() {	
+    public Electro2D() {
 
 	proteinListFrame = new SingleProteinListFrame( "Protein Lists", this);
 	fileFrame = new FileFrame(this, 1);  //init frame
@@ -274,10 +274,9 @@ public class Electro2D extends JPanel implements ActionListener {
         return leftPanel;
     }
 
-   /**
+    /**
      * Any drawing on the applet panel itself is done here.
      */
-
     public void displayProtList(){
 	
 	proteinListFrame.setVisible(true);
@@ -288,8 +287,9 @@ public class Electro2D extends JPanel implements ActionListener {
      * displays the incrementing pH values above the gel after the IEF
      * animation.
      *
-     * @param loc - the location of the label
+     * @param loc   - the location of the label
      * @param value - the value to be placed on the label
+     * @return the array list
      */
     public ArrayList<Integer> showPH() {
 
@@ -367,9 +367,10 @@ public class Electro2D extends JPanel implements ActionListener {
      * of the dots.
      *
      * @param loc100 - the location of the 100,000 molecular weight
-     * @param loc50 - the location of the 50,000 molecular weight
-     * @param loc25 - the location of the 25,000 molecular weight
-     * @param loc10 - the location of the 10,000 molecular weight
+     * @param loc50  - the location of the 50,000 molecular weight
+     * @param loc25  - the location of the 25,000 molecular weight
+     * @param loc10  - the location of the 10,000 molecular weight
+     * @param reMake the re make
      */
     public void showMW(int loc100, int loc50, int loc25, int loc10, boolean reMake) {
 
@@ -421,6 +422,9 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the top-level frame that contains the specified
      * component, or null if there is no top-level frame.
+     *
+     * @param comp the comp
+     * @return the frame
      */
     Frame getFrame(Component comp) {
 	Component theTop = null;
@@ -466,11 +470,11 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     *  Retrieves protein sequence information from a file.
-     *  This is achieved by popping up a new window with options for 
-     *  selecting a file from the server, or copying and pasting a file 
-     *  into a textbox.
-     *  Currently, supported file types are .fasta, .faa, .gbk, and .pdb.
+     * Retrieves protein sequence information from a file.
+     * This is achieved by popping up a new window with options for
+     * selecting a file from the server, or copying and pasting a file
+     * into a textbox.
+     * Currently, supported file types are .fasta, .faa, .gbk, and .pdb.
      */
     public void getSequenceData() {
 
@@ -479,6 +483,9 @@ public class Electro2D extends JPanel implements ActionListener {
 	fileFrame.setVisible(true);
     }
 
+    /**
+     * Get sequence data 2.
+     */
     public void getSequenceData2(){
 	fileFrame2.toFront();
 	fileFrame2.setVisible(true);
@@ -487,6 +494,8 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Brings up a SwissProt-TrEMBL search for the particular protein
      * id provided
+     *
+     * @param id the id
      */
     public void showSwsSearchPage( String id ){
 
@@ -535,9 +544,11 @@ public class Electro2D extends JPanel implements ActionListener {
 	}
     }
 
-   /**
+    /**
      * Brings up a Blast search for the particular protein
      * sequence provided
+     *
+     * @param seq the seq
      */
     public void showBlastSearchPage( String seq ){
 
@@ -588,6 +599,8 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Brings up GenBank search for the particular protein
      * id provided
+     *
+     * @param id the id
      */
     public void showSearchPage( String id ){
 
@@ -699,6 +712,8 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Brings up Enzyme Commission search for the particular protein
      * id provided
+     *
+     * @param id the id
      */
     public void showECSearchPage( String id ){
 	
@@ -754,9 +769,9 @@ public class Electro2D extends JPanel implements ActionListener {
 	    }catch(IOException e ){System.err.println( e.getMessage() );}
 	}
     }
-    
+
     /**
-     *  Cycles through the list and removes any highlighted proteins.
+     * Cycles through the list and removes any highlighted proteins.
      */
     public void removeHighlightedProteins() {
 	selectedIndexes = proteinList.getSelectedIndexes();
@@ -775,7 +790,7 @@ public class Electro2D extends JPanel implements ActionListener {
 	    }
 	}
     }
-    
+
     /**
      * this method returns the voltage selected by the user
      *
@@ -842,13 +857,12 @@ public class Electro2D extends JPanel implements ActionListener {
          */
         return (double) max;
     }
-    
+
     /**
      * this method returns the minimum pH range that the user selected
      *
      * @return min the minimum pH to be used in the simulation
      */
-
     public double getMinRange(){
         // set up the default minimum pH of 3
         Double min = new Double(3);
@@ -906,7 +920,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the value stored in the % acrylamide text field
      *
-     * @return percent
+     * @return percent double
      */
     public double getLowPercent(){
 	// get the value in the text box
@@ -939,7 +953,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the higher of the values stored in the % acrylamide text field
      *
-     * @return percent
+     * @return percent double
      */
     public double getHighPercent(){
 	// get the value in the text box
@@ -968,8 +982,7 @@ public class Electro2D extends JPanel implements ActionListener {
 	
 	return percent;
     }
-    
-    
+
 
     /**
      * this method returns the animation selected by the user
@@ -988,9 +1001,9 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     *  Refreshes the protein list, called after reading in new proteins 
-     *  from a file. Currently, the list is cleared and re-filled with 
-     *  proteins from the latest file read in.
+     * Refreshes the protein list, called after reading in new proteins
+     * from a file. Currently, the list is cleared and re-filled with
+     * proteins from the latest file read in.
      */
     public void refreshProteinList() {
 	// removes everything from the list of proteins
@@ -1001,12 +1014,13 @@ public class Electro2D extends JPanel implements ActionListener {
 	}
         proteinListFrame.updateSequences(sequenceTitles, sequenceTitles2);
     }
-    
+
     /**
-     * Given a protein title from proteinList, removes the protein's 
+     * Given a protein title from proteinList, removes the protein's
      * information from the vectors.
      *
      * @param title the title to be removed
+     * @return the boolean
      */
     public boolean removeProteinbyTitle(String title) {
 	for(int x = 0; x < sequenceTitles.size(); x++) {
@@ -1026,6 +1040,7 @@ public class Electro2D extends JPanel implements ActionListener {
      * information from the vectors.
      *
      * @param title the title to be removed
+     * @return the boolean
      */
     public boolean removeProteinbyTitle2( String title ){
 	if( sequenceTitles2 != null ){
@@ -1040,8 +1055,10 @@ public class Electro2D extends JPanel implements ActionListener {
 	}
 	return false;
     }
-    
-    /***/
+
+    /**
+     * Refresh protein list 2.
+     */
     public void refreshProteinList2() {
 	proteinList2.removeAll();
 	for( int x = 0; x < sequenceTitles2.size(); x++ ){
@@ -1067,7 +1084,7 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * Sets the SDS-PAGE status in playButton to false to let the 
+     * Sets the SDS-PAGE status in playButton to false to let the
      * actionListener know that the SDS-PAGE portion of the animation
      * has not been drawn
      */
@@ -1076,7 +1093,7 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * Reinitializes the dotThread 
+     * Reinitializes the dotThread
      */
     public void restartThread(){
 	//initializes the thread, sets a value, and calls the start method
@@ -1084,7 +1101,7 @@ public class Electro2D extends JPanel implements ActionListener {
 	dotThread.startDots();
 	dotThread.start();
     }
-    
+
     /**
      * this method is called by the reset button once it is pressed.
      * it lets the applet know it should reload the protein information
@@ -1092,7 +1109,7 @@ public class Electro2D extends JPanel implements ActionListener {
     public void setBool(){
 	resetPressed = true;
     }
-    
+
     /**
      * This method lets the applet know that the information has already been
      * loaded and the reset button has not been pressed.
@@ -1124,7 +1141,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * This method returns an instance of the IEFThread
      *
-     * @return iefThread
+     * @return iefThread ief thread
      */
     public IEFThread getIEFThread(){
 	return iefThread;
@@ -1136,7 +1153,7 @@ public class Electro2D extends JPanel implements ActionListener {
     public void resetIEF(){
 	playButton.resetIEF();
     }
-	
+
 
     /**
      * Stops the dotThread
@@ -1148,7 +1165,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the last file loaded
      *
-     * @return lastFileLoaded
+     * @return lastFileLoaded last file loaded
      */
     public String getLastFileLoaded() {
 	return lastFileLoaded;
@@ -1157,7 +1174,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the gelcanvas object
      *
-     * @return gelCanvas
+     * @return gelCanvas gel
      */
     public GelCanvasSwingVersion getGel() {
 	return gelCanvas;
@@ -1166,7 +1183,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the sequences of amino acids
      *
-     * @return sequences
+     * @return sequences sequences
      */
     public Vector getSequences() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
@@ -1185,7 +1202,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the sequence titles
      *
-     * @return sequenceTitles
+     * @return sequenceTitles sequence titles
      */
     public Vector getSequenceTitles() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
@@ -1207,7 +1224,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the DotThread
      *
-     * @return dotThread
+     * @return dotThread dot thread
      */
     public DotThread getThread(){
 	return dotThread;
@@ -1216,7 +1233,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * Returns the molecular weights
      *
-     * @return molecularWeights
+     * @return molecularWeights molecular weights
      */
     public Vector getMolecularWeights() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
@@ -1235,6 +1252,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * returns the molecular weight of a protein given its name
      *
+     * @param title the title
      * @return a string
      */
     public String getMWbyTitle(String title) {
@@ -1254,9 +1272,10 @@ public class Electro2D extends JPanel implements ActionListener {
 	return "";
     }
 
-    /** 
+    /**
      * returns the function of a protein given its name
      *
+     * @param title the title
      * @return a string
      */
     public String getFunctionbyTitle(String title) {
@@ -1279,6 +1298,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * returns the pI value of a protein given its name
      *
+     * @param title the title
      * @return a string
      */
     public String getPIbyTitle(String title) {
@@ -1300,6 +1320,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * returns the sequence value of a protein given its name
      *
+     * @param title the title
      * @return a string
      */
     public String getSequencebyTitle(String title) {
@@ -1321,12 +1342,12 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * sets the values for the max and min pI and MW
      *
-     * @param minmw the min MW val
      * @param maxmw the max MW val
-     * @param minpi the min pI val
+     * @param minmw the min MW val
      * @param maxpi the max pI val
+     * @param minpi the min pI val
      */
-    public void setMaxAndMinVals( double maxmw, double minmw, double maxpi, 
+    public void setMaxAndMinVals( double maxmw, double minmw, double maxpi,
 				  double minpi ){
 	maxMW = maxmw;
 	minMW = minmw;
@@ -1334,18 +1355,38 @@ public class Electro2D extends JPanel implements ActionListener {
 	minPi = minpi;
     }
 
+    /**
+     * Get max pi double.
+     *
+     * @return the double
+     */
     public double getMaxPi(){
 	return maxPi;
     }
-    
+
+    /**
+     * Get min pi double.
+     *
+     * @return the double
+     */
     public double getMinPi(){
 	return minPi;
     }
-    
+
+    /**
+     * Get max mw double.
+     *
+     * @return the double
+     */
     public double getMaxMW(){
 	return maxMW;
     }
 
+    /**
+     * Get min mw double.
+     *
+     * @return the double
+     */
     public double getMinMW(){
 	return minMW;
     }
@@ -1353,7 +1394,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * returns the pI values
      *
-     * @return piValues
+     * @return piValues pi values
      */
     public Vector getPiValues() {
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
@@ -1372,7 +1413,7 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * returns the protein functions
      *
-     * @return functions
+     * @return functions vector
      */
     public Vector getFunctions(){
         Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
@@ -1388,6 +1429,11 @@ public class Electro2D extends JPanel implements ActionListener {
 	return functions;
     }
 
+    /**
+     * Get pi values 2 vector.
+     *
+     * @return the vector
+     */
     public Vector getPiValues2(){
         Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
@@ -1402,6 +1448,11 @@ public class Electro2D extends JPanel implements ActionListener {
 	return piValues2;
     }
 
+    /**
+     * Get sequences 2 vector.
+     *
+     * @return the vector
+     */
     public Vector getSequences2(){
         Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
@@ -1416,6 +1467,11 @@ public class Electro2D extends JPanel implements ActionListener {
         return sequences2;
     }
 
+    /**
+     * Get sequence titles 2 vector.
+     *
+     * @return the vector
+     */
     public Vector getSequenceTitles2(){
         if(sequenceTitles2 != null) {
             Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
@@ -1433,6 +1489,11 @@ public class Electro2D extends JPanel implements ActionListener {
         return new Vector();
     }
 
+    /**
+     * Get molecular weights 2 vector.
+     *
+     * @return the vector
+     */
     public Vector getMolecularWeights2(){
         Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
@@ -1447,6 +1508,11 @@ public class Electro2D extends JPanel implements ActionListener {
 	return molecularWeights2;
     }
 
+    /**
+     * Get functions 2 vector.
+     *
+     * @return the vector
+     */
     public Vector getFunctions2(){
         Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
@@ -1463,6 +1529,8 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * stores the name of the last file loaded
+     *
+     * @param l the l
      */
     public void setLastFileLoaded(String l) {
 	lastFileLoaded = l;
@@ -1470,6 +1538,8 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * stores the vector of sequence data
+     *
+     * @param s the s
      */
     public void setSequences(Vector s){
 	sequences = s;
@@ -1481,7 +1551,7 @@ public class Electro2D extends JPanel implements ActionListener {
      * GelCanvasSwingVersion know whether or not there are sequences available for
      * animiation.
      *
-     * @param bool
+     * @param bool Are the sequences available
      */
     public void setSequencesReady(boolean bool) {
         sequencesReady = bool;
@@ -1490,8 +1560,8 @@ public class Electro2D extends JPanel implements ActionListener {
     /**
      * This method is used by PlayButtonSwingVersion to determine when the user
      * clicks play if there are sequences ready to animate.
-     * 
-     * @return sequencesReady
+     *
+     * @return sequencesReady sequences ready
      */
     public boolean getSequencesReady() {
         return sequencesReady;
@@ -1499,6 +1569,8 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * sets the vector of sequence titles
+     *
+     * @param st the st
      */
     public void setSequenceTitles(Vector st) {
 	sequenceTitles = st;
@@ -1506,6 +1578,8 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * sets the vector of molecular weights
+     *
+     * @param mw the mw
      */
     public void setMolecularWeights(Vector mw) {
 	molecularWeights = mw;
@@ -1513,6 +1587,8 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * sets the vector of protein functions
+     *
+     * @param fcn the fcn
      */
     public void setFunctionValues( Vector fcn ){
 	functions = fcn;
@@ -1520,31 +1596,59 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * sets the vector of pI values
+     *
+     * @param pi the pi
      */
     public void setPiValues(Vector pi) {
 	piValues = pi;
     }
 
+    /**
+     * Set sequences 2.
+     *
+     * @param s the s
+     */
     public void setSequences2( Vector s ){
 	sequences2 = new Vector();
 	sequences2 = s;
         sequencesReady = true;
     }
 
+    /**
+     * Set sequence titles 2.
+     *
+     * @param st the st
+     */
     public void setSequenceTitles2( Vector st ){
 	sequenceTitles2 = new Vector();
 	sequenceTitles2 = st;
     }
 
+    /**
+     * Set molecular weights 2.
+     *
+     * @param mw the mw
+     */
     public void setMolecularWeights2( Vector mw ){
 	molecularWeights2 = new Vector();
 	molecularWeights2 = mw;
     }
 
+    /**
+     * Set pi values 2.
+     *
+     * @param pi the pi
+     */
     public void setPiValues2( Vector pi ){
 	piValues2 = new Vector();
 	piValues2 = pi;
     }
+
+    /**
+     * Set function values 2.
+     *
+     * @param fcn the fcn
+     */
     public void setFunctionValues2( Vector fcn ){
 	functions2 = new Vector();
 	functions2 = fcn;
@@ -1554,7 +1658,15 @@ public class Electro2D extends JPanel implements ActionListener {
      * Standard applet methods.
      */
     public void start() { }
+
+    /**
+     * Stop.
+     */
     public void stop() { }
+
+    /**
+     * Destroy.
+     */
     public void destroy() { }
 
     /**
@@ -1566,17 +1678,26 @@ public class Electro2D extends JPanel implements ActionListener {
 	return "Electro2D...copyright" +
                 "" +
                 " 2003 Adam L Bazinet & Jill Zapoticznyj";
-    }   
-    
+    }
+
+    /**
+     * Write to csv.
+     */
     public void writeToCSV(){
 	CSVCreator csv = new CSVCreator( this );
 	csv.writeToCSV();
     }
-    
+
+    /**
+     * Generate web page.
+     */
     public void generateWebPage(){
 	web.genFile( this.getLastFileLoaded() );
     }
 
+    /**
+     * Reset both protein lists.
+     */
     public void resetBothProteinLists() {
         proteinList = new java.awt.List();
         proteinList2 = new java.awt.List();

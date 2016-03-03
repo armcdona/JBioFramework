@@ -10,6 +10,9 @@
 import java.awt.*;
 import java.util.*;
 
+/**
+ * The type Ief protein swing version.
+ */
 public class IEFProteinSwingVersion extends Component {
 
     private static Color[] colors = { Color.blue, Color.green, Color.yellow,
@@ -32,12 +35,13 @@ public class IEFProteinSwingVersion extends Component {
     private static double minpH = 3;
     private static GelCanvasSwingVersion gelcanvas;
 
-    /**
-     * constructor - creates the IEFProtein object
-     *
-     * @param p the first protein to be represented by this object
-     */
-    public IEFProteinSwingVersion(E2DProtein p, GelCanvasSwingVersion g){
+	/**
+	 * constructor - creates the IEFProtein object
+	 *
+	 * @param p the first protein to be represented by this object
+	 * @param g the g
+	 */
+	public IEFProteinSwingVersion(E2DProtein p, GelCanvasSwingVersion g){
 	names = new Vector();
 	gelcanvas = g;
 	proteins = new Vector();
@@ -78,14 +82,13 @@ public class IEFProteinSwingVersion extends Component {
 	increments = (myX - tempX)/50;
     }
 
-    /**
-     * addProtein adds a collection of proteins c to the vector of proteins
-     * being represented by this IEFProtein object
-     *
-     * @param c the collection of proteins to be added to the vector
-     */
-
-    public void addProtein(Collection c){
+	/**
+	 * addProtein adds a collection of proteins c to the vector of proteins
+	 * being represented by this IEFProtein object
+	 *
+	 * @param c the collection of proteins to be added to the vector
+	 */
+	public void addProtein(Collection c){
         /**
          * copy all of the proteins passed to this object into its vector
          */
@@ -141,59 +144,58 @@ public class IEFProteinSwingVersion extends Component {
 
     }
 
-    /**
-     * accessor method
-     *
-     * @return the X coordinate of the protein
-     */
-
-    public int returnX() {
+	/**
+	 * accessor method
+	 *
+	 * @return the X coordinate of the protein
+	 */
+	public int returnX() {
 	return myX;
     }
 
-    /**
-     * accessor method
-     *
-     * @return the Y coordinate of the protein
-     */
-    public int returnY(){
+	/**
+	 * accessor method
+	 *
+	 * @return the Y coordinate of the protein
+	 */
+	public int returnY(){
 	return myY;
     }
 
-    /**
-     * accessor method
-     *
-     * @return the maximum pI value
-     */
-    public double getMaxPI(){
+	/**
+	 * accessor method
+	 *
+	 * @return the maximum pI value
+	 */
+	public double getMaxPI(){
 	return maxPi;
     }
 
-    /**
-     * accessor method
-     *
-     * @return the minimum pI value
-     */
-    public double getMinPI(){
+	/**
+	 * accessor method
+	 *
+	 * @return the minimum pI value
+	 */
+	public double getMinPI(){
 	return minPi;
     }
 
-    /**
-     * getProtein returns the protein object(s) that this IEFProtein
-     * is representing.
-     *
-     * @return proteins
-     */
-    public Vector getProtein(){
+	/**
+	 * getProtein returns the protein object(s) that this IEFProtein
+	 * is representing.
+	 *
+	 * @return proteins vector
+	 */
+	public Vector getProtein(){
 
 	return proteins;
     }
 
-    /**
-     * changeWidth increments the width of the IEFProtein for the initial
-     * animation.
-     */
-    public static void changeWidth(){
+	/**
+	 * changeWidth increments the width of the IEFProtein for the initial
+	 * animation.
+	 */
+	public static void changeWidth(){
 
         /**
          * increase the width of the object by a 50th of its final width
@@ -201,34 +203,36 @@ public class IEFProteinSwingVersion extends Component {
 	tempWidth = tempWidth + myWidth / 50;
     }
 
-    /**
-     * changes the position of the object a 50th of the distance from its
-     * final position.
-     */
-    public void changeX(){
+	/**
+	 * changes the position of the object a 50th of the distance from its
+	 * final position.
+	 */
+	public void changeX(){
 	tempX = tempX + increments;
     }
 
-    /**
-     * Sets the tempX equal to the final X value for the end of the animation
-     * of the IEF process
-     */
-    public void setX(){
+	/**
+	 * Sets the tempX equal to the final X value for the end of the animation
+	 * of the IEF process
+	 */
+	public void setX(){
 	tempX = myX;
     }
 
-    /**
-     * Sets the tempWidth equal to the final width for the end of the
-     * animation of the IEF process
-     */
-    public static void setWidth(){
+	/**
+	 * Sets the tempWidth equal to the final width for the end of the
+	 * animation of the IEF process
+	 */
+	public static void setWidth(){
 	tempWidth = myWidth;
     }
 
-    /**
-     * draw displays the IEFProtein as a rectangle on the screen
-     */
-    public void draw( Graphics g ){
+	/**
+	 * draw displays the IEFProtein as a rectangle on the screen
+	 *
+	 * @param g the g
+	 */
+	public void draw( Graphics g ){
 
 	myWidth = 563/100;
 
@@ -240,11 +244,11 @@ public class IEFProteinSwingVersion extends Component {
 
     }
 
-    /**
-     * decreases the height of the protein for the beginning of the SDS-PAGE
-     * animation
-     */
-    public static void shrinkProtein(){
+	/**
+	 * decreases the height of the protein for the beginning of the SDS-PAGE
+	 * animation
+	 */
+	public static void shrinkProtein(){
 	myHeight = myHeight - 2;
 
         /**
@@ -254,65 +258,68 @@ public class IEFProteinSwingVersion extends Component {
 	myY = myY + 2;
     }
 
-    /**
-     * accessor method
-     *
-     * @return current height of the object
-     */
-    public static int returnHeight(){
+	/**
+	 * accessor method
+	 *
+	 * @return current height of the object
+	 */
+	public static int returnHeight(){
 	return myHeight;
     }
 
-    /**
-     * accessor method
-     *
-     * @return final width of this object
-     */
-    public static double returnWidth(){
+	/**
+	 * accessor method
+	 *
+	 * @return final width of this object
+	 */
+	public static double returnWidth(){
 	return myWidth;
     }
 
-    /**
-     * accessor method
-     *
-     * @return current width of this object
-     */
-    public static double returnTempWidth(){
+	/**
+	 * accessor method
+	 *
+	 * @return current width of this object
+	 */
+	public static double returnTempWidth(){
 	return tempWidth;
     }
 
-    /**
-     * This method is called when the reset button is pressed.  It sets the
-     * tempWidth data member back to zero to prepare to draw the IEFProteins
-     * again
-     */
-    public static void resetTempWidth(){
+	/**
+	 * This method is called when the reset button is pressed.  It sets the
+	 * tempWidth data member back to zero to prepare to draw the IEFProteins
+	 * again
+	 */
+	public static void resetTempWidth(){
 	tempWidth = 0;
     }
 
-    /**
-     * This method is called when the reset button is pressed.  It sets the
-     * height and y positions back to their original values
-     */
-    public static void resetProtein(){
+	/**
+	 * This method is called when the reset button is pressed.  It sets the
+	 * height and y positions back to their original values
+	 */
+	public static void resetProtein(){
 	myHeight = 40;
 	myY = 5;
     }
 
-    /**
-     * accessor method
-     *
-     * @return vector of protein titles
-     */
-    public Vector getNames(){
+	/**
+	 * accessor method
+	 *
+	 * @return vector of protein titles
+	 */
+	public Vector getNames(){
 	return names;
     }
 
-    /**
-     * sets maxpH equal to the maximum pH value and minpH to the minimum
-     * pH value entered by the user for the IEF animation
-     */
-    public static void setRange( double max, double min ){
+	/**
+	 * sets maxpH equal to the maximum pH value and minpH to the minimum
+	 * pH value entered by the user for the IEF animation
+	 *
+	 * @param max the max
+	 * @param min the min
+	 */
+	public static void setRange( double max, double min ){
 	maxpH = max;
 	minpH = min;
 	// calculate the final width

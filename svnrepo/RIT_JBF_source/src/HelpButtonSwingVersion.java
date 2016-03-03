@@ -7,8 +7,14 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 
+/**
+ * The type Help button swing version.
+ */
 public class HelpButtonSwingVersion extends JButton implements ActionListener {
 
+    /**
+     * Instantiates a new Help button swing version.
+     */
     public HelpButtonSwingVersion () {
 
         super("Help");

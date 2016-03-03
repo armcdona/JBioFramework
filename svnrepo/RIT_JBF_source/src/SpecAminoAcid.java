@@ -11,6 +11,7 @@
  */
 
 /**
+ * The type Spec amino acid.
  *
  * @author Amanda Fisher
  */
@@ -22,16 +23,17 @@ public class SpecAminoAcid {
     private double NHHpKa;
     private double sidechainPKa;
     private int charge;
+    /**
+     * The Hits.
+     */
     int hits;
 
     /**
      * Constructor for SpecAminoAcid when given a char. Passes to translate method.
      *
      * @param code Symbol to be turned into an SpecAminoAcid.
-     * @throws AminoException When given a symbol that doesn't represent an
-     *                        amino acid.
+     * @throws AminoException When given a symbol that doesn't represent an                        amino acid.
      */
-
     public SpecAminoAcid(char code) throws AminoException {
             translate(code);
     }
@@ -41,10 +43,8 @@ public class SpecAminoAcid {
      * input into a char and passes to translate method.
      *
      * @param input Symbol to be turned in to an SpecAminoAcid.
-     * @throws AminoException When given a symbol that doesn't represent an
-     *                        amino acid or given more than one symbol.
+     * @throws AminoException When given a symbol that doesn't represent an                        amino acid or given more than one symbol.
      */
-
     public SpecAminoAcid(String input) throws AminoException {
         if(input.length() > 1) {
             throw new AminoException("String input too long; must be single char.");
@@ -169,7 +169,7 @@ public class SpecAminoAcid {
     /**
      * Used to return the SpecAminoAcid's name.
      *
-     * @return Name.
+     * @return Name. name
      */
     public String getName() {
         return name;
@@ -178,7 +178,7 @@ public class SpecAminoAcid {
     /**
      * Used to return the SpecAminoAcid's mass.
      *
-     * @return Mass.
+     * @return Mass. mass
      */
     public double getMass() {
         return mass;
@@ -187,7 +187,7 @@ public class SpecAminoAcid {
     /**
      * Used to return the SpecAminoAcid's charge.
      *
-     * @return Charge.
+     * @return Charge. charge
      */
     public int getCharge() {
         return charge;
@@ -197,7 +197,7 @@ public class SpecAminoAcid {
      * Used to return the SpecAminoAcid's mass charge ratio when being used in
      * TandemOutputGUI.
      *
-     * @return MassChargeRatio.
+     * @return MassChargeRatio. mass charge ratio
      */
     public double getMassChargeRatio() {
         return mass/(double)charge;
@@ -208,7 +208,7 @@ public class SpecAminoAcid {
      * (Not used in the spectrometer simulation, but put in for making
      * SpecAminoAcid more complete)
      *
-     * @return COOHpKa
+     * @return COOHpKa coo hp ka
      */
     public double getCOOHpKa() {
         return COOHpKa;
@@ -219,7 +219,7 @@ public class SpecAminoAcid {
      * (Not used in the spectrometer simulation, but put in for making
      * SpecAminoAcid more complete)
      *
-     * @return NHHpKa
+     * @return NHHpKa nh hp ka
      */
     public double getNHHpKa() {
         return NHHpKa;
@@ -230,8 +230,8 @@ public class SpecAminoAcid {
      * does not have a sidechain pKa, then a value of -1 is returned instead.
      * (Not used in the spectrometer simulation, but put in for making
      * SpecAminoAcid more complete)
-     * 
-     * @return sidechainPKa
+     *
+     * @return sidechainPKa sidechain p ka
      */
     public double getSidechainPKa() {
         return sidechainPKa;

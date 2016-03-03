@@ -10,6 +10,9 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * The type Html gen screen.
+ */
 public class HTMLGenScreen extends JFrame implements ActionListener,
 						    MouseListener{
 
@@ -27,7 +30,12 @@ public class HTMLGenScreen extends JFrame implements ActionListener,
     private int sortField;
     private Electro2D electro2D;
 
-    public HTMLGenScreen( Electro2D e ){
+	/**
+	 * Instantiates a new Html gen screen.
+	 *
+	 * @param e the e
+	 */
+	public HTMLGenScreen( Electro2D e ){
 	super( "Sort Web Page By:" );
 	setResizable(false);
 	electro2D = e;

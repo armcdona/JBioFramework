@@ -8,6 +8,9 @@
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * The type Protein dot swing version.
+ */
 public class ProteinDotSwingVersion extends Component {
 
     private Graphics graphic;
@@ -26,10 +29,10 @@ public class ProteinDotSwingVersion extends Component {
     /**
      * constructor
      *
-     * @param pro the protein being represented
-     * @param canvas JPanel to hold the protein
-     * @param x the x coordinate for this dot
-     * @param y the y coordinate for this dot
+     * @param pro   the protein being represented
+     * @param panel the panel
+     * @param x     the x coordinate for this dot
+     * @param y     the y coordinate for this dot
      */
     public ProteinDotSwingVersion(E2DProtein pro, JPanel panel, double x, double y) {
         myProtein = pro;
@@ -40,6 +43,14 @@ public class ProteinDotSwingVersion extends Component {
 	myY = y;
     }
 
+    /**
+     * Instantiates a new Protein dot swing version.
+     *
+     * @param c     the c
+     * @param panel the panel
+     * @param x     the x
+     * @param y     the y
+     */
     public ProteinDotSwingVersion( Color c, JPanel panel, double x, double y) {
 	myColor = c;
 	myPanel = panel;
@@ -79,7 +90,6 @@ public class ProteinDotSwingVersion extends Component {
      * This method is called when the restart button is pressed.
      * It sets the dot back to its starting position for the animation
      */
-
     public void restart() {
 	myY = 48;
     }
@@ -200,6 +210,9 @@ public class ProteinDotSwingVersion extends Component {
 	}
     }
 
+    /**
+     * Update.
+     */
     public void update(){
 	draw( graphic );
     }

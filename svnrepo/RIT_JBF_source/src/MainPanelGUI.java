@@ -29,6 +29,9 @@ import java.text.DecimalFormat;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
+/**
+ * The type Main panel gui.
+ */
 public class MainPanelGUI extends JPanel {
 
     private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
@@ -45,7 +48,7 @@ public class MainPanelGUI extends JPanel {
     private ToggleFragmentButton redYs;
     private OutputGraphGUI outputGraph;
     private Ion ion;
-    
+
     /**
      * The constructor uses a GridBagLayout to arrange the eight different
      * elements of the GUI- the label explaining the input box, the input box,
@@ -167,7 +170,7 @@ public class MainPanelGUI extends JPanel {
      * when a user clicks on a peak in the OutputGraphGUI. It also alerts
      * TandemGraphGUI that there is peptide sequencing to be done.
      *
-     * @param ion The ion the user selected for peptide sequencing.
+     * @param selected the selected
      */
     public void runTandem(Ion selected) {
         ion = selected;
@@ -182,11 +185,11 @@ public class MainPanelGUI extends JPanel {
      */
     private class LoadButton extends JButton implements ActionListener {
 
-        /**
-         * Constructor passes the String to be displayed on the button to
-         * JButton's constructor and registers itself as its own actionListener.
-         */
-        public LoadButton() {
+       /**
+        * Constructor passes the String to be displayed on the button to
+        * JButton's constructor and registers itself as its own actionListener.
+        */
+       public LoadButton() {
             super("Load Sequence From File");
             addActionListener(this);
         }
@@ -248,6 +251,9 @@ public class MainPanelGUI extends JPanel {
         /**
          * Constructor passes the String to be displayed on the button to
          * JCheckBox's constructor and registers itself as its own actionListener.
+         *
+         * @param text  the text
+         * @param state the state
          */
         public ToggleFragmentButton(String text, boolean state) {
             super(text, state);
@@ -296,7 +302,7 @@ public class MainPanelGUI extends JPanel {
     /**
      * Called by OutputGraphGUI's setPeaks method to sort out which ion peaks to
      * display based on the user specified m/e range.
-     * 
+     *
      * @return The lower limit of the user selected range.
      */
     public double getLowerLimit() {
