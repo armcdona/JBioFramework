@@ -291,7 +291,7 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public ArrayList<Integer> showPH() {
 
-        double minPH = ◊getMinRange();
+        double minPH = getMinRange();
         double maxPH = getMaxRange();
         ArrayList<Integer> linePositions = new ArrayList<Integer>();
 

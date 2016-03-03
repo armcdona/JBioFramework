@@ -312,7 +312,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
      * The paintComponent method does the actual drawing when the System calls
      * for the GelCanvas to be set up.
      *
-     * @override overrides the paintComponent method of JPanel
+     * @Override overrides the paintComponent method of JPanel
      */
     public void paintComponent(Graphics g) {
         /**
