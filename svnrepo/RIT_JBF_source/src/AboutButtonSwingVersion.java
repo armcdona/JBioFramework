@@ -10,6 +10,7 @@ import java.io.*;
 
 /**
  * The type About button swing version.
+ *
  */
 public class AboutButtonSwingVersion extends JButton implements ActionListener {
     /**
