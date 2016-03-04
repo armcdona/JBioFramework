@@ -12,34 +12,34 @@ import java.awt.image.*;
  * Format</A>). A GIFEncoder
  * is constructed with either an AWT Image (which must be fully
  * loaded) or a set of RGB arrays. The image can be written out with a
- * call to <CODE>Write</CODE>.<P>
+ * call to <CODE>Write</CODE>.
  * <p>
  * Three caveats:
  * <UL>
  * <LI>GIFEncoder will convert the image to indexed color upon
  * construction. This will take some time, depending on the size of
  * the image. Also, actually writing the image out (Write) will take
- * time.<P>
- * <p>
+ * time.
+ *
  * <LI>The image cannot have more than 256 colors, since GIF is an 8
  * bit format. For a 24 bit to 8 bit quantization algorithm, see
  * Graphics Gems II III.2 by Xialoin Wu. Or check out his <A
- * HREF="http://www.csd.uwo.ca/faculty/wu/cq.c">C source</A>.<P>
- * <p>
+ * HREF="http://www.csd.uwo.ca/faculty/wu/cq.c">C source</A>.
+ *
  * <LI>Since the image must be completely loaded into memory,
  * GIFEncoder may have problems with large images. Attempting to
  * encode an image which will not fit into memory will probably
  * result in the following exception:<P>
  * <CODE>java.awt.AWTException: Grabber returned false: 192</CODE><P>
- * </UL><P>
+ * </UL>
  * <p>
  * GIFEncoder is based upon gifsave.c, which was written and released
- * by:<P>
+ * by:
  * <CENTER>
  * Sverre H. Huseby<BR>
  * Bjoelsengt. 17<BR>
  * N-0468 Oslo<BR>
- * Norway<P>
+ * Norway
  * <p>
  * Phone: +47 2 230539<BR>
  * sverrehu@ifi.uio.no<P>
@@ -116,7 +116,7 @@ public class GIFEncoder {
 
 	/**
 	 * Construct a GIFEncoder. The constructor will convert the image to
-	 * an indexed color array. <B>This may take some time.</B><P>
+	 * an indexed color array. <B>This may take some time.</B>
 	 * <p>
 	 * Each array stores intensity values for the image. In other words,
 	 * r[x][y] refers to the red intensity of the pixel at column x, row

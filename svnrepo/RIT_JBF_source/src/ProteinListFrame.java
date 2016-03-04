@@ -287,7 +287,7 @@ public class ProteinListFrame extends JFrame {
      * Electro2D will call them in its get methods for the vectors used in
      * gel filtration in order to carry over the manipulations done by the user.
      *
-     * @return Vector<Integer>  the positions of each element still in the sequence.
+     * @return the positions of each element still in the sequence.
      */
     public Vector<Integer> getPositionsOne() {
         return positionsOne;

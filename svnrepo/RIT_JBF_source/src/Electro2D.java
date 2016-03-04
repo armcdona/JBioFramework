@@ -287,8 +287,6 @@ public class Electro2D extends JPanel implements ActionListener {
      * displays the incrementing pH values above the gel after the IEF
      * animation.
      *
-     * @param loc   - the location of the label
-     * @param value - the value to be placed on the label
      * @return the array list
      */
     public ArrayList<Integer> showPH() {

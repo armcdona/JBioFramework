@@ -174,8 +174,6 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      * OutputGraphGUI can resize its x-axis to start at the smallest m/e ratio
      * and end at the largest m/e ratio.
      *
-     * @param smallestme - the smallest m/e ratio among the ions
-     * @param biggestme  - the biggest m/e ratio among the ions
      */
     public void resizeXAxis() {
         // Determine the smallest m/e ratio and the biggest m/e ratio
