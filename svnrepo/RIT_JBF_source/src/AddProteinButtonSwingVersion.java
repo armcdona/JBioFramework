@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * The button that the user presses in order to add a new protein
+ * Opens window for user to enter a new protein sequence
  */
 public class AddProteinButtonSwingVersion extends JButton implements ActionListener {
 
