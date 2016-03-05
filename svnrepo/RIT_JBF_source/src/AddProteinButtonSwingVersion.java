@@ -8,18 +8,16 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * The type Add protein button swing version.
+ * The button that the user presses in order to add a new protein
  */
 public class AddProteinButtonSwingVersion extends JButton implements ActionListener {
-    /**
-     * The Electro 2 d.
-     */
+
     Electro2D electro2D;
 
     /**
-     * Instantiates a new Add protein button swing version.
+     * Adds a new protein
      *
-     * @param e the e
+     * @param e The protein entered
      */
     public AddProteinButtonSwingVersion (Electro2D e) {
 
