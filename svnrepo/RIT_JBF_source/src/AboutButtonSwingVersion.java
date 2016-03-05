@@ -9,17 +9,12 @@ import java.awt.event.*;
 import java.io.*;
 
 /**
- * The type About button swing version.
+ * Launches a browser window directed toward about.html
  */
 public class AboutButtonSwingVersion extends JButton implements ActionListener {
-    /**
-     * The Electro 2 d.
-     */
+
     Electro2D electro2D;
 
-    /**
-     * Instantiates a new About button swing version.
-     */
     public AboutButtonSwingVersion () {
         super("About");
         addActionListener(this);
