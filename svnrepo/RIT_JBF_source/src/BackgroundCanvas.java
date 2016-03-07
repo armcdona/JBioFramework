@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 /**
- * The type Background canvas.
+ * The Background canvas of the main window.
  */
 public class BackgroundCanvas {
 
@@ -9,9 +9,9 @@ public class BackgroundCanvas {
     private JPanel background;
 
     /**
-     * Instantiates a new Background canvas.
+     * Instantiates the background canvas, and adds the
      *
-     * @param e the e
+     * @param e the Electro2D tab
      */
     public BackgroundCanvas( Electro2D e ){
 	electro2D = e;
