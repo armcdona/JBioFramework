@@ -7,17 +7,11 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * The type Color key button swing version.
+ * TDisplays the Color Window
  */
 public class ColorKeyButtonSwingVersion extends JButton implements ActionListener {
-    /**
-     * The Key.
-     */
     ColorFrame key;
 
-    /**
-     * Instantiates a new Color key button swing version.
-     */
     public ColorKeyButtonSwingVersion () {
 
         super("Color Key");

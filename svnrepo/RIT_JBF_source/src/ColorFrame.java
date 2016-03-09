@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * The type Color frame.
+ * a window with the various colors and what they represent
  */
 public class ColorFrame {
     
@@ -25,18 +25,19 @@ public class ColorFrame {
 	colorkey = E2DProtein.getColorGuide();
 	
 	colorFrame = new Frame( "Color Key" );
-	colorFrame.addWindowListener( new WindowAdapter(){
-		public void windowClosing( WindowEvent e ){
-		    colorFrame.setVisible(false);
+	colorFrame.addWindowListener(
+		new WindowAdapter(){
+			public void windowClosing( WindowEvent e ){
+				colorFrame.setVisible(false);
+			}
 		}
-	    }
-				      );
+	);
 	labels = new ArrayList();
 	
 	colorPanel = new Panel();
 	colorPanel.setLayout( new GridLayout( 0,1 ) );
 	
-	labels.add( new Label( "dna in Title", Label.CENTER ) );
+	labels.add( new Label( "dna in Title", Label.CENTER) );
 	((Label)labels.get( 0 )).setBackground( (Color)colorkey.get( "dna in Title" ) );
 	colorPanel.add( (Label)labels.get(0) );
 	
@@ -52,8 +53,7 @@ public class ColorFrame {
 	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "hypothetical protein" ) );
 	colorPanel.add( (Label)labels.get(labels.size() - 1) );
 	
-	labels.add( new Label( "transport protein in Function", 
-			       Label.CENTER ) );
+	labels.add( new Label( "transport protein in Function", Label.CENTER ) );
 	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "transport protein in Function" ) );
 	((Label)labels.get(labels.size() - 1)).setForeground( Color.WHITE );
 	colorPanel.add( (Label)labels.get(labels.size() - 1) );
@@ -72,7 +72,7 @@ public class ColorFrame {
     }
 
 	/**
-	 * Show key.
+	 * Show the color
 	 */
 	public void showKey(){
 	colorFrame.pack();

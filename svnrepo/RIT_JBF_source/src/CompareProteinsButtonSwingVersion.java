@@ -12,16 +12,8 @@ import java.awt.event.*;
  */
 public class CompareProteinsButtonSwingVersion extends JButton implements ActionListener {
 
-    /**
-     * The Electro 2 d.
-     */
     Electro2D electro2D;
 
-    /**
-     * Instantiates a new Compare proteins button swing version.
-     *
-     * @param e the e
-     */
     public CompareProteinsButtonSwingVersion(Electro2D e) {
 
         super("Compare Proteins");
@@ -32,8 +24,8 @@ public class CompareProteinsButtonSwingVersion extends JButton implements Action
 
     public void actionPerformed(ActionEvent e) {
 
-	electro2D.getSequenceData2();
-	PlayButtonSwingVersion.setCompare(true);
+	    electro2D.getSequenceData2();
+	    PlayButtonSwingVersion.setCompare(true);
 
     }
 }
