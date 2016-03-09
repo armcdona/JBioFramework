@@ -244,7 +244,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
        JPanel ninthPanel = new JPanel();
        ninthPanel.add(secondProt);
-       //leftPanel.add(ninthPanel); Removed compare protein functionality until it is useful.
+       //leftPanel.add(ninthPanel); //Removed compare protein functionality until it is useful.
 
        JPanel tenthPanel = new JPanel();
        tenthPanel.add(searchButton);
