@@ -38,32 +38,34 @@ public class ColorFrame {
 	colorPanel.setLayout( new GridLayout( 0,1 ) );
 	
 	labels.add( new Label( "dna in Title", Label.CENTER) );
-	((Label)labels.get( 0 )).setBackground( (Color)colorkey.get( "dna in Title" ) );
+		((Label)labels.get( 0 )).setBackground( (Color)colorkey.get( "dna in Title" ) );
+		((Label)labels.get(labels.size() - 1)).setForeground( Color.WHITE );
 	colorPanel.add( (Label)labels.get(0) );
 	
 	labels.add( new Label( "ribosomal in Title", Label.CENTER ) );
-	((Label)labels.get( labels.size() - 1 )).setBackground( (Color)colorkey.get( "ribosomal in Title" ));
+		((Label)labels.get( labels.size() - 1 )).setBackground( (Color)colorkey.get( "ribosomal in Title" ));
+		((Label)labels.get(labels.size() - 1)).setForeground( Color.WHITE );
 	colorPanel.add( (Label)labels.get( labels.size() - 1 ) );
 	
 	labels.add( new Label( "Enzyme EC in Function", Label.CENTER ) );
-	((Label)labels.get( labels.size() - 1 )).setBackground( (Color)colorkey.get( "Enzyme EC in Function" ) );
+		((Label)labels.get( labels.size() - 1 )).setBackground( (Color)colorkey.get( "Enzyme EC in Function" ) );
 	colorPanel.add( (Label)labels.get( labels.size() - 1 ) );
 
 	labels.add( new Label( "hypothetical protein", Label.CENTER ) );
-	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "hypothetical protein" ) );
+		((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "hypothetical protein" ) );
 	colorPanel.add( (Label)labels.get(labels.size() - 1) );
 	
 	labels.add( new Label( "transport protein in Function", Label.CENTER ) );
-	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "transport protein in Function" ) );
-	((Label)labels.get(labels.size() - 1)).setForeground( Color.WHITE );
+		((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "transport protein in Function" ) );
+		((Label)labels.get(labels.size() - 1)).setForeground( Color.WHITE );
 	colorPanel.add( (Label)labels.get(labels.size() - 1) );
 
 	labels.add( new Label( "receptor in Function", Label.CENTER ) );
-	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "receptor in Function" ) );
+		((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "receptor in Function" ) );
 	colorPanel.add( (Label)labels.get(labels.size() - 1) );
 
 	labels.add( new Label( "transduction in Function", Label.CENTER ) );
-	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "transduction in Function" ) );
+		((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "transduction in Function" ) );
 	colorPanel.add( (Label)labels.get(labels.size() - 1) );
 	
 	colorFrame.setBounds( 0, 0, 400, 300 );
