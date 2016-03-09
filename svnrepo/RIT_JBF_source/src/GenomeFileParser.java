@@ -228,7 +228,7 @@ public class GenomeFileParser {
 	    try {
 		File f = new File( "data"+ File.separator + theFile );
 		in = new BufferedReader
-		    (new InputStreamReader( f.toURL().openStream()));
+		    (new InputStreamReader( f.toURI().toURL().openStream()));
 		String temp1;
 		
 		while ( (temp1 = in.readLine()) != null) {
@@ -239,7 +239,7 @@ public class GenomeFileParser {
 		MessageFrame error = new MessageFrame();
 		error.setMessage("Error reading from file.  Be sure you " +
 				 "typed the name correctly.");
-		error.show();
+		error.setVisible(true);
 		anerror = true;
 		System.err.println("Exception was: " + e);
 	    }
@@ -449,7 +449,7 @@ public class GenomeFileParser {
 	    //read in aminoconversiontable
 	    File f = new File( "./aminoconversiontable.txt" );
 	    in = new BufferedReader(new InputStreamReader(
-						    f.toURL().openStream()));
+						    f.toURI().toURL().openStream()));
 
 	    while((temp = in.readLine()) != null) {
 		aminoConversions.put(temp.substring(0,3), temp.substring(4,5));
@@ -658,7 +658,7 @@ public class GenomeFileParser {
 	    try {
 		File f = new File( "data" + File.separator + theFile );
 		in = new BufferedReader
-		    (new InputStreamReader( f.toURL().openStream()));
+		    (new InputStreamReader( f.toURI().toURL().openStream()));
 		String temp1;
 		
 		while ( (temp1 = in.readLine()) != null) {
@@ -669,7 +669,7 @@ public class GenomeFileParser {
 		MessageFrame error = new MessageFrame();
 		error.setMessage("Error reading from file.  Be sure you " +
 				 "typed the name correctly.");
-		error.show();
+		error.setVisible(true);
 		anerror = true;
 		System.err.println("Exception was: " + e);
 	    }
@@ -869,7 +869,7 @@ public class GenomeFileParser {
 		in = new BufferedReader
 		    (new InputStreamReader((/*electro2D.getCodeBase()*/ 
 						   /* "data/" + theFile*/
-						   f.toURL()).openStream()));
+						   f.toURI().toURL()).openStream()));
 		String temp1;
 		
 		while ( (temp1 = in.readLine()) != null) {
@@ -880,7 +880,7 @@ public class GenomeFileParser {
 		MessageFrame error = new MessageFrame();
 		error.setMessage("Error reading from file.  Be sure you " +
 				 "typed the name correctly.");
-		error.show();
+		error.setVisible(true);
 
 		anerror = true;
 		System.err.println("Exception was: " + e);
@@ -1225,7 +1225,7 @@ public class GenomeFileParser {
 	File f = new File( "data" + File.separator + theFile );
 	BufferedReader in = null;
 	try{
-	    in = new BufferedReader( new InputStreamReader( f.toURL().openStream() ) );
+	    in = new BufferedReader( new InputStreamReader( f.toURI().toURL().openStream() ) );
 	  
 	}catch( Exception e ){
 	    System.err.println("Error reading from file.  Double-check " +

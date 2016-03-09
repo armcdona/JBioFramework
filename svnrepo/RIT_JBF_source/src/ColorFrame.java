@@ -21,7 +21,7 @@ public class ColorFrame {
 	colorFrame = new Frame( "Color Key" );
 	colorFrame.addWindowListener( new WindowAdapter(){
 		public void windowClosing( WindowEvent e ){
-		    colorFrame.hide();
+		    colorFrame.setVisible(false);
 		}
 	    }
 				      );
@@ -67,6 +67,6 @@ public class ColorFrame {
 
     public void showKey(){
 	colorFrame.pack();
-	colorFrame.show();
+	colorFrame.setVisible(true);
     }
 }

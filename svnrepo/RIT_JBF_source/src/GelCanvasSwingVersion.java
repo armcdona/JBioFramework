@@ -933,7 +933,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
                 if(((ProteinDotSwingVersion)dotProteins.elementAt(i)).getShowMe() && clickX <= dotX + 6 && clickX >= dotX - 1) {
                     if(clickY <= dotY + 7 && clickY >= dotY - 1) {
                         ProteinFrame pFrame = new ProteinFrame(electro2D, ((ProteinDotSwingVersion)dotProteins.elementAt(i)).getPro().getID(), 1);
-                        pFrame.show();
+                        pFrame.setVisible(true);
                     }
                 }
             }
@@ -945,7 +945,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
                 if(((ProteinDotSwingVersion)dotProteins2.elementAt(i)).getShowMe() && clickX <= dotX + 5 && clickX >= dotX - 1) {
                     if(clickY <= dotY + 5 && clickY >= dotY - 1) {
                         ProteinFrame pFrame = new ProteinFrame(electro2D, ((ProteinDotSwingVersion)dotProteins2.elementAt(i)).getPro().getID(), 2);
-                        pFrame.show();
+                        pFrame.setVisible(true);
                     }
                 }
             }
@@ -963,7 +963,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
                             IEFFrame iFrame = new IEFFrame((IEFProteinSwingVersion)barProteins.elementAt(j));
                             iFrame.setResizable(true);
                             iFrame.pack();
-                            iFrame.show();
+                            iFrame.setVisible(true);
                         }
                     }
                 }
@@ -980,7 +980,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
                             IEFFrame iFrame = new IEFFrame((IEFProteinSwingVersion)barProteins2.elementAt(j));
                             iFrame.setResizable(true);
                             iFrame.pack();
-                            iFrame.show();
+                            iFrame.setVisible(true);
                         }
                     }
                 }

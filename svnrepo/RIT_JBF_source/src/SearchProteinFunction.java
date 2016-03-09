@@ -49,7 +49,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	window = new JFrame();
 	window.addWindowListener( new WindowAdapter(){
 		public void windowClosing( WindowEvent e ) {
-					  window.hide();
+					  window.setVisible(false);
 				      }
 				  }
 				  );
