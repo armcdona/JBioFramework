@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * The type Csv creator.
+ * Saves the array of Protein dots into a csv File
  */
 public class CSVCreator{
     
@@ -18,18 +18,13 @@ public class CSVCreator{
     private Electro2D electro2D;
     private final String directoryString = "CSV Files";
 
-    /**
-     * Instantiates a new Csv creator.
-     *
-     * @param e the e
-     */
     public CSVCreator( Electro2D e ){
 	electro2D = e;	
 	proteins = electro2D.getGel().getDots();
     }
 
     /**
-     * Write to csv.
+     * Takes the array of Protein Dots and saves it into a csv file with a format recognized by the program
      */
     public void writeToCSV(){
 	

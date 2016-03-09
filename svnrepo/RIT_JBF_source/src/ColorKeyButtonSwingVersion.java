@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * TDisplays the Color Window
+ * Displays the Color Window (tells the user what a dots color means)
  */
 public class ColorKeyButtonSwingVersion extends JButton implements ActionListener {
     ColorFrame key;

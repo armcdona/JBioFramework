@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * The type Compare proteins button swing version.
+ * Button to activate the protein comparison.  This is not used at this time.
  */
 public class CompareProteinsButtonSwingVersion extends JButton implements ActionListener {
 

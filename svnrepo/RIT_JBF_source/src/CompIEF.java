@@ -16,10 +16,10 @@ public class CompIEF implements Comparator{
     private double min;  //the minimum pH value for the IEF
 
 	/**
-	 * Constructor for the CompIEF object
+	 * Creates the object with gives maximum and minimum values
 	 *
-	 * @param _max the max value
-	 * @param _min the min value
+	 * @param _max the maximum value
+	 * @param _min the minimum value
 	 */
 	public CompIEF( double _max, double _min ){
 	max = _max;
@@ -27,10 +27,8 @@ public class CompIEF implements Comparator{
     }
 
     /**
-     * Compares two IEFProtein objects by their pI values and 
-     * x coordinate.  The method returns a 0 if they are equal,
-     * a negative one if the 2nd object is greater than the first,
-     * and a 1 if the first object is greater than the second.
+     * Compares two IEFProtein objects by their pI values and x coordinate.
+	 * The method returns 0 if they are equal, -1 if the second object > first object, and 1 if the first object > second object.
      *
      * @param o1 the first IEFProtein object
      * @param o2 the second IEFProtein object
