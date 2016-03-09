@@ -6,8 +6,7 @@
  */
 
 /**
- * 
- * @author Amanda Fisher
+ * Not used at the moment
  */
 public class AminoException extends Exception {
     public AminoException() {}

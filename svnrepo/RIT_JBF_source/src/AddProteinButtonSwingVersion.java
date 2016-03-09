@@ -7,6 +7,9 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * Opens a window for the user to load a file
+ */
 public class AddProteinButtonSwingVersion extends JButton implements ActionListener {
     Electro2D electro2D;
 

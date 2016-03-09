@@ -1,5 +1,8 @@
 import javax.swing.*;
 
+/**
+ * The background canvas of the main window
+ */
 public class BackgroundCanvas {
 
     private Electro2D electro2D;

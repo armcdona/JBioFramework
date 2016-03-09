@@ -27,7 +27,7 @@ public class ProteinDotSwingVersion extends Component {
      * constructor
      *
      * @param pro the protein being represented
-     * @param canvas JPanel to hold the protein
+     * @param panel JPanel to hold the protein
      * @param x the x coordinate for this dot
      * @param y the y coordinate for this dot
      */

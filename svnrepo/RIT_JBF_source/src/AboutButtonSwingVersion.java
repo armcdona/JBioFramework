@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 
+/**
+ * Opens a window that displays about.html
+ */
 public class AboutButtonSwingVersion extends JButton implements ActionListener {
     Electro2D electro2D;
 

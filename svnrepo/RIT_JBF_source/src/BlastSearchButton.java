@@ -17,8 +17,9 @@ public class BlastSearchButton extends JButton implements ActionListener {
     /**
      * Constructor, performs some perfunctory tasks.
      *
-     * @param e - a reference to Electro2D
-     * @param id - the string being searched for
+     * @param seq the string that will be searched for
+     * @param e a reference to Electro2D
+     * @param text the text of the button
      */
     public BlastSearchButton( Electro2D e, String seq, String text) {
         super(text);

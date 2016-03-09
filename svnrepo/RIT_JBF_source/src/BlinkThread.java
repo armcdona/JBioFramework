@@ -1,5 +1,8 @@
 import java.awt.*;
 
+/**
+ * Supposed to alternate the color of a protein dot (make them blink) between green and red, but is not currently used
+ */
 public class BlinkThread extends Thread {
 
     private ProteinDotSwingVersion theDot;

@@ -10,20 +10,20 @@
  */
 import java.util.ArrayList;
 
+/**
+ * Cuts proteins in a similar/same way that ProteinaseK does
+ */
 public class ProteinaseK extends Protease {
 
     ArrayList<Character> buildingIons = new ArrayList<Character>();
     ArrayList<String> cutSequence = new ArrayList<String>();
 
     /**
-     * The cut method takes an input sequence and cuts it in to different Strings
-     * at points dependent on the type of Protease using the method. It uses
-     * the makeIon method to turn the ArrayList of collectd characters in to
-     * a String.
-     *
-     * @param sequence String sequence representing an amino acid chain.
-     * @return ArrayList of Strings, the cut sequence.
-     * @throws ProteaseException When given inappropriate input.
+     * The cut method takes an input sequence and cuts it in to different Strings at points dependent on the type of Protease using the method.
+     * It uses the makeIon method to turn the ArrayList of collected characters in to a String
+     * @param sequence String sequence representing an amino acid chain
+     * @return The sequence after it is cut
+     * @throws ProteaseException Thrown when given an input with incorrect formatting
      */
     public ArrayList<String> cut(String sequence) throws ProteaseException {
         if (sequence.contains(" ")) {
@@ -51,8 +51,7 @@ public class ProteinaseK extends Protease {
     }
 
     /**
-     * makeIon takes the characters collected by cut and turns them in to a String
-     * representing an Ion's sequence.
+     * Takes the characters collected by cut and turns them in to a string that represents the sequence of the Ion
      */
     private void makeIon() {
         Character[] characterIon = new Character[buildingIons.size()];

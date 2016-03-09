@@ -6,8 +6,7 @@
  */
 
 /**
- *
- * @author Amanda Fisher
+ * Exception thrown if cut sequence is not properly formatted
  */
 public class ProteaseException extends Exception {
     public ProteaseException() {}

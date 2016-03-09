@@ -822,7 +822,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     }
 
     /**
-     * Returns the statis of blink.
+     * Returns the status of blink
      *
      * @return blink
      */
@@ -831,7 +831,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
     }
 
     /**
-     * Sets blink to false.
+     * Sets blink to false
      */
      public static void stopBlink() {
          blink = false;
@@ -839,7 +839,7 @@ public class GelCanvasSwingVersion extends JPanel implements MouseListener {
 
      /**
       * This method draws the location of a protein to the screen using its 
-      * xLoc and yLoc values.
+      * xLoc and yLoc values
       */
      public void redrawLocation() {
 	bufferImageGraphics.setColor(Color.LIGHT_GRAY);
