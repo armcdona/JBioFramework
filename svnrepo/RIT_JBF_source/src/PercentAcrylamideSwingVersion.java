@@ -6,9 +6,15 @@
 
 import javax.swing.*;
 
+/**
+ * The type Percent acrylamide swing version.
+ */
 public class PercentAcrylamideSwingVersion extends JComboBox {
 
-    public PercentAcrylamideSwingVersion() {
+	/**
+	 * Instantiates a new Percent acrylamide swing version.
+	 */
+	public PercentAcrylamideSwingVersion() {
 
         super();
         addItem( "5" );

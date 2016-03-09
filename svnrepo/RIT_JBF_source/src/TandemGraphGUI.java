@@ -12,16 +12,46 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.util.ArrayList;
 
+/**
+ * The type Tandem graph gui.
+ */
 public class TandemGraphGUI extends JPanel {
 
+    /**
+     * The Width.
+     */
     int width;
+    /**
+     * The Height.
+     */
     int height;
+    /**
+     * The X axis width.
+     */
     int xAxisWidth;
+    /**
+     * The Y axis height.
+     */
     int yAxisHeight;
+    /**
+     * The X axis starting point.
+     */
     int xAxisStartingPoint;
+    /**
+     * The Y axis starting point.
+     */
     int yAxisStartingPoint;
+    /**
+     * The Half hash mark length.
+     */
     int halfHashMarkLength;
+    /**
+     * The Numerical difference.
+     */
     int numericalDifference = 200;
+    /**
+     * The Starting point.
+     */
     int startingPoint = 0;
 
     private ArrayList<Ion> peakLines;
@@ -93,7 +123,7 @@ public class TandemGraphGUI extends JPanel {
      * drawSequencePeaks figures what ions are created from the initial
      * ion and makes an arrayList of ions with them. It then calls drawPeaks
      * to display the ions in the list.
-     *
+     * <p>
      * b and y fragments: In truth, peptides can be broken down into two smaller
      * fragments at any of three different types of places in their chain. We're
      * just interested in the break that can happen at the CO-NH bond between
@@ -110,7 +140,7 @@ public class TandemGraphGUI extends JPanel {
      * sequence from right to left. You can assume the last residue in each
      * sequence will be whatever the protease used to digest the original peptide
      * cuts at.
-     *
+     * <p>
      * Source: http://www.astbury.leeds.ac.uk/facil/MStut/mstutorial.htm
      *
      * @param ion The ion the user selected for peptide sequencing.
@@ -188,8 +218,6 @@ public class TandemGraphGUI extends JPanel {
      * OutputGraphGUI can resize its x-axis to start at the smallest m/e ratio
      * and end at the largest m/e ratio.
      *
-     * @param smallestme - the smallest m/e ratio among the ions
-     * @param biggestme - the biggest m/e ratio among the ions
      */
     public void resizeXAxis() {
         // Determine the smallest m/e ratio and the biggest m/e ratio
@@ -352,7 +380,7 @@ public class TandemGraphGUI extends JPanel {
 
     /**
      * Used by MainPanelGUI's JCheckBoxes to toggle whether b fragments are seen.
-     * 
+     *
      * @param state State of the check box.
      */
     public void setBlueBs(boolean state) {

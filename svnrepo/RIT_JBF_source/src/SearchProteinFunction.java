@@ -3,6 +3,9 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
+/**
+ * The type Search protein function.
+ */
 public class SearchProteinFunction implements MouseListener, ActionListener{
     
     private Vector dots1;
@@ -28,7 +31,12 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
     private JRadioButton titleButton;
     private JRadioButton functionButton;
 
-    public SearchProteinFunction( Electro2D e2D ){
+	/**
+	 * Instantiates a new Search protein function.
+	 *
+	 * @param e2D the e 2 d
+	 */
+	public SearchProteinFunction( Electro2D e2D ){
 	
 	electro2D = e2D;
 	radioButtons = new ButtonGroup();
@@ -123,7 +131,13 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
         }
     }
 
-    public void searchFor( String fcnName, String limitations ){
+	/**
+	 * Search for.
+	 *
+	 * @param fcnName     the fcn name
+	 * @param limitations the limitations
+	 */
+	public void searchFor( String fcnName, String limitations ){
 	dots1 = gel.getDots();
 	dots2 = gel.getDots2();
 
@@ -220,8 +234,11 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
         count = 0;
         gel.update(gel.getGraphics());
     }
-    
-    public void displayAll(){
+
+	/**
+	 * Display all.
+	 */
+	public void displayAll(){
 	dots1 = gel.getDots();
 	dots2 = gel.getDots2();
 	for( int i = 0; i < dots1.size(); i++ ){
@@ -235,8 +252,11 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 //	gel.repaint();
         gel.update(gel.getGraphics());
     }
-    
-    public void hideExcludeFields(){
+
+	/**
+	 * Hide exclude fields.
+	 */
+	public void hideExcludeFields(){
 	//if( !title.getSelected() && !function.getSelected() ){
 	    searchFieldPane.remove( excludesLabel );
 	    searchFieldPane.remove( excludeTerm );
@@ -263,7 +283,12 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
 	
 	private SearchProteinFunction spf;
 
-	public HideExclude( SearchProteinFunction s ){
+		/**
+		 * Instantiates a new Hide exclude.
+		 *
+		 * @param s the s
+		 */
+		public HideExclude( SearchProteinFunction s ){
 	    spf = s;
 	}
 	

@@ -7,17 +7,37 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * The type Play button swing version.
+ */
 public class PlayButtonSwingVersion extends JButton implements ActionListener {
 
-    Electro2D electro2D;
-    boolean playing;
+	/**
+	 * The Electro 2 d.
+	 */
+	Electro2D electro2D;
+	/**
+	 * The Playing.
+	 */
+	boolean playing;
     private boolean iefDrawn;
     private boolean sdsDrawn;
     private static boolean compareFiles;
-    String choice;
-    boolean isPlaying;
+	/**
+	 * The Choice.
+	 */
+	String choice;
+	/**
+	 * The Is playing.
+	 */
+	boolean isPlaying;
 
-    public PlayButtonSwingVersion(Electro2D e) {
+	/**
+	 * Instantiates a new Play button swing version.
+	 *
+	 * @param e the e
+	 */
+	public PlayButtonSwingVersion(Electro2D e) {
 
         super("Run");
         addActionListener(this);
@@ -28,24 +48,43 @@ public class PlayButtonSwingVersion extends JButton implements ActionListener {
         compareFiles = false;
     }
 
-    public boolean getSdsStatus(){
+	/**
+	 * Get sds status boolean.
+	 *
+	 * @return the boolean
+	 */
+	public boolean getSdsStatus(){
 	return sdsDrawn;
     }
 
-    public void resetPlay(){
+	/**
+	 * Reset play.
+	 */
+	public void resetPlay(){
 	playing = false;
         this.setText("Run");
     }
 
-    public void resetIEF(){
+	/**
+	 * Reset ief.
+	 */
+	public void resetIEF(){
 	iefDrawn = false;
     }
 
-    public void resetSdsStatus(){
+	/**
+	 * Reset sds status.
+	 */
+	public void resetSdsStatus(){
 	sdsDrawn = false;
     }
 
-    public static void setCompare(boolean bool){
+	/**
+	 * Set compare.
+	 *
+	 * @param bool the bool
+	 */
+	public static void setCompare(boolean bool){
 	compareFiles = bool;
     }
 

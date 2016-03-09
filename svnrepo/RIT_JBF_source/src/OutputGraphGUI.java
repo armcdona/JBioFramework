@@ -18,24 +18,59 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 
+/**
+ * The type Output graph gui.
+ */
 public class OutputGraphGUI extends JPanel implements MouseListener {
 
     private ArrayList<Ion> peakLines;
     private MainPanelGUI mainPanel;
+    /**
+     * The Most hits.
+     */
     double mostHits;
+    /**
+     * The Width.
+     */
     int width;
+    /**
+     * The Height.
+     */
     int height;
+    /**
+     * The X axis width.
+     */
     int xAxisWidth;
+    /**
+     * The Y axis height.
+     */
     int yAxisHeight;
+    /**
+     * The X axis starting point.
+     */
     int xAxisStartingPoint;
+    /**
+     * The Y axis starting point.
+     */
     int yAxisStartingPoint;
+    /**
+     * The Half hash mark length.
+     */
     int halfHashMarkLength;
+    /**
+     * The Numerical difference.
+     */
     int numericalDifference = 200;
+    /**
+     * The Starting point.
+     */
     int startingPoint = 0;
 
     /**
      * The constructor's only purpose is to add itself as its own mouse
      * listener, so the user's clicks can be registered.
+     *
+     * @param mP the m p
      */
     public OutputGraphGUI(MainPanelGUI mP) {
         super();
@@ -49,11 +84,8 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      * to draw the lines that represent ion peaks. setPeaks also uses the range
      * entered by the user to select which peaks are displayed.
      *
-     * @param pL ArrayList of two element double arrays where each array's first
-     * entry is the peak's mass charge ratio, and the second entry is the peak's
-     * intensity.
-     * @param mH Spectrometer gives the int number of the most hits for a specific
-     * ion occuring so intensity of each peak can be calculated.
+     * @param pL ArrayList of two element double arrays where each array's first entry is the peak's mass charge ratio, and the second entry is the peak's intensity.
+     * @param mH Spectrometer gives the int number of the most hits for a specific ion occuring so intensity of each peak can be calculated.
      */
     public void setPeaks(ArrayList<Ion> pL, double mH) {
         double lowerLimit = mainPanel.getLowerLimit();
@@ -142,8 +174,6 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      * OutputGraphGUI can resize its x-axis to start at the smallest m/e ratio
      * and end at the largest m/e ratio.
      *
-     * @param smallestme - the smallest m/e ratio among the ions
-     * @param biggestme - the biggest m/e ratio among the ions
      */
     public void resizeXAxis() {
         // Determine the smallest m/e ratio and the biggest m/e ratio

@@ -11,6 +11,9 @@
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * The type Message frame.
+ */
 public class MessageFrame extends Frame {
 
  /** variables for the file reading pop-up frame **/
@@ -18,8 +21,11 @@ public class MessageFrame extends Frame {
     private Panel thePanel;              //panel to add components to
     private Label theLabel;              //label to display message on
     private String theMessage = "";      //message to display to user
-    
-    //construct simple GUI
+
+	/**
+	 * Instantiates a new Message frame.
+	 */
+//construct simple GUI
     public MessageFrame() {
 	
 	//set the title to Alert
@@ -44,7 +50,13 @@ public class MessageFrame extends Frame {
 	this.add(thePanel);
 	thePanel.add(theLabel);
     }
-    //set the message
+
+	/**
+	 * Sets message.
+	 *
+	 * @param message the message
+	 */
+//set the message
     public void setMessage(String message) {
 	theMessage = message;
 	theLabel.setText(theMessage);

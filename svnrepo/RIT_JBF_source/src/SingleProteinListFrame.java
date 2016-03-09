@@ -12,12 +12,30 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * The type Single protein list frame.
+ */
 public class SingleProteinListFrame extends JFrame {
 
+    /**
+     * The Electro 2 d.
+     */
     Electro2D electro2D;
+    /**
+     * The Sequence one list.
+     */
     JList sequenceOneList;
+    /**
+     * The Sequence titles one.
+     */
     Vector sequenceTitlesOne;
+    /**
+     * The Positions one.
+     */
     Vector<Integer> positionsOne;
+    /**
+     * The Copy sequence one.
+     */
     Vector copySequenceOne;
 
     /**
@@ -66,6 +84,9 @@ public class SingleProteinListFrame extends JFrame {
      * refreshProteinList2 method when a new protein sequence is loaded.
      * updateSequences copies the protein sequence titles into its own lists
      * for display.
+     *
+     * @param pL1 the p l 1
+     * @param pL2 the p l 2
      */
     public void updateSequences(Vector pL1, Vector pL2) {
         sequenceOneList.setListData(pL1);
@@ -126,13 +147,18 @@ public class SingleProteinListFrame extends JFrame {
      * Electro2D will call them in its get methods for the vectors used in
      * gel filtration in order to carry over the manipulations done by the user.
      *
-     * @return Vector<Integer> the positions of each element still in the sequence.
+     * @return the positions of each element still in the sequence.
      */
     public Vector<Integer> getPositionsOne() {
         return positionsOne;
     }
 
-    // This method should currently be unused, as the compare proteins functionality
+    /**
+     * Gets positions two.
+     *
+     * @return the positions two
+     */
+// This method should currently be unused, as the compare proteins functionality
     // has been temporarily disabled.
     public Vector<Integer> getPositionsTwo() {
         Vector<Integer> positionsTwo = new Vector<Integer>();

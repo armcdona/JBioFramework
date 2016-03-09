@@ -2,14 +2,13 @@ import java.io.*;
 import java.util.Vector;
 
 /**
- * This class generates the preprocessed proteome files created after a 
+ * This class generates the preprocessed proteome files created after a
  * genBank, fasta, or protein database file has been run.  In doing this
  * the time to load a proteome (if already loaded once) will be cut down.
  * (Hopefully...)
  *
  * @author Jill Zapoticznyj
  */
-
 public class Preprocessor{
     
     private static final String EXTENTION = ".e2d";
@@ -33,8 +32,13 @@ public class Preprocessor{
     private String fileName;
     private int numEnzymes;
     private Electro2D electro2D;
-    
-    public Preprocessor( Electro2D e ){
+
+	/**
+	 * Instantiates a new Preprocessor.
+	 *
+	 * @param e the e
+	 */
+	public Preprocessor( Electro2D e ){
 	sequence = e.getSequences();
 	sequenceTitle = e.getSequenceTitles();
 	molwts = e.getMolecularWeights();
@@ -42,8 +46,11 @@ public class Preprocessor{
 	functions = e.getFunctions();
 	fileName = e.getLastFileLoaded();
     }
-    
-    public void writeToFile(){
+
+	/**
+	 * Write to file.
+	 */
+	public void writeToFile(){
 	int length = 0;
 	String fcn = "";
 	String seq = "";
@@ -105,11 +112,23 @@ public class Preprocessor{
 	}
     }
 
-    public static int getHeaderLength(){
+	/**
+	 * Get header length int.
+	 *
+	 * @return the int
+	 */
+	public static int getHeaderLength(){
 	return HEADER_LENGTH;
     }
 
-    public static void readFromFile( BufferedReader in, Electro2D electro2D, 
+	/**
+	 * Read from file.
+	 *
+	 * @param in        the in
+	 * @param electro2D the electro 2 d
+	 * @param fileNum   the file num
+	 */
+	public static void readFromFile( BufferedReader in, Electro2D electro2D,
 				     int fileNum ){
 	int fileNameLoc = 0;
 	int endofHeader = 1;

@@ -7,18 +7,21 @@
 
 import java.util.*;
 
+/**
+ * The type Comp ief.
+ */
 public class CompIEF implements Comparator{
     
     private double max;  //the maximum pH value for the IEF
     private double min;  //the minimum pH value for the IEF
 
-    /**
-     * Constructor for the CompIEF object
-     *
-     * @param _max the max value
-     * @param _min the min value
-     */    
-    public CompIEF( double _max, double _min ){
+	/**
+	 * Constructor for the CompIEF object
+	 *
+	 * @param _max the max value
+	 * @param _min the min value
+	 */
+	public CompIEF( double _max, double _min ){
 	max = _max;
 	min = _min;
     }

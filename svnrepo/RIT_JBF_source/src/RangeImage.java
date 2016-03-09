@@ -6,6 +6,9 @@
 
 import java.awt.*;
 
+/**
+ * The type Range image.
+ */
 public class RangeImage extends Canvas{
 
     private Image pic;

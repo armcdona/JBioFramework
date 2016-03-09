@@ -18,12 +18,30 @@
 import java.util.ArrayList;
 import java.awt.Color;
 
+/**
+ * The type Ion.
+ */
 public class Ion extends ArrayList<SpecAminoAcid> {
 
+    /**
+     * The Total mass.
+     */
     double totalMass = 0;
+    /**
+     * The Total charge.
+     */
     int totalCharge = 0;
+    /**
+     * The Hits.
+     */
     double hits = 0;
+    /**
+     * The X coordinate.
+     */
     int xCoordinate = 0;
+    /**
+     * The Color.
+     */
     Color color = Color.BLACK;
 
     /**
@@ -83,7 +101,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
     /**
      * Used by OutputGraphGUI to let the Ion know where it is on the graph.
      *
-     * @param x
+     * @param x the x
      */
     public void setXCoordinate(int x) {
         xCoordinate = x;
@@ -91,8 +109,8 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 
     /**
      * Used to return the Ion's mass.
-     * 
-     * @return totalMass.
+     *
+     * @return totalMass. mass
      */
     public double getMass() {
         return totalMass;
@@ -102,7 +120,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * Used to return the Ion's charge. Should always return one; think about
      * removing this function.
      *
-     * @return totalCharge.
+     * @return totalCharge. charge
      */
     public int getCharge() {
         return totalCharge;
@@ -112,7 +130,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * Used to return the Ion's mass charge ratio. Should always just be mass
      * over one. Think about removing this method.
      *
-     * @return massChargeRatio.
+     * @return massChargeRatio. mass charge ratio
      */
     public double getMassChargeRatio() {
         return totalMass/(double)totalCharge;
@@ -121,7 +139,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
     /**
      * Used to return the Ion's hits count.
      *
-     * @return hits.
+     * @return hits. hits
      */
     public double getHits() {
         return hits;
@@ -130,7 +148,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
     /**
      * Used by Spectrometer to determine if a user clicked on this Ion or not.
      *
-     * @return xCoordinate.
+     * @return xCoordinate. x coordinate
      */
     public int getXCoordinate() {
         return xCoordinate;

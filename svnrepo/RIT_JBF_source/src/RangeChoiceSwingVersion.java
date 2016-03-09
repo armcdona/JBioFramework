@@ -7,10 +7,21 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * The type Range choice swing version.
+ */
 public class RangeChoiceSwingVersion extends JComboBox implements ItemListener {
 
+    /**
+     * The Electro 2 d.
+     */
     Electro2D electro2D;
 
+    /**
+     * Instantiates a new Range choice swing version.
+     *
+     * @param e the e
+     */
     public RangeChoiceSwingVersion(Electro2D e) {
 
         super();

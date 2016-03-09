@@ -9,17 +9,28 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * The type Csv creator.
+ */
 public class CSVCreator{
     
     private Vector proteins;
     private Electro2D electro2D;
     private final String directoryString = "CSV Files";
 
+    /**
+     * Instantiates a new Csv creator.
+     *
+     * @param e the e
+     */
     public CSVCreator( Electro2D e ){
 	electro2D = e;	
 	proteins = electro2D.getGel().getDots();
     }
 
+    /**
+     * Write to csv.
+     */
     public void writeToCSV(){
 	
 	String filename = electro2D.getLastFileLoaded();

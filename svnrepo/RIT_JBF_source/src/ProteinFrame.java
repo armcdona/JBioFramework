@@ -19,6 +19,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.*;
 
+/**
+ * The type Protein frame.
+ */
 public class ProteinFrame extends JFrame {
 
     private Electro2D electro2D;          //reference to calling applet
@@ -46,8 +49,9 @@ public class ProteinFrame extends JFrame {
      * Constructor - creates the ProteinFrame object as well as initializes
      * all of the data members
      *
-     * @param e a reference to the Electro2D class
-     * @param pt the title of the protein whose information is displayed
+     * @param e       a reference to the Electro2D class
+     * @param pt      the title of the protein whose information is displayed
+     * @param filenum the filenum
      */
     public ProteinFrame(Electro2D e, String pt, int filenum) {
 
@@ -189,6 +193,9 @@ public class ProteinFrame extends JFrame {
     }
 
     private class sendToSpec extends JButton implements ActionListener {
+        /**
+         * Instantiates a new Send to spec.
+         */
         public sendToSpec() {
             super("Run Mass Spectrum");
             addActionListener(this);

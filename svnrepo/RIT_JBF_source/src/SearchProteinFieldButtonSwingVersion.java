@@ -7,11 +7,25 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * The type Search protein field button swing version.
+ */
 public class SearchProteinFieldButtonSwingVersion extends JButton implements ActionListener {
 
+    /**
+     * The Electro 2 d.
+     */
     Electro2D electro2D;
+    /**
+     * The Spf.
+     */
     SearchProteinFunction spf;
 
+    /**
+     * Instantiates a new Search protein field button swing version.
+     *
+     * @param e the e
+     */
     public SearchProteinFieldButtonSwingVersion(Electro2D e) {
 
         super("Search Protein Field");

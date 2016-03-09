@@ -8,14 +8,20 @@ import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * The type Color frame.
+ */
 public class ColorFrame {
     
     private static Frame colorFrame;
     private Panel colorPanel;
     private ArrayList labels;
     private HashMap colorkey;
-    
-    public ColorFrame(){
+
+	/**
+	 * Instantiates a new Color frame.
+	 */
+	public ColorFrame(){
 	colorkey = E2DProtein.getColorGuide();
 	
 	colorFrame = new Frame( "Color Key" );
@@ -65,7 +71,10 @@ public class ColorFrame {
 	colorFrame.add( colorPanel );
     }
 
-    public void showKey(){
+	/**
+	 * Show key.
+	 */
+	public void showKey(){
 	colorFrame.pack();
 	colorFrame.setVisible(true);
     }

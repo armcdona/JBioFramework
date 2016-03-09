@@ -15,6 +15,9 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 
+/**
+ * The type File frame.
+ */
 public class FileFrame extends JFrame implements ActionListener {
 
     /** variables for the file reading pop-up frame **/
@@ -30,6 +33,12 @@ public class FileFrame extends JFrame implements ActionListener {
     private JPanel south;
     private String[] sa;
 
+    /**
+     * Instantiates a new File frame.
+     *
+     * @param e the e
+     * @param i the
+     */
     public FileFrame(Electro2D e, int i) {
 
         fileNum = i;
@@ -74,6 +83,9 @@ public class FileFrame extends JFrame implements ActionListener {
         refreshFileList();
     }
 
+    /**
+     * Refresh file list.
+     */
     public void refreshFileList() {
 
         choice.removeAllItems();
@@ -114,6 +126,9 @@ public class FileFrame extends JFrame implements ActionListener {
         refreshFileList();
     }
 
+    /**
+     * Load file.
+     */
     public void loadFile() {
 
         //first, get filename from textbox

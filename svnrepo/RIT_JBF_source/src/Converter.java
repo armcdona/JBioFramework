@@ -8,6 +8,7 @@
  */
 
 /**
+ * The type Converter.
  *
  * @author Amanda Fisher
  */

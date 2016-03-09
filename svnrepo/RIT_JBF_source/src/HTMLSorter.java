@@ -5,12 +5,24 @@
 
 import java.util.*;
 
+/**
+ * The type Html sorter.
+ */
 public class HTMLSorter{
     
     private TreeSet proteinInfo;
     private int compBy;
-    
-    public HTMLSorter( int cb, Vector t, Vector p, Vector m, Vector f ){
+
+	/**
+	 * Instantiates a new Html sorter.
+	 *
+	 * @param cb the cb
+	 * @param t  the t
+	 * @param p  the p
+	 * @param m  the m
+	 * @param f  the f
+	 */
+	public HTMLSorter( int cb, Vector t, Vector p, Vector m, Vector f ){
 	
 	compBy = cb;
 	proteinInfo = new TreeSet( new HTMLComparator( compBy ) );
@@ -26,7 +38,12 @@ public class HTMLSorter{
 	}
     }
 
-    public TreeSet getSorted(){
+	/**
+	 * Get sorted tree set.
+	 *
+	 * @return the tree set
+	 */
+	public TreeSet getSorted(){
 	return proteinInfo;
     }
 }

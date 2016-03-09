@@ -11,6 +11,16 @@
  */
 import java.util.ArrayList;
 
+/**
+ * The type Protease.
+ */
 public abstract class Protease {
+    /**
+     * Cut array list.
+     *
+     * @param sequence the sequence
+     * @return the array list
+     * @throws ProteaseException the protease exception
+     */
     public abstract ArrayList<String> cut(String sequence) throws ProteaseException;
 }

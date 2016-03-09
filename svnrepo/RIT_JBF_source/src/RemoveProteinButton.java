@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+
 /**
  * Removes highlighted proteins from the protein list.
  *
@@ -22,6 +23,8 @@ public class RemoveProteinButton extends Canvas implements MouseListener {
 
     /**
      * Constructor, performs some perfunctory tasks.
+     *
+     * @param e the e
      */
     public RemoveProteinButton(Electro2D e) {
 	electro2D = e; //give the button a reference to Electro2D

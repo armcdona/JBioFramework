@@ -13,13 +13,17 @@ import java.io.*;  // input/output package
 import java.util.*; // utiliies
 import java.net.URL;
 
+/**
+ * The type Genome file parser.
+ */
 public class GenomeFileParser {
-    /**
-     * This method calculates the pI from inputted sequence
-     *
-     * @param     pro     protein sequence
-     */
-    public static double getPI( String pro ) {
+	/**
+	 * This method calculates the pI from inputted sequence
+	 *
+	 * @param pro protein sequence
+	 * @return the pi
+	 */
+	public static double getPI( String pro ) {
 
         // Calculate charge at a certain pH, starting with a pH of 7
         double  pH = 7;
@@ -115,14 +119,15 @@ public class GenomeFileParser {
         }
         return pH; // Method returns the pH at which charge is 0 (pI)
     }
-    
 
-    /**
-     * This method calculates the molecular weight from inputted sequence
-     *
-     * @param     pro     protein sequence
-     */
-    public static double getMW( String pro ) {
+
+	/**
+	 * This method calculates the molecular weight from inputted sequence
+	 *
+	 * @param pro protein sequence
+	 * @return the mw
+	 */
+	public static double getMW( String pro ) {
 
         // Length of protein sequence
         int Plength = pro.length();
@@ -173,15 +178,16 @@ public class GenomeFileParser {
         return weight;
     }
 
-    /**
-     * This method parses a .pdb file, extracting sequence information and 
-     * appropriate descriptor for the sequence.
-     * 
-     * @param theFile   file to retrieve sequence data from
-     * @param electro2D reference to calling applet
-     * @param data      user-inputted file data
-     */
-    public static void pdbParse(String theFile, Electro2D electro2D,
+	/**
+	 * This method parses a .pdb file, extracting sequence information and
+	 * appropriate descriptor for the sequence.
+	 *
+	 * @param theFile   file to retrieve sequence data from
+	 * @param electro2D reference to calling applet
+	 * @param data      user-inputted file data
+	 * @param fileNum   the file num
+	 */
+	public static void pdbParse(String theFile, Electro2D electro2D,
 				String data, int fileNum) {
 	//error in reading file?
 	boolean anerror = false;
@@ -615,11 +621,17 @@ public class GenomeFileParser {
 	Preprocessor p = new Preprocessor( electro2D );
 	p.writeToFile();
     }
-    /**
-     * This method parses a FASTA file, extracting sequence information and 
-     * appropriate descriptor for the sequence.
-     */	
-    public static void fastaParse(String theFile, Electro2D electro2D,
+
+	/**
+	 * This method parses a FASTA file, extracting sequence information and
+	 * appropriate descriptor for the sequence.
+	 *
+	 * @param theFile   the the file
+	 * @param electro2D the electro 2 d
+	 * @param data      the data
+	 * @param fileNum   the file num
+	 */
+	public static void fastaParse(String theFile, Electro2D electro2D,
 				  String data, int fileNum) {
 
 	//was there an error in file reading?
@@ -822,13 +834,18 @@ public class GenomeFileParser {
 	p.writeToFile();
 
     }
-    /**
-     * This method parses a .gbk file, extracting sequence information and 
-     * appropriate descriptor for the sequence.
-     *
-     * @return  0 on success, 1 on error
-     */
-    public static int gbkParse(String theFile, Electro2D electro2D,
+
+	/**
+	 * This method parses a .gbk file, extracting sequence information and
+	 * appropriate descriptor for the sequence.
+	 *
+	 * @param theFile   the the file
+	 * @param electro2D the electro 2 d
+	 * @param data      the data
+	 * @param fileNum   the file num
+	 * @return 0 on success, 1 on error
+	 */
+	public static int gbkParse(String theFile, Electro2D electro2D,
 				String data, int fileNum) {
 
 	//was there an error in file reading?
@@ -1213,13 +1230,17 @@ public class GenomeFileParser {
 	return 0;
     }
 
-    /**
-     * This method parses a .e2d file, extracting sequence information and 
-     * appropriate descriptor for the sequence.
-     *
-     * @return  0 on success, 1 on error
-     */
-    public static int e2dParse(String theFile, Electro2D electro2D,
+	/**
+	 * This method parses a .e2d file, extracting sequence information and
+	 * appropriate descriptor for the sequence.
+	 *
+	 * @param theFile   the the file
+	 * @param electro2D the electro 2 d
+	 * @param data      the data
+	 * @param fileNum   the file num
+	 * @return 0 on success, 1 on error
+	 */
+	public static int e2dParse(String theFile, Electro2D electro2D,
 				String data, int fileNum) {
 
 	File f = new File( "data" + File.separator + theFile );

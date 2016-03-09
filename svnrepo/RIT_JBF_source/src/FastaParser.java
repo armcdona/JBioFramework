@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+/**
+ * The type Fasta parser.
+ */
 public class FastaParser {
 
     /**

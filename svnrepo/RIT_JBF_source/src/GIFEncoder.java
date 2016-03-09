@@ -12,59 +12,80 @@ import java.awt.image.*;
  * Format</A>). A GIFEncoder
  * is constructed with either an AWT Image (which must be fully
  * loaded) or a set of RGB arrays. The image can be written out with a
- * call to <CODE>Write</CODE>.<P>
- *
+ * call to <CODE>Write</CODE>.
+ * <p>
  * Three caveats:
  * <UL>
- *   <LI>GIFEncoder will convert the image to indexed color upon
- *   construction. This will take some time, depending on the size of
- *   the image. Also, actually writing the image out (Write) will take
- *   time.<P>
+ * <LI>GIFEncoder will convert the image to indexed color upon
+ * construction. This will take some time, depending on the size of
+ * the image. Also, actually writing the image out (Write) will take
+ * time.
  *
- *   <LI>The image cannot have more than 256 colors, since GIF is an 8
- *   bit format. For a 24 bit to 8 bit quantization algorithm, see
- *   Graphics Gems II III.2 by Xialoin Wu. Or check out his <A
- *   HREF="http://www.csd.uwo.ca/faculty/wu/cq.c">C source</A>.<P>
+ * <LI>The image cannot have more than 256 colors, since GIF is an 8
+ * bit format. For a 24 bit to 8 bit quantization algorithm, see
+ * Graphics Gems II III.2 by Xialoin Wu. Or check out his <A
+ * HREF="http://www.csd.uwo.ca/faculty/wu/cq.c">C source</A>.
  *
- *   <LI>Since the image must be completely loaded into memory,
- *   GIFEncoder may have problems with large images. Attempting to
- *   encode an image which will not fit into memory will probably
- *   result in the following exception:<P>
- *   <CODE>java.awt.AWTException: Grabber returned false: 192</CODE><P>
- * </UL><P>
- *
+ * <LI>Since the image must be completely loaded into memory,
+ * GIFEncoder may have problems with large images. Attempting to
+ * encode an image which will not fit into memory will probably
+ * result in the following exception:<P>
+ * <CODE>java.awt.AWTException: Grabber returned false: 192</CODE><P>
+ * </UL>
+ * <p>
  * GIFEncoder is based upon gifsave.c, which was written and released
- * by:<P>
+ * by:
  * <CENTER>
- *                                  Sverre H. Huseby<BR>
- *                                   Bjoelsengt. 17<BR>
- *                                     N-0468 Oslo<BR>
- *                                       Norway<P>
- *
- *                                 Phone: +47 2 230539<BR>
- *                                 sverrehu@ifi.uio.no<P>
+ * Sverre H. Huseby<BR>
+ * Bjoelsengt. 17<BR>
+ * N-0468 Oslo<BR>
+ * Norway
+ * <p>
+ * Phone: +47 2 230539<BR>
+ * sverrehu@ifi.uio.no<P>
  * </CENTER>
+ *
+ * @author <A HREF="http://www.cs.brown.edu/people/amd/">Adam Doppelt</A>
  * @version 0.90 21 Apr 1996
- * @author <A HREF="http://www.cs.brown.edu/people/amd/">Adam Doppelt</A> */
+ */
 public class GIFEncoder {
-    short width_, height_;
-    int numColors_;
-    byte pixels_[], colors_[];
-    
-    ScreenDescriptor sd_;
-    ImageDescriptor id_;
-    
-/**
- * Construct a GIFEncoder. The constructor will convert the image to
- * an indexed color array. <B>This may take some time.</B><P>
- * 
- * @param image The image to encode. The image <B>must</B> be
- * completely loaded.
- * @exception AWTException Will be thrown if the pixel grab fails. This
- * can happen if Java runs out of memory. It may also indicate that the image
- * contains more than 256 colors.
- * */
-    public GIFEncoder(Image image) throws AWTException {
+	/**
+	 * The Width.
+	 */
+	short width_, /**
+	 * The Height.
+	 */
+	height_;
+	/**
+	 * The Num colors.
+	 */
+	int numColors_;
+	/**
+	 * The Pixels.
+	 */
+	byte pixels_[], /**
+	 * The Colors.
+	 */
+	colors_[];
+
+	/**
+	 * The Sd.
+	 */
+	ScreenDescriptor sd_;
+	/**
+	 * The Id.
+	 */
+	ImageDescriptor id_;
+
+	/**
+	 * Construct a GIFEncoder. The constructor will convert the image to
+	 * an indexed color array. <B>This may take some time.</B><P>
+	 *
+	 * @param image The image to encode. The image <B>must</B> be completely loaded.
+	 * @throws AWTException the awt exception
+	 * @throws AWTException Will be thrown if the pixel grab fails. This can happen if Java runs out of memory. It may also indicate that the image contains more than 256 colors.
+	 */
+	public GIFEncoder(Image image) throws AWTException {
 	width_ = (short)image.getWidth(null);
 	height_ = (short)image.getHeight(null);
 
@@ -93,39 +114,37 @@ public class GIFEncoder {
 	ToIndexedColor(r, g, b);
     }
 
-/**
- * Construct a GIFEncoder. The constructor will convert the image to
- * an indexed color array. <B>This may take some time.</B><P>
- *
- * Each array stores intensity values for the image. In other words,
- * r[x][y] refers to the red intensity of the pixel at column x, row
- * y.<P>
- *
- * @param r An array containing the red intensity values.
- * @param g An array containing the green intensity values.
- * @param b An array containing the blue intensity values.
- *
- * @exception AWTException Will be thrown if the image contains more than
- * 256 colors.
- * */
-    public GIFEncoder(byte r[][], byte g[][], byte b[][]) throws AWTException {
+	/**
+	 * Construct a GIFEncoder. The constructor will convert the image to
+	 * an indexed color array. <B>This may take some time.</B>
+	 * <p>
+	 * Each array stores intensity values for the image. In other words,
+	 * r[x][y] refers to the red intensity of the pixel at column x, row
+	 * y.<P>
+	 *
+	 * @param r An array containing the red intensity values.
+	 * @param g An array containing the green intensity values.
+	 * @param b An array containing the blue intensity values.
+	 * @throws AWTException the awt exception
+	 * @throws AWTException Will be thrown if the image contains more than 256 colors.
+	 */
+	public GIFEncoder(byte r[][], byte g[][], byte b[][]) throws AWTException {
 	width_ = (short)(r.length);
 	height_ = (short)(r[0].length);
 
 	ToIndexedColor(r, g, b);
     }
 
-/**
- * Writes the image out to a stream in the GIF file format. This will
- * be a single GIF87a image, non-interlaced, with no background color.
- * <B>This may take some time.</B><P>
- *
- * @param output The stream to output to. This should probably be a
- * buffered stream.
- *
- * @exception IOException Will be thrown if a write operation fails.
- * */
-    public void Write(OutputStream output) throws IOException {
+	/**
+	 * Writes the image out to a stream in the GIF file format. This will
+	 * be a single GIF87a image, non-interlaced, with no background color.
+	 * <B>This may take some time.</B><P>
+	 *
+	 * @param output The stream to output to. This should probably be a buffered stream.
+	 * @throws IOException the io exception
+	 * @throws IOException Will be thrown if a write operation fails.
+	 */
+	public void Write(OutputStream output) throws IOException {
 	BitUtils.WriteString(output, "GIF87a");
 	
 	ScreenDescriptor sd = new ScreenDescriptor(width_, height_,
@@ -151,7 +170,15 @@ public class GIFEncoder {
 	//System.exit( 0 );
     }
 
-    void ToIndexedColor(byte r[][], byte g[][],
+	/**
+	 * To indexed color.
+	 *
+	 * @param r the r
+	 * @param g the g
+	 * @param b the b
+	 * @throws AWTException the awt exception
+	 */
+	void ToIndexedColor(byte r[][], byte g[][],
 			byte b[][]) throws AWTException {
 	pixels_ = new byte[width_ * height_];
 	colors_ = new byte[256 * 3];
@@ -186,19 +213,44 @@ public class GIFEncoder {
     
 }
 
+/**
+ * The type Bit file.
+ */
 class BitFile {
-    OutputStream output_;
-    byte buffer_[];
-    int index_, bitsLeft_;
+	/**
+	 * The Output.
+	 */
+	OutputStream output_;
+	/**
+	 * The Buffer.
+	 */
+	byte buffer_[];
+	/**
+	 * The Index.
+	 */
+	int index_, /**
+	 * The Bits left.
+	 */
+	bitsLeft_;
 
-    public BitFile(OutputStream output) {
+	/**
+	 * Instantiates a new Bit file.
+	 *
+	 * @param output the output
+	 */
+	public BitFile(OutputStream output) {
 	output_ = output;
 	buffer_ = new byte[256];
 	index_ = 0;
 	bitsLeft_ = 8;
     }
 
-    public void Flush() throws IOException {
+	/**
+	 * Flush.
+	 *
+	 * @throws IOException the io exception
+	 */
+	public void Flush() throws IOException {
 	int numBytes = index_ + (bitsLeft_ == 8 ? 0 : 1);
 	if (numBytes > 0) {
 	    output_.write(numBytes);
@@ -209,7 +261,14 @@ class BitFile {
 	}
     }
 
-    public void WriteBits(int bits, int numbits) throws IOException {
+	/**
+	 * Write bits.
+	 *
+	 * @param bits    the bits
+	 * @param numbits the numbits
+	 * @throws IOException the io exception
+	 */
+	public void WriteBits(int bits, int numbits) throws IOException {
 	int bitsWritten = 0;
 	int numBytes = 255;
 	do {
@@ -242,6 +301,9 @@ class BitFile {
     }
 }
 
+/**
+ * The type Lzw string table.
+ */
 class LZWStringTable {
     private final static int RES_CODES = 2;
     private final static short HASH_FREE = (short)0xFFFF;
@@ -251,18 +313,40 @@ class LZWStringTable {
     private final static short HASHSIZE = 9973;
     private final static short HASHSTEP = 2039;
 
-    byte strChr_[];
-    short strNxt_[];
-    short strHsh_[];
-    short numStrings_;
+	/**
+	 * The Str chr.
+	 */
+	byte strChr_[];
+	/**
+	 * The Str nxt.
+	 */
+	short strNxt_[];
+	/**
+	 * The Str hsh.
+	 */
+	short strHsh_[];
+	/**
+	 * The Num strings.
+	 */
+	short numStrings_;
 
-    public LZWStringTable() {
+	/**
+	 * Instantiates a new Lzw string table.
+	 */
+	public LZWStringTable() {
 	strChr_ = new byte[MAXSTR];
 	strNxt_ = new short[MAXSTR];
 	strHsh_ = new short[HASHSIZE];    
     }
 
-    public int AddCharString(short index, byte b) {
+	/**
+	 * Add char string int.
+	 *
+	 * @param index the index
+	 * @param b     the b
+	 * @return the int
+	 */
+	public int AddCharString(short index, byte b) {
 	int hshidx;
 
 	if (numStrings_ >= MAXSTR)
@@ -278,8 +362,15 @@ class LZWStringTable {
 
 	return numStrings_++;
     }
-    
-    public short FindCharString(short index, byte b) {
+
+	/**
+	 * Find char string short.
+	 *
+	 * @param index the index
+	 * @param b     the b
+	 * @return the short
+	 */
+	public short FindCharString(short index, byte b) {
 	int hshidx, nxtidx;
 
 	if (index == HASH_FREE)
@@ -295,7 +386,12 @@ class LZWStringTable {
 	return (short)0xFFFF;
     }
 
-    public void ClearTable(int codesize) {
+	/**
+	 * Clear table.
+	 *
+	 * @param codesize the codesize
+	 */
+	public void ClearTable(int codesize) {
 	numStrings_ = 0;
 	
 	for (int q = 0; q < HASHSIZE; q++) {
@@ -306,15 +402,33 @@ class LZWStringTable {
 	for (int q = 0; q < w; q++)
 	    AddCharString((short)0xFFFF, (byte)q);
     }
-    
-    static public int Hash(short index, byte lastbyte) {
+
+	/**
+	 * Hash int.
+	 *
+	 * @param index    the index
+	 * @param lastbyte the lastbyte
+	 * @return the int
+	 */
+	static public int Hash(short index, byte lastbyte) {
 	return ((int)((short)(lastbyte << 8) ^ index) & 0xFFFF) % HASHSIZE;
     }
 }
 
+/**
+ * The type Lzw compressor.
+ */
 class LZWCompressor {
 
-    public static void LZWCompress(OutputStream output, int codesize,
+	/**
+	 * Lzw compress.
+	 *
+	 * @param output     the output
+	 * @param codesize   the codesize
+	 * @param toCompress the to compress
+	 * @throws IOException the io exception
+	 */
+	public static void LZWCompress(OutputStream output, int codesize,
 				   byte toCompress[]) throws IOException {
 	byte c;
 	short index;
@@ -360,12 +474,34 @@ class LZWCompressor {
     }
 }
 
+/**
+ * The type Screen descriptor.
+ */
 class ScreenDescriptor {
-    public short localScreenWidth_, localScreenHeight_;
+	/**
+	 * The Local screen width.
+	 */
+	public short localScreenWidth_, /**
+	 * The Local screen height.
+	 */
+	localScreenHeight_;
     private byte byte_;
-    public byte backgroundColorIndex_, pixelAspectRatio_;
+	/**
+	 * The Background color index.
+	 */
+	public byte backgroundColorIndex_, /**
+	 * The Pixel aspect ratio.
+	 */
+	pixelAspectRatio_;
 
-    public ScreenDescriptor(short width, short height, int numColors) {
+	/**
+	 * Instantiates a new Screen descriptor.
+	 *
+	 * @param width     the width
+	 * @param height    the height
+	 * @param numColors the num colors
+	 */
+	public ScreenDescriptor(short width, short height, int numColors) {
 	localScreenWidth_ = width;
 	localScreenHeight_ = height;
 	SetGlobalColorTableSize((byte)(BitUtils.BitsNeeded(numColors) - 1));
@@ -376,7 +512,13 @@ class ScreenDescriptor {
 	pixelAspectRatio_ = 0;
     }
 
-    public void Write(OutputStream output) throws IOException {
+	/**
+	 * Write.
+	 *
+	 * @param output the output
+	 * @throws IOException the io exception
+	 */
+	public void Write(OutputStream output) throws IOException {
 	BitUtils.WriteWord(output, localScreenWidth_);
 	BitUtils.WriteWord(output, localScreenHeight_);
 	output.write(byte_);
@@ -384,29 +526,74 @@ class ScreenDescriptor {
 	output.write(pixelAspectRatio_);
     }
 
-    public void SetGlobalColorTableSize(byte num) {
+	/**
+	 * Set global color table size.
+	 *
+	 * @param num the num
+	 */
+	public void SetGlobalColorTableSize(byte num) {
 	byte_ |= (num & 7);
     }
 
-    public void SetSortFlag(byte num) {
+	/**
+	 * Set sort flag.
+	 *
+	 * @param num the num
+	 */
+	public void SetSortFlag(byte num) {
 	byte_ |= (num & 1) << 3;
     }
 
-    public void SetColorResolution(byte num) {
+	/**
+	 * Set color resolution.
+	 *
+	 * @param num the num
+	 */
+	public void SetColorResolution(byte num) {
 	byte_ |= (num & 7) << 4;
     }
-    
-    public void SetGlobalColorTableFlag(byte num) {
+
+	/**
+	 * Set global color table flag.
+	 *
+	 * @param num the num
+	 */
+	public void SetGlobalColorTableFlag(byte num) {
 	byte_ |= (num & 1) << 7;
     }
 }
 
+/**
+ * The type Image descriptor.
+ */
 class ImageDescriptor {
-    public byte separator_;
-    public short leftPosition_, topPosition_, width_, height_;
+	/**
+	 * The Separator.
+	 */
+	public byte separator_;
+	/**
+	 * The Left position.
+	 */
+	public short leftPosition_, /**
+	 * The Top position.
+	 */
+	topPosition_, /**
+	 * The Width.
+	 */
+	width_, /**
+	 * The Height.
+	 */
+	height_;
     private byte byte_;
 
-    public ImageDescriptor(short width, short height, char separator) {
+	/**
+	 * Instantiates a new Image descriptor.
+	 *
+	 * @param width     the width
+	 * @param height    the height
+	 * @param separator the separator
+	 */
+	public ImageDescriptor(short width, short height, char separator) {
 	separator_ = (byte)separator;
 	leftPosition_ = 0;
 	topPosition_ = 0;
@@ -418,8 +605,14 @@ class ImageDescriptor {
 	SetInterlaceFlag((byte)0);
 	SetLocalColorTableFlag((byte)0);
     }
-    
-    public void Write(OutputStream output) throws IOException {
+
+	/**
+	 * Write.
+	 *
+	 * @param output the output
+	 * @throws IOException the io exception
+	 */
+	public void Write(OutputStream output) throws IOException {
 	output.write(separator_);
 	BitUtils.WriteWord(output, leftPosition_);
 	BitUtils.WriteWord(output, topPosition_);
@@ -428,29 +621,63 @@ class ImageDescriptor {
 	output.write(byte_);
     }
 
-    public void SetLocalColorTableSize(byte num) {
+	/**
+	 * Set local color table size.
+	 *
+	 * @param num the num
+	 */
+	public void SetLocalColorTableSize(byte num) {
 	byte_ |= (num & 7);
     }
 
-    public void SetReserved(byte num) {
+	/**
+	 * Set reserved.
+	 *
+	 * @param num the num
+	 */
+	public void SetReserved(byte num) {
 	byte_ |= (num & 3) << 3;
     }
 
-    public void SetSortFlag(byte num) {
+	/**
+	 * Set sort flag.
+	 *
+	 * @param num the num
+	 */
+	public void SetSortFlag(byte num) {
 	byte_ |= (num & 1) << 5;
     }
-    
-    public void SetInterlaceFlag(byte num) {
+
+	/**
+	 * Set interlace flag.
+	 *
+	 * @param num the num
+	 */
+	public void SetInterlaceFlag(byte num) {
 	byte_ |= (num & 1) << 6;
     }
 
-    public void SetLocalColorTableFlag(byte num) {
+	/**
+	 * Set local color table flag.
+	 *
+	 * @param num the num
+	 */
+	public void SetLocalColorTableFlag(byte num) {
 	byte_ |= (num & 1) << 7;
     }
 }
 
+/**
+ * The type Bit utils.
+ */
 class BitUtils {
-    public static byte BitsNeeded(int n) {
+	/**
+	 * Bits needed byte.
+	 *
+	 * @param n the n
+	 * @return the byte
+	 */
+	public static byte BitsNeeded(int n) {
 	byte ret = 1;
 
 	if (n-- == 0)
@@ -460,15 +687,29 @@ class BitUtils {
 	    ++ret;
 	
 	return ret;
-    }    
+    }
 
-    public static void WriteWord(OutputStream output,
+	/**
+	 * Write word.
+	 *
+	 * @param output the output
+	 * @param w      the w
+	 * @throws IOException the io exception
+	 */
+	public static void WriteWord(OutputStream output,
 				 short w) throws IOException {
 	output.write(w & 0xFF);
 	output.write((w >> 8) & 0xFF);
     }
-    
-    static void WriteString(OutputStream output,
+
+	/**
+	 * Write string.
+	 *
+	 * @param output the output
+	 * @param string the string
+	 * @throws IOException the io exception
+	 */
+	static void WriteString(OutputStream output,
 			    String string) throws IOException {
 	for (int loop = 0; loop < string.length(); ++loop)
 	    output.write((byte)(string.charAt(loop)));
