@@ -9,7 +9,7 @@ import java.awt.event.*;
 import java.io.*;
 
 /**
- * Opens a window that displays about.html
+ * Opens a window that displays the file about.html
  */
 public class AboutButtonSwingVersion extends JButton implements ActionListener {
     Electro2D electro2D;
