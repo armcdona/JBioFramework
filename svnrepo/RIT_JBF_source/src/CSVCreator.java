@@ -37,21 +37,22 @@ public class CSVCreator{
             		fl.mkdir();
             	}
                 out = new PrintWriter( new BufferedWriter( new FileWriter(
-                    					   directoryString +
-                                                           File.separator +
-                                                           filename.substring(0,
-                                                           filename.indexOf("."))
-                                                           + ".csv" )));
+                    directoryString +
+                    File.separator +
+                    filename.substring(0, filename.indexOf(".")) + ".csv" )
+                ));
             }catch( IOException e ){
-	    System.err.println( "Error writing to CSV file" );
+	            System.err.println( "Error writing to CSV file" );
             }
 	
             E2DProtein p = null;
             ProteinDotSwingVersion d = null;
 	
-            out.println( "Title" + "," + "Sequence" + "," + "Molecular Weight" +
-            	     "," + "pI Value" + "," + "X-Coordinate" + "," +
-            	     "Y-Coordinate" );
+            try {
+            out.println( "Title" + "," + "Sequence" + "," + "Molecular Weight" + "," + "pI Value" +
+                "," + "X-Coordinate" + "," + "Y-Coordinate" ); }catch( ){
+
+            }
 
             if (proteins == null) {
                 proteins = new Vector();

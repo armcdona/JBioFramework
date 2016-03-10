@@ -20,10 +20,15 @@ public class E2DProtein {
 
     private static final Color colors[] = {
         Color.YELLOW,
-	new Color( 254, 143, 74 ), new Color( 160, 11, 206 ), 
-	new Color( 72, 100, 100 ), new Color( 0, 95, 95 ), Color.CYAN,
-        new Color( 158, 49, 49 ), new Color( 0, 135, 16 ),
-	new Color( 255, 96, 0 ) };  
+	    new Color( 254, 143, 74 ),
+        new Color( 160, 11, 206 ),
+	    new Color( 72, 100, 100 ),
+        new Color( 0, 95, 95 ),
+        Color.CYAN,
+        new Color( 158, 49, 49 ),
+        new Color( 0, 135, 16 ),
+	    new Color( 255, 96, 0 )
+    };
     
     private String myID; //protein title
     private double myMolWt; //molecular weight
@@ -48,39 +53,37 @@ public class E2DProtein {
 	 * @param sequence the sequence
 	 * @param fcn      the function of this protein
 	 */
-	public E2DProtein( String id, double molWt, double pI, String sequence,
-		    String fcn ){
-	myID = id;
-	myMolWt = molWt;
-	mySequence = sequence;
-	myFunction = fcn;
-	myPI = pI;
-	if( id.indexOf( "DNA" ) != -1 || id.indexOf( "dna" ) != -1 ){
-	    myColor = dnaColor;
-	}
-	else if(id.indexOf( "ribosomal" ) != -1){
-	    myColor = rnaColor;
-	}
-	else if( id.indexOf( "hypothetical" ) != -1 ){
-	    myColor = hypotheticalColor;
-	}
-	else if(fcn.length() > 6 && fcn.substring( 0, 6 ).equals( "Enzyme" ) ){
-	    myColor = enzymeColor;
-	}
-	else if( fcn.indexOf( "transport" ) != -1 ){
-	    myColor = transportColor;
-	}
-	else if( fcn.indexOf( "receptor" ) != -1 || fcn.indexOf( "reception" )
-		 != -1 ){
-	    myColor = receptorColor;
-	}
-	else if( fcn.indexOf( "transduction" ) != -1 ){
-	    myColor = transductionColor;
-	}
-	else{
-	    Random r = new Random();
-	    myColor = colors[ r.nextInt( 9 ) ];
-	}
+	public E2DProtein( String id, double molWt, double pI, String sequence, String fcn ){
+	    myID = id;
+	    myMolWt = molWt;
+	    mySequence = sequence;
+	    myFunction = fcn;
+	    myPI = pI;
+	    if( id.indexOf( "DNA" ) != -1 || id.indexOf( "dna" ) != -1 ){
+	        myColor = dnaColor;
+	    }
+	    else if(id.indexOf( "ribosomal" ) != -1){
+	        myColor = rnaColor;
+	    }
+	    else if( id.indexOf( "hypothetical" ) != -1 ){
+	        myColor = hypotheticalColor;
+	    }
+	    else if(fcn.length() > 6 && fcn.substring( 0, 6 ).equals( "Enzyme" ) ){
+	        myColor = enzymeColor;
+	    }
+	    else if( fcn.indexOf( "transport" ) != -1 ){
+	        myColor = transportColor;
+	    }
+	    else if( fcn.indexOf( "receptor" ) != -1 || fcn.indexOf( "reception" ) != -1 ){
+	        myColor = receptorColor;
+	    }
+	    else if( fcn.indexOf( "transduction" ) != -1 ){
+	        myColor = transductionColor;
+	    }
+	    else{
+	        Random r = new Random();
+	        myColor = colors[ r.nextInt( 9 ) ];
+	    }
     }
 
 	/**
@@ -89,7 +92,7 @@ public class E2DProtein {
 	 * @return myID string
 	 */
 	public String getID(){
-	return myID;
+        return myID;
     }
 
 	/**
@@ -98,7 +101,7 @@ public class E2DProtein {
 	 * @return myMolWt double
 	 */
 	public double getMW(){
-	return myMolWt;
+        return myMolWt;
     }
 
 	/**
@@ -107,7 +110,7 @@ public class E2DProtein {
 	 * @return myColor color
 	 */
 	public Color getColor(){
-	return myColor;
+        return myColor;
     }
 
 	/**
@@ -116,7 +119,7 @@ public class E2DProtein {
 	 * @return myPI double
 	 */
 	public double getPI(){
-	return myPI;
+        return myPI;
     }
 
 	/**
@@ -125,7 +128,7 @@ public class E2DProtein {
 	 * @return mySequence string
 	 */
 	public String getSequence(){
-	return mySequence;
+        return mySequence;
     }
 
     /**
@@ -153,18 +156,17 @@ public class E2DProtein {
 	 */
 	public static HashMap getColorGuide(){
 	
-	HashMap retVal = new HashMap();
+	    HashMap retVal = new HashMap();
+
+	    retVal.put( "dna in Title", dnaColor );
+	    retVal.put( "ribosomal in Title", rnaColor );
+	    retVal.put( "Enzyme EC in Function", enzymeColor );
+	    retVal.put( "hypothetical protein", hypotheticalColor );
+	    retVal.put( "transport protein in Function", transportColor );
+	    retVal.put( "receptor in Function", receptorColor );
+	    retVal.put( "transduction in Function", transductionColor );
 	
-	
-	retVal.put( "dna in Title", dnaColor );
-	retVal.put( "ribosomal in Title", rnaColor );
-	retVal.put( "Enzyme EC in Function", enzymeColor );
-	retVal.put( "hypothetical protein", hypotheticalColor );
-	retVal.put( "transport protein in Function", transportColor );
-	retVal.put( "receptor in Function", receptorColor );
-	retVal.put( "transduction in Function", transductionColor );
-	
-	return retVal;
+	    return retVal;
     }
 
 }

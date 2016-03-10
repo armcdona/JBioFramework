@@ -18,9 +18,6 @@ public class ColorFrame {
     private ArrayList labels;
     private HashMap colorkey;
 
-	/**
-	 * Instantiates a new Color frame.
-	 */
 	public ColorFrame(){
 	colorkey = E2DProtein.getColorGuide();
 	

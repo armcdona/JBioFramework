@@ -28,7 +28,8 @@ public class CompIEF implements Comparator{
 
     /**
      * Compares two IEFProtein objects by their pI values and x coordinate.
-	 * The method returns 0 if they are equal, -1 if the second object > first object, and 1 if the first object > second object.
+	 * The method returns 0 if they are equal, -1 if the second object is greater than first object,
+	 * and 1 if the first object is greater than second object.
      *
      * @param o1 the first IEFProtein object
      * @param o2 the second IEFProtein object
