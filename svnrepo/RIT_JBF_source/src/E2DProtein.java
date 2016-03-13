@@ -7,8 +7,7 @@
  */
 
 import java.awt.*;
-import java.util.Random;  // randomly generates colors for protein
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * The type E 2 d protein.
@@ -28,7 +27,7 @@ public class E2DProtein {
         new Color( 158, 49, 49 ),  //Dark Red
         new Color( 0, 135, 16 ),   //Green
 	    new Color( 255, 96, 0 )    //Orange
-    };
+    }; //list of colors for proteins of a type that isn't recognized
     
     private String myID; //protein title
     private double myMolWt; //molecular weight
@@ -47,7 +46,7 @@ public class E2DProtein {
 	/**
 	 * constructor for protein
 	 *
-	 * @param id       the protein's type
+	 * @param id       the type of protein
 	 * @param molWt    the molecular weight of the protein
 	 * @param pI       the pI value for the protein
 	 * @param sequence the sequence
@@ -59,30 +58,29 @@ public class E2DProtein {
 	    mySequence = sequence;
 	    myFunction = fcn;
 	    myPI = pI;
-	    if(id.contains("DNA") || id.contains("dna")){
+	    if(id.toLowerCase().contains("dna")){
 	        myColor = dnaColor;
 	    }
-	    else if(id.contains("ribosomal")){
+	    else if(id.toLowerCase().contains("ribosomal")){
 	        myColor = rnaColor;
 	    }
-	    else if(id.contains("hypothetical")){
+	    else if(id.toLowerCase().contains("hypothetical")){
 	        myColor = hypotheticalColor;
 	    }
-	    else if(fcn.length() > 6 && fcn.substring( 0, 6 ).equals( "Enzyme" ) ){
+	    else if(id.toLowerCase().contains("enzyme")){
 	        myColor = enzymeColor;
 	    }
-	    else if(fcn.contains("transport")){
+	    else if(fcn.toLowerCase().contains("transport")){
 	        myColor = transportColor;
 	    }
-	    else if(fcn.contains("receptor") || fcn.contains("reception")){
+	    else if(fcn.toLowerCase().contains("receptor") || fcn.contains("reception")){
 	        myColor = receptorColor;
 	    }
-	    else if(fcn.contains("transduction")){
+	    else if(fcn.toLowerCase().contains("transduction")){
 	        myColor = transductionColor;
 	    }
 	    else{
-	        Random r = new Random();
-	        myColor = colors[ r.nextInt( 9 ) ];
+	        myColor = colors[new Random().nextInt(colors.length)];
 	    }
     }
 
@@ -154,17 +152,17 @@ public class E2DProtein {
 	 *
 	 * @return HashMap of default colors
 	 */
-	public static HashMap getColorGuide(){
+	public static String[][] getColorGuide() {
 	
-	    HashMap retVal = new HashMap();
-
-	    retVal.put( "dna in Title", dnaColor );
-	    retVal.put( "ribosomal in Title", rnaColor );
-	    retVal.put( "Enzyme EC in Function", enzymeColor );
-	    retVal.put( "hypothetical protein", hypotheticalColor );
-	    retVal.put( "transport protein in Function", transportColor );
-	    retVal.put( "receptor in Function", receptorColor );
-	    retVal.put( "transduction in Function", transductionColor );
+	    String[][] retVal = new String[][]{
+                {"dna in Title", Integer.toString(dnaColor.getRGB())},
+                {"ribosomal in Title", Integer.toString(rnaColor.getRGB())},
+                {"Enzyme EC in Function", Integer.toString(enzymeColor.getRGB())},
+                {"hypothetical protein", Integer.toString(hypotheticalColor.getRGB())},
+                {"transport protein in Function", Integer.toString(transportColor.getRGB())},
+                {"receptor in Function", Integer.toString(receptorColor.getRGB())},
+                {"transduction in Function", Integer.toString(transductionColor.getRGB())}
+        };
 	
 	    return retVal;
     }
