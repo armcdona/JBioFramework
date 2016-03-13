@@ -47,12 +47,9 @@ public class CSVCreator{
 	
             E2DProtein p = null;
             ProteinDotSwingVersion d = null;
-	
-            try {
-            out.println( "Title" + "," + "Sequence" + "," + "Molecular Weight" + "," + "pI Value" +
-                "," + "X-Coordinate" + "," + "Y-Coordinate" ); }catch( ){
 
-            }
+            out.println( "Title" + "," + "Sequence" + "," + "Molecular Weight" + "," + "pI Value" +
+                "," + "X-Coordinate" + "," + "Y-Coordinate" );
 
             if (proteins == null) {
                 proteins = new Vector();

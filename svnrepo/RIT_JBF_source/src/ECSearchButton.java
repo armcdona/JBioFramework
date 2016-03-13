@@ -3,7 +3,7 @@ import java.awt.color.*;
 import java.awt.event.*;
 
 /**
- * Searches for EC number of proteins whose function is enzyme
+ * Searches for EC number of proteins whose function is enzyme.  This is not currently used.
  *
  * @author Jill Zapoticznyj Much of this code is based off of the RemoveProteinButton class
  * @author Adam Bazinet
@@ -31,11 +31,10 @@ public class ECSearchButton extends Canvas implements MouseListener {
      * @param id - the string being searched for
      */
     public ECSearchButton( Electro2D e, String id ) {
-	electro2D = e; //give the button a reference to Electro2D
-	pro_id = id; //set the search value to the string passed to the method
-	//have the button register itself as a MouseListener in order to
-	//respond to mouse events from the user
-	this.addMouseListener(this);
+	    electro2D = e; //Give the button a reference to class Electro2D
+	    pro_id = id; //Set the search value to the string passed to the method
+	    //Have the button register itself as a MouseListener in order to respond to mouse events from the user
+	    this.addMouseListener(this);
     }
     
     /**
@@ -83,7 +82,7 @@ public class ECSearchButton extends Canvas implements MouseListener {
 	//do nothing
     }
     /**
-     * Responds to the cursor being placed over this button.
+     * When the mouse hovers
      */
     public void mouseEntered(MouseEvent e) {
 	//change the image of the cursor
@@ -109,7 +108,7 @@ public class ECSearchButton extends Canvas implements MouseListener {
 	//electro2D.showStatus("");
     }
     /**
-     * Responds to the user clicking on the button.
+     * When activated, open a search page for the protein
      */
     public void mouseClicked(MouseEvent e) {
 	//open the search page and perform the search for the protein

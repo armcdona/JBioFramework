@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * when activated, the current array of dots (ProteinDot) in the gel are saved in a csv file
+ * When pressed, the current array of dots (ProteinDot) in the gel are saved in a csv file
  */
 public class CSVButtonSwingVersion extends JButton implements ActionListener {
 

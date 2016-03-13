@@ -15,12 +15,11 @@
 public class Converter {
 
     /**
-     * The convert method takes a String input representing an amino acid chain
-     * and returns an Ion containing the amino acids the string sequence
-     * represented.
+     * The convert method takes a String input that represents an amino acid chain
+     * and returns a class Ion containing the amino acids the string sequence represented.
      *
-     * @param sequence Amino acid symbols for an ion.
-     * @return Ion containing amino acids from sequence.
+     * @param sequence String contain the amino acid sequence
+     * @return Ion class containing amino acids from sequence.
      */
     public static Ion convert(String sequence) {
         char[] aminoAcids = sequence.toCharArray();

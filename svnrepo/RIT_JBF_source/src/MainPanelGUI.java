@@ -29,13 +29,9 @@ import java.text.DecimalFormat;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
-/**
- * The type Main panel gui.
- */
 public class MainPanelGUI extends JPanel {
 
-    private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
-        "Thermolysin"};
+    private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K", "Thermolysin"};
     private HelpButtonSwingVersion help;
     private AboutButtonSwingVersion about;
     private static JTextArea inputArea; // static so ProteinFrame can interact with it.
@@ -50,10 +46,8 @@ public class MainPanelGUI extends JPanel {
     private Ion ion;
 
     /**
-     * The constructor uses a GridBagLayout to arrange the eight different
-     * elements of the GUI- the label explaining the input box, the input box,
-     * the label OR, the button to load a sequence, the protease selection
-     * drop down box, the info label, the big graph and the small graph.
+     * The constructor uses a GridBagLayout to arrange the eight different elements of the GUI- the label explaining the input box, the input box,
+     * the label OR, the button to load a sequence, the protease selection drop down box, the info label, the big graph and the small graph.
      */
     public MainPanelGUI() {
         super();
@@ -166,9 +160,8 @@ public class MainPanelGUI extends JPanel {
     }
 
     /**
-     * runTandem changes the information displayed in the infoScreen Jlabel
-     * when a user clicks on a peak in the OutputGraphGUI. It also alerts
-     * TandemGraphGUI that there is peptide sequencing to be done.
+     * runTandem changes the information displayed in the infoScreen Jlabel when a user clicks on a peak in the OutputGraphGUI.
+     * It also alerts TandemGraphGUI that there is peptide sequencing to be done.
      *
      * @param selected the selected
      */
@@ -186,8 +179,7 @@ public class MainPanelGUI extends JPanel {
     private class LoadButton extends JButton implements ActionListener {
 
        /**
-        * Constructor passes the String to be displayed on the button to
-        * JButton's constructor and registers itself as its own actionListener.
+        * Constructor passes the String to be displayed on the button to JButton's constructor and registers itself as its own actionListener.
         */
        public LoadButton() {
             super("Load Sequence From File");
@@ -195,16 +187,11 @@ public class MainPanelGUI extends JPanel {
         }
 
         /**
-         * The actionPerformed method is called when the user clicks on the button.
-         * It opens a JFileChooser so the user may select which file they would
-         * like to obtain sequence information from.
-         *
-         * @param e Unused.
+         * When the button is clicked it opens a JFileChooser so the user may select which file they would like to obtain sequence information from.
          */
         public void actionPerformed(ActionEvent e) {
             JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files",
-                "fasta");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files", "fasta");
             chooser.setFileFilter(filter);
             int returnVal = chooser.showOpenDialog(this);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -222,8 +209,7 @@ public class MainPanelGUI extends JPanel {
     private class RunButton extends JButton implements ActionListener {
 
         /**
-         * Constructor passes the String to be displayed on the button to
-         * JButton's constructor and registers itself as its own actionListener.
+         * Constructor passes the String to be displayed on the button to JButton's constructor and registers itself as its own actionListener.
          */
         public RunButton() {
             super("Run Spectrum");
@@ -231,8 +217,7 @@ public class MainPanelGUI extends JPanel {
         }
 
         /**
-         * The actionPerformed method is called when the user clicks on the button.
-         * It begins the simulation.
+         * The actionPerformed method is called when the user clicks on the button. It begins the simulation.
          *
          * @param e Unused.
          */
@@ -249,8 +234,7 @@ public class MainPanelGUI extends JPanel {
     private class ToggleFragmentButton extends JCheckBox implements ItemListener {
 
         /**
-         * Constructor passes the String to be displayed on the button to
-         * JCheckBox's constructor and registers itself as its own actionListener.
+         * Constructor passes the String to be displayed on the button to JCheckBox's constructor and registers itself as its own actionListener.
          *
          * @param text  the text
          * @param state the state
@@ -261,8 +245,7 @@ public class MainPanelGUI extends JPanel {
         }
 
         /**
-         * The actionPerformed method is called when the user clicks on the button.
-         * It repaints TandemGraphGUI.
+         * The actionPerformed method is called when the user clicks on the button. It repaints TandemGraphGUI.
          *
          * @param e Unused.
          */
@@ -289,9 +272,8 @@ public class MainPanelGUI extends JPanel {
     } // End of FragmentToggleButton
 
     /**
-     * The ProteinFrame class from the Electro2D simulation of JBioFramework
-     * calls this to set the input area's text to the sequence of a protein the
-     * user clicked on in the gel canvas.
+     * The ProteinFrame class from the Electro2D simulation of JBioFramework calls this to set the input area's
+     * text to the sequence of a protein the user clicked on in the gel canvas.
      *
      * @return The JTextArea that holds a protein's sequence.
      */
@@ -300,8 +282,7 @@ public class MainPanelGUI extends JPanel {
     }
 
     /**
-     * Called by OutputGraphGUI's setPeaks method to sort out which ion peaks to
-     * display based on the user specified m/e range.
+     * Called by OutputGraphGUI's setPeaks method to sort out which ion peaks to display based on the user specified m/e range.
      *
      * @return The lower limit of the user selected range.
      */
@@ -342,8 +323,7 @@ public class MainPanelGUI extends JPanel {
     }
 
     /**
-     * Called by OutputGraphGUI's setPeaks method to sort out which ion peaks to
-     * display based on the user specified m/e range.
+     * Called by OutputGraphGUI's setPeaks method to sort out which ion peaks to display based on the user specified m/e range.
      *
      * @return The upper limit of the user selected range.
      */
