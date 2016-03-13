@@ -20,14 +20,14 @@ public class E2DProtein {
 
     private static final Color colors[] = {
         Color.YELLOW,
-	    new Color( 254, 143, 74 ),
-        new Color( 160, 11, 206 ),
-	    new Color( 72, 100, 100 ),
-        new Color( 0, 95, 95 ),
+	    new Color( 254, 143, 74 ), //Light Orange
+        new Color( 160, 11, 206 ), //Purple
+	    new Color( 72, 100, 100 ), //Dark Cyan
+        new Color( 0, 95, 95 ),    //Darker Cyan
         Color.CYAN,
-        new Color( 158, 49, 49 ),
-        new Color( 0, 135, 16 ),
-	    new Color( 255, 96, 0 )
+        new Color( 158, 49, 49 ),  //Dark Red
+        new Color( 0, 135, 16 ),   //Green
+	    new Color( 255, 96, 0 )    //Orange
     };
     
     private String myID; //protein title
@@ -39,9 +39,9 @@ public class E2DProtein {
     private static Color dnaColor = Color.RED;
     private static Color enzymeColor = Color.GREEN;
     private static Color hypotheticalColor = Color.PINK;
-    private static Color transportColor = new Color( 117, 92, 50 );
-    private static Color receptorColor = new Color( 176, 196, 222 );
-    private static Color transductionColor = new Color( 255, 216, 202 );
+    private static Color transportColor = new Color( 117, 92, 50 ); //Brown
+    private static Color receptorColor = new Color( 176, 196, 222 ); //Light Blue
+    private static Color transductionColor = new Color( 255, 216, 202 ); //Light Pink
     private String myFunction;
 
 	/**
