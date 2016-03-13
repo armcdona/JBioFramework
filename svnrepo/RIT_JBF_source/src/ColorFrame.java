@@ -45,7 +45,6 @@ public class ColorFrame {
             } else {
                 colorLabel.setForeground(Color.BLACK);
             }
-            System.out.println(labelStrings[0] + ", " + labelStrings[1] + ", " + (backColor.getRed() / 255) + ", " + backColor.getGreen() / 255 + ", " + backColor.getBlue() / 255 + ", " + Double.toString(Luminance));
             colorPanel.add(colorLabel);
         }
 
