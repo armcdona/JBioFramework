@@ -6,9 +6,9 @@
  */
 
 /**
- *
  * @author Amanda Fisher
  */
+
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -173,15 +173,15 @@ public class MainPanelGUI extends JPanel {
         tandemGraph.drawSequencePeaks(ion);
     }
 
-   /**
+    /**
      * Inner class that loads a protein file selected by the user.
      */
     private class LoadButton extends JButton implements ActionListener {
 
-       /**
-        * Constructor passes the String to be displayed on the button to JButton's constructor and registers itself as its own actionListener.
-        */
-       public LoadButton() {
+        /**
+         * Constructor passes the String to be displayed on the button to JButton's constructor and registers itself as its own actionListener.
+         */
+        public LoadButton() {
             super("Load Sequence From File");
             addActionListener(this);
         }
@@ -194,7 +194,7 @@ public class MainPanelGUI extends JPanel {
             FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files", "fasta");
             chooser.setFileFilter(filter);
             int returnVal = chooser.showOpenDialog(this);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
                 String parsedSequence = FastaParser.parse(chooser.getSelectedFile());
                 inputArea.setText(parsedSequence);
             }
@@ -264,7 +264,7 @@ public class MainPanelGUI extends JPanel {
                     tandemGraph.setRedYs(true);
                 }
             }
-            if(ion != null) {
+            if (ion != null) {
                 tandemGraph.drawSequencePeaks(ion);
             }
         }
@@ -288,14 +288,14 @@ public class MainPanelGUI extends JPanel {
      */
     public double getLowerLimit() {
         double lower;
-        if(lowerRange.getText().contains(",")) {
+        if (lowerRange.getText().contains(",")) {
             String noComma = lowerRange.getText();
             int index = noComma.indexOf(",");
             noComma = noComma.substring(0, index) +
-                        noComma.substring(index+1, noComma.length());
+                    noComma.substring(index + 1, noComma.length());
             try {
                 lower = Double.valueOf(noComma);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Did not recognize Lower Limit as a number. Using default lower limit of 0.");
                 lowerRange.setText("0");
                 return 0;
@@ -303,18 +303,18 @@ public class MainPanelGUI extends JPanel {
         } else {
             try {
                 lower = Double.valueOf(lowerRange.getText());
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Did not recognize Lower Limit as a number. Using default lower limit of 0.");
                 lowerRange.setText("0");
                 return 0;
             }
         }
-        if(lower < 0 || lower > 20000) {
+        if (lower < 0 || lower > 20000) {
             lower = 0;
             JOptionPane.showMessageDialog(null, "Lower Limit out of bounds (0 to 20,000). Set to default of 0.");
             lowerRange.setText("0");
         }
-        if(lower > getUpperLimit()) {
+        if (lower > getUpperLimit()) {
             lower = 0;
             JOptionPane.showMessageDialog(null, "Lower Limit is higher than Upper Limit. Set to default of 0.");
             lowerRange.setText("0");
@@ -329,14 +329,14 @@ public class MainPanelGUI extends JPanel {
      */
     public double getUpperLimit() {
         double upper;
-        if(upperRange.getText().contains(",")) {
+        if (upperRange.getText().contains(",")) {
             String noComma = upperRange.getText();
             int index = noComma.indexOf(",");
             noComma = noComma.substring(0, index) +
-                        noComma.substring(index+1, noComma.length());
+                    noComma.substring(index + 1, noComma.length());
             try {
                 upper = Double.valueOf(noComma);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Did not recognize Upper Limit as a number. Using default upper limit of 3000.");
                 upperRange.setText("3000");
                 return 0;
@@ -344,13 +344,13 @@ public class MainPanelGUI extends JPanel {
         } else {
             try {
                 upper = Double.valueOf(upperRange.getText());
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Did not recognize Upper Limit as a number. Using default upper limit of 3000.");
                 upperRange.setText("3000");
                 return 3000;
             }
         }
-        if(upper < 0 || upper > 20000) {
+        if (upper < 0 || upper > 20000) {
             upper = 3000;
             JOptionPane.showMessageDialog(null, "Upper Limit out of bounds (0 to 20,000). Set to default of 3000.");
             upperRange.setText("3000");

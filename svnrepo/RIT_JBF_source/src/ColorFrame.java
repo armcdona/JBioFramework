@@ -1,15 +1,10 @@
-/**
- * ColorFrame.java works as a key for the protein colors displayed in the
- * gel's final product.
- */
-
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 
 /**
- * a window with the various colors and what they represent
+ * Window displays all of the colors of proteins and what they represent
  */
 public class ColorFrame {
 

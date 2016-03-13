@@ -6,9 +6,9 @@
  */
 
 /**
- *
  * @author Amanda Fisher
  */
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -33,7 +33,7 @@ public class FastaParser {
             FileReader fReader = new FileReader(file);
             BufferedReader bReader = new BufferedReader(fReader);
             String line;
-            while((line = bReader.readLine()) != null) {
+            while ((line = bReader.readLine()) != null) {
                 line = process(line);
                 returnSequence = returnSequence.concat(line);
             }
@@ -53,12 +53,12 @@ public class FastaParser {
      *         MainPanelGUI.
      */
     private static String process(String line) {
-        if(line.charAt(0) != ';' && line.charAt(0) != '>') {
+        if (line.charAt(0) != ';' && line.charAt(0) != '>') {
             int starIndex = line.indexOf("[^\\w]");
-            if(starIndex != -1) {
+            if (starIndex != -1) {
                 String[] splitLine = line.split("[^\\w]");
                 line = new String();
-                for(String split : splitLine) {
+                for (String split : splitLine) {
                     line = line.concat(split);
                 }
             }
