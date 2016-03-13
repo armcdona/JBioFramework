@@ -59,25 +59,25 @@ public class E2DProtein {
 	    mySequence = sequence;
 	    myFunction = fcn;
 	    myPI = pI;
-	    if( id.indexOf( "DNA" ) != -1 || id.indexOf( "dna" ) != -1 ){
+	    if(id.contains("DNA") || id.contains("dna")){
 	        myColor = dnaColor;
 	    }
-	    else if(id.indexOf( "ribosomal" ) != -1){
+	    else if(id.contains("ribosomal")){
 	        myColor = rnaColor;
 	    }
-	    else if( id.indexOf( "hypothetical" ) != -1 ){
+	    else if(id.contains("hypothetical")){
 	        myColor = hypotheticalColor;
 	    }
 	    else if(fcn.length() > 6 && fcn.substring( 0, 6 ).equals( "Enzyme" ) ){
 	        myColor = enzymeColor;
 	    }
-	    else if( fcn.indexOf( "transport" ) != -1 ){
+	    else if(fcn.contains("transport")){
 	        myColor = transportColor;
 	    }
-	    else if( fcn.indexOf( "receptor" ) != -1 || fcn.indexOf( "reception" ) != -1 ){
+	    else if(fcn.contains("receptor") || fcn.contains("reception")){
 	        myColor = receptorColor;
 	    }
-	    else if( fcn.indexOf( "transduction" ) != -1 ){
+	    else if(fcn.contains("transduction")){
 	        myColor = transductionColor;
 	    }
 	    else{
