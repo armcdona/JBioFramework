@@ -458,7 +458,7 @@ public class GenomeFileParser {
                 }
 
             } else if (hasMoleculeTag == false) {
-	    
+
 	    /* handle special case where chains are lettered, but there 
 	       was no chain tag to tell which labels to look for */
 

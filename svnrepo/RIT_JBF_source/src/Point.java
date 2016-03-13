@@ -23,11 +23,12 @@ public class Point {
      * @param x the x
      * @param y the y
      */
-    public Point( int x, int y ) {
-	this.x = x;
-	this.y = y;
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
+
     public String toString() {
-	return "(" + x + ", " + y + ")";
+        return "(" + x + ", " + y + ")";
     }
 }

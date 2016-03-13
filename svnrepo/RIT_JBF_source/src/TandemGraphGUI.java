@@ -216,7 +216,6 @@ public class TandemGraphGUI extends JPanel {
      * drawSequencePeaks calls this method right before it calls repaint so that
      * OutputGraphGUI can resize its x-axis to start at the smallest m/e ratio
      * and end at the largest m/e ratio.
-     *
      */
     public void resizeXAxis() {
         // Determine the smallest m/e ratio and the biggest m/e ratio

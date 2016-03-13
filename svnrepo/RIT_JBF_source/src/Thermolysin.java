@@ -5,9 +5,9 @@
  */
 
 /**
- *
  * @author Amanda Fisher
  */
+
 import java.util.ArrayList;
 
 /**
@@ -35,8 +35,8 @@ public class Thermolysin extends Protease {
         }
 
         char[] charSequence = sequence.toCharArray();
-        for(int i = 0; i < charSequence.length; i++) {
-            if(charSequence[i] == 'I' || charSequence[i] == 'L'
+        for (int i = 0; i < charSequence.length; i++) {
+            if (charSequence[i] == 'I' || charSequence[i] == 'L'
                     || charSequence[i] == 'M' || charSequence[i] == 'V') {
                 makeIon();
             }
@@ -53,7 +53,7 @@ public class Thermolysin extends Protease {
         Character[] characterIon = new Character[buildingIons.size()];
         characterIon = buildingIons.toArray(characterIon);
         char[] charIon = new char[characterIon.length];
-        for(int j = 0; j < characterIon.length; j++) {
+        for (int j = 0; j < characterIon.length; j++) {
             charIon[j] = characterIon[j].charValue();
         }
         String ion = new String(charIon);

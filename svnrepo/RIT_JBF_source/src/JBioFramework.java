@@ -5,20 +5,17 @@
  */
 
 /**
- *
  * @author Amanda Fisher
  */
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * The type J bio framework swing version.
+ * Main class which starts the program and opens and initializes the main window
  */
-public class JBioFrameworkSwingVersion extends JFrame {
+public class JBioFramework extends JFrame {
 
-    /**
-     * The constant serialVersionUID.
-     */
     public static final long serialVersionUID = 1L;
     private JTabbedPane tabbedPane;
     private Electro2D electro2D;
@@ -30,13 +27,14 @@ public class JBioFrameworkSwingVersion extends JFrame {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        JBioFrameworkSwingVersion jbfSwing = new JBioFrameworkSwingVersion();
+
+        JBioFramework jbfSwing = new JBioFramework();
     }
 
     /**
-     * Instantiates a new J bio framework swing version.
+     * Initializes a new JBioFramework Window
      */
-    public JBioFrameworkSwingVersion() {
+    public JBioFramework() {
         super();
 
         setVisible(true);
@@ -44,7 +42,7 @@ public class JBioFrameworkSwingVersion extends JFrame {
 
         electro2D = new Electro2D();
         spectrometer = new MainPanelGUI();
-        
+
         tabbedPane = new JTabbedPane();
 
         tabbedPane.addTab("Electro2D", electro2D);
@@ -59,6 +57,8 @@ public class JBioFrameworkSwingVersion extends JFrame {
 
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
+        this.setMinimumSize(new Dimension(1024, 600));//set the Minimum size of the window because the window will not display all of the required information below this size
+        this.setMaximumSize(new Dimension(1024, 768));//set the Maximim size of the window because automatic scaling has not been implemented yet
         this.pack();
-    }    
+    }
 }

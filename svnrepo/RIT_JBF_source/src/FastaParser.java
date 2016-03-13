@@ -50,7 +50,7 @@ public class FastaParser {
      * @param line Given by the prase method as it reads lines from the user
      *             supplied file.
      * @return String to be added to the end of the sequence to be sent to
-     *         MainPanelGUI.
+     * MainPanelGUI.
      */
     private static String process(String line) {
         if (line.charAt(0) != ';' && line.charAt(0) != '>') {

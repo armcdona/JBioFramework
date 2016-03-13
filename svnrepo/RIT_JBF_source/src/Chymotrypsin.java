@@ -5,9 +5,9 @@
  */
 
 /**
- *
  * @author Amanda Fisher
  */
+
 import java.util.ArrayList;
 
 /**
@@ -35,9 +35,9 @@ public class Chymotrypsin extends Protease {
         }
 
         char[] charSequence = sequence.toCharArray();
-        for(int i = 0; i < charSequence.length; i++) {
+        for (int i = 0; i < charSequence.length; i++) {
             buildingIons.add(charSequence[i]);
-            if(charSequence[i] == 'Y' || charSequence[i] == 'W'
+            if (charSequence[i] == 'Y' || charSequence[i] == 'W'
                     || charSequence[i] == 'F') {
                 makeIon();
             }
@@ -53,7 +53,7 @@ public class Chymotrypsin extends Protease {
         Character[] characterIon = new Character[buildingIons.size()];
         characterIon = buildingIons.toArray(characterIon);
         char[] charIon = new char[characterIon.length];
-        for(int j = 0; j < characterIon.length; j++) {
+        for (int j = 0; j < characterIon.length; j++) {
             charIon[j] = characterIon[j].charValue();
         }
         String ion = new String(charIon);

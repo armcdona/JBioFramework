@@ -32,8 +32,8 @@ import javax.swing.JOptionPane;
 public class MainPanelGUI extends JPanel {
 
     private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K", "Thermolysin"};
-    private HelpButtonSwingVersion help;
-    private AboutButtonSwingVersion about;
+    private HelpButton help;
+    private AboutButton about;
     private static JTextArea inputArea; // static so ProteinFrame can interact with it.
     private JTextField lowerRange;
     private JTextField upperRange;
@@ -57,8 +57,8 @@ public class MainPanelGUI extends JPanel {
         constraints.insets = new Insets(1, 5, 1, 5);
 
         JPanel infoButtonsPanel = new JPanel();
-        help = new HelpButtonSwingVersion();
-        about = new AboutButtonSwingVersion();
+        help = new HelpButton();
+        about = new AboutButton();
         infoButtonsPanel.add(help);
         infoButtonsPanel.add(about);
         constraints.gridx = 0;

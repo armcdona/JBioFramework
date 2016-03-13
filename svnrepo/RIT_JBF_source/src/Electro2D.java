@@ -24,26 +24,26 @@ public class Electro2D extends JPanel implements ActionListener {
 
     private FileFrame fileFrame;          //pop up for loading file data
     private SingleProteinListFrame proteinListFrame;       //pop up for displaying protein lists
-    private ProteinListButtonSwingVersion proteinListButton;
+    private ProteinListButton proteinListButton;
 
     /** components of the main applet **/
-    private GelCanvasSwingVersion gelCanvas;          //area where animation takes place
-    private HelpButtonSwingVersion helpButton;        //brings up help page
-    private AboutButtonSwingVersion aboutButton;      //brings up about page
-    private AddProteinButtonSwingVersion addProteinButton;   //brings up file frame
+    private GelCanvas gelCanvas;          //area where animation takes place
+    private HelpButton helpButton;        //brings up help page
+    private AboutButton aboutButton;      //brings up about page
+    private AddProteinButton addProteinButton;   //brings up file frame
     private RemoveProteinButton removeProteinButton;  //removes proteins
-    private PlayButtonSwingVersion playButton;        //starts/pauses animation
-    private StopButtonSwingVersion stopButton;        //stops animation
-    private RestartButtonSwingVersion restartButton;  //restarts animation
-    private CSVButtonSwingVersion csvButton;          //writes to csv file
-    private CompareProteinsButtonSwingVersion secondProt; //loads second file for comparison
+    private PlayButton playButton;        //starts/pauses animation
+    private StopButton stopButton;        //stops animation
+    private RestartButton restartButton;  //restarts animation
+    private CSVButton csvButton;          //writes to csv file
+    private CompareProteinsButton secondProt; //loads second file for comparison
     private java.awt.List proteinList;    //current protein list
     private int[] selectedIndexes;        //selected indexes in the list
-    private AnimationChooserSwingVersion animationChooser;      //select animation to control
-    private RangeChoiceSwingVersion rangeChooser;     //select the range for IEF
+    private CurrentAnimation currentAnimation;      //select animation to control
+    private RangeChoice rangeChooser;     //select the range for IEF
     private DotThread dotThread;          //thread controlling the SDS-PAGE
     //animation
-    private ColorKeyButtonSwingVersion colorkey;      //protein color key
+    private ColorKeyButton colorkey;      //protein color key
     private IEFThread iefThread;          //thread controlling IEF animation
     private boolean resetPressed;         //detects whether reset was pressed
     //or not
@@ -51,15 +51,15 @@ public class Electro2D extends JPanel implements ActionListener {
     private Graphics graphics;
     private boolean rangeReload;      //determines whether or not the user 
     //enters a pH range manually or not
-    private SearchProteinFieldButtonSwingVersion searchButton; //opens a frame which allows the
+    private SearchProteinFieldButton searchButton; //opens a frame which allows the
     //user to search through the proteins for specific information
 
-    private PercentAcrylamideSwingVersion percentAcrylamide;  //the Choices for entering the
+    private PercentAcrylamide percentAcrylamide;  //the Choices for entering the
     //% acrylamide for the gel
     private Vector<JLabel> rangeLabels;
     private Vector<JLabel> mwLabels;
     private WebGenerator web;             //generates the website
-    private GenerateHTMLButtonSwingVersion webButton;
+    private GenerateHTMLButton webButton;
 
 
     /** protein data vectors **/
@@ -101,37 +101,35 @@ public class Electro2D extends JPanel implements ActionListener {
         proteinList2 = new java.awt.List();
 
         web = new WebGenerator(this);
-        webButton = new GenerateHTMLButtonSwingVersion(this);
+        webButton = new GenerateHTMLButton(this);
 
         //read in deactivated range Image
-        rangeImage = new RangeImage(
-                Toolkit.getDefaultToolkit().getImage(
-                        "rangeSelectDeactivated.jpg"));
+        rangeImage = new RangeImage(Toolkit.getDefaultToolkit().getImage("rangeSelectDeactivated.jpg"));
 
-        rangeLabels = new Vector<JLabel>();
+        rangeLabels = new Vector<>();
         mwLabels = new Vector();
         resetPressed = false;
         rangeReload = false;
-        gelCanvas = new GelCanvasSwingVersion(this);
-        secondProt = new CompareProteinsButtonSwingVersion(this);
-        searchButton = new SearchProteinFieldButtonSwingVersion(this);
-        csvButton = new CSVButtonSwingVersion(this);
-        helpButton = new HelpButtonSwingVersion();
-        aboutButton = new AboutButtonSwingVersion();
-        addProteinButton = new AddProteinButtonSwingVersion(this);
+        gelCanvas = new GelCanvas(this);
+        secondProt = new CompareProteinsButton(this);
+        searchButton = new SearchProteinFieldButton(this);
+        csvButton = new CSVButton(this);
+        helpButton = new HelpButton();
+        aboutButton = new AboutButton();
+        addProteinButton = new AddProteinButton(this);
         removeProteinButton = new RemoveProteinButton(this);
-        colorkey = new ColorKeyButtonSwingVersion();
+        colorkey = new ColorKeyButton();
 
-        playButton = new PlayButtonSwingVersion(this);
-        stopButton = new StopButtonSwingVersion(this);
-        restartButton = new RestartButtonSwingVersion(this);
+        playButton = new PlayButton(this);
+        stopButton = new StopButton(this);
+        restartButton = new RestartButton(this);
 
-        animationChooser = new AnimationChooserSwingVersion();
+        currentAnimation = new CurrentAnimation();
 
-        rangeChooser = new RangeChoiceSwingVersion(this);
+        rangeChooser = new RangeChoice(this);
 
         // init %Acrylamide field and set initial value to 15
-        percentAcrylamide = new PercentAcrylamideSwingVersion();
+        percentAcrylamide = new PercentAcrylamide();
 
         sequences = new Vector();
         sequenceTitles = new Vector();
@@ -140,7 +138,7 @@ public class Electro2D extends JPanel implements ActionListener {
         sequencesReady = false;
 
         proteinListFrame = new SingleProteinListFrame("Protein Lists", this);
-        proteinListButton = new ProteinListButtonSwingVersion(this);
+        proteinListButton = new ProteinListButton(this);
 
        /*
         * new code for designing a Swing GUI; uses JPanels and layout managers
@@ -207,7 +205,7 @@ public class Electro2D extends JPanel implements ActionListener {
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
         thirdPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Current Animation", TitledBorder.CENTER, TitledBorder.TOP));
-        innerPanel.add(animationChooser);
+        innerPanel.add(currentAnimation);
         thirdPanel.add(innerPanel);
         leftPanel.add(thirdPanel);
 
@@ -265,11 +263,12 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * Accessor method for the leftPanel instance variable so that
-     * GelCanvasSwingVersion can correctly set its getMinimumSize() method.
+     * GelCanvas can correctly set its getMinimumSize() method.
      *
      * @return the leftPanel variable that holds all of the buttons
      */
     public JPanel getButtonPanel() {
+
         return leftPanel;
     }
 
@@ -398,22 +397,22 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * Changes the choice selected on the animationChooser Choice box to
+     * Changes the choice selected on the currentAnimation Choice box to
      * SDS-PAGE after the IEF animation is completed.
      */
     public void setSDS() {
 
-        //chose the SDS-PAGE value in animationChooser
-        animationChooser.setText("SDS-PAGE");
+        //chose the SDS-PAGE value in currentAnimation
+        currentAnimation.setText("SDS-PAGE");
     }
 
     /**
-     * Changes the choice selected on the animationChooser Choice box to
+     * Changes the choice selected on the currentAnimation Choice box to
      * IEF after the reset button is pressed.
      */
     public void setIEF() {
-        //choose the IEF value in animationChooser
-        animationChooser.setText("IEF");
+        //choose the IEF value in currentAnimation
+        currentAnimation.setText("IEF");
     }
 
     /**
@@ -988,7 +987,7 @@ public class Electro2D extends JPanel implements ActionListener {
      * @return a string
      */
     public String getAnimationChoice() {
-        return (String) animationChooser.getText();
+        return (String) currentAnimation.getText();
     }
 
     /**
@@ -1174,7 +1173,7 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return gelCanvas gel
      */
-    public GelCanvasSwingVersion getGel() {
+    public GelCanvas getGel() {
         return gelCanvas;
     }
 
@@ -1546,7 +1545,7 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * This method is used by ProteinListFrame to let Electro2D and
-     * GelCanvasSwingVersion know whether or not there are sequences available for
+     * GelCanvas know whether or not there are sequences available for
      * animiation.
      *
      * @param bool Are the sequences available
@@ -1556,7 +1555,7 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * This method is used by PlayButtonSwingVersion to determine when the user
+     * This method is used by PlayButton to determine when the user
      * clicks play if there are sequences ready to animate.
      *
      * @return sequencesReady sequences ready

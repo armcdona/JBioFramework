@@ -4,8 +4,8 @@
  * ProteinFrame.
  *
  * @author Jill Zapoticznyj
- *
  */
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -21,11 +21,11 @@ public class BlastSearchButton extends JButton implements ActionListener {
      * @param e a reference to Electro2D
      * @param text the text of the button
      */
-    public BlastSearchButton( Electro2D e, String seq, String text) {
+    public BlastSearchButton(Electro2D e, String seq, String text) {
         super(text);
-	electro2D = e;
-	pro_sequence = seq;
-	this.addActionListener(this);
+        electro2D = e;
+        pro_sequence = seq;
+        this.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {

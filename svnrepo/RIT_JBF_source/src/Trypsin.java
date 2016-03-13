@@ -6,9 +6,9 @@
  */
 
 /**
- *
  * @author Amanda Fisher
  */
+
 import java.util.ArrayList;
 
 /**
@@ -36,10 +36,10 @@ public class Trypsin extends Protease {
         }
 
         char[] charSequence = sequence.toCharArray();
-        for(int i = 0; i < charSequence.length; i++) {
-            if(charSequence[i] == 'R' || charSequence[i] == 'K') {
+        for (int i = 0; i < charSequence.length; i++) {
+            if (charSequence[i] == 'R' || charSequence[i] == 'K') {
                 buildingIons.add(charSequence[i]);
-                if(i < charSequence.length - 1 && charSequence[i+1] != 'P') {
+                if (i < charSequence.length - 1 && charSequence[i + 1] != 'P') {
                     makeIon();
                 }
             } else {
@@ -57,7 +57,7 @@ public class Trypsin extends Protease {
         Character[] characterIon = new Character[buildingIons.size()];
         characterIon = buildingIons.toArray(characterIon);
         char[] charIon = new char[characterIon.length];
-        for(int j = 0; j < characterIon.length; j++) {
+        for (int j = 0; j < characterIon.length; j++) {
             charIon[j] = characterIon[j].charValue();
         }
         String ion = new String(charIon);

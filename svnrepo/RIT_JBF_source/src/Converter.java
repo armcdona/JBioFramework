@@ -24,7 +24,7 @@ public class Converter {
     public static Ion convert(String sequence) {
         char[] aminoAcids = sequence.toCharArray();
         Ion ion = new Ion();
-        for(char acid : aminoAcids) {
+        for (char acid : aminoAcids) {
             try {
                 SpecAminoAcid newAcid = new SpecAminoAcid(acid);
                 ion.add(newAcid);

@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.*;
 
 /**
- * The type E 2 d protein.
+ * A protein that will be used in the E2D simulation.
  */
 public class E2DProtein {
 

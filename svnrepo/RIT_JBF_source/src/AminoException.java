@@ -9,7 +9,9 @@
  * Not used at the moment
  */
 public class AminoException extends Exception {
-    public AminoException() {}
+    public AminoException() {
+    }
+
     public AminoException(String message) {
         super(message);
     }

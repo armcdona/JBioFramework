@@ -12,9 +12,9 @@
  */
 
 /**
- *
  * @author Amanda Fisher
  */
+
 import java.util.ArrayList;
 import java.awt.Color;
 
@@ -58,7 +58,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
         // add the mass of the amino acid to the ion
         setMass(totalMass + a.getMass());
         // if this is the second or greater amino acid added to the chain;
-        if(this.size() > 1) {
+        if (this.size() > 1) {
             // subtract the mass in Daltons of H2O as the amino acids dehydrate
             // together to form the chain
             setMass(totalMass - 18.01528);
@@ -133,7 +133,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @return massChargeRatio. mass charge ratio
      */
     public double getMassChargeRatio() {
-        return totalMass/(double)totalCharge;
+        return totalMass / (double) totalCharge;
     }
 
     /**

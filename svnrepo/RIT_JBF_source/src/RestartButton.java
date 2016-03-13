@@ -1,6 +1,5 @@
 
 /**
- *
  * @author Amanda Fisher
  */
 
@@ -11,7 +10,7 @@ import java.util.*;
 /**
  * The type Restart button swing version.
  */
-public class RestartButtonSwingVersion extends JButton implements ActionListener {
+public class RestartButton extends JButton implements ActionListener {
 
     /**
      * The Electro 2 d.
@@ -23,37 +22,37 @@ public class RestartButtonSwingVersion extends JButton implements ActionListener
      *
      * @param e the e
      */
-    public RestartButtonSwingVersion(Electro2D e) {
+    public RestartButton(Electro2D e) {
         super("Restart");
         addActionListener(this);
         electro2D = e;
     }
 
     public void actionPerformed(ActionEvent e) {
-        GelCanvasSwingVersion g = electro2D.getGel();
-	g.clearIEF();
-	g.resetLocation();
-	g.resetRanges();
-	g.clearCanvas();
-	electro2D.resetIEF();
-	IEFProteinSwingVersion.resetProtein();
+        GelCanvas g = electro2D.getGel();
+        g.clearIEF();
+        g.resetLocation();
+        g.resetRanges();
+        g.clearCanvas();
+        electro2D.resetIEF();
+        IEFProtein.resetProtein();
 
-	if( ProteinDotSwingVersion.getShow() ){
-	    ProteinDotSwingVersion.setShow();
-	    electro2D.stopThread();
-	}
-	g.restartCanvas();
+        if (ProteinDot.getShow()) {
+            ProteinDot.setShow();
+            electro2D.stopThread();
+        }
+        g.restartCanvas();
 
-	electro2D.resetPlay();
-	electro2D.resetSdsStatus();
-	electro2D.setBool();
-	electro2D.clearpH();
-	electro2D.setIEF();
-	GelCanvasSwingVersion.setRed();
-	GelCanvasSwingVersion.setGreen();
-	GelCanvasSwingVersion.setBlue();
-	IEFProteinSwingVersion.resetTempWidth();
-        PlayButtonSwingVersion.setCompare(false);
+        electro2D.resetPlay();
+        electro2D.resetSdsStatus();
+        electro2D.setBool();
+        electro2D.clearpH();
+        electro2D.setIEF();
+        GelCanvas.setRed();
+        GelCanvas.setGreen();
+        GelCanvas.setBlue();
+        IEFProtein.resetTempWidth();
+        PlayButton.setCompare(false);
         electro2D.resetBothProteinLists();
         electro2D.setSequences(new Vector());
         electro2D.setSequenceTitles(new Vector());

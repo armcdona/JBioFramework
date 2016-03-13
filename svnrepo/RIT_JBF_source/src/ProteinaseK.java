@@ -5,9 +5,9 @@
  */
 
 /**
- *
  * @author Amanda Fisher
  */
+
 import java.util.ArrayList;
 
 /**
@@ -21,6 +21,7 @@ public class ProteinaseK extends Protease {
     /**
      * The cut method takes an input sequence and cuts it in to different Strings at points dependent on the type of Protease using the method.
      * It uses the makeIon method to turn the ArrayList of collected characters in to a String
+     *
      * @param sequence String sequence representing an amino acid chain
      * @return The sequence after it is cut
      * @throws ProteaseException Thrown when given an input with incorrect formatting
@@ -35,9 +36,9 @@ public class ProteinaseK extends Protease {
         }
 
         char[] charSequence = sequence.toCharArray();
-        for(int i = 0; i < charSequence.length; i++) {
+        for (int i = 0; i < charSequence.length; i++) {
             buildingIons.add(charSequence[i]);
-            if(charSequence[i] == 'A' || charSequence[i] == 'F'
+            if (charSequence[i] == 'A' || charSequence[i] == 'F'
                     || charSequence[i] == 'I' || charSequence[i] == 'L'
                     || charSequence[i] == 'V' || charSequence[i] == 'W'
                     || charSequence[i] == 'Y') {
@@ -57,7 +58,7 @@ public class ProteinaseK extends Protease {
         Character[] characterIon = new Character[buildingIons.size()];
         characterIon = buildingIons.toArray(characterIon);
         char[] charIon = new char[characterIon.length];
-        for(int j = 0; j < characterIon.length; j++) {
+        for (int j = 0; j < characterIon.length; j++) {
             charIon[j] = characterIon[j].charValue();
         }
         String ion = new String(charIon);

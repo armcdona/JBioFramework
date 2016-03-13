@@ -10,7 +10,7 @@ import java.awt.event.*;
 /**
  * The type Generate html button swing version.
  */
-public class GenerateHTMLButtonSwingVersion extends JButton implements ActionListener {
+public class GenerateHTMLButton extends JButton implements ActionListener {
 
     /**
      * The Electro 2 d.
@@ -22,7 +22,7 @@ public class GenerateHTMLButtonSwingVersion extends JButton implements ActionLis
      *
      * @param e the e
      */
-    public GenerateHTMLButtonSwingVersion (Electro2D e) {
+    public GenerateHTMLButton(Electro2D e) {
 
         super("Generate HTML Page");
         electro2D = e;

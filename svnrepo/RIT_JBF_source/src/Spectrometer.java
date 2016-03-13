@@ -11,6 +11,7 @@
 /**
  * @author Amanda Fisher
  */
+
 import java.util.ArrayList;
 
 /**
@@ -41,7 +42,7 @@ public class Spectrometer {
 
             //Figure out which protease the user wants.
             Protease protease;
-            if(proteaseChoice.equals("Trypsin")) {
+            if (proteaseChoice.equals("Trypsin")) {
                 protease = new Trypsin();
             } else if (proteaseChoice.equals("Chymotrypsin")) {
                 protease = new Chymotrypsin();
@@ -63,21 +64,21 @@ public class Spectrometer {
                 for (String ion : ionStrings) {
                     Ion newIon = Converter.convert(ion);
                     newIon.setCharge(1);
-                    if(newIon.getMass() != 0) {
+                    if (newIon.getMass() != 0) {
                         ions.add(newIon);
                     }
                 }
-            } catch(ProteaseException ex) {
+            } catch (ProteaseException ex) {
                 System.out.println(ex.getMessage());
             }
 
             //Count up the number of ions with the same mass charge rotios to
             //find intensity of each peak.
             int mostHits = 0;
-            for(int i = 0; i < ions.size(); i++) {
+            for (int i = 0; i < ions.size(); i++) {
                 int hits = 0;
-                for(int j = 0; j < ions.size(); j++) {
-                    if(ions.get(i).getMassChargeRatio() == ions.get(j).getMassChargeRatio()) {
+                for (int j = 0; j < ions.size(); j++) {
+                    if (ions.get(i).getMassChargeRatio() == ions.get(j).getMassChargeRatio()) {
                         hits++;
                     }
                 }
@@ -89,7 +90,7 @@ public class Spectrometer {
 
             // Have outputGraph draw the peaks.
             outputGraph.setPeaks(ions, mostHits);
-            
+
         }
 
     }
