@@ -8,7 +8,7 @@
  */
 
 /**
- * The type Converter.
+ * Converts
  *
  * @author Amanda Fisher
  */
@@ -16,13 +16,13 @@ public class Converter {
 
     /**
      * The convert method takes a String input that represents an amino acid chain
-     * and returns a class Ion containing the amino acids the string sequence represented.
+     * and returns a class Ion containing the amino acids the string aminoAcidSequence represented.
      *
-     * @param sequence String contain the amino acid sequence
-     * @return Ion class containing amino acids from sequence.
+     * @param aminoAcidSequence String contain the amino acid aminoAcidSequence
+     * @return Ion class containing amino acids from aminoAcidSequence.
      */
-    public static Ion convert(String sequence) {
-        char[] aminoAcids = sequence.toCharArray();
+    public static Ion convert(String aminoAcidSequence) {
+        char[] aminoAcids = aminoAcidSequence.toCharArray();
         Ion ion = new Ion();
         for (char acid : aminoAcids) {
             try {

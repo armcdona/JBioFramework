@@ -17,7 +17,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- * The type File frame.
+ * Window to select a file containing protein sequence data
  */
 public class FileFrame extends JFrame implements ActionListener {
 

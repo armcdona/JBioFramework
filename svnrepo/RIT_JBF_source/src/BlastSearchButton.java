@@ -9,13 +9,16 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * When pressed opens the protein blast search window
+ */
 public class BlastSearchButton extends JButton implements ActionListener {
 
     private Electro2D electro2D;
     private String pro_sequence = "";
 
     /**
-     * Constructor, performs some perfunctory tasks.
+     * Creates the button
      *
      * @param seq the string that will be searched for
      * @param e a reference to Electro2D
@@ -29,6 +32,7 @@ public class BlastSearchButton extends JButton implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+
         electro2D.showBlastSearchPage(pro_sequence);
     }
 

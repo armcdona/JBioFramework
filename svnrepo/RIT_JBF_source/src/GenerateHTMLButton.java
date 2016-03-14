@@ -8,20 +8,12 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * The type Generate html button swing version.
+ * When activated a window appears asking the user to select how he wants the proteins sorted, and then generates an html file with the proteins
  */
 public class GenerateHTMLButton extends JButton implements ActionListener {
 
-    /**
-     * The Electro 2 d.
-     */
     Electro2D electro2D;
 
-    /**
-     * Instantiates a new Generate html button swing version.
-     *
-     * @param e the e
-     */
     public GenerateHTMLButton(Electro2D e) {
 
         super("Generate HTML Page");

@@ -1,7 +1,8 @@
 import java.io.IOException;
+import java.net.URI;
 
 /**
- * The type Browser launcher.
+ * Launches the web browser with a given url
  */
 public class BrowserLauncher {
 
@@ -17,7 +18,7 @@ public class BrowserLauncher {
      */
     public static void openURL(String url) throws IOException {
         try {
-            java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+            java.awt.Desktop.getDesktop().browse(URI.create(url));
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

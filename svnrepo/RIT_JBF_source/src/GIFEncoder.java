@@ -21,12 +21,10 @@ import java.awt.image.*;
  * construction. This will take some time, depending on the size of
  * the image. Also, actually writing the image out (Write) will take
  * time.
- * <p>
  * <LI>The image cannot have more than 256 colors, since GIF is an 8
  * bit format. For a 24 bit to 8 bit quantization algorithm, see
  * Graphics Gems II III.2 by Xialoin Wu. Or check out his <A
  * HREF="http://www.csd.uwo.ca/faculty/wu/cq.c">C source</A>.
- * <p>
  * <LI>Since the image must be completely loaded into memory,
  * GIFEncoder may have problems with large images. Attempting to
  * encode an image which will not fit into memory will probably
