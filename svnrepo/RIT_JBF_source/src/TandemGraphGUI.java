@@ -81,11 +81,9 @@ public class TandemGraphGUI extends JPanel {
 
         g.setColor(Color.BLACK);
         //draw horizontal axis
-        g.drawLine(xAxisStartingPoint, yAxisStartingPoint + yAxisHeight,
-                xAxisStartingPoint + xAxisWidth, yAxisStartingPoint + yAxisHeight);
+        g.drawLine(xAxisStartingPoint, yAxisStartingPoint + yAxisHeight, xAxisStartingPoint + xAxisWidth, yAxisStartingPoint + yAxisHeight);
         //draw verticle axis
-        g.drawLine(xAxisStartingPoint, yAxisStartingPoint,
-                xAxisStartingPoint, yAxisStartingPoint + yAxisHeight);
+        g.drawLine(xAxisStartingPoint, yAxisStartingPoint, xAxisStartingPoint, yAxisStartingPoint + yAxisHeight);
 
         //draw labels
         g.drawString("I", width / 40, height / 2);
@@ -97,8 +95,7 @@ public class TandemGraphGUI extends JPanel {
         for (int i = 0; i < 16; i++) {
             int xPos = xAxisStartingPoint + i * xAxisWidth / 15;
             g.drawLine(xPos, yStart, xPos, yEnd);
-            String markNumber = String.valueOf(i * numericalDifference
-                    + startingPoint);
+            String markNumber = String.valueOf(i * numericalDifference + startingPoint);
             g.drawString(markNumber, xPos - 10, yEnd + 15);
         }
 

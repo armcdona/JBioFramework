@@ -350,10 +350,14 @@ public class MainPanelGUI extends JPanel {
                 return 3000;
             }
         }
-        if (upper < 0 || upper > 20000) {
-            upper = 3000;
-            JOptionPane.showMessageDialog(null, "Upper Limit out of bounds (0 to 20,000). Set to default of 3000.");
-            upperRange.setText("3000");
+        if (upper > 20000) {
+            upper = 20000;
+            JOptionPane.showMessageDialog(null, "Upper Limit too high (0 to 20,000). Set to maximum of 20,000.");
+            upperRange.setText("20000");
+        } else if (upper < 0 ){
+            upper = 0;
+            JOptionPane.showMessageDialog(null, "Upper Limit too low (0 to 20,000). Set to maximum of 20,000.");
+            upperRange.setText("0");
         }
         return upper;
     }
