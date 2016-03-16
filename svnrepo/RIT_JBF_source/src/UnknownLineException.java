@@ -1,13 +1,3 @@
-/*
- * UnknownLineException.java
- *
- * Version:
- *     $Id$
- *
- * Revisions:
- *      $Log$
- *
- */
 
 /**
  * Exception thrown when a given line in a line graph isn't recognized
@@ -18,14 +8,15 @@ public class UnknownLineException extends Exception {
     /**
      * Instantiates a new Unknown line exception.
      */
-    public UnknownLineException() {}
+    public UnknownLineException() {
+    }
 
     /**
      * Instantiates a new Unknown line exception.
      *
      * @param message the message
      */
-    public UnknownLineException( String message ) {
-	super( message );
+    public UnknownLineException(String message) {
+        super(message);
     }
 }

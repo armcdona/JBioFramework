@@ -1,7 +1,8 @@
 import java.io.IOException;
+import java.net.URI;
 
 /**
- * The type Browser launcher.
+ * Launches the web browser with a given url
  */
 public class BrowserLauncher {
 
@@ -16,12 +17,12 @@ public class BrowserLauncher {
      * @throws IOException If the web browser could not be located or does not run
      */
     public static void openURL(String url) throws IOException {
-            try {
-                java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-	}
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create(url));
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * Handles opening the Help and About files.
@@ -30,10 +31,10 @@ public class BrowserLauncher {
      * @throws IOException the io exception
      */
     public static void openHTMLFile(java.io.File file) throws IOException {
-            try {
-                java.awt.Desktop.getDesktop().open(file);
-            } catch(Exception ex) {
-                System.out.println(ex);
-            }
+        try {
+            java.awt.Desktop.getDesktop().open(file);
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
+    }
 }

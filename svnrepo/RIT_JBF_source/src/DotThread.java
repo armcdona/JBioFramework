@@ -7,7 +7,7 @@
 
 public class DotThread extends Thread{
     private static boolean go = false;
-    private GelCanvasSwingVersion gel;
+    private GelCanvas gel;
     private Electro2D electro2D;
 
 	/**
@@ -16,7 +16,7 @@ public class DotThread extends Thread{
 	 * @param g a reference to the GelCanvas
 	 * @param e the e
 	 */
-	public DotThread( GelCanvasSwingVersion g, Electro2D e ){
+	public DotThread(GelCanvas g, Electro2D e ){
 	gel = g;
 	electro2D = e;
     }
@@ -57,16 +57,16 @@ public class DotThread extends Thread{
      */
 
     public void run(){
-	GelCanvasSwingVersion.stopBlink();
+	GelCanvas.stopBlink();
 	//send the percent acrylamide value to ProteinDot
-	ProteinDotSwingVersion.setPercent( electro2D.getLowPercent(),
+	ProteinDot.setPercent( electro2D.getLowPercent(),
 			       electro2D.getHighPercent() );
 
 	gel.resetReLine();
 	// while the IEFProteins are still visible...
-	while( IEFProteinSwingVersion.returnHeight() > 0 ){
+	while( IEFProtein.returnHeight() > 0 ){
 	    //...shrink them in size...
-	    IEFProteinSwingVersion.shrinkProtein();
+	    IEFProtein.shrinkProtein();
 	    // ...and redraw them to the GelCanvas
 	    gel.shrinkIEF();
 
@@ -79,8 +79,8 @@ public class DotThread extends Thread{
 	}
 	
 	// Make the ProteinDots visible
-	if( ProteinDotSwingVersion.getShow() == false ){
-	    ProteinDotSwingVersion.setShow();
+	if( ProteinDot.getShow() == false ){
+	    ProteinDot.setShow();
 	}
 	
 	int i = 0;

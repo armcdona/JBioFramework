@@ -11,10 +11,10 @@ import java.io.*;
 /**
  * Opens a window that displays the file about.html
  */
-public class AboutButtonSwingVersion extends JButton implements ActionListener {
+public class AboutButton extends JButton implements ActionListener {
     Electro2D electro2D;
 
-    public AboutButtonSwingVersion () {
+    public AboutButton() {
         super("About");
         addActionListener(this);
     }

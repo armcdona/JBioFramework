@@ -10,10 +10,10 @@ import java.awt.event.*;
 /**
  * Opens a window for the user to load a file
  */
-public class AddProteinButtonSwingVersion extends JButton implements ActionListener {
+public class AddProteinButton extends JButton implements ActionListener {
     Electro2D electro2D;
 
-    public AddProteinButtonSwingVersion (Electro2D e) {
+    public AddProteinButton(Electro2D e) {
 
         super("Add Proteins");
         addActionListener(this);

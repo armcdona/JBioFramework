@@ -10,11 +10,11 @@ import java.awt.event.*;
 /**
  * Button to activate the protein comparison.  This is not used at this time.
  */
-public class CompareProteinsButtonSwingVersion extends JButton implements ActionListener {
+public class CompareProteinsButton extends JButton implements ActionListener {
 
     Electro2D electro2D;
 
-    public CompareProteinsButtonSwingVersion(Electro2D e) {
+    public CompareProteinsButton(Electro2D e) {
 
         super("Compare Proteins");
         electro2D = e;
@@ -25,7 +25,7 @@ public class CompareProteinsButtonSwingVersion extends JButton implements Action
     public void actionPerformed(ActionEvent e) {
 
 	    electro2D.getSequenceData2();
-	    PlayButtonSwingVersion.setCompare(true);
+	    PlayButton.setCompare(true);
 
     }
 }

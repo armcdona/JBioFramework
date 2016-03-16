@@ -1,5 +1,5 @@
 /**
- * This class compares the information to be displayed in the generated 
+ * This class compares the information to be displayed in the generated
  * HTML document.
  */
 
@@ -8,103 +8,97 @@ import java.util.*;
 /**
  * The type Html comparator.
  */
-public class HTMLComparator implements Comparator{
-    
+public class HTMLComparator implements Comparator {
+
     private int compBy;
 
-	/**
-	 * Instantiates a new Html comparator.
-	 *
-	 * @param c the c
-	 */
-	public HTMLComparator( int c ){
-	compBy = c;
+    /**
+     * Instantiates a new Html comparator.
+     *
+     * @param c the c
+     */
+    public HTMLComparator(int c) {
+        compBy = c;
     }
 
-    public int compare( Object a, Object b ){
-	
-	Vector objA = (Vector)a;
-	Vector objB = (Vector)b;
-	if( compBy != 1 && compBy != 2 ){
-	    if( ((String)objA.elementAt( compBy ) ).equals(
-				  (String)objB.elementAt(compBy ) ) ){
-		for( int i = 0; i < 4; i++ ){
-		    if( i != 1 && i != 2 ){
-			int comp = ((String)objA.elementAt(i)).compareTo(
-					    ((String)objB.elementAt(i)) );
-			if( comp != 0 ){
-			    return comp;
-			}
-		    }
-		    else if( i == 1 || i == 2 ){
-			int comp = compareDouble( a, b, i );
-			if( comp != 0 ){
-			    return comp;
-			}
-		    }
-		}
-	    
-	    }
-	    else{
-		return (((String)objA.elementAt( compBy )).compareTo( 
-								     (String)objB.elementAt( compBy ) ) );
-	    }
-	   
-	}
-	else if( compBy == 1 || compBy == 2 ){
-	    if( compareDouble( a,b,compBy ) == 0 ){
-		for( int i = 0; i < 4; i++ ){
-		    if( i != 1 && i != 2 ){
-		       
-			int comp = ((String)objA.elementAt(i)).compareTo(
-						((String)objB.elementAt(i)) );
-			
-			if( comp != 0 ){
-			    return comp;
-			}
-		    }
-		    else if( i == 1 || i == 2 ){
-			
-			int comp = compareDouble( a, b, i );
-			if( comp != 0 ){
-			    return comp;
-			}
-		    }
-		}
-		
-		return 0;
-	    }
-	    return compareDouble( a, b, compBy );
-	}
-	
-	return -1000;
+    public int compare(Object a, Object b) {
+
+        Vector objA = (Vector) a;
+        Vector objB = (Vector) b;
+        if (compBy != 1 && compBy != 2) {
+            if (((String) objA.elementAt(compBy)).equals(
+                    (String) objB.elementAt(compBy))) {
+                for (int i = 0; i < 4; i++) {
+                    if (i != 1 && i != 2) {
+                        int comp = ((String) objA.elementAt(i)).compareTo(
+                                ((String) objB.elementAt(i)));
+                        if (comp != 0) {
+                            return comp;
+                        }
+                    } else if (i == 1 || i == 2) {
+                        int comp = compareDouble(a, b, i);
+                        if (comp != 0) {
+                            return comp;
+                        }
+                    }
+                }
+
+            } else {
+                return (((String) objA.elementAt(compBy)).compareTo(
+                        (String) objB.elementAt(compBy)));
+            }
+
+        } else if (compBy == 1 || compBy == 2) {
+            if (compareDouble(a, b, compBy) == 0) {
+                for (int i = 0; i < 4; i++) {
+                    if (i != 1 && i != 2) {
+
+                        int comp = ((String) objA.elementAt(i)).compareTo(
+                                ((String) objB.elementAt(i)));
+
+                        if (comp != 0) {
+                            return comp;
+                        }
+                    } else if (i == 1 || i == 2) {
+
+                        int comp = compareDouble(a, b, i);
+                        if (comp != 0) {
+                            return comp;
+                        }
+                    }
+                }
+
+                return 0;
+            }
+            return compareDouble(a, b, compBy);
+        }
+
+        return -1000;
     }
 
-	/**
-	 * Compare double int.
-	 *
-	 * @param a     the a
-	 * @param b     the b
-	 * @param index the index
-	 * @return the int
-	 */
-	public int compareDouble( Object a, Object b, int index ){
-	Vector objA = (Vector)a;
-	Vector objB = (Vector)b;
-	int retVal = -2;
-	
-	double dA = Double.parseDouble(((String)objA.elementAt( index )));
-	double dB = Double.parseDouble(((String)objB.elementAt( index ) ) );
+    /**
+     * Compare double int.
+     *
+     * @param a     the a
+     * @param b     the b
+     * @param index the index
+     * @return the int
+     */
+    public int compareDouble(Object a, Object b, int index) {
+        Vector objA = (Vector) a;
+        Vector objB = (Vector) b;
+        int retVal = -2;
 
-	if( dA < dB ){
-	    retVal = -1;
-	}
-	else if( dA == dB ){
-	    retVal = 0;
-	}
-	else if( dA > dB ){
-	    retVal = 1;
-	}
-	return retVal;
+        double dA = Double.parseDouble(((String) objA.elementAt(index)));
+        double dB = Double.parseDouble(((String) objB.elementAt(index)));
+
+        if (dA < dB) {
+            retVal = -1;
+        } else if (dA == dB) {
+            retVal = 0;
+        } else if (dA > dB) {
+            retVal = 1;
+        }
+        return retVal;
     }
 }

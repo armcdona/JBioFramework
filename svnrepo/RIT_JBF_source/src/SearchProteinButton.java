@@ -20,11 +20,11 @@ public class SearchProteinButton extends JButton implements ActionListener {
      * @param id   - the string being searched for
      * @param text the text
      */
-    public SearchProteinButton( Electro2D e, String id, String text) {
+    public SearchProteinButton(Electro2D e, String id, String text) {
         super(text);
-	electro2D = e; //give the button a reference to Electro2D
-	pro_id = id; //set the search value to the string passed to the method
-	this.addActionListener(this);
+        electro2D = e; //give the button a reference to Electro2D
+        pro_id = id; //set the search value to the string passed to the method
+        this.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {

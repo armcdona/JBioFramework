@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * The type Range image.
  */
-public class RangeImage extends Canvas{
+public class RangeImage extends Canvas {
 
     private Image pic;
 
@@ -18,17 +18,17 @@ public class RangeImage extends Canvas{
      *
      * @param i - the image represented by the object
      */
-    public RangeImage( Image i ){
-	//give the object a reference to the image to be drawn
-	pic = i;
+    public RangeImage(Image i) {
+        //give the object a reference to the image to be drawn
+        pic = i;
     }
 
     /**
      * This method draws the image to the screen
      */
-    public void paint( Graphics g ){
-	
-	g.drawImage( pic, 0, 0, this );
+    public void paint(Graphics g) {
+
+        g.drawImage(pic, 0, 0, this);
 
     }
 

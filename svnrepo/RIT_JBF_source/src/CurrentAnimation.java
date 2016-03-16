@@ -8,9 +8,9 @@ import javax.swing.*;
 /**
  * Displays the current animation type
  */
-public class AnimationChooserSwingVersion extends JLabel {
+public class CurrentAnimation extends JLabel {
 
-    public AnimationChooserSwingVersion() {
+    public CurrentAnimation() {
 
         super("IEF");
 

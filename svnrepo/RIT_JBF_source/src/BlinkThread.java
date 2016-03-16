@@ -5,20 +5,20 @@ import java.awt.*;
  */
 public class BlinkThread extends Thread {
 
-    private ProteinDotSwingVersion theDot;
-    private GelCanvasSwingVersion theGel;
+    private ProteinDot theDot;
+    private GelCanvas theGel;
     
-    public BlinkThread( ProteinDotSwingVersion p, GelCanvasSwingVersion g ){
+    public BlinkThread(ProteinDot p, GelCanvas g ){
 	theGel = g;
 	theDot = p;
     }
 
     public void run(){
 	
-	while( !GelCanvasSwingVersion.getBlink() ){
+	while( !GelCanvas.getBlink() ){
 	}
 
-	while( GelCanvasSwingVersion.getBlink() && !DotThread.getDotState() ){
+	while( GelCanvas.getBlink() && !DotThread.getDotState() ){
 	    if( theDot.getColor() == Color.RED ){
 		theDot.changeColor( Color.GREEN );
 	    }

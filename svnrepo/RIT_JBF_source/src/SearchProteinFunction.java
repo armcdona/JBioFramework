@@ -6,11 +6,11 @@ import javax.swing.*;
 /**
  * The type Search protein function.
  */
-public class SearchProteinFunction implements MouseListener, ActionListener{
-    
+public class SearchProteinFunction implements MouseListener, ActionListener {
+
     private Vector dots1;
     private Vector dots2;
-    private GelCanvasSwingVersion gel;
+    private GelCanvas gel;
     private Electro2D electro2D;
     private JFrame window;
     private JButton search;
@@ -31,92 +31,92 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
     private JRadioButton titleButton;
     private JRadioButton functionButton;
 
-	/**
-	 * Instantiates a new Search protein function.
-	 *
-	 * @param e2D the e 2 d
-	 */
-	public SearchProteinFunction( Electro2D e2D ){
-	
-	electro2D = e2D;
-	radioButtons = new ButtonGroup();
-	
-	gel = electro2D.getGel();
-	dots1 = new Vector();
-	dots2 = new Vector();
-	excludesLabel = new JLabel( "Excludes: " );
-	includesLabel = new JLabel( "Includes: " );
-	searchTerm = new JTextField();
-	excludeTerm = new JTextField();
-	buttonPane = new JPanel();
-	buttonLabelPane = new JPanel();
-	buttonSelectionPane = new JPanel();
-	textPane = new JPanel();
-	searchLabelPane = new JPanel();
-	searchFieldPane = new JPanel();
-	window = new JFrame();
-	window.addWindowListener( new WindowAdapter(){
-		public void windowClosing( WindowEvent e ) {
-					  window.setVisible(false);
-				      }
-				  }
-				  );
+    /**
+     * Instantiates a new Search protein function.
+     *
+     * @param e2D the e 2 d
+     */
+    public SearchProteinFunction(Electro2D e2D) {
+
+        electro2D = e2D;
+        radioButtons = new ButtonGroup();
+
+        gel = electro2D.getGel();
+        dots1 = new Vector();
+        dots2 = new Vector();
+        excludesLabel = new JLabel("Excludes: ");
+        includesLabel = new JLabel("Includes: ");
+        searchTerm = new JTextField();
+        excludeTerm = new JTextField();
+        buttonPane = new JPanel();
+        buttonLabelPane = new JPanel();
+        buttonSelectionPane = new JPanel();
+        textPane = new JPanel();
+        searchLabelPane = new JPanel();
+        searchFieldPane = new JPanel();
+        window = new JFrame();
+        window.addWindowListener(new WindowAdapter() {
+                                     public void windowClosing(WindowEvent e) {
+                                         window.setVisible(false);
+                                     }
+                                 }
+        );
 
         search = new JButton("Search");
         reset = new JButton("Reset");
         search.addActionListener(new SearchListener());
         reset.addActionListener(new ResetListener());
-	sequenceButton = new JRadioButton( "Sequence", false );
-	titleButton = new JRadioButton( "Protein Title", true );
-	functionButton = new JRadioButton( "Protein Function", false );
+        sequenceButton = new JRadioButton("Sequence", false);
+        titleButton = new JRadioButton("Protein Title", true);
+        functionButton = new JRadioButton("Protein Function", false);
         searchField = "function";
-	sequenceButton.addActionListener( this );
-	titleButton.addActionListener( this );
-	functionButton.addActionListener( this );
-	sequenceButton.setActionCommand( "sequence" );
-	titleButton.setActionCommand( "title" );
-	functionButton.setActionCommand( "function" );
-	functionButton.setMnemonic( KeyEvent.VK_F );
-	sequenceButton.setMnemonic( KeyEvent.VK_S );
-	titleButton.setMnemonic( KeyEvent.VK_T );
-	radioButtons.add( sequenceButton );
-	radioButtons.add( titleButton );
-	radioButtons.add( functionButton );
+        sequenceButton.addActionListener(this);
+        titleButton.addActionListener(this);
+        functionButton.addActionListener(this);
+        sequenceButton.setActionCommand("sequence");
+        titleButton.setActionCommand("title");
+        functionButton.setActionCommand("function");
+        functionButton.setMnemonic(KeyEvent.VK_F);
+        sequenceButton.setMnemonic(KeyEvent.VK_S);
+        titleButton.setMnemonic(KeyEvent.VK_T);
+        radioButtons.add(sequenceButton);
+        radioButtons.add(titleButton);
+        radioButtons.add(functionButton);
 
-	buttonLabelPane.setLayout( new GridLayout(0,1) );
-	JLabel labelPane = new JLabel( "Select Search Field" );
-	buttonLabelPane.add( labelPane );
-	buttonSelectionPane.setLayout( new GridLayout( 0, 1 ) );
-	buttonSelectionPane.add( titleButton );
-	buttonSelectionPane.add( functionButton );
-	buttonSelectionPane.add( sequenceButton );
-	
-	buttonPane.setLayout( new BorderLayout() );
-	buttonPane.add( buttonLabelPane, BorderLayout.NORTH );
-	buttonPane.add( buttonSelectionPane, BorderLayout.CENTER );
-	searchLabelPane.setLayout( new GridLayout(0,1));
-	Label searchLabel = new Label( "Enter Search Term" );
-	searchLabelPane.add( searchLabel );
-	searchFieldPane.setLayout( new GridLayout(0,1) );
-	searchFieldPane.add( includesLabel );
-	searchFieldPane.add( searchTerm );
-	searchFieldPane.add( excludesLabel );
-	searchFieldPane.add( excludeTerm );
-	searchFieldPane.add( search );
-	searchFieldPane.add( reset );
-	
-	textPane.setLayout( new BorderLayout() );
-	textPane.add( searchLabelPane, BorderLayout.NORTH );
-	textPane.add( searchFieldPane, BorderLayout.CENTER );
-	
+        buttonLabelPane.setLayout(new GridLayout(0, 1));
+        JLabel labelPane = new JLabel("Select Search Field");
+        buttonLabelPane.add(labelPane);
+        buttonSelectionPane.setLayout(new GridLayout(0, 1));
+        buttonSelectionPane.add(titleButton);
+        buttonSelectionPane.add(functionButton);
+        buttonSelectionPane.add(sequenceButton);
 
-	window.setLayout( new BorderLayout() );
-	window.setTitle( "Search Proteins" );
-	window.add( buttonPane, BorderLayout.WEST );
-	window.add( textPane, BorderLayout.EAST );
-	window.pack();
-	window.setVisible( true );
-	
+        buttonPane.setLayout(new BorderLayout());
+        buttonPane.add(buttonLabelPane, BorderLayout.NORTH);
+        buttonPane.add(buttonSelectionPane, BorderLayout.CENTER);
+        searchLabelPane.setLayout(new GridLayout(0, 1));
+        Label searchLabel = new Label("Enter Search Term");
+        searchLabelPane.add(searchLabel);
+        searchFieldPane.setLayout(new GridLayout(0, 1));
+        searchFieldPane.add(includesLabel);
+        searchFieldPane.add(searchTerm);
+        searchFieldPane.add(excludesLabel);
+        searchFieldPane.add(excludeTerm);
+        searchFieldPane.add(search);
+        searchFieldPane.add(reset);
+
+        textPane.setLayout(new BorderLayout());
+        textPane.add(searchLabelPane, BorderLayout.NORTH);
+        textPane.add(searchFieldPane, BorderLayout.CENTER);
+
+
+        window.setLayout(new BorderLayout());
+        window.setTitle("Search Proteins");
+        window.add(buttonPane, BorderLayout.WEST);
+        window.add(textPane, BorderLayout.EAST);
+        window.pack();
+        window.setVisible(true);
+
     }
 
     private class SearchListener implements ActionListener {
@@ -131,15 +131,15 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
         }
     }
 
-	/**
-	 * Search for.
-	 *
-	 * @param fcnName     the fcn name
-	 * @param limitations the limitations
-	 */
-	public void searchFor( String fcnName, String limitations ){
-	dots1 = gel.getDots();
-	dots2 = gel.getDots2();
+    /**
+     * Search for.
+     *
+     * @param fcnName     the fcn name
+     * @param limitations the limitations
+     */
+    public void searchFor(String fcnName, String limitations) {
+        dots1 = gel.getDots();
+        dots2 = gel.getDots2();
 
         if (dots1 == null) {
             dots1 = new Vector();
@@ -149,83 +149,77 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
             dots2 = new Vector();
         }
 
-	ProteinDotSwingVersion prot = null;
-	if( searchField.equals( "function" ) ){
-	    for( int i = 0; i < dots1.size(); i++ ){
-		prot = (ProteinDotSwingVersion)dots1.elementAt( i );
-		if( ((E2DProtein)prot.getPro()).getFunction().indexOf( fcnName )
-		    == -1 ){
-		    prot.doNotShowMe();
-		}
-		else if( ((E2DProtein)prot.getPro()).getFunction().indexOf(
-			limitations ) != -1 && !limitations.equals( "" ) ){
-		    prot.doNotShowMe();
-		}
-	    }
-	    if( dots2.size() != 0 ){
-		for( int j = 0; j < dots2.size(); j++ ){
-		    prot = (ProteinDotSwingVersion)dots2.elementAt( j );
-		    if( ((E2DProtein)prot.getPro()).getFunction().indexOf(
-				      		       fcnName ) == -1 ){
-			prot.doNotShowMe();
-		    }
-		    else if(((E2DProtein)prot.getPro()).getFunction().indexOf(
-			    limitations ) != -1 && !limitations.equals( "" ) ){
-			prot.doNotShowMe();
-		    }
-		}
-	    }
-	}
-	else if(searchField.equals( "sequence" )){
-	    for( int i = 0; i < dots1.size(); i++ ){
-		prot = (ProteinDotSwingVersion)dots1.elementAt( i );
-		if(((E2DProtein)prot.getPro()).getSequence().indexOf( fcnName )
-		   == -1 ){
-		    prot.doNotShowMe();
-		}
-	    }
-	    if( dots2.size() != 0 ){
-		for( int j = 0; j < dots2.size(); j++ ){
-		    if(((E2DProtein)prot.getPro()).getSequence().indexOf( fcnName)
-		       == -1 ){
-			prot.doNotShowMe();
-		    }
-		}
-	    }
-	}
-	else if(searchField.equals( "title" ) ){
-	    for( int i = 0; i < dots1.size(); i++ ){
-		prot = (ProteinDotSwingVersion)dots1.elementAt( i );
-		if(((E2DProtein)prot.getPro()).getID().indexOf( fcnName ) 
-		   == -1 ){
-		    prot.doNotShowMe();
-		}
-		else if(((E2DProtein)prot.getPro()).getID().indexOf( 
-			   limitations ) != -1 && !limitations.equals("" ) ){
-		    prot.doNotShowMe();
-		}
-	    }
-	    if( dots2.size() != 0 ){
-		for( int j = 0; j < dots2.size(); j++ ){
-		    prot = (ProteinDotSwingVersion)dots2.elementAt( j );
-		    if(((E2DProtein)prot.getPro()).getID().indexOf( fcnName)
-		       == -1 ){
-			prot.doNotShowMe();
-		    }
-		    else if(((E2DProtein)prot.getPro()).getID().indexOf(
-			   limitations ) != -1 && !limitations.equals( "" ) ){
-			prot.doNotShowMe();
-		    }
-		}
-	    }
-	}
+        ProteinDot prot = null;
+        if (searchField.equals("function")) {
+            for (int i = 0; i < dots1.size(); i++) {
+                prot = (ProteinDot) dots1.elementAt(i);
+                if (((E2DProtein) prot.getPro()).getFunction().indexOf(fcnName)
+                        == -1) {
+                    prot.doNotShowMe();
+                } else if (((E2DProtein) prot.getPro()).getFunction().indexOf(
+                        limitations) != -1 && !limitations.equals("")) {
+                    prot.doNotShowMe();
+                }
+            }
+            if (dots2.size() != 0) {
+                for (int j = 0; j < dots2.size(); j++) {
+                    prot = (ProteinDot) dots2.elementAt(j);
+                    if (((E2DProtein) prot.getPro()).getFunction().indexOf(
+                            fcnName) == -1) {
+                        prot.doNotShowMe();
+                    } else if (((E2DProtein) prot.getPro()).getFunction().indexOf(
+                            limitations) != -1 && !limitations.equals("")) {
+                        prot.doNotShowMe();
+                    }
+                }
+            }
+        } else if (searchField.equals("sequence")) {
+            for (int i = 0; i < dots1.size(); i++) {
+                prot = (ProteinDot) dots1.elementAt(i);
+                if (((E2DProtein) prot.getPro()).getSequence().indexOf(fcnName)
+                        == -1) {
+                    prot.doNotShowMe();
+                }
+            }
+            if (dots2.size() != 0) {
+                for (int j = 0; j < dots2.size(); j++) {
+                    if (((E2DProtein) prot.getPro()).getSequence().indexOf(fcnName)
+                            == -1) {
+                        prot.doNotShowMe();
+                    }
+                }
+            }
+        } else if (searchField.equals("title")) {
+            for (int i = 0; i < dots1.size(); i++) {
+                prot = (ProteinDot) dots1.elementAt(i);
+                if (((E2DProtein) prot.getPro()).getID().indexOf(fcnName)
+                        == -1) {
+                    prot.doNotShowMe();
+                } else if (((E2DProtein) prot.getPro()).getID().indexOf(
+                        limitations) != -1 && !limitations.equals("")) {
+                    prot.doNotShowMe();
+                }
+            }
+            if (dots2.size() != 0) {
+                for (int j = 0; j < dots2.size(); j++) {
+                    prot = (ProteinDot) dots2.elementAt(j);
+                    if (((E2DProtein) prot.getPro()).getID().indexOf(fcnName)
+                            == -1) {
+                        prot.doNotShowMe();
+                    } else if (((E2DProtein) prot.getPro()).getID().indexOf(
+                            limitations) != -1 && !limitations.equals("")) {
+                        prot.doNotShowMe();
+                    }
+                }
+            }
+        }
         int count = 0;
-        for(ProteinDotSwingVersion dot : (Vector<ProteinDotSwingVersion>)dots1) {
+        for (ProteinDot dot : (Vector<ProteinDot>) dots1) {
             if (dot.getShowMe()) {
                 count++;
             }
         }
-        for(ProteinDotSwingVersion dot : (Vector<ProteinDotSwingVersion>)dots2) {
+        for (ProteinDot dot : (Vector<ProteinDot>) dots2) {
             if (dot.getShowMe()) {
                 count++;
             }
@@ -235,71 +229,87 @@ public class SearchProteinFunction implements MouseListener, ActionListener{
         gel.update(gel.getGraphics());
     }
 
-	/**
-	 * Display all.
-	 */
-	public void displayAll(){
-	dots1 = gel.getDots();
-	dots2 = gel.getDots2();
-	for( int i = 0; i < dots1.size(); i++ ){
-	    ((ProteinDotSwingVersion)dots1.elementAt( i )).doShowMe();
-	}
-	if( dots2.size() != 0 ){
-	    for( int j = 0; j < dots2.size(); j++ ){
-		((ProteinDotSwingVersion)dots2.elementAt( j )).doShowMe();
-	    }
-	}
+    /**
+     * Display all.
+     */
+    public void displayAll() {
+        dots1 = gel.getDots();
+        dots2 = gel.getDots2();
+        for (int i = 0; i < dots1.size(); i++) {
+            ((ProteinDot) dots1.elementAt(i)).doShowMe();
+        }
+        if (dots2.size() != 0) {
+            for (int j = 0; j < dots2.size(); j++) {
+                ((ProteinDot) dots2.elementAt(j)).doShowMe();
+            }
+        }
 //	gel.repaint();
         gel.update(gel.getGraphics());
     }
 
-	/**
-	 * Hide exclude fields.
-	 */
-	public void hideExcludeFields(){
-	//if( !title.getSelected() && !function.getSelected() ){
-	    searchFieldPane.remove( excludesLabel );
-	    searchFieldPane.remove( excludeTerm );
-	    window.validate();
-	    //}
-    }
-    
-    public void actionPerformed( ActionEvent e ){
-	searchField = e.getActionCommand();
-	
+    /**
+     * Hide exclude fields.
+     */
+    public void hideExcludeFields() {
+        //if( !title.getSelected() && !function.getSelected() ){
+        searchFieldPane.remove(excludesLabel);
+        searchFieldPane.remove(excludeTerm);
+        window.validate();
+        //}
     }
 
-    public void mouseClicked( MouseEvent e ){
-	    searchFieldPane.add( excludesLabel );
-	    searchFieldPane.add( excludeTerm );
-	    window.validate();
+    public void actionPerformed(ActionEvent e) {
+        searchField = e.getActionCommand();
+
     }
-    public void mousePressed( MouseEvent e ){}
-    public void mouseReleased( MouseEvent e ){}
-    public void mouseEntered( MouseEvent e ){}
-    public void mouseExited( MouseEvent e ){}
+
+    public void mouseClicked(MouseEvent e) {
+        searchFieldPane.add(excludesLabel);
+        searchFieldPane.add(excludeTerm);
+        window.validate();
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseExited(MouseEvent e) {
+    }
 
     private class HideExclude implements MouseListener {
-	
-	private SearchProteinFunction spf;
 
-		/**
-		 * Instantiates a new Hide exclude.
-		 *
-		 * @param s the s
-		 */
-		public HideExclude( SearchProteinFunction s ){
-	    spf = s;
-	}
-	
-	public void mouseClicked( MouseEvent e ){
-	    spf.hideExcludeFields();
-	}
-	public void mousePressed( MouseEvent e ){}
-	public void mouseReleased( MouseEvent e ){}
-	public void mouseEntered( MouseEvent e ){}
-	public void mouseExited( MouseEvent e ){}
-    
+        private SearchProteinFunction spf;
+
+        /**
+         * Instantiates a new Hide exclude.
+         *
+         * @param s the s
+         */
+        public HideExclude(SearchProteinFunction s) {
+            spf = s;
+        }
+
+        public void mouseClicked(MouseEvent e) {
+            spf.hideExcludeFields();
+        }
+
+        public void mousePressed(MouseEvent e) {
+        }
+
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        public void mouseExited(MouseEvent e) {
+        }
+
     }
 
 }

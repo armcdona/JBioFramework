@@ -11,12 +11,12 @@ public class ImageFilter implements FilenameFilter {
     public boolean accept(File f, String s) {
         String extension = s.substring(s.lastIndexOf(".") + 1);
         if (extension != null) {
-            if (extension.equals("e2d") || 
-		extension.equals("gbk") ||
-		extension.equals("faa") ||
-		extension.equals("pdb") ||
-		extension.equals("fasta")) {
-                    return true;
+            if (extension.equals("e2d") ||
+                    extension.equals("gbk") ||
+                    extension.equals("faa") ||
+                    extension.equals("pdb") ||
+                    extension.equals("fasta")) {
+                return true;
             } else {
                 return false;
             }

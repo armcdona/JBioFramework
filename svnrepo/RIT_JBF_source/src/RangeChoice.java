@@ -1,6 +1,5 @@
 
 /**
- *
  * @author Amanda Fisher
  */
 
@@ -10,7 +9,7 @@ import java.awt.event.*;
 /**
  * The type Range choice swing version.
  */
-public class RangeChoiceSwingVersion extends JComboBox implements ItemListener {
+public class RangeChoice extends JComboBox implements ItemListener {
 
     /**
      * The Electro 2 d.
@@ -22,7 +21,7 @@ public class RangeChoiceSwingVersion extends JComboBox implements ItemListener {
      *
      * @param e the e
      */
-    public RangeChoiceSwingVersion(Electro2D e) {
+    public RangeChoice(Electro2D e) {
 
         super();
         electro2D = e;
@@ -32,16 +31,17 @@ public class RangeChoiceSwingVersion extends JComboBox implements ItemListener {
         (this).addItem("Enter a Range");
 
     }
-    public void itemStateChanged( ItemEvent e ){
 
-        if( getSelectedItem().equals( "Enter a Range" ) ){
+    public void itemStateChanged(ItemEvent e) {
+
+        if (getSelectedItem().equals("Enter a Range")) {
 
             (this).setEditable(true);
 
-	} else if ( getSelectedItem().equals(("4 - 7")) || getSelectedItem().equals(("3 - 10"))) {
-            
+        } else if (getSelectedItem().equals(("4 - 7")) || getSelectedItem().equals(("3 - 10"))) {
+
             (this).setEditable(false);
-            
+
         }
 
     }

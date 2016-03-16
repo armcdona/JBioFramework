@@ -1,6 +1,5 @@
 
 /**
- *
  * @author Amanda Fisher
  */
 
@@ -10,7 +9,7 @@ import java.awt.event.*;
 /**
  * The type Search protein field button swing version.
  */
-public class SearchProteinFieldButtonSwingVersion extends JButton implements ActionListener {
+public class SearchProteinFieldButton extends JButton implements ActionListener {
 
     /**
      * The Electro 2 d.
@@ -26,7 +25,7 @@ public class SearchProteinFieldButtonSwingVersion extends JButton implements Act
      *
      * @param e the e
      */
-    public SearchProteinFieldButtonSwingVersion(Electro2D e) {
+    public SearchProteinFieldButton(Electro2D e) {
 
         super("Search Protein Field");
         electro2D = e;

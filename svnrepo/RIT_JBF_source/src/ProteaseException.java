@@ -9,7 +9,7 @@
  * Exception thrown if cut sequence is not properly formatted
  */
 public class ProteaseException extends Exception {
-    public ProteaseException() {}
+
     public ProteaseException(String message) {
         super(message);
     }
