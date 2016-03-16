@@ -44,29 +44,34 @@ public class CSVCreator{
             }catch( IOException e ){
 	            System.err.println( "Error writing to CSV file" );
             }
-	
-            E2DProtein p = null;
-            ProteinDotSwingVersion d = null;
 
-            out.println( "Title" + "," + "Sequence" + "," + "Molecular Weight" + "," + "pI Value" +
-                "," + "X-Coordinate" + "," + "Y-Coordinate" );
+            if (out != null) { // must check to see if out exists before trying to do file operations
+                E2DProtein p = null;
+                ProteinDotSwingVersion d = null;
 
-            if (proteins == null) {
-                proteins = new Vector();
-            }
-            for( int i = 0; i < proteins.size(); i++ ){
-                d = (ProteinDotSwingVersion)proteins.elementAt( i );
-                p = (E2DProtein)d.getPro();
-	    
-                out.println( "\"" + p.getID() + "\"" + "," + p.getSequence() + "," +
-			 p.getMW() + "," + p.getPI() + "," + 
-			 d.returnX() + "," + d.returnY() );
-            }
-	 
-            try{
-                out.close();
-            }catch( Exception e ){
-                System.err.println( "Error closing stream" );
+
+                out.println("Title" + "," + "Sequence" + "," + "Molecular Weight" + "," + "pI Value" +
+                        "," + "X-Coordinate" + "," + "Y-Coordinate");
+
+                if (proteins == null) {
+                    proteins = new Vector();
+                }
+                for (int i = 0; i < proteins.size(); i++) {
+                    d = (ProteinDotSwingVersion) proteins.elementAt(i);
+                    p = (E2DProtein) d.getPro();
+
+                    out.println("\"" + p.getID() + "\"" + "," + p.getSequence() + "," +
+                            p.getMW() + "," + p.getPI() + "," +
+                            d.returnX() + "," + d.returnY());
+                }
+
+                try {
+                    out.close();
+                } catch (Exception e) {
+                    System.err.println("Error closing stream");
+                }
+            } else {
+                System.err.println("Error writing CSV file");
             }
         }
     }
