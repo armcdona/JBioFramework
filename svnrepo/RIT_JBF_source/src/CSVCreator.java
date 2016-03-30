@@ -47,7 +47,7 @@ public class CSVCreator{
 
             if (out != null) { // must check to see if out exists before trying to do file operations
                 E2DProtein p = null;
-                ProteinDotSwingVersion d = null;
+                ProteinDot d = null;
 
 
                 out.println("Title" + "," + "Sequence" + "," + "Molecular Weight" + "," + "pI Value" +
@@ -57,7 +57,7 @@ public class CSVCreator{
                     proteins = new Vector();
                 }
                 for (int i = 0; i < proteins.size(); i++) {
-                    d = (ProteinDotSwingVersion) proteins.elementAt(i);
+                    d = (ProteinDot) proteins.elementAt(i);
                     p = (E2DProtein) d.getPro();
 
                     out.println("\"" + p.getID() + "\"" + "," + p.getSequence() + "," +

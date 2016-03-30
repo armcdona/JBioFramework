@@ -15,6 +15,10 @@ import java.util.ArrayList;
  */
 public class Chymotrypsin extends Protease {
 
+    public Chymotrypsin() {
+        String[] cutAminoAcids = {"Y", "W", "F"};
+    }
+
     /**
      * The cut method takes an input sequence and cuts it in to different Strings at points dependent on the type of Protease using the method.
      * It uses the makeIon method to turn the ArrayList of collected characters in to a String
