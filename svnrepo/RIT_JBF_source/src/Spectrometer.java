@@ -52,7 +52,7 @@ public class Spectrometer {
                 protease = new Thermolysin();
             } else {
                 System.err.println("Did not recognize protease choice.");
-                System.err.println("Defaulting to Trypsin selection.");
+                System.err.println("Defaulting to Trypsin.");
                 protease = new Trypsin();
             }
 

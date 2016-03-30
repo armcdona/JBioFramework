@@ -1,20 +1,35 @@
-/*
- * Trypsin cuts a protein sequence at Arginine(R) or Lysine(K), except when either is
- * followed by a Proline(P).
- *
- * version 2
- */
-
 /**
  *
  * @author Amanda Fisher
  */
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
- * Cuts proteins in a similar/same way that Trypsin does
+ * Cuts proteins in a similar/same way that Trypsin does (after Arginine(R) or Lysine(K), except when either is followed by a Proline(P))
  */
 public class Trypsin extends Protease {
+
+    public Trypsin() {
+        cutAminoAcids = new ArrayList<>(Arrays.asList('R','K')); //Chymotrypsin cuts at these proteins
+        cutsBefore = false;//T
+    }
+
+    public ArrayList<String> cut(String sequence) throws ProteaseException {//Must override default method because Trypsin has an extra requirement
+        ArrayList<String> cutSequence = new ArrayList<>();
+        ArrayList<Character> buildingIons = new ArrayList<>();
+        sequence = checkSequence(sequence);
+        char[] charSequence = sequence.toCharArray();
+        for (int i=0; i < charSequence.length; i++) {
+            buildingIons.add(charSequence[i]);
+            for (Character c : cutAminoAcids) {
+                if ((charSequence[i] == c) && (i <  charSequence.length - 1) && (charSequence[i+1] != 'P')) {
+                    makeIon(buildingIons,cutSequence);
+                }
+            }
+        }
+        return cutSequence;
+    }
 
     /**
      * The cut method takes an input sequence and cuts it in to different Strings at points dependent on the type of Protease using the method.
