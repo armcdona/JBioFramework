@@ -1,8 +1,6 @@
-package Electro2D; /**
+/**
  * @author Amanda Fisher
  */
-
-import Electro2D.ProteaseException;
 
 import java.util.ArrayList;
 
@@ -16,7 +14,6 @@ public class Protease {
 
     /**
      * Cut array list.
-     * √
      *
      * @param sequence the sequence
      * @return the array list
@@ -32,7 +29,6 @@ public class Protease {
             if (!cutsBefore) {
                 buildingIons.add(currentAA);
             }
-
             for (Character currentCutPoint : cutAminoAcids) { //should make a new method for determing if the protease should cut here so that more a complex protease only has to override that smaller method instead of the larger cut method
 
                 Character afterAA = ' ';
@@ -42,14 +38,25 @@ public class Protease {
                 if (shouldCutHere(currentAA, currentCutPoint, afterAA)) {
                     makeIon(buildingIons, cutSequence);
                 }
+                if (shouldCutHere(currentAA,currentCutPoint)){
+                    makeIon(buildingIons,cutSequence);
+                }
+
 
             }
             if (cutsBefore) {
                 buildingIons.add(currentAA);
             }
-            i++;
         }
         return cutSequence;
+    }
+
+    public boolean shouldCutHere(Character currentAA,Character currentCutPoint) {
+        boolean shouldCut = false;
+            if (currentAA == currentCutPoint) {
+                shouldCut = true;
+            }
+        return shouldCut;
     }
 
     public boolean shouldCutHere(Character currentAA, Character currentCutPoint, Character afterAA) {
