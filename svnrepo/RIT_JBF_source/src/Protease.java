@@ -14,7 +14,7 @@ public class Protease {
 
     /**
      * Cut array list.
-     *
+     *√
      * @param sequence the sequence
      * @return the array list
      * @throws ProteaseException the protease exception
@@ -23,11 +23,13 @@ public class Protease {
         ArrayList<Character> buildingIons = new ArrayList<>();
         ArrayList<String> cutSequence = new ArrayList<>();
         sequence = checkSequence(sequence); //runs the sequence through the sequence checker method in order to detect any errors
+        int i = 0; //needed to send what the character after the currentAA is
         for (Character currentAA : sequence.toCharArray()) {
-            //System.out.println("Checking character: " + s.toString() + "to " + cutAminoAcids.size());
+
             if (!cutsBefore) {
                 buildingIons.add(currentAA);
             }
+
             for (Character currentCutPoint : cutAminoAcids) { //should make a new method for determing if the protease should cut here so that more a complex protease only has to override that smaller method instead of the larger cut method
 
                 /**
@@ -35,7 +37,11 @@ public class Protease {
                     makeIon(buildingIons,cutSequence);
                 }
                  */
-                if (shouldCutHere(currentAA,currentCutPoint)){
+                Character afterAA = ' ';
+                if (i+1 <= sequence.toCharArray().length) {
+                    afterAA = sequence.toCharArray()[i+1];
+                }
+                if (shouldCutHere(currentAA,currentCutPoint,afterAA)){
                     makeIon(buildingIons,cutSequence);
                 }
 
@@ -43,11 +49,12 @@ public class Protease {
             if (cutsBefore) {
                 buildingIons.add(currentAA);
             }
+            i++;
         }
         return cutSequence;
     }
 
-    public boolean shouldCutHere(Character currentAA,Character currentCutPoint) {
+    public boolean shouldCutHere(Character currentAA,Character currentCutPoint,Character afterAA) {
         boolean shouldCut = false;
             if (currentAA == currentCutPoint) {
                 shouldCut = true;

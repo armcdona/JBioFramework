@@ -12,9 +12,19 @@ public class Trypsin extends Protease {
 
     public Trypsin() {
         cutAminoAcids = new ArrayList<>(Arrays.asList('R','K')); //Chymotrypsin cuts at these proteins
-        cutsBefore = false;//T
+        cutsBefore = false;
     }
 
+    @Override
+    public boolean shouldCutHere(Character currentAA, Character currentCutPoint, Character afterAA) {
+        boolean shouldCut = false;
+        if ((currentAA == currentCutPoint) && (afterAA != 'P')) { //only cuts if A or K are not followed by P
+            shouldCut = true;
+        }
+        return shouldCut;
+    }
+
+    /**
     public ArrayList<String> cut(String sequence) throws ProteaseException {//Must override default method because Trypsin has an extra requirement
         ArrayList<String> cutSequence = new ArrayList<>();
         ArrayList<Character> buildingIons = new ArrayList<>();
@@ -29,7 +39,7 @@ public class Trypsin extends Protease {
             }
         }
         return cutSequence;
-    }
+    } */
 
     /**
      * The cut method takes an input sequence and cuts it in to different Strings at points dependent on the type of Protease using the method.
