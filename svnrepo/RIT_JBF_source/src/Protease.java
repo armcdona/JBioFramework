@@ -32,13 +32,8 @@ public class Protease {
 
             for (Character currentCutPoint : cutAminoAcids) { //should make a new method for determing if the protease should cut here so that more a complex protease only has to override that smaller method instead of the larger cut method
 
-                /**
-                if (currentAA == currentCutPoint) {
-                    makeIon(buildingIons,cutSequence);
-                }
-                 */
                 Character afterAA = ' ';
-                if (i+1 <= sequence.toCharArray().length) {
+                if ((i+1) <= (sequence.toCharArray().length - 1)) {
                     afterAA = sequence.toCharArray()[i+1];
                 }
                 if (shouldCutHere(currentAA,currentCutPoint,afterAA)){
@@ -88,10 +83,7 @@ public class Protease {
         String ion = new String();
         for (Character c : buildingIons) {
             ion += c.toString();
-            System.out.println("Made Ion:" + ion);
         }
-        //String ion = new String(charIon);
-        System.out.println(ion);
         cutSequence.add(ion);
         buildingIons.clear();
     }
