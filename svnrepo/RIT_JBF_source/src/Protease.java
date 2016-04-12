@@ -23,21 +23,36 @@ public class Protease {
         ArrayList<Character> buildingIons = new ArrayList<>();
         ArrayList<String> cutSequence = new ArrayList<>();
         sequence = checkSequence(sequence); //runs the sequence through the sequence checker method in order to detect any errors
-        for (Character s : sequence.toCharArray()) {
+        for (Character currentAA : sequence.toCharArray()) {
             //System.out.println("Checking character: " + s.toString() + "to " + cutAminoAcids.size());
             if (!cutsBefore) {
-                buildingIons.add(s);
+                buildingIons.add(currentAA);
             }
-            for (Character c : cutAminoAcids) { //should make a new method for determing if the protease should cut here so that more a complex protease only has to override that smaller method instead of the larger cut method
-                if (s == c) {
+            for (Character currentCutPoint : cutAminoAcids) { //should make a new method for determing if the protease should cut here so that more a complex protease only has to override that smaller method instead of the larger cut method
+
+                /**
+                if (currentAA == currentCutPoint) {
                     makeIon(buildingIons,cutSequence);
                 }
+                 */
+                if (shouldCutHere(currentAA,currentCutPoint)){
+                    makeIon(buildingIons,cutSequence);
+                }
+
             }
             if (cutsBefore) {
-                buildingIons.add(s);
+                buildingIons.add(currentAA);
             }
         }
         return cutSequence;
+    }
+
+    public boolean shouldCutHere(Character currentAA,Character currentCutPoint) {
+        boolean shouldCut = false;
+            if (currentAA == currentCutPoint) {
+                shouldCut = true;
+            }
+        return shouldCut;
     }
 
     public String checkSequence(String sequence) throws ProteaseException {
