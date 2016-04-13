@@ -33,7 +33,7 @@ public class ProteinFrame extends JFrame {
     private JLabel mwLabel;                //protein MW
     private JLabel piLabel;                //protein pI
     private SearchProteinButton search;   // button clicked to search for info
-    private SwissProtSearchButton swsSearch;//button clicked to search for info
+    private SwissProteinSearchButton swsSearch;//button clicked to search for info
     private BlastSearchButton blstSearch; //button clicked to search Blast site
     private String searchID = null;       // the id for the GenBank search
     private String swsSearchID = null;    // id for the SwissProt search
@@ -153,13 +153,13 @@ public class ProteinFrame extends JFrame {
 
         if (proteinTitle.indexOf("|") < 0) {
             swsSearchID = proteinTitle;
-            swsSearch = new SwissProtSearchButton(electro2D, swsSearchID, threeText);
+            swsSearch = new SwissProteinSearchButton(electro2D, swsSearchID, threeText);
         } else {
             swsSearchID = proteinTitle.substring(4,
                     proteinTitle.lastIndexOf("|"));
             swsSearchID = swsSearchID.substring(
                     swsSearchID.lastIndexOf("|") + 1);
-            swsSearch = new SwissProtSearchButton(electro2D, swsSearchID, threeText);
+            swsSearch = new SwissProteinSearchButton(electro2D, swsSearchID, threeText);
         }
 
 

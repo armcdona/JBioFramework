@@ -132,14 +132,17 @@ public class GelCanvas extends JPanel implements MouseListener {
          */
         for (int i = 0; i < sequenceTitles.size(); i++) {
 
-            barProteins.addElement(new IEFProtein(new E2DProtein(
-                    ((String) sequenceTitles.elementAt(i)),
-                    ((Double.valueOf(
-                            (String) molecularWeights.elementAt(i)))).doubleValue(),
-                    ((Double.valueOf(
-                            (String) pIValues.elementAt(i)))).doubleValue(),
-                    (String) sequences.elementAt(i),
-                    (String) functions.elementAt(i)), this));
+            barProteins.addElement(
+                new IEFProtein(
+                    new E2DProtein(
+                        sequenceTitles.elementAt(i).toString(),
+                        Double.valueOf(molecularWeights.elementAt(i).toString()),
+                        Double.valueOf(pIValues.elementAt(i).toString()),
+                        sequences.elementAt(i).toString(),
+                        functions.elementAt(i).toString()
+                    ),
+                this)
+            );
         }
 
         /**

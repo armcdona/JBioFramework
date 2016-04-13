@@ -23,26 +23,22 @@ public class SpecAminoAcid {
     private double NHHpKa;
     private double sidechainPKa;
     private int charge;
-    /**
-     * The Hits.
-     */
     int hits;
 
     /**
-     * Constructor for SpecAminoAcid when given a char. Passes to translate method.
+     * Constructor for SpecAminoAcid when given a char, which is Passed to the translate method.
      *
-     * @param code Symbol to be turned into an SpecAminoAcid.
-     * @throws AminoException When given a symbol that doesn't represent an amino acid.
+     * @param code character to be turned into an SpecAminoAcid.
+     * @throws AminoException When the char isn't an amino acid.
      */
     public SpecAminoAcid(char code) throws AminoException {
         translate(code);
     }
 
     /**
-     * Constructor for SpecAminoAcid when given a String instead of a char. Turns
-     * input into a char and passes to translate method.
+     * Constructor for SpecAminoAcid when given a String instead of a char. Passes input as a char to the translate method.
      *
-     * @param input Symbol to be turned in to an SpecAminoAcid.
+     * @param input string(single uppercase letter) to be turned in to an SpecAminoAcid.
      * @throws AminoException When given a symbol that doesn't represent an amino acid or given more than one symbol.
      */
     public SpecAminoAcid(String input) throws AminoException {
@@ -264,7 +260,6 @@ public class SpecAminoAcid {
      * @param h Hits.
      */
     public void setHits(int h) {
-
         hits = h;
     }
 
@@ -275,7 +270,6 @@ public class SpecAminoAcid {
      * @param k The pKa value.
      */
     private void setCOOHpKa(double k) {
-
         COOHpKa = k;
     }
 
@@ -286,7 +280,6 @@ public class SpecAminoAcid {
      * @param k The pKa value.
      */
     private void setNHHpKa(double k) {
-
         NHHpKa = k;
     }
 
@@ -306,7 +299,6 @@ public class SpecAminoAcid {
      * of at least 1).
      */
     public void increaseCharge() {
-
         charge++;
     }
 

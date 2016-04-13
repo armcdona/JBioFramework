@@ -7,20 +7,15 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * The type Stop button swing version.
+ * When pressed, stops the animation
  */
 public class StopButton extends JButton implements ActionListener {
 
     /**
-     * The Electro 2 d.
+     * Electro2D reference
      */
     Electro2D electro2D;
 
-    /**
-     * Instantiates a new Stop button swing version.
-     *
-     * @param e the e
-     */
     public StopButton(Electro2D e) {
         super("Stop");
         addActionListener(this);

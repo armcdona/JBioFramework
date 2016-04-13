@@ -15,7 +15,7 @@
 import java.util.ArrayList;
 
 /**
- * The type Spectrometer.
+ * Runs the analysis of the mass spec
  */
 public class Spectrometer {
 

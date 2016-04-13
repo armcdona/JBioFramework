@@ -18,7 +18,7 @@ import java.awt.event.*;
 public class SingleProteinListFrame extends JFrame {
 
     /**
-     * The Electro 2 d.
+     * electro2D reference
      */
     Electro2D electro2D;
     /**
@@ -39,8 +39,7 @@ public class SingleProteinListFrame extends JFrame {
     Vector copySequenceOne;
 
     /**
-     * Constructor for the window; sets up the instance variables and builds
-     * the GUI.
+     * Constructor for the window; sets up the instance variables and builds the GUI.
      *
      * @param param     The title of the window.
      * @param electro2D Reference to the electro2D where the protein lists are.
@@ -92,7 +91,7 @@ public class SingleProteinListFrame extends JFrame {
         sequenceOneList.setListData(pL1);
         sequenceTitlesOne = new Vector(pL1);
         copySequenceOne = (Vector) sequenceTitlesOne.clone();
-        positionsOne = new Vector<Integer>();
+        positionsOne = new Vector<>();
     }
 
     /**
@@ -154,14 +153,12 @@ public class SingleProteinListFrame extends JFrame {
     }
 
     /**
-     * Gets positions two.
+     * Gets positions two. Currently unused as protein comparison is currently disabled)
      *
      * @return the positions two
      */
-// This method should currently be unused, as the compare proteins functionality
-    // has been temporarily disabled.
     public Vector<Integer> getPositionsTwo() {
-        Vector<Integer> positionsTwo = new Vector<Integer>();
+        Vector<Integer> positionsTwo = new Vector<>();
         return positionsTwo;
     }
 
