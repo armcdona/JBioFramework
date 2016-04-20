@@ -10,6 +10,9 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * Generates HTML files with the proteins sorted in a way chosen by the user.
+ */
 public class HTMLGenScreen extends JFrame implements ActionListener,
         MouseListener {
 

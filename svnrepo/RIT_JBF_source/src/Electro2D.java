@@ -18,7 +18,7 @@ import javax.swing.border.*;
 import java.awt.Font;
 
 /**
- * The main electro2D class.
+ * The main electro2D class.  This class runs the animation and sets up and controls the animation GUI.
  */
 public class Electro2D extends JPanel implements ActionListener {
 
@@ -1657,15 +1657,9 @@ public class Electro2D extends JPanel implements ActionListener {
     public void start() {
     }
 
-    /**
-     * Stop.
-     */
     public void stop() {
     }
 
-    /**
-     * Destroy.
-     */
     public void destroy() {
     }
 

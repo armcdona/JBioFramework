@@ -7,35 +7,18 @@ import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * The type Play button swing version.
+ * Starts the electro2D simulation
  */
 public class PlayButton extends JButton implements ActionListener {
 
-    /**
-     * The Electro 2 d.
-     */
     Electro2D electro2D;
-    /**
-     * The Playing.
-     */
     boolean playing;
     private boolean iefDrawn;
     private boolean sdsDrawn;
     private static boolean compareFiles;
-    /**
-     * The Choice.
-     */
     String choice;
-    /**
-     * The Is playing.
-     */
     boolean isPlaying;
 
-    /**
-     * Instantiates a new Play button swing version.
-     *
-     * @param e the e
-     */
     public PlayButton(Electro2D e) {
 
         super("Run");
@@ -48,41 +31,27 @@ public class PlayButton extends JButton implements ActionListener {
     }
 
     /**
-     * Get sds status boolean.
+     * Gets whether the sds has been drawn
      *
-     * @return the boolean
+     * @return whether the sds has been drawn or not
      */
     public boolean getSdsStatus() {
         return sdsDrawn;
     }
 
-    /**
-     * Reset play.
-     */
     public void resetPlay() {
         playing = false;
         this.setText("Run");
     }
 
-    /**
-     * Reset ief.
-     */
     public void resetIEF() {
         iefDrawn = false;
     }
 
-    /**
-     * Reset sds status.
-     */
     public void resetSdsStatus() {
         sdsDrawn = false;
     }
 
-    /**
-     * Set compare.
-     *
-     * @param bool the bool
-     */
     public static void setCompare(boolean bool) {
         compareFiles = bool;
     }

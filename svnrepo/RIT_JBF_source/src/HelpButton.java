@@ -8,13 +8,10 @@ import java.awt.event.*;
 import java.io.*;
 
 /**
- * The type Help button swing version.
+ * Open the help.html file
  */
 public class HelpButton extends JButton implements ActionListener {
 
-    /**
-     * Instantiates a new Help button swing version.
-     */
     public HelpButton() {
 
         super("Help");

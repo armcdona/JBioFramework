@@ -14,6 +14,9 @@ import java.util.*;
 import java.awt.*;
 import java.io.*;
 
+/**
+ * Controls the actual movement and placement for the animation frame.
+ */
 public class GelCanvas extends JPanel implements MouseListener {
 
     private Electro2D electro2D;

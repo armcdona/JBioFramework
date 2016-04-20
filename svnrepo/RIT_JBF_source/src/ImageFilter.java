@@ -1,13 +1,18 @@
 import java.io.File;
 import java.io.FilenameFilter;
 
+
 /**
- * The type Image filter.
+ *  ImageFilter.java is a 1.4 example used by FileChooserDemo2.java.
  */
-/* ImageFilter.java is a 1.4 example used by FileChooserDemo2.java. */
 public class ImageFilter implements FilenameFilter {
 
-    //Accept all directories and all gif, jpg, tiff, or png files.
+    /**
+     * Determined if the file should be accepted depending on its extension
+     * @param f The file
+     * @param s The file name
+     * @return whether the file should be accepted or not
+     */
     public boolean accept(File f, String s) {
         String extension = s.substring(s.lastIndexOf(".") + 1);
         if (extension != null) {
@@ -26,12 +31,11 @@ public class ImageFilter implements FilenameFilter {
     }
 
     /**
-     * Gets description.
+     * Gets the description of this filter.
      *
      * @return the description
      */
-//The description of this filter
     public String getDescription() {
-        return "Just Images";
+        return ".e2d, .gbk, .faa, .pdb, .fasta";
     }
 }

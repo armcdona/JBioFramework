@@ -29,6 +29,9 @@ import java.text.DecimalFormat;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
+/**
+ * Arranges the gui in the correct layout for the electro2D frame
+ */
 public class MainPanelGUI extends JPanel {
 
     private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K", "Thermolysin"};

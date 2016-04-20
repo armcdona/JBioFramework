@@ -49,7 +49,7 @@ public class E2DProtein {
      * @param id       the type of protein
      * @param molWt    the molecular weight of the protein
      * @param pI       the pI value for the protein
-     * @param sequence the sequence
+     * @param sequence the protein sequence
      * @param fcn      the function of this protein
      */
     public E2DProtein(String id, double molWt, double pI, String sequence, String fcn) {
@@ -95,44 +95,24 @@ public class E2DProtein {
         return myMolWt;
     }
 
-    /**
-     * returns color
-     *
-     * @return myColor color
-     */
     public Color getColor() {
         return myColor;
     }
 
-    /**
-     * returns pI value
-     *
-     * @return myPI double
-     */
     public double getPI() {
         return myPI;
     }
 
-    /**
-     * returns sequence data
-     *
-     * @return mySequence string
-     */
     public String getSequence() {
         return mySequence;
     }
 
-    /**
-     * creates a string representation of this object
-     *
-     * @return myID
-     */
     public String toString() {
         return myID;
     }
 
     /**
-     * returns protein function
+     * returns the proteins function
      *
      * @return myFunction string
      */
@@ -141,7 +121,7 @@ public class E2DProtein {
     }
 
     /**
-     * returns colors
+     * returns the colors of protein functions
      *
      * @return Array of default colors
      */

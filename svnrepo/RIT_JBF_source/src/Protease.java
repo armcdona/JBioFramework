@@ -70,6 +70,9 @@ public class Protease {
 
     /**
      * Takes the characters collected by cut and turns them in to a string that represents the sequence of the Ion
+     *
+     * @param buildingIons The current ion
+     * @param cutSequence  The sequence to be cut
      */
     public void makeIon(ArrayList<Character> buildingIons,ArrayList<String> cutSequence) {
         String ion = new String();

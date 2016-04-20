@@ -16,7 +16,7 @@ import java.util.*;
 import javax.swing.*;
 
 /**
- * The type Ief frame.
+ * Frame for displaying the data of a single protein.
  */
 public class IEFFrame extends Frame {
 
@@ -37,11 +37,6 @@ public class IEFFrame extends Frame {
     private static int xlocation = 0;  //the x location of this frame
     private static int ylocation = 0;  // the y location of this frame
 
-    /**
-     * Constructor for IEFFrame
-     *
-     * @param i - the IEFProtein being represented
-     */
     public IEFFrame(IEFProtein i) {
         labels = new Vector();
 

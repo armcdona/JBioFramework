@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.*;
 
 /**
- * The type Ief protein swing version.
+ * Represents the proteins where the user has clicked on the electro2D animation
  */
 public class IEFProtein extends Component {
 
@@ -36,12 +36,6 @@ public class IEFProtein extends Component {
     private static double minpH = 3;
     private static GelCanvas gelcanvas;
 
-    /**
-     * constructor - creates the IEFProtein object
-     *
-     * @param p the first protein to be represented by this object
-     * @param g the g
-     */
     public IEFProtein(E2DProtein p, GelCanvas g) {
         names = new Vector();
         gelcanvas = g;

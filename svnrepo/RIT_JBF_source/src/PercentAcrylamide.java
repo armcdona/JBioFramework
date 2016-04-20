@@ -6,12 +6,12 @@
 import javax.swing.*;
 
 /**
- * The type Percent acrylamide swing version.
+ * Dropdown box for selecting the percent acrylamide for the electro2D simulation
  */
 public class PercentAcrylamide extends JComboBox {
 
     /**
-     * Instantiates a new Percent acrylamide swing version.
+     * Adds the various percentages of Acrylamide that can be used in the simulation
      */
     public PercentAcrylamide() {
 

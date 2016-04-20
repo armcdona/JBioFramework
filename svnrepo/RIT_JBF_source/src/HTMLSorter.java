@@ -6,7 +6,7 @@
 import java.util.*;
 
 /**
- * The type Html sorter.
+ * Creates a sorted TreeSet of the proteins
  */
 public class HTMLSorter {
 
@@ -14,13 +14,12 @@ public class HTMLSorter {
     private int compBy;
 
     /**
-     * Instantiates a new Html sorter.
      *
-     * @param cb the cb
-     * @param t  the t
-     * @param p  the p
-     * @param m  the m
-     * @param f  the f
+     * @param cb What to compare the proteins by
+     * @param t  Name of the protein
+     * @param p  the pI value of the protein
+     * @param m  the molecular weight of the protein
+     * @param f  the function of the protein
      */
     public HTMLSorter(int cb, Vector t, Vector p, Vector m, Vector f) {
 

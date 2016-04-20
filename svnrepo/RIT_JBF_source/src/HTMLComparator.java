@@ -6,17 +6,12 @@
 import java.util.*;
 
 /**
- * The type Html comparator.
+ * Compares two HTML objects with eachother
  */
 public class HTMLComparator implements Comparator {
 
     private int compBy;
 
-    /**
-     * Instantiates a new Html comparator.
-     *
-     * @param c the c
-     */
     public HTMLComparator(int c) {
         compBy = c;
     }

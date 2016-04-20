@@ -19,51 +19,21 @@ import java.awt.event.MouseEvent;
 
 
 /**
- * The type Output graph gui.
+ * TControls the graph for the Mass Spectrometer simulation
  */
 public class OutputGraphGUI extends JPanel implements MouseListener {
 
     private ArrayList<Ion> peakLines;
     private MainPanelGUI mainPanel;
-    /**
-     * The Most hits.
-     */
     double mostHits;
-    /**
-     * The Width.
-     */
     int width;
-    /**
-     * The Height.
-     */
     int height;
-    /**
-     * The X axis width.
-     */
     int xAxisWidth;
-    /**
-     * The Y axis height.
-     */
     int yAxisHeight;
-    /**
-     * The X axis starting point.
-     */
     int xAxisStartingPoint;
-    /**
-     * The Y axis starting point.
-     */
     int yAxisStartingPoint;
-    /**
-     * The Half hash mark length.
-     */
     int halfHashMarkLength;
-    /**
-     * The Numerical difference.
-     */
     int numericalDifference = 200;
-    /**
-     * The Starting point.
-     */
     int startingPoint = 0;
 
     /**

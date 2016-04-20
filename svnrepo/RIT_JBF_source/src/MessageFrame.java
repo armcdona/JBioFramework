@@ -12,20 +12,17 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * The type Message frame.
+ * a frame that pops up when an error has occurred.
  */
 public class MessageFrame extends Frame {
-
-    /** variables for the file reading pop-up frame **/
 
     private Panel thePanel;              //panel to add components to
     private Label theLabel;              //label to display message on
     private String theMessage = "";      //message to display to user
 
     /**
-     * Instantiates a new Message frame.
+     * Arranges the GUI of the error pop-up frame
      */
-//construct simple GUI
     public MessageFrame() {
 
         //set the title to Alert

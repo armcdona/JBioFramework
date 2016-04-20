@@ -19,29 +19,14 @@ import java.util.ArrayList;
 import java.awt.Color;
 
 /**
- * The type Ion.
+ * Represents an amino acid sequence ion.
  */
 public class Ion extends ArrayList<SpecAminoAcid> {
 
-    /**
-     * The Total mass.
-     */
     double totalMass = 0;
-    /**
-     * The Total charge.
-     */
     int totalCharge = 0;
-    /**
-     * The Hits.
-     */
     double hits = 0;
-    /**
-     * The X coordinate.
-     */
     int xCoordinate = 0;
-    /**
-     * The Color.
-     */
     Color color = Color.BLACK;
 
     /**
