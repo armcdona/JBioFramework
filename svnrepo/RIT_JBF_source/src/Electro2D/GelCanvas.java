@@ -25,6 +25,9 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.FileOutputStream;
 
+/**
+ * Controls the actual movement and placement for the animation frame.
+ */
 public class GelCanvas extends JPanel implements MouseListener {
 
     private Electro2D electro2D;
