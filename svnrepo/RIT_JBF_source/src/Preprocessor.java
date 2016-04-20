@@ -5,7 +5,6 @@ import java.util.Vector;
  * This class generates the preprocessed proteome files created after a
  * genBank, fasta, or protein database file has been run.  In doing this
  * the time to load a proteome (if already loaded once) will be cut down.
- * (Hopefully...)
  *
  * @author Jill Zapoticznyj
  */
@@ -33,11 +32,6 @@ public class Preprocessor {
     private int numEnzymes;
     private Electro2D electro2D;
 
-    /**
-     * Instantiates a new Preprocessor.
-     *
-     * @param e the e
-     */
     public Preprocessor(Electro2D e) {
         sequence = e.getSequences();
         sequenceTitle = e.getSequenceTitles();
@@ -120,14 +114,13 @@ public class Preprocessor {
     }
 
     /**
-     * Read from file.
+     * Reads from the file
      *
-     * @param in        the in
-     * @param electro2D the electro 2 d
-     * @param fileNum   the file num
+     * @param in        BufferedReader input
+     * @param electro2D Electro2D reference
+     * @param fileNum   the file number
      */
-    public static void readFromFile(BufferedReader in, Electro2D electro2D,
-                                    int fileNum) {
+    public static void readFromFile(BufferedReader in, Electro2D electro2D, int fileNum) {
         int fileNameLoc = 0;
         int endofHeader = 1;
         Vector sequences = new Vector();
