@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Window displays all of the colors of proteins and what they represent
+ * Displays what the color of a protein means
  */
 public class ColorFrame {
 

@@ -8,7 +8,7 @@
  */
 
 /**
- * Converts
+ * Converts an amino acid sequence within a string into the class Ion containing that sequence
  *
  * @author Amanda Fisher
  */
