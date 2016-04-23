@@ -149,20 +149,19 @@ public class E2DProtein {
      *
      * @return HashMap of default colors
      */
-    public static HashMap getColorGuide(){
-	
-	HashMap retVal = new HashMap();
-	
-	
-	retVal.put( "dna in Title", dnaColor );
-	retVal.put( "ribosomal in Title", rnaColor );
-	retVal.put( "Enzyme EC in Function", enzymeColor );
-	retVal.put( "hypothetical protein", hypotheticalColor );
-	retVal.put( "transport protein in Function", transportColor );
-	retVal.put( "receptor in Function", receptorColor );
-	retVal.put( "transduction in Function", transductionColor );
-	
-	return retVal;
-    }
+	public static String[][] getColorGuide() {
+
+		String[][] retVal = new String[][]{
+				{"dna in Title", Integer.toString(dnaColor.getRGB())},
+				{"ribosomal in Title", Integer.toString(rnaColor.getRGB())},
+				{"Enzyme EC in Function", Integer.toString(enzymeColor.getRGB())},
+				{"hypothetical protein", Integer.toString(hypotheticalColor.getRGB())},
+				{"transport protein in Function", Integer.toString(transportColor.getRGB())},
+				{"receptor in Function", Integer.toString(receptorColor.getRGB())},
+				{"transduction in Function", Integer.toString(transductionColor.getRGB())}
+		};
+
+		return retVal;
+	}
 
 }

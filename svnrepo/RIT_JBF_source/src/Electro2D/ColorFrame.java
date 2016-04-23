@@ -1,74 +1,62 @@
-package Electro2D; /**
- * Electro2D.ColorFrame.java works as a key for the protein colors displayed in E2D
- * gel's final product.
- */
+package Electro2D;
 
-import java.awt.*;
+import Electro2D.E2DProtein;
+
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 
+/**
+ * Displays what the color of a protein means
+ */
 public class ColorFrame {
-    
-    private static Frame colorFrame;
-    private Panel colorPanel;
-    private ArrayList labels;
-    private HashMap colorkey;
-    
-    public ColorFrame(){
-	colorkey = E2DProtein.getColorGuide();
-	
-	colorFrame = new Frame( "Color Key" );
-    colorFrame.setPreferredSize(new Dimension(200,225));
-	colorFrame.addWindowListener( new WindowAdapter(){
-		public void windowClosing( WindowEvent e ){
-		    colorFrame.hide();
+
+	private static Frame colorFrame;
+	private Panel colorPanel;
+
+	public ColorFrame() {
+		String[][] colorKey = E2DProtein.getColorGuide();
+
+		colorFrame = new Frame("Color Key");
+		colorFrame.addWindowListener(
+				new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						colorFrame.setVisible(false);
+					}
+
+					public void windowDeactivated(WindowEvent e) {
+						windowClosing(e);//Closes the color window if the window loses focus
+					}
+				}
+		);
+
+		colorPanel = new Panel();
+		colorPanel.setLayout(new GridLayout(0, 1));
+
+		for (String[] labelStrings : colorKey) {
+			Label colorLabel = new Label(labelStrings[0], Label.CENTER);
+			Color backColor = new Color(Integer.parseInt(labelStrings[1]));
+			colorLabel.setBackground(backColor);
+			double Luminance = ((backColor.getRed() * 299) + (backColor.getGreen() * 587) + (backColor.getBlue() * 114)) / 1000; //Calculate the luminance of the background color and determine if the text should be white or black
+			if (Luminance <= 125) {
+				colorLabel.setForeground(Color.WHITE);
+			} else {
+				colorLabel.setForeground(Color.BLACK);
+			}
+			colorPanel.add(colorLabel);
 		}
-	    }
-				      );
-	labels = new ArrayList();
-	
-	colorPanel = new Panel();
-	colorPanel.setLayout( new GridLayout( 0,1 ) );
-	
-	labels.add( new Label( "dna in Title", Label.CENTER ) );
-	((Label)labels.get( 0 )).setBackground( (Color)colorkey.get( "dna in Title" ) );
-	colorPanel.add( (Label)labels.get(0) );
-	
-	labels.add( new Label( "ribosomal in Title", Label.CENTER ) );
-	((Label)labels.get( labels.size() - 1 )).setBackground( (Color)colorkey.get( "ribosomal in Title" ));
-	colorPanel.add( (Label)labels.get( labels.size() - 1 ) );
-	
-	labels.add( new Label( "Enzyme EC in Function", Label.CENTER ) );
-	((Label)labels.get( labels.size() - 1 )).setBackground( (Color)colorkey.get( "Enzyme EC in Function" ) );
-	colorPanel.add( (Label)labels.get( labels.size() - 1 ) );
 
-	labels.add( new Label( "hypothetical protein", Label.CENTER ) );
-	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "hypothetical protein" ) );
-	colorPanel.add( (Label)labels.get(labels.size() - 1) );
-	
-	labels.add( new Label( "transport protein in Function", 
-			       Label.CENTER ) );
-	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "transport protein in Function" ) );
-	((Label)labels.get(labels.size() - 1)).setForeground( Color.WHITE );
-	colorPanel.add( (Label)labels.get(labels.size() - 1) );
+		colorFrame.setBounds(0, 0, 400, (300 / 7) * colorKey.length);//each color label gets (300/7) pixels of length
+		colorPanel.setBounds(0, 0, 400, (300 / 7) * colorKey.length);//each color label gets (300/7) pixels of length
+		colorFrame.add(colorPanel);
+	}
 
-	labels.add( new Label( "receptor in Function", Label.CENTER ) );
-	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "receptor in Function" ) );
-	colorPanel.add( (Label)labels.get(labels.size() - 1) );
-
-	labels.add( new Label( "transduction in Function", Label.CENTER ) );
-	((Label)labels.get(labels.size() - 1)).setBackground( (Color)colorkey.get( "transduction in Function" ) );
-	colorPanel.add( (Label)labels.get(labels.size() - 1) );
-
-	colorFrame.setBounds( 0, 0, 400, 300 );
-	colorPanel.setBounds( 0, 0, 400, 300 );
-	colorFrame.add( colorPanel );
-    }
-
-    public void showKey(){
-	colorFrame.pack();
-	colorFrame.show();
-    }
+	/**
+	 * Show the color
+	 */
+	public void showKey() {
+		colorFrame.pack();
+		colorFrame.setVisible(true);
+	}
 }

@@ -85,7 +85,7 @@ public class Welcome extends JPanel{
           String s = "<html>JBioFramework (JBF) is a set of chemical separations simulations frequently used in " +
                  "chemistry, biochemistry and proteomics research. It is written in the Java programming language and will " +
                  "run on any and all systems that have the JVM installed. A copy of the source code is available "+
-                 "online on SourceForge, or by clicking 'Contact Us' > 'Source Code'. Click on one of the tabs  "+
+                 "online on Github, or by clicking 'Contact Us' > 'Source Code'. Click on one of the tabs  "+
                  "in the upper left to get started.";
           String html1 = "<html><body style='width: ";
           String html2 = "px'>";
@@ -305,7 +305,7 @@ public class Welcome extends JPanel{
                   source.addActionListener(new ActionListener() {
                       public void actionPerformed(ActionEvent e) {
                           try{
-                              BrowserLauncher.openURL("https://sourceforge.net/p/jbf/git/ci/master/tree/");
+                              BrowserLauncher.openURL("https://github.com/RITJBF/JBioFramework/tree/master/");
                           }catch (IOException i){
                               System.err.println( i.getMessage());}
                       }
