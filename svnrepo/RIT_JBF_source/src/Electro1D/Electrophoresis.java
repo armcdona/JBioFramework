@@ -14,8 +14,8 @@ import utilities.BrowserLauncher;
 
 /**
  * @author Bader Alharbi
- * Desktop application
- * The Swing version 1D Electrophoresis simulation,
+ *         Desktop application
+ *         The Swing version 1D Electrophoresis simulation,
  */
 public class Electrophoresis extends JPanel {
     JTabbedPane tabPane, tabPane2;
@@ -24,15 +24,20 @@ public class Electrophoresis extends JPanel {
     ProteinData dataPanel;
     Plot plotPanel;
 
-    public void Header(){
-    // @TODO: figure out where we want to put the help button on E1D
+    public void Header() {
+        // @TODO: figure out where we want to put the help button on E1D
         JPanel headPanel = new JPanel();
         JButton help = new JButton("Help");
         help.setToolTipText("Open Help wiki for Electro1D");
         help.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String url = "http://sourceforge.net/p/jbf/wiki/Electro1D";
-                try{BrowserLauncher.openURL(url);} catch(IOException i){System.err.println( i.getMessage());}    }
+                try {
+                    BrowserLauncher.openURL(url);
+                } catch (IOException i) {
+                    System.err.println(i.getMessage());
+                }
+            }
         });
         headPanel.add(help);
         super.add(headPanel);
@@ -72,7 +77,7 @@ public class Electrophoresis extends JPanel {
     }
 
     /**
-     *  addStandard() add standards proteins
+     * addStandard() add standards proteins
      */
     public void addStandard() {
         simPanel.addStandard();
@@ -93,8 +98,9 @@ public class Electrophoresis extends JPanel {
     }
 
     /**
-     *  set the acrylamide percentage
-     * @param acrylamide
+     * set the acrylamide percentage
+     *
+     * @param acrylamide acrylamide reference
      */
     public void setAcrylamide(Acrylamide acrylamide) {
         simPanel.setAcrylamide(acrylamide);
@@ -102,24 +108,24 @@ public class Electrophoresis extends JPanel {
 
     /**
      * start running the simulation
-     * @param aprotein
-     * @param protein
-     * @param protein1
-     * @param protein2
+     *
+     * @param aprotein is an array of standard proteins (known)
+     * @param protein is a unknown protein (sample)
+     * @param protein1 is a dye
+     * @param protein2 is a dye
      */
-    public void startRun(Protein aprotein[], Protein protein, Protein protein1,
-                         Protein protein2) {
+    public void startRun(Protein aprotein[], Protein protein, Protein protein1, Protein protein2) {
         simPanel.startRun(aprotein, protein, protein1, protein2);
     }
 
     /**
-     *  setPlotData() set the plot data
-     * @param aprotein
-     * @param protein
-     * @param protein1
+     * setPlotData() set the plot data
+     *
+     * @param aprotein is an array of standard proteins (known)
+     * @param protein is a unknown protein (sample)
+     * @param protein1 is a dye
      */
-    public void setPlotData(Protein aprotein[], Protein protein,
-                            Protein protein1) {
+    public void setPlotData(Protein aprotein[], Protein protein, Protein protein1) {
         plotPanel.setResults(aprotein, protein, protein1);
     }
 
@@ -132,7 +138,7 @@ public class Electrophoresis extends JPanel {
     }
 
     /**
-     *  adding the sample
+     * adding the sample
      */
     public void addSample() {
         simPanel.addSample();
@@ -140,16 +146,18 @@ public class Electrophoresis extends JPanel {
 
     /**
      * configure the animation speed
-     * @param s
+     *
+     * @param s the animation speed
      */
     public void setAnimationSpeed(String s) {
         simPanel.setPause(s);
     }
 
     /**
-     *    displayProtein(Protein protein)
-     *   display protein info on the plotting panel
-     * @param protein
+     * displayProtein(Protein protein)
+     * display protein info on the plotting panel
+     *
+     * @param protein the protein to display
      */
     public void displayProtein(Protein protein) {
         dataPanel.displayData(protein);

@@ -6,91 +6,72 @@ import java.awt.Graphics;
 /**
  *
  */
-public class Sample
-{
+public class Sample {
 
-    public void setXPosition(int i)
-    {
+    public void setXPosition(int i) {
         sampX = i;
     }
 
-    public void setYPosition(int i)
-    {
+    public void setYPosition(int i) {
         sampY = i;
     }
 
-    public void drawSwitch(boolean flag)
-    {
+    public void drawSwitch(boolean flag) {
         changeOn = flag;
     }
 
-    public void empty()
-    {
+    public void empty() {
         fillSwitch = false;
         emptySwitch = true;
     }
 
-    public void fill()
-    {
+    public void fill() {
         fillSwitch = true;
         emptySwitch = false;
     }
 
-    public Sample()
-    {
+    public Sample() {
     }
 
-    public void drawSample(Graphics g)
-    {
-        if(changeOn)
-        {
-            if(fillCounter > fillRatio)
-            {
-                if(fillSwitch)
-                {
+    public void drawSample(Graphics g) {
+        if (changeOn) {
+            if (fillCounter > fillRatio) {
+                if (fillSwitch) {
                     sampY--;
                     sampHeight++;
                 }
-                if(emptySwitch)
-                {
+                if (emptySwitch) {
                     sampY++;
                     sampHeight--;
                 }
                 fillCounter = 0;
-            } else
-            {
+            } else {
                 fillCounter++;
             }
-            if(emptySwitch && sampY > maxY)
-            {
+            if (emptySwitch && sampY > maxY) {
                 changeOn = false;
                 sampHeight = 0;
             }
         }
-        if(sampHeight > 0)
-        {
+        if (sampHeight > 0) {
             g.setColor(Color.blue);
             g.fillRect(sampX, sampY, sampWidth, sampHeight);
         }
     }
 
-    public void setWidth(int i)
-    {
+    public void setWidth(int i) {
         sampWidth = i;
     }
 
-    public void setMaxY(int i)
-    {
+    public void setMaxY(int i) {
         maxY = i;
     }
 
-    public void setRatio(int i)
-    {
+    public void setRatio(int i) {
         fillRatio = i;
     }
 
-    public void reset()
-    {
+    public void reset() {
         changeOn = false;
         fillSwitch = false;
         emptySwitch = false;

@@ -16,7 +16,7 @@ package Main;
  */
 
 /**
- * The main frame of the entire suite. 
+ * The main frame of the entire suite.
  * Calls for the main GUI panels for other classes and adds them to a tabbed
  * frame.
  *
@@ -52,6 +52,8 @@ public class JBioFrameworkMain extends JFrame {
     /**
      * Main method for entire program.
      * Creates a new instantiation of the JBioFramework class (calls constructor)
+     *
+     * @param args program arguments
      */
     public static void main(String[] args) {
         new JBioFrameworkMain();
@@ -63,14 +65,14 @@ public class JBioFrameworkMain extends JFrame {
      *  panels from Electro1D, Electro2d, etc. and adjusts size.
      */
     public JBioFrameworkMain() {
-	//calls JFrame constructor with String parametr which sets the displayed
-	//name at the top of the window.
+        //calls JFrame constructor with String parametr which sets the displayed
+        //name at the top of the window.
         super("JBioFramework");
 
-	//swing component which facilitates switching between different panels.
+        //swing component which facilitates switching between different panels.
         tabbedPane = new JTabbedPane();
 
-	//add all of the relevant panels for each application's GUI to tabbedPane
+        //add all of the relevant panels for each application's GUI to tabbedPane
         tabbedPane.addTab("Welcome", new Welcome());
         tabbedPane.addTab("IonExchange", new Ionex());
         tabbedPane.addTab("Electro1D", new Electrophoresis());
@@ -79,17 +81,17 @@ public class JBioFrameworkMain extends JFrame {
         tabbedPane.addTab("Marvin Sketch", new MarvinTab().createMainPanel());
         /*tabbedPane.addTab(["name (to be displayed)"], [object]);*/
 
-	//add tabbedPane to frame
+        //add tabbedPane to frame
         add(tabbedPane);
 
 
-	/**various last steps for the JFrame.*/
+        /**various last steps for the JFrame.*/
 
-	// Method inherited from Window by JFrame which "Causes this Window to be
-	// sized to fit the preferred size and layouts of its subcomponents.
-	super.pack();
+        // Method inherited from Window by JFrame which "Causes this Window to be
+        // sized to fit the preferred size and layouts of its subcomponents.
+        super.pack();
 
-	// Use a toolkit to find the screen size of the user's monitor
+        // Use a toolkit to find the screen size of the user's monitor
 
         //scale window size so as to not take up the entire screen
 //    double newWidth = Toolkit.getDefaultToolkit().getScreenSize().width*(3/4);
@@ -99,19 +101,21 @@ public class JBioFrameworkMain extends JFrame {
 //    super.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
         //ensure that the program stops when the Window for the GUI is closed.
-	//TODO create WindowManager to set prompt for review or session log.
-	super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //TODO create WindowManager to set prompt for review or session log.
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	//make the completed, correctly-sized window visible.
-	// [should be the last thing called, to prevent the user from seeing
-	//  the window get resized]
-	super.setVisible(true);
+        //make the completed, correctly-sized window visible.
+        // [should be the last thing called, to prevent the user from seeing
+        //  the window get resized]
+        super.setVisible(true);
     }
 
     /**
      * returns the JTabbedPane which holds all of our simulation panels.
      * tabbedPane is a Swing component which facilitates the switching between
      * multiple components.
+     *
+     * @return returns the tabbed pane
      */
     public static JTabbedPane getTabs() {
         return tabbedPane;

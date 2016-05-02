@@ -1,7 +1,7 @@
 package MassSpec; /**
- *
  * @author Amanda Fisher
  */
+
 import Electro2D.Protease;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class Thermolysin extends Protease {
 
     public Thermolysin() {
-        cutAminoAcids = new ArrayList<>(Arrays.asList('I','L','M','V')); //Thermolysin cuts at these proteins
+        cutAminoAcids = new ArrayList<>(Arrays.asList('I', 'L', 'M', 'V')); //Thermolysin cuts at these proteins
         cutsBefore = true;
     }
 

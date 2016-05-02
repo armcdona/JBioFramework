@@ -2,8 +2,7 @@ package Ionex;
 
 import java.awt.*;
 
-class ImageCanvas extends Canvas implements Runnable
-{
+class ImageCanvas extends Canvas implements Runnable {
     final int COLLOY = 25;
     final int COLHIY = 226;
     final int COLLOX = 280;
@@ -14,21 +13,20 @@ class ImageCanvas extends Canvas implements Runnable
     final int DETECTPEAK = 259;
     final int DETECTTOP = 275;
 
-    Thread  m_animator;
-    Image	m_offscreen;
+    Thread m_animator;
+    Image m_offscreen;
     Graphics m_offgraphics;
-    Image    m_imgBack;
-    int		m_nTime = 0;
-    Ionex   m_theExp;
-    Point   m_pLastConcen;
-    Point   m_pNewConcen;
-    Point   m_pNewDetect;
-    Point   m_pLastDetect;
-    double	m_dTopConc;		// concentration entering column
-    double	m_dBottomConc;	// concentration leaving column
+    Image m_imgBack;
+    int m_nTime = 0;
+    Ionex m_theExp;
+    Point m_pLastConcen;
+    Point m_pNewConcen;
+    Point m_pNewDetect;
+    Point m_pLastDetect;
+    double m_dTopConc;        // concentration entering column
+    double m_dBottomConc;    // concentration leaving column
 
-    public ImageCanvas(Ionex theExp)
-    {
+    public ImageCanvas(Ionex theExp) {
         m_theExp = theExp;
         m_pLastConcen = new Point(DETECTORIGINX, DETECTORIGINY);
         m_pLastDetect = new Point(DETECTORIGINX, DETECTORIGINY);
@@ -36,9 +34,8 @@ class ImageCanvas extends Canvas implements Runnable
         m_pNewDetect = new Point(DETECTORIGINX, DETECTORIGINY);
     }
 
-    public void start()
-    {
-        if( m_animator == null){
+    public void start() {
+        if (m_animator == null) {
             m_animator = new Thread(this);
         }
         m_animator.start();
@@ -54,10 +51,10 @@ class ImageCanvas extends Canvas implements Runnable
 
         //reinitialize
         m_nTime = 0;
-        m_pLastConcen.move( DETECTORIGINX, DETECTORIGINY);
-        m_pLastDetect.move( DETECTORIGINX, DETECTORIGINY);
-        m_pNewConcen.move( DETECTORIGINX, DETECTORIGINY);
-        m_pNewDetect.move( DETECTORIGINX, DETECTORIGINY);
+        m_pLastConcen.move(DETECTORIGINX, DETECTORIGINY);
+        m_pLastDetect.move(DETECTORIGINX, DETECTORIGINY);
+        m_pNewConcen.move(DETECTORIGINX, DETECTORIGINY);
+        m_pNewDetect.move(DETECTORIGINX, DETECTORIGINY);
     }
 
     public void run() {
@@ -81,114 +78,107 @@ class ImageCanvas extends Canvas implements Runnable
             try {
                 startTime += delay;
                 Thread.sleep(Math.max(0,
-                        startTime-System.currentTimeMillis()));
+                        startTime - System.currentTimeMillis()));
             } catch (InterruptedException e) {
                 break;
             }
         }
     }
 
-    public void paint(Graphics g)
-    {
-        update( g);
+    public void paint(Graphics g) {
+        update(g);
     }
 
-    public synchronized void update(Graphics g)
-    {
+    public synchronized void update(Graphics g) {
         //get the background image
-        if (m_offscreen == null){
-            m_offscreen = createImage( 488, 395);
+        if (m_offscreen == null) {
+            m_offscreen = createImage(488, 395);
             m_offgraphics = m_offscreen.getGraphics();
 
             // reset the background image
-            m_offgraphics.drawImage( m_imgBack, 0, 0, null);
+            m_offgraphics.drawImage(m_imgBack, 0, 0, null);
         }
 
         //now draw the protein bands
-        drawProteins( m_offgraphics);
+        drawProteins(m_offgraphics);
 
         //now draw the detector
-        m_offgraphics.setColor( Color.blue);
-        m_offgraphics.drawLine( m_pLastDetect.x, m_pLastDetect.y,
+        m_offgraphics.setColor(Color.blue);
+        m_offgraphics.drawLine(m_pLastDetect.x, m_pLastDetect.y,
                 m_pNewDetect.x, m_pNewDetect.y);
 
         //now draw the concentration graph
-        m_offgraphics.setColor( Color.red);
-        m_offgraphics.drawLine( m_pLastConcen.x, m_pLastConcen.y,
+        m_offgraphics.setColor(Color.red);
+        m_offgraphics.drawLine(m_pLastConcen.x, m_pLastConcen.y,
                 m_pNewConcen.x, m_pNewConcen.y);
 
         // now draw the concentrations at the top and bottom of the column
-        m_offgraphics.setColor( Color.white);
-        m_offgraphics.fillRect( COLHIX + 5, COLLOY, 50, 10);
-        m_offgraphics.fillRect( COLHIX + 5, COLHIY - 10, 50, 10);
+        m_offgraphics.setColor(Color.white);
+        m_offgraphics.fillRect(COLHIX + 5, COLLOY, 50, 10);
+        m_offgraphics.fillRect(COLHIX + 5, COLHIY - 10, 50, 10);
 
-        String strConc = new String( String.valueOf( m_dTopConc));
-        m_offgraphics.setColor( Color.gray);
-        m_offgraphics.drawString( formatFloat( strConc), COLHIX + 5, COLLOY + 10);
+        String strConc = new String(String.valueOf(m_dTopConc));
+        m_offgraphics.setColor(Color.gray);
+        m_offgraphics.drawString(formatFloat(strConc), COLHIX + 5, COLLOY + 10);
 
-        strConc = String.valueOf( m_dBottomConc);
-        m_offgraphics.drawString( formatFloat( strConc), COLHIX + 5, COLHIY);
+        strConc = String.valueOf(m_dBottomConc);
+        m_offgraphics.drawString(formatFloat(strConc), COLHIX + 5, COLHIY);
 
         //now actually draw to the screen
         g.drawImage(m_offscreen, 0, 0, null);
     }
 
-    private String formatFloat( String strF)
-    {
-        String	str;
+    private String formatFloat(String strF) {
+        String str;
 
-        int nPos = strF.indexOf( '.');
-        if(( nPos < 0) || ( nPos + 3 > strF.length())){
-            str = new String( strF);
-        }
-        else{
-            str = new String( strF.substring( 0, nPos + 3));
+        int nPos = strF.indexOf('.');
+        if ((nPos < 0) || (nPos + 3 > strF.length())) {
+            str = new String(strF);
+        } else {
+            str = new String(strF.substring(0, nPos + 3));
         }
 
         return str;
 
     }
 
-    public void resetBackground()
-    {
+    public void resetBackground() {
         // reset the background image
-        m_offgraphics.drawImage( m_imgBack, 0, 0, null);
+        m_offgraphics.drawImage(m_imgBack, 0, 0, null);
 
         //call repaint to draw to the screen
         repaint();
     }
 
-    public void prepareBackground()
-    {
+    public void prepareBackground() {
         // reset the background image
-        m_offgraphics.drawImage( m_imgBack, 0, 0, null);
+        m_offgraphics.drawImage(m_imgBack, 0, 0, null);
 
         //redraw the names of the proteins
-        for( int i = 0; i < m_theExp.m_arrProteins.length; i++){
-            if( m_theExp.m_arrProteins[i] == null){
+        for (int i = 0; i < m_theExp.m_arrProteins.length; i++) {
+            if (m_theExp.m_arrProteins[i] == null) {
                 continue;
             }
 
-            if( m_theExp.m_arrProteins[i].m_bMix){
+            if (m_theExp.m_arrProteins[i].m_bMix) {
                 //use the color for mixed proteins
-                m_offgraphics.setColor( m_theExp.m_colors[5]);
-            }
-            else{
-                m_offgraphics.setColor( m_theExp.m_colors[i]);
+                m_offgraphics.setColor(m_theExp.m_colors[5]);
+            } else {
+                m_offgraphics.setColor(m_theExp.m_colors[i]);
             }
 
-            m_offgraphics.drawString( m_theExp.m_arrProteins[i].getName(), 10, 344 + (i * 11));
+            m_offgraphics.drawString(m_theExp.m_arrProteins[i].getName(), 10, 344 + (i * 11));
         }
 
         //call repaint to draw to the screen
         repaint();
     }
 
-    public void animate(){
+    public void animate() {
 
         m_nTime++;
 
-        if( m_nTime >= 460){
+        if (m_nTime >= 460) {
             // we're done
             m_theExp.processStop();
             return;
@@ -198,86 +188,79 @@ class ImageCanvas extends Canvas implements Runnable
         moveProteins();
 
         //move the concentration graph point
-        m_pLastConcen.move( m_pNewConcen.x, m_pNewConcen.y);
+        m_pLastConcen.move(m_pNewConcen.x, m_pNewConcen.y);
         calcConc();
 
         //move the detector graph point
-        m_pLastDetect.move( m_pNewDetect.x, m_pNewDetect.y);
+        m_pLastDetect.move(m_pNewDetect.x, m_pNewDetect.y);
         calcDetect();
 
         repaint();
     }
 
-    void moveProteins()
-    {
-        double		dConc;			// concentration at protein location
-        CProtein	protein;
-        int			i;
+    void moveProteins() {
+        double dConc;            // concentration at protein location
+        CProtein protein;
+        int i;
 
         //loop through the proteins and determine their positions
-        for( i = 0; i < m_theExp.m_arrProteins.length; i++){
-            if( m_theExp.m_arrProteins[i] == null){
+        for (i = 0; i < m_theExp.m_arrProteins.length; i++) {
+            if (m_theExp.m_arrProteins[i] == null) {
                 continue;
             }
 
             protein = m_theExp.m_arrProteins[i];
 
-            if( protein.m_bBound){
+            if (protein.m_bBound) {
 
                 // find the concentration at the location of the protein
-                if( m_nTime <= (150 + protein.m_nPos)){
+                if (m_nTime <= (150 + protein.m_nPos)) {
                     // the time for the initial wash to move through the column
                     dConc = m_theExp.m_dConc1;
-                }
-                else{
-                    if( m_nTime <= (300 + protein.m_nPos)){
+                } else {
+                    if (m_nTime <= (300 + protein.m_nPos)) {
                         // concentration entering column changes
                         dConc = m_theExp.m_dConc1 +
-                                (float)((( m_theExp.m_dConc2 - m_theExp.m_dConc1)/150) *
+                                (float) (((m_theExp.m_dConc2 - m_theExp.m_dConc1) / 150) *
                                         (m_nTime - 150 - protein.m_nPos));
-                    }
-                    else{
+                    } else {
                         // only the high concentration now
                         dConc = m_theExp.m_dConc2;
                     }
                 }
 
                 // determine if the protein is still bound or not
-                if( Math.abs( protein.m_dCharge) < (dConc * 100)){
+                if (Math.abs(protein.m_dCharge) < (dConc * 100)) {
                     protein.m_bBound = false;
                 }
             }
 
             // protein is not bound, move it
-            if( !protein.m_bBound){
+            if (!protein.m_bBound) {
                 (m_theExp.m_arrProteins[i]).moveProtein();
             }
         }
     }
 
-    void calcConc()
-    {
+    void calcConc() {
         //find the concentration of the solvent entering and leaving the column
-        if( m_nTime <= 150){
+        if (m_nTime <= 150) {
             m_dTopConc = m_theExp.m_dConc1;
             m_dBottomConc = m_theExp.m_dConc1;
-        }
-        else{
-            if( m_nTime <= 300){
+        } else {
+            if (m_nTime <= 300) {
                 // concentration entering column changes
                 // the time for the initial wash to move through the column
                 m_dTopConc = (m_theExp.m_dConc1 +
-                        (float)((( m_theExp.m_dConc2 - m_theExp.m_dConc1)/150) * (m_nTime - 150)));
+                        (float) (((m_theExp.m_dConc2 - m_theExp.m_dConc1) / 150) * (m_nTime - 150)));
                 m_dBottomConc = m_theExp.m_dConc1;
-            }
-            else{
+            } else {
                 //only final wash entering column
-                if( m_nTime <= 450){
+                if (m_nTime <= 450) {
                     m_dTopConc = m_theExp.m_dConc2;
                     m_dBottomConc = (m_theExp.m_dConc1 +
-                            (float)((( m_theExp.m_dConc2 - m_theExp.m_dConc1)/150) * (m_nTime - 300)));
-                }
-                else{
+                            (float) (((m_theExp.m_dConc2 - m_theExp.m_dConc1) / 150) * (m_nTime - 300)));
+                } else {
                     // only the high concentration now
                     m_dTopConc = m_theExp.m_dConc2;
                     m_dBottomConc = m_theExp.m_dConc2;
@@ -286,70 +269,68 @@ class ImageCanvas extends Canvas implements Runnable
         }
 
         //move the graph point
-        m_pNewConcen.move( DETECTORIGINX + m_nTime,
-                DETECTORIGINY - 1 - (int)(m_dBottomConc * (DETECTORIGINY - DETECTTOP)));
+        m_pNewConcen.move(DETECTORIGINX + m_nTime,
+                DETECTORIGINY - 1 - (int) (m_dBottomConc * (DETECTORIGINY - DETECTTOP)));
 
     }
 
-    void calcDetect()
-    {
-        int		i;
-        int		nPos;
-        int     nMaxAmount = 0, nMixAmount = 0;
-        int		nAmount;
-        int		nHeight;
-        int		nNewPoint;
+    void calcDetect() {
+        int i;
+        int nPos;
+        int nMaxAmount = 0, nMixAmount = 0;
+        int nAmount;
+        int nHeight;
+        int nNewPoint;
 
         //move the x
-        m_pNewDetect.move( DETECTORIGINX + m_nTime, DETECTORIGINY);
+        m_pNewDetect.move(DETECTORIGINX + m_nTime, DETECTORIGINY);
 
         // loop through the proteins, to find the largest amount entered
-        for( i = 0; i < m_theExp.m_arrProteins.length; i++){
-            if( m_theExp.m_arrProteins[i] == null){
+        for (i = 0; i < m_theExp.m_arrProteins.length; i++) {
+            if (m_theExp.m_arrProteins[i] == null) {
                 continue;
             }
-            nMaxAmount = Math.max( nMaxAmount, m_theExp.m_arrProteins[i].m_nAmount);
+            nMaxAmount = Math.max(nMaxAmount, m_theExp.m_arrProteins[i].m_nAmount);
         }
 
         //now see if there are any that are being eluted together and calculate that amount
-        for( i = 0; i < m_theExp.m_arrProteins.length; i++){
-            if( m_theExp.m_arrProteins[i] == null){
+        for (i = 0; i < m_theExp.m_arrProteins.length; i++) {
+            if (m_theExp.m_arrProteins[i] == null) {
                 continue;
             }
 
-            if( m_theExp.m_arrProteins[i].m_bMix){
+            if (m_theExp.m_arrProteins[i].m_bMix) {
                 nMixAmount += m_theExp.m_arrProteins[i].m_nAmount;
             }
         }
 
-        nMaxAmount = Math.max( nMaxAmount, nMixAmount);
+        nMaxAmount = Math.max(nMaxAmount, nMixAmount);
 
         // loop through the proteins, see if there's any near the bottom
-        for( i = 0; i < m_theExp.m_arrProteins.length; i++){
-            if( m_theExp.m_arrProteins[i] == null){
+        for (i = 0; i < m_theExp.m_arrProteins.length; i++) {
+            if (m_theExp.m_arrProteins[i] == null) {
                 continue;
             }
 
             //calculate the detector position for this proteins peak
             nHeight = DETECTORIGINY - DETECTPEAK;
 
-            if( m_theExp.m_arrProteins[i].m_bMix){
+            if (m_theExp.m_arrProteins[i].m_bMix) {
                 nAmount = nMixAmount;
-            }
-            else{
+            } else {
                 nAmount = m_theExp.m_arrProteins[i].m_nAmount;
             }
-            nHeight = (int)(nHeight * (float)((float)nAmount/(float)nMaxAmount)); //force it to use floats!
+            nHeight = (int) (nHeight * (float) ((float) nAmount / (float) nMaxAmount)); //force it to use floats!
 
             nPos = m_theExp.m_arrProteins[i].m_nPos;
 
-            switch( Math.abs(( COLHIY - COLLOY + 2) - ( nPos +1))){
+            switch (Math.abs((COLHIY - COLLOY + 2) - (nPos + 1))) {
                 case 2:
-                    nHeight = (int)(nHeight * (4.0/7.0));
+                    nHeight = (int) (nHeight * (4.0 / 7.0));
                     break;
 
                 case 1:
-                    nHeight = (int)(nHeight * (6.0/7.0));
+                    nHeight = (int) (nHeight * (6.0 / 7.0));
                     break;
 
                 case 0:
@@ -363,77 +344,73 @@ class ImageCanvas extends Canvas implements Runnable
 
             // if the point is already set, only set it if
             // the new setting shows a higher detector response
-            if( m_pNewDetect.y > nNewPoint){
+            if (m_pNewDetect.y > nNewPoint) {
                 m_pNewDetect.y = nNewPoint;
             }
         }
     }
 
 
-    public void setImage( Image img)
-    {
+    public void setImage(Image img) {
         m_imgBack = img;
     }
 
-    void drawProteins( Graphics g)
-    {
-        int	i;
+    void drawProteins(Graphics g) {
+        int i;
 
         //erase the column
-        g.setColor( Color.white);
-        g.fillRect( COLLOX + 1, COLLOY + 1, COLHIX - COLLOX - 1, COLHIY - COLLOY - 1);
+        g.setColor(Color.white);
+        g.fillRect(COLLOX + 1, COLLOY + 1, COLHIX - COLLOX - 1, COLHIY - COLLOY - 1);
 
         //draw bound proteins first
-        for( i = 0; i < m_theExp.m_arrProteins.length; i++){
-            if( m_theExp.m_arrProteins[i] == null){
+        for (i = 0; i < m_theExp.m_arrProteins.length; i++) {
+            if (m_theExp.m_arrProteins[i] == null) {
                 continue;
             }
-            if( m_theExp.m_arrProteins[i].m_bBound){
-                drawProteinBand( g, i);
+            if (m_theExp.m_arrProteins[i].m_bBound) {
+                drawProteinBand(g, i);
             }
         }
 
         // now draw mobil ones
-        for( i = 0; i < m_theExp.m_arrProteins.length; i++){
-            if( m_theExp.m_arrProteins[i] == null){
+        for (i = 0; i < m_theExp.m_arrProteins.length; i++) {
+            if (m_theExp.m_arrProteins[i] == null) {
                 continue;
             }
-            if( !m_theExp.m_arrProteins[i].m_bBound){
-                drawProteinBand( g, i);
+            if (!m_theExp.m_arrProteins[i].m_bBound) {
+                drawProteinBand(g, i);
             }
         }
     }
 
-    void drawProteinBand( Graphics g, int nProtein)
-    {
-        Rectangle	rect;
-        int			nPos, nWidth;	//placement and width of protein band
+    void drawProteinBand(Graphics g, int nProtein) {
+        Rectangle rect;
+        int nPos, nWidth;    //placement and width of protein band
 
-        nPos = m_theExp.m_arrProteins[ nProtein].m_nPos;
-        nWidth = m_theExp.m_arrProteins[ nProtein].m_nBandwidth;
+        nPos = m_theExp.m_arrProteins[nProtein].m_nPos;
+        nWidth = m_theExp.m_arrProteins[nProtein].m_nBandwidth;
 
         //draw the protein if its still in the column
-        if( nPos >= (COLHIY - COLLOY)){
+        if (nPos >= (COLHIY - COLLOY)) {
             return;
         }
 
-        rect = new Rectangle( COLLOX + 1, COLLOY + nPos,
+        rect = new Rectangle(COLLOX + 1, COLLOY + nPos,
                 COLHIX - COLLOX - 1, nWidth);
 
         // don't draw anything outside of the column
-        if(( rect.y + rect.height) >= COLHIY){
+        if ((rect.y + rect.height) >= COLHIY) {
             rect.height = COLHIY - rect.y;
         }
 
         // draw the protein with the correct color
-        if( m_theExp.m_arrProteins[ nProtein].m_bMix){
-            g.setColor( m_theExp.m_colors[5]);
-        }
-        else{
-            g.setColor( m_theExp.m_colors[nProtein]);
+        if (m_theExp.m_arrProteins[nProtein].m_bMix) {
+            g.setColor(m_theExp.m_colors[5]);
+        } else {
+            g.setColor(m_theExp.m_colors[nProtein]);
         }
 
-        g.fillRect( rect.x, rect.y, rect.width, rect.height);
+        g.fillRect(rect.x, rect.y, rect.width, rect.height);
     }
 
 }

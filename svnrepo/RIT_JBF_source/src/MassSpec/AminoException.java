@@ -6,11 +6,12 @@ package MassSpec;/*
  */
 
 /**
- * 
  * @author Amanda Fisher
  */
 public class AminoException extends Exception {
-    public AminoException() {}
+    public AminoException() {
+    }
+
     public AminoException(String message) {
         super(message);
     }

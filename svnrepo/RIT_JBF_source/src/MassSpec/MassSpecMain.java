@@ -1,4 +1,5 @@
-package MassSpec;/*
+package MassSpec;
+/**
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -18,9 +19,10 @@ package MassSpec;/*
  * One of the tabs added to /Main.JBioFrameworkMain/'s JTabbedPane.
  *
  * @author Amanda Fisher
-*/
+ */
 
 //GUI Components
+
 import javax.swing.*;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -37,6 +39,7 @@ import java.awt.event.ItemEvent;
 //etc.
 import java.io.IOException;
 import java.text.DecimalFormat;
+
 import utilities.BrowserLauncher;
 import utilities.FastaParser;
 
@@ -46,7 +49,7 @@ import utilities.FastaParser;
 public class MassSpecMain extends JPanel {
 
     private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
-        "Thermolysin"};
+            "Thermolysin"};
     private JButton help;
     private JButton about;
     private static JTextArea inputArea; // static so Electro2D.ProteinFrame can interact with it.
@@ -59,7 +62,7 @@ public class MassSpecMain extends JPanel {
     private ToggleFragmentButton redYs;
     private OutputGraphGUI outputGraph;
     private Ion ion;
-    
+
     /**
      * The constructor uses a GridBagLayout to arrange the eight different
      * elements of the GUI- the label explaining the input box, the input box,
@@ -67,75 +70,75 @@ public class MassSpecMain extends JPanel {
      * drop down box, the info label, the big graph and the small graph.
      */
     public MassSpecMain() {
-	//set the layout of the JPanel it's extending.
+        //set the layout of the JPanel it's extending.
         super(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(1, 5, 1, 5);
 
-	//Head Panel including JLabel for the name.
+        //Head Panel including JLabel for the name.
         JPanel headP = new JPanel();
-            JLabel head = new JLabel("Tandem Mass Spectrometer");
-            head.setFont(new Font("SansSerif", Font.BOLD, 18));
+        JLabel head = new JLabel("Tandem Mass Spectrometer");
+        head.setFont(new Font("SansSerif", Font.BOLD, 18));
 
-	headP.add(head);
-	constraints.gridy = 0;
+        headP.add(head);
+        constraints.gridy = 0;
         super.add(headP, constraints);
 
-	//panel for the information buttons (help and about)
+        //panel for the information buttons (help and about)
         JPanel infoButtonsPanel = new JPanel();
 
          /*help Button which uses /BrowserLauncher/ to open help wiki for MassSpec.*/
-	  help = new JButton("Help");
+        help = new JButton("Help");
 
-	  //add hovertext
-	  help.setToolTipText("Opens Help wiki for Mass Spectrometer");
+        //add hovertext
+        help.setToolTipText("Opens Help wiki for Mass Spectrometer");
 
-	  //set functionality
-	  help.addActionListener(new ActionListener() {
-              public void actionPerformed(ActionEvent e) {
-                  try{
-                      BrowserLauncher.openURL("https://sourceforge.net/p/jbf/wiki/MassSpec/");
-                  }catch(IOException i){
-                      System.err.println( i.getMessage());
-                  }
-              }
-          });
+        //set functionality
+        help.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    BrowserLauncher.openURL("https://sourceforge.net/p/jbf/wiki/MassSpec/");
+                } catch (IOException i) {
+                    System.err.println(i.getMessage());
+                }
+            }
+        });
 
-	  //add 'help' to infoButtonPanel
-	  infoButtonsPanel.add(help);
+        //add 'help' to infoButtonPanel
+        infoButtonsPanel.add(help);
 
 	 /*about button which uses /BrowserLauncher/ to open main page for JBF.*/
-	  about = new JButton("About");
+        about = new JButton("About");
 
-          //add hover text
-	  about.setToolTipText("About the program");
+        //add hover text
+        about.setToolTipText("About the program");
 
-	  //set functionality 
-	  about.addActionListener(new ActionListener() {
-              public void actionPerformed(ActionEvent e) {
-                  try{
-                      BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
-                  } catch(IOException i){
-                      System.err.println( i.getMessage());
-                  }
-              }
-	  });
+        //set functionality
+        about.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
+                } catch (IOException i) {
+                    System.err.println(i.getMessage());
+                }
+            }
+        });
 
-	  //add 'about' to infoButtonPanel
-	  infoButtonsPanel.add(about);
+        //add 'about' to infoButtonPanel
+        infoButtonsPanel.add(about);
 
         //add infoButtonsPanel to main MassSpec panel.
-	constraints.gridx = 0;
+        constraints.gridx = 0;
         constraints.gridy = 1;
-        super.add(infoButtonsPanel,constraints);
+        super.add(infoButtonsPanel, constraints);
 
 
 	/*Loading sequences. allows user to add custom sequence "OR" load one.
-	 * contains JLabels, JTextArea, . */
+     * contains JLabels, JTextArea, . */
         JLabel inputLabel = new JLabel("Input protein sequence to be analyzed: ");
         constraints.gridy = 2;
 //        grid.setConstraints(inputLabel, constraints);
-        add(inputLabel,constraints);
+        add(inputLabel, constraints);
 
         inputArea = new JTextArea(7, 20);
         inputArea.setToolTipText("type or paste protein sequence here");
@@ -159,20 +162,21 @@ public class MassSpecMain extends JPanel {
                         "fasta");
                 chooser.setFileFilter(filter);
                 int returnVal = chooser.showOpenDialog(chooser);
-                if(returnVal == JFileChooser.APPROVE_OPTION) {
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
                     String parsedSequence = FastaParser.parse(chooser.getSelectedFile());
                     inputArea.setText(parsedSequence);
-                }            }
+                }
+            }
         });
         constraints.gridy = 5;
 //        grid.setConstraints(loadButton, constraints);
-        add(loadButton,constraints);
+        add(loadButton, constraints);
 
         /*selecting the protease*/
         JLabel proteaseLabel = new JLabel("Select protease: ");
         constraints.gridy = 6;
 //        grid.setConstraints(proteaseLabel, constraints);
-        add(proteaseLabel,constraints);
+        add(proteaseLabel, constraints);
 
         proteaseBox = new JComboBox(proteaseChoices);
         constraints.gridy = 7;
@@ -183,7 +187,7 @@ public class MassSpecMain extends JPanel {
         JLabel selectRangeLabel = new JLabel("Enter m/e range: ");
         constraints.gridy = 8;
 //        grid.setConstraints(selectRangeLabel, constraints);
-        add(selectRangeLabel,constraints);
+        add(selectRangeLabel, constraints);
 
         JPanel rangeSelectionUpperPanel = new JPanel();
         lowerRange = new JTextField("0", 5);
@@ -192,7 +196,7 @@ public class MassSpecMain extends JPanel {
         rangeSelectionUpperPanel.add(lowerRange);
         constraints.gridy = 9;
 //        grid.setConstraints(rangeSelectionUpperPanel, constraints);
-        add(rangeSelectionUpperPanel,constraints);
+        add(rangeSelectionUpperPanel, constraints);
 
         JPanel rangeSelectionLowerPanel = new JPanel();
         upperRange = new JTextField("3000", 5);
@@ -201,7 +205,7 @@ public class MassSpecMain extends JPanel {
         rangeSelectionLowerPanel.add(upperRange);
         constraints.gridy = 10;
 //        grid.setConstraints(rangeSelectionLowerPanel, constraints);
-        add(rangeSelectionLowerPanel,constraints);
+        add(rangeSelectionLowerPanel, constraints);
 
 	/* Run Spectrum (button) */
         JButton runButton = new JButton("Run Spectrum");
@@ -210,15 +214,16 @@ public class MassSpecMain extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Spectrometer.runAnalysis(inputArea.getText(), outputGraph,
                         proteaseBox.getSelectedItem().toString());
-                }});
+            }
+        });
         constraints.gridy = 11;
 //        grid.setConstraints(runButton, constraints);
-        add(runButton,constraints);
+        add(runButton, constraints);
 
         massDisplay = new JLabel("<html> Mass: N/A <P>");
         constraints.gridy = 12;
 //        grid.setConstraints(massDisplay, constraints);
-        add(massDisplay,constraints);
+        add(massDisplay, constraints);
 
 	/*toggle b/y fragments*/
         blueBs = new ToggleFragmentButton("B fragments", true);
@@ -301,7 +306,7 @@ public class MassSpecMain extends JPanel {
                     tandemGraph.setRedYs(true);
                 }
             }
-            if(ion != null) {
+            if (ion != null) {
                 tandemGraph.drawSequencePeaks(ion);
             }
         }
@@ -327,14 +332,14 @@ public class MassSpecMain extends JPanel {
      */
     public double getLowerLimit() {
         double lower;
-        if(lowerRange.getText().contains(",")) {
+        if (lowerRange.getText().contains(",")) {
             String noComma = lowerRange.getText();
             int index = noComma.indexOf(",");
             noComma = noComma.substring(0, index) +
-                        noComma.substring(index+1, noComma.length());
+                    noComma.substring(index + 1, noComma.length());
             try {
                 lower = Double.valueOf(noComma);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Did not recognize Lower Limit as a number. Using default lower limit of 0.");
                 lowerRange.setText("0");
                 return 0;
@@ -342,18 +347,18 @@ public class MassSpecMain extends JPanel {
         } else {
             try {
                 lower = Double.valueOf(lowerRange.getText());
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Did not recognize Lower Limit as a number. Using default lower limit of 0.");
                 lowerRange.setText("0");
                 return 0;
             }
         }
-        if(lower < 0 || lower > 20000) {
+        if (lower < 0 || lower > 20000) {
             lower = 0;
             JOptionPane.showMessageDialog(null, "Lower Limit out of bounds (0 to 20,000). Set to default of 0.");
             lowerRange.setText("0");
         }
-        if(lower > getUpperLimit()) {
+        if (lower > getUpperLimit()) {
             lower = 0;
             JOptionPane.showMessageDialog(null, "Lower Limit is higher than Upper Limit. Set to default of 0.");
             lowerRange.setText("0");
@@ -369,14 +374,14 @@ public class MassSpecMain extends JPanel {
      */
     public double getUpperLimit() {
         double upper;
-        if(upperRange.getText().contains(",")) {
+        if (upperRange.getText().contains(",")) {
             String noComma = upperRange.getText();
             int index = noComma.indexOf(",");
             noComma = noComma.substring(0, index) +
-                        noComma.substring(index+1, noComma.length());
+                    noComma.substring(index + 1, noComma.length());
             try {
                 upper = Double.valueOf(noComma);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Did not recognize Upper Limit as a number. Using default upper limit of 3000.");
                 upperRange.setText("3000");
                 return 0;
@@ -384,13 +389,13 @@ public class MassSpecMain extends JPanel {
         } else {
             try {
                 upper = Double.valueOf(upperRange.getText());
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Did not recognize Upper Limit as a number. Using default upper limit of 3000.");
                 upperRange.setText("3000");
                 return 3000;
             }
         }
-        if(upper < 0 || upper > 20000) {
+        if (upper < 0 || upper > 20000) {
             upper = 3000;
             JOptionPane.showMessageDialog(null, "Upper Limit out of bounds (0 to 20,000). Set to default of 3000.");
             upperRange.setText("3000");
@@ -402,7 +407,7 @@ public class MassSpecMain extends JPanel {
      * Creates a frame containing only the mass spec simulation (for testing).
      * @param args command line arguments unused
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         JFrame frame = new JFrame("Mass Spectrometer");
         frame.add(new MassSpecMain());
         frame.pack();

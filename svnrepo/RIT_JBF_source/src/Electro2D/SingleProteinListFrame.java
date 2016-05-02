@@ -43,7 +43,7 @@ public class SingleProteinListFrame extends JFrame {
         JLabel sequenceOneLabel = new JLabel("Sequence");
         sequenceOneList = new JList();
         sequenceTitlesOne = new Vector();
-        copySequenceOne = (Vector)sequenceTitlesOne.clone();
+        copySequenceOne = (Vector) sequenceTitlesOne.clone();
         positionsOne = new Vector<Integer>();
         JScrollPane sequenceOneScroll = new JScrollPane(sequenceOneList);
         JButton selectedButton = new JButton("Remove Selected Proteins");
@@ -75,12 +75,15 @@ public class SingleProteinListFrame extends JFrame {
      * refreshProteinList2 method when a new protein sequence is loaded.
      * updateSequences copies the protein sequence titles into its own lists
      * for display.
+     *
+     * @param pL1 the first protein list
+     * @param pL2 the second protein list
      */
     public void updateSequences(Vector pL1, Vector pL2) {
         sequenceOneList.setListData(pL1);
         sequenceTitlesOne = new Vector(pL1);
-        copySequenceOne = (Vector)sequenceTitlesOne.clone();
-        positionsOne = new Vector<Integer>();
+        copySequenceOne = (Vector) sequenceTitlesOne.clone();
+        positionsOne = new Vector<>();
     }
 
     /**
@@ -89,7 +92,7 @@ public class SingleProteinListFrame extends JFrame {
      * with the user's manipulations.
      */
     public void updatePositions() {
-        positionsOne = new Vector<Integer>();
+        positionsOne = new Vector<>();
         for (int x = 0; x < copySequenceOne.size(); x++) {
             if (sequenceTitlesOne.contains(copySequenceOne.get(x))) {
                 positionsOne.add(x);
@@ -116,14 +119,14 @@ public class SingleProteinListFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             int[] oneIndexes = sequenceOneList.getSelectedIndices();
             Vector oneProteins = new Vector();
-            for(int x = 0; x < oneIndexes.length; x++) {
+            for (int x = 0; x < oneIndexes.length; x++) {
                 oneProteins.add(sequenceTitlesOne.get(oneIndexes[x]));
             }
             sequenceTitlesOne.removeAll(oneProteins);
             // The following line ensures that multiple edits can be made,
             // even before and after a gel run.
-            copySequenceOne = (Vector)sequenceTitlesOne.clone();
-            
+            copySequenceOne = (Vector) sequenceTitlesOne.clone();
+
             sequenceOneList.setListData(sequenceTitlesOne);
             sequenceOneList.validate();
             updatePositions();
@@ -135,7 +138,7 @@ public class SingleProteinListFrame extends JFrame {
      * Electro2D.Electro2D will call them in its get methods for the vectors used in
      * gel filtration in order to carry over the manipulations done by the user.
      *
-     * @return Vector<Integer> the positions of each element still in the sequence.
+     * @return the positions of each element still in the sequence.
      */
     public Vector<Integer> getPositionsOne() {
         return positionsOne;

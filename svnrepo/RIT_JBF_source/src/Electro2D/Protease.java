@@ -16,7 +16,8 @@ public class Protease {
 
     /**
      * Cut array list.
-     *√
+     * √
+     *
      * @param sequence the sequence
      * @return the array list
      * @throws ProteaseException the protease exception
@@ -35,11 +36,11 @@ public class Protease {
             for (Character currentCutPoint : cutAminoAcids) { //should make a new method for determing if the protease should cut here so that more a complex protease only has to override that smaller method instead of the larger cut method
 
                 Character afterAA = ' ';
-                if ((i+1) <= (sequence.toCharArray().length - 1)) {
-                    afterAA = sequence.toCharArray()[i+1];
+                if ((i + 1) <= (sequence.toCharArray().length - 1)) {
+                    afterAA = sequence.toCharArray()[i + 1];
                 }
-                if (shouldCutHere(currentAA,currentCutPoint,afterAA)){
-                    makeIon(buildingIons,cutSequence);
+                if (shouldCutHere(currentAA, currentCutPoint, afterAA)) {
+                    makeIon(buildingIons, cutSequence);
                 }
 
             }
@@ -51,7 +52,7 @@ public class Protease {
         return cutSequence;
     }
 
-    public boolean shouldCutHere(Character currentAA,Character currentCutPoint,Character afterAA) {
+    public boolean shouldCutHere(Character currentAA, Character currentCutPoint, Character afterAA) {
         boolean shouldCut = false;
         if (currentAA == currentCutPoint) {
             shouldCut = true;
@@ -76,7 +77,7 @@ public class Protease {
      * @param buildingIons The current ion
      * @param cutSequence  The sequence to be cut
      */
-    public void makeIon(ArrayList<Character> buildingIons,ArrayList<String> cutSequence) {
+    public void makeIon(ArrayList<Character> buildingIons, ArrayList<String> cutSequence) {
         String ion = new String();
         for (Character c : buildingIons) {
             ion += c.toString();

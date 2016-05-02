@@ -1,4 +1,5 @@
-package MassSpec;/*
+package MassSpec;
+/**
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -13,12 +14,12 @@ package MassSpec;/*
  * See the GNU General Public License for more details.
  */
 
-/*
+/**
  * This class extends ArrayList to function as a 'holder' for AminoAcids.
  * MassSpec.Ion knows the total mass and charge of itself, based on the AminoAcids
  * it contains, and calculates and sets its own mass/charge ratio. MassSpec.Ion also
  * knows the color it should be when displayed on a graph (black for initial
- * fragmetnation, blue for b fragments and red for y fragmetns in sequencing.
+ * fragmentation, blue for b fragments and red for y fragments in sequencing.
  * The variable hits is set by MassSpec.Spectrometer as it counts how many of each type
  * of ion it has. Hits is used to determine the ion's intensity on the
  * MassSpec.OutputGraphGUI and MassSpec.TandemGraphGUI. MassSpec.Ion also knows its position on the
@@ -127,16 +128,20 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @param mass New totalMass.
      */
     public void setMass(double mass) {
+
         totalMass = mass;
     }
     
     // This will set the sequence given from the ion fragment in the bottom peaks of the graph
     public void setSequence(String sequence) {
-    	this.sequence = sequence;
+
+        this.sequence = sequence;
     }
+
     // Gets the Sequence to be used in the Translator
     public String getSequence() {
-    	return sequence;
+
+        return sequence;
     }
 
     /**
@@ -146,6 +151,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @param charge New totalCharge.
      */
     public void setCharge(int charge) {
+
         totalCharge = charge;
     }
 
@@ -156,15 +162,17 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @param i New hits count.
      */
     public void setHits(double i) {
+
         hits = i;
     }
 
     /**
      * Used by MassSpec.OutputGraphGUI to let the MassSpec.Ion know where it is on the graph.
      *
-     * @param x
+     * @param x the x-coordinate
      */
     public void setXCoordinate(int x) {
+
         xCoordinate = x;
     }
 
@@ -173,6 +181,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @return totalMass.
      */
     public double getMass() {
+
         return totalMass;
     }
 
@@ -183,6 +192,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @return totalCharge.
      */
     public int getCharge() {
+
         return totalCharge;
     }
 
@@ -193,6 +203,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @return massChargeRatio.
      */
     public double getMassChargeRatio() {
+
         return totalMass/(double)totalCharge;
     }
 
@@ -202,6 +213,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @return hits.
      */
     public double getHits() {
+
         return hits;
     }
 
@@ -211,6 +223,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @return xCoordinate.
      */
     public int getXCoordinate() {
+
         return xCoordinate;
     }
 
@@ -220,6 +233,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @param c desired color for the MassSpec.Ion's peak on a graph
      */
     public void setColor(Color c) {
+
         color = c;
     }
 
@@ -230,6 +244,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
      * @return color this MassSpec.Ion's peak should be on a graph
      */
     public Color getColor() {
+
         return color;
     }
 }

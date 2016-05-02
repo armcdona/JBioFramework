@@ -32,15 +32,15 @@ import java.util.Collection;
 
 public class IEFProtein extends Component {
 
-    private static Color[] colors = { Color.blue, Color.green, Color.yellow,
-				      Color.red, Color.orange, Color.pink };
+    private static Color[] colors = {Color.blue, Color.green, Color.yellow,
+            Color.red, Color.orange, Color.pink};
     private Color myColor;
     private Vector proteins;
     private int myX;
     private static int myY = 5;
     private double tempX = 0;
     private double increments = 0;
-    
+
     private double myPi;
     private double maxPi;
     private double minPi;
@@ -57,45 +57,43 @@ public class IEFProtein extends Component {
      *
      * @param p the first protein to be represented by this object
      */
-    public IEFProtein(E2DProtein p, GelCanvas g){
-	names = new Vector();
-	gelcanvas = g;
-	proteins = new Vector();
-	proteins.add(p);
+    public IEFProtein(E2DProtein p, GelCanvas g) {
+        names = new Vector();
+        gelcanvas = g;
+        proteins = new Vector();
+        proteins.add(p);
 
-	myPi = p.getPI();
-	minPi = p.getPI();
-	maxPi = minPi;
-        if(myPi < minpH){
-	    maxPi = minpH;
-	}
+        myPi = p.getPI();
+        minPi = p.getPI();
+        maxPi = minPi;
+        if (myPi < minpH) {
+            maxPi = minpH;
+        }
 
         /**
          * add the name of the protein to the name vector and set the initial
          * color of the object
          */
-	names.add(p.toString());
-	myColor = colors[0];
+        names.add(p.toString());
+        myColor = colors[0];
 
         /**
          * determine the x coordinate of this Electro2D.IEFProtein
          */
-	double w = gelcanvas.getWidth();
+        double w = gelcanvas.getWidth();
 
-	if(myPi <= ((double)minpH)){
-	    myX = 1;
-	}
-	else if(myPi >= maxpH){
-	    myX = (int)(w  - 6);
-	}
-	else{
-	    myX =(int)(( w - 4) * (((myPi - minpH) / (maxpH - minpH))));
-	}
+        if (myPi <= ((double) minpH)) {
+            myX = 1;
+        } else if (myPi >= maxpH) {
+            myX = (int) (w - 6);
+        } else {
+            myX = (int) ((w - 4) * (((myPi - minpH) / (maxpH - minpH))));
+        }
 
-	Random rand = new Random();
-	tempX = rand.nextInt((int)w - 7);
-	tempX = tempX + 1;
-	increments = (myX - tempX)/50;
+        Random rand = new Random();
+        tempX = rand.nextInt((int) w - 7);
+        tempX = tempX + 1;
+        increments = (myX - tempX) / 50;
     }
 
     /**
@@ -105,59 +103,53 @@ public class IEFProtein extends Component {
      * @param c the collection of proteins to be added to the vector
      */
 
-    public void addProtein(Collection c){
+    public void addProtein(Collection c) {
         /**
          * copy all of the proteins passed to this object into its vector
          */
-	proteins.addAll( (Vector)(c) );
+        proteins.addAll((Vector) (c));
 
         /**
          * change the color of the Electro2D.IEFProtein based on the number of proteins
          * it now has
          */
-	if(proteins.size() < 10){
-	    myColor = colors[0];
-	}
-	else if(proteins.size() < 20){
-	    myColor = colors[1];
-	    }
-	else if(proteins.size() < 30){
-	    myColor = colors[2];
-	}
-	else if(proteins.size() < 40){
-	    myColor = colors[3];
-	}
-	else if(proteins.size() < 60){
-	    myColor = colors[4];
-	}
-	else{
-	    myColor = colors[5];
-	}
+        if (proteins.size() < 10) {
+            myColor = colors[0];
+        } else if (proteins.size() < 20) {
+            myColor = colors[1];
+        } else if (proteins.size() < 30) {
+            myColor = colors[2];
+        } else if (proteins.size() < 40) {
+            myColor = colors[3];
+        } else if (proteins.size() < 60) {
+            myColor = colors[4];
+        } else {
+            myColor = colors[5];
+        }
 
-	this.repaint();
+        this.repaint();
 
         /**
          * add the new protein names to the vector of names and set any
          * changes in the max or min pI values
          */
-	E2DProtein p = null;
-	double pi = 0;
-	for(int i = 0; i < ((Vector)c).size(); i++){
+        E2DProtein p = null;
+        double pi = 0;
+        for (int i = 0; i < ((Vector) c).size(); i++) {
 
-	    names.add(((E2DProtein)((Vector)c).elementAt(i)).toString());
+            names.add(((E2DProtein) ((Vector) c).elementAt(i)).toString());
 
-	    p = ((E2DProtein)((Vector)c).elementAt(i));
-	    pi = p.getPI();
+            p = ((E2DProtein) ((Vector) c).elementAt(i));
+            pi = p.getPI();
 
-	    if( pi > maxPi ){
-			maxPi = pi;
-	    }
-	    else if( pi < minPi ){
-			minPi = pi;
-	    }
-	}
+            if (pi > maxPi) {
+                maxPi = pi;
+            } else if (pi < minPi) {
+                minPi = pi;
+            }
+        }
 
-	myPi = (maxPi + minPi) / 2;
+        myPi = (maxPi + minPi) / 2;
 
     }
 
@@ -168,7 +160,7 @@ public class IEFProtein extends Component {
      */
 
     public int returnX() {
-	return myX;
+        return myX;
     }
 
     /**
@@ -176,8 +168,8 @@ public class IEFProtein extends Component {
      *
      * @return the Y coordinate of the protein
      */
-    public int returnY(){
-	return myY;
+    public int returnY() {
+        return myY;
     }
 
     /**
@@ -185,8 +177,8 @@ public class IEFProtein extends Component {
      *
      * @return the maximum pI value
      */
-    public double getMaxPI(){
-	return maxPi;
+    public double getMaxPI() {
+        return maxPi;
     }
 
     /**
@@ -194,8 +186,8 @@ public class IEFProtein extends Component {
      *
      * @return the minimum pI value
      */
-    public double getMinPI(){
-	return minPi;
+    public double getMinPI() {
+        return minPi;
     }
 
     /**
@@ -204,59 +196,59 @@ public class IEFProtein extends Component {
      *
      * @return proteins
      */
-    public Vector getProtein(){
+    public Vector getProtein() {
 
-	return proteins;
+        return proteins;
     }
 
     /**
      * changeWidth increments the width of the Electro2D.IEFProtein for the initial
      * animation.
      */
-    public static void changeWidth(){
+    public static void changeWidth() {
 
         /**
          * increase the width of the object by a 50th of its final width
          */
-	tempWidth = tempWidth + myWidth / 50;
+        tempWidth = tempWidth + myWidth / 50;
     }
 
     /**
      * changes the position of the object a 50th of the distance from its
      * final position.
      */
-    public void changeX(){
-	tempX = tempX + increments;
+    public void changeX() {
+        tempX = tempX + increments;
     }
 
     /**
      * Sets the tempX equal to the final X value for the end of the animation
      * of the IEF process
      */
-    public void setX(){
-	tempX = myX;
+    public void setX() {
+        tempX = myX;
     }
 
     /**
      * Sets the tempWidth equal to the final width for the end of the
      * animation of the IEF process
      */
-    public static void setWidth(){
-	tempWidth = myWidth;
+    public static void setWidth() {
+        tempWidth = myWidth;
     }
 
     /**
      * draw displays the Electro2D.IEFProtein as a rectangle on the screen
      */
-    public void draw( Graphics g ){
+    public void draw(Graphics g) {
 
-	myWidth = 563/100;
+        myWidth = 563 / 100;
 
-	//set the color to be drawn to the color of this Electro2D.IEFProtein
-	g.setColor( myColor );
+        //set the color to be drawn to the color of this Electro2D.IEFProtein
+        g.setColor(myColor);
 
-	//draw the rectangle to the screen
-	g.fillRect((int)tempX, myY, (int)tempWidth, myHeight);
+        //draw the rectangle to the screen
+        g.fillRect((int) tempX, myY, (int) tempWidth, myHeight);
 
     }
 
@@ -264,14 +256,14 @@ public class IEFProtein extends Component {
      * decreases the height of the protein for the beginning of the SDS-PAGE
      * animation
      */
-    public static void shrinkProtein(){
-	myHeight = myHeight - 2;
+    public static void shrinkProtein() {
+        myHeight = myHeight - 2;
 
         /**
          * shift the y coordinate down so it appears that the object is being
          * compressed
          */
-	myY = myY + 2;
+        myY = myY + 2;
     }
 
     /**
@@ -279,8 +271,8 @@ public class IEFProtein extends Component {
      *
      * @return current height of the object
      */
-    public static int returnHeight(){
-	return myHeight;
+    public static int returnHeight() {
+        return myHeight;
     }
 
     /**
@@ -288,8 +280,8 @@ public class IEFProtein extends Component {
      *
      * @return final width of this object
      */
-    public static double returnWidth(){
-	return myWidth;
+    public static double returnWidth() {
+        return myWidth;
     }
 
     /**
@@ -297,8 +289,8 @@ public class IEFProtein extends Component {
      *
      * @return current width of this object
      */
-    public static double returnTempWidth(){
-	return tempWidth;
+    public static double returnTempWidth() {
+        return tempWidth;
     }
 
     /**
@@ -306,17 +298,17 @@ public class IEFProtein extends Component {
      * tempWidth data member back to zero to prepare to draw the IEFProteins
      * again
      */
-    public static void resetTempWidth(){
-	tempWidth = 0;
+    public static void resetTempWidth() {
+        tempWidth = 0;
     }
 
     /**
      * This method is called when the reset button is pressed.  It sets the
      * height and y positions back to their original values
      */
-    public static void resetProtein(){
-	myHeight = 40;
-	myY = 5;
+    public static void resetProtein() {
+        myHeight = 40;
+        myY = 5;
     }
 
     /**
@@ -324,19 +316,19 @@ public class IEFProtein extends Component {
      *
      * @return vector of protein titles
      */
-    public Vector getNames(){
-	return names;
+    public Vector getNames() {
+        return names;
     }
 
     /**
      * sets maxpH equal to the maximum pH value and minpH to the minimum
      * pH value entered by the user for the IEF animation
      */
-    public static void setRange( double max, double min ){
-	maxpH = max;
-	minpH = min;
-	// calculate the final width
-	myWidth = 563/100;
+    public static void setRange(double max, double min) {
+        maxpH = max;
+        minpH = min;
+        // calculate the final width
+        myWidth = 563 / 100;
     }
 
 }

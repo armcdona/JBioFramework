@@ -1,7 +1,7 @@
 package Electro2D; /**
- *
  * @author Amanda Fisher
  */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,7 +12,7 @@ public class ProteinaseK extends Protease {
 
 
     public ProteinaseK() {
-        cutAminoAcids = new ArrayList<>(Arrays.asList('A','F','I','L','V','W','Y')); //ProteinaseK cuts at these proteins
+        cutAminoAcids = new ArrayList<>(Arrays.asList('A', 'F', 'I', 'L', 'V', 'W', 'Y')); //ProteinaseK cuts at these proteins
         cutsBefore = false;
     }
 

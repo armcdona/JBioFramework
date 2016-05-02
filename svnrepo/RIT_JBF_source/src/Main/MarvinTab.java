@@ -20,6 +20,7 @@ package Main;/*
  */
 
 //GUI compoents
+
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
@@ -44,33 +45,35 @@ public class MarvinTab extends JPanel {
     private static MSketchPane marvinPane;
 
     //unused textarea.
-    private JTextArea textare = new JTextArea(10,50);
+    private JTextArea textare = new JTextArea(10, 50);
 
     /**
      * construct the front-end JPanel for the main MarvinSketch application.
      * by creating and arranging the other components created by the methods
      * below.
+     *
+     * @return return the main panel
      */
     public JPanel createMainPanel() {
-	//main panel for application. contains topPanel.
+        //main panel for application. contains topPanel.
         JPanel mainPanel = new JPanel();
 
-          //top panel. contains sketchpanel.
-	  JPanel topPanel = new JPanel();
+        //top panel. contains sketchpanel.
+        JPanel topPanel = new JPanel();
 
-	    //sketchPanel. contains marvinPane.
-	    JPanel sketchPanel = new JPanel();
+        //sketchPanel. contains marvinPane.
+        JPanel sketchPanel = new JPanel();
 
-	    marvinPane = createSketchPane();
-            sketchPanel.add(marvinPane);
+        marvinPane = createSketchPane();
+        sketchPanel.add(marvinPane);
 
-          topPanel.add(sketchPanel);
+        topPanel.add(sketchPanel);
 
 
-	mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(topPanel);
 
-	return mainPanel;
+        return mainPanel;
     }
 
     /**
@@ -80,10 +83,10 @@ public class MarvinTab extends JPanel {
      */
     private MSketchPane createSketchPane() {
 
-	MSketchPane pane = new MSketchPane(createUserSettings());
-	pane.setPreferredSize(new Dimension(900, 500));
+        MSketchPane pane = new MSketchPane(createUserSettings());
+        pane.setPreferredSize(new Dimension(900, 500));
 
-	return pane;
+        return pane;
     }
 
     /**
@@ -96,15 +99,17 @@ public class MarvinTab extends JPanel {
                 this.getClass().getResourceAsStream("marvin.properties"));
         settings.setProperty(SketchParameterConstants.MENU_CUSTOMIZATION_FILE,
                 System.getProperty("user.dir") + "/src/customization.xml");
-	settings.setProperty(SketchParameterConstants.SHORTCUTS,
-	        System.getProperty("user.dir") + "/src/shortchuts.xml");
-	settings.setProperty(SketchParameterConstants.TOOLBAR_TEMPLATES + "20",
-	        ":specials:specialTemplates.mrv");
-	return settings;
+        settings.setProperty(SketchParameterConstants.SHORTCUTS,
+                System.getProperty("user.dir") + "/src/shortchuts.xml");
+        settings.setProperty(SketchParameterConstants.TOOLBAR_TEMPLATES + "20",
+                ":specials:specialTemplates.mrv");
+        return settings;
     }
 
     /**
      * returns the JPanel its constructed in traditional accessor format.
+     *
+     * @return returns the marvin sketch pane
      */
     public static MSketchPane getSketchPane() {
         return marvinPane;

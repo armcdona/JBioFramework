@@ -15,7 +15,7 @@ package utilities;/*
 
 /**
  * utilities.MessageFrame.java
- *
+ * <p>
  * This class encapsulates all the functionality required to pop up a frame
  * and display a message to the user.
  *
@@ -24,6 +24,7 @@ package utilities;/*
  */
 
 //GUI components
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -34,7 +35,9 @@ import java.awt.event.WindowEvent;
 
 public class MessageFrame extends JFrame {
 
- /** variables for the file reading pop-up frame **/
+    /**
+     * variables for the file reading pop-up frame
+     **/
 
     private JPanel panel;              //panel to add components to
     private JLabel label;              //label to display message on
@@ -46,45 +49,39 @@ public class MessageFrame extends JFrame {
     public MessageFrame() {
 
         //set the title to Alert
-	  super("Alert");
+        super("Alert");
 
-	//initialize components
-	  panel = new JPanel();          //init components
-	//position the message label to be centered in the frame
-	  label = new JLabel(theMessage, JLabel.CENTER);
+        //initialize components
+        panel = new JPanel();          //init components
+        //position the message label to be centered in the frame
+        label = new JLabel(theMessage, JLabel.CENTER);
 
-	// allow the user to close the frame
-	this.addWindowListener(new WindowAdapter() {
-		public void windowClosing(WindowEvent e) {
-		    dispose();
-		}
-	    });
+        // allow the user to close the frame
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
 
-	// set the sizes of the frame and its components
-	this.setBounds(20,140,600,100);
-	panel.setBounds(0,0,600,100);
-	label.setBounds(0,0,600,100);
+        // set the sizes of the frame and its components
+        this.setBounds(20, 140, 600, 100);
+        panel.setBounds(0, 0, 600, 100);
+        label.setBounds(0, 0, 600, 100);
 
-	//add the components
-	this.add(panel);
-	panel.add(label);
+        //add the components
+        this.add(panel);
+        panel.add(label);
 
         super.setVisible(true);
     }
 
     //set the message
     public void setMessage(String message) {
-	theMessage = message;
-	label.setText(theMessage);
+        theMessage = message;
+        label.setText(theMessage);
     }
 
-    /**
-     * simple unittest for functionality
-     */
-    public static void main(String[] args){
-	MessageFrame mFrameTest = new MessageFrame();
-    }
-}//utilities.MessageFrame
+}
 
 
 

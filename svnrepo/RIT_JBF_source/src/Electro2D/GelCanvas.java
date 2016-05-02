@@ -90,10 +90,10 @@ public class GelCanvas extends JPanel implements MouseListener {
      * enough space to allow the user to easily see its display.
      *
      * @return the dimension object used by the JFrame to allocate the space for
-     *         the component
+     * the component
      */
     public Dimension getMinimiumSize() {
-         return new Dimension(800, electro2D.getHeight());
+        return new Dimension(800, electro2D.getHeight());
     }
 
 
@@ -112,19 +112,19 @@ public class GelCanvas extends JPanel implements MouseListener {
          * Set up the static variables in Electro2D.IEFProtein so it knows the pH range
          */
         maxPH = electro2D.getMaxRange();
-	minPH = electro2D.getMinRange();
-	IEFProtein.setRange(maxPH, minPH);
+        minPH = electro2D.getMinRange();
+        IEFProtein.setRange(maxPH, minPH);
 
         /**
          * Create the Electro2D.CompIEF object that later will help sort the proteins
          */
-       comp = new CompIEF( maxPH, minPH );
+        comp = new CompIEF(maxPH, minPH);
 
-       /**
-        * Call the next method, which will handle setting up the barProtein
-        * vector
-        */
-       fillBarProteinVector();
+        /**
+         * Call the next method, which will handle setting up the barProtein
+         * vector
+         */
+        fillBarProteinVector();
     }
 
     public void fillBarProteinVector() {
@@ -133,25 +133,25 @@ public class GelCanvas extends JPanel implements MouseListener {
          * into local variable vectors.
          */
         Vector sequenceTitles = electro2D.getSequenceTitles();
-	Vector molecularWeights = electro2D.getMolecularWeights();
-	Vector pIValues = electro2D.getPiValues();
-	Vector sequences = electro2D.getSequences();
-	Vector functions = electro2D.getFunctions();
+        Vector molecularWeights = electro2D.getMolecularWeights();
+        Vector pIValues = electro2D.getPiValues();
+        Vector sequences = electro2D.getSequences();
+        Vector functions = electro2D.getFunctions();
 
         /**
          * Fill up the barProteins vector
          */
-        for(int i = 0; i < sequenceTitles.size(); i++) {
+        for (int i = 0; i < sequenceTitles.size(); i++) {
 
-	    barProteins.addElement(new IEFProtein(new E2DProtein(
-				((String)sequenceTitles.elementAt(i)),
-				((Double.valueOf(
-				(String)molecularWeights.elementAt(i)))).doubleValue(),
-			        ((Double.valueOf(
-    			        (String)pIValues.elementAt(i)))).doubleValue(),
-				(String)sequences.elementAt(i),
-				(String)functions.elementAt(i)), this));
-	}
+            barProteins.addElement(new IEFProtein(new E2DProtein(
+                    ((String) sequenceTitles.elementAt(i)),
+                    ((Double.valueOf(
+                            (String) molecularWeights.elementAt(i)))).doubleValue(),
+                    ((Double.valueOf(
+                            (String) pIValues.elementAt(i)))).doubleValue(),
+                    (String) sequences.elementAt(i),
+                    (String) functions.elementAt(i)), this));
+        }
 
         /**
          * Call the next method, which will sort the elements in barProteins
@@ -169,18 +169,18 @@ public class GelCanvas extends JPanel implements MouseListener {
          * The for loops start out with their iterators at -1 the length of
          * barProteins so that they can access their elements in order correctly
          */
-	for(int i = barProteins.size() - 1; i >= 0; i--) {
-	    for(int j = i-1; j >= 0; j--) {
-		if(comp.compare((IEFProtein)barProteins.elementAt(i),
-		(IEFProtein)barProteins.elementAt(j)) == 0) {
-                    ((IEFProtein)(barProteins.elementAt(i))).addProtein(
-                    ((IEFProtein)(barProteins.elementAt(j))).getProtein());
+        for (int i = barProteins.size() - 1; i >= 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (comp.compare((IEFProtein) barProteins.elementAt(i),
+                        (IEFProtein) barProteins.elementAt(j)) == 0) {
+                    ((IEFProtein) (barProteins.elementAt(i))).addProtein(
+                            ((IEFProtein) (barProteins.elementAt(j))).getProtein());
                     barProteins.remove(j);
-		    i--;
-		    j = i;
-		}
-	    }
-	}
+                    i--;
+                    j = i;
+                }
+            }
+        }
 
         /**
          * call the next method, makeDotProteins(), which will convert the bar
@@ -198,26 +198,26 @@ public class GelCanvas extends JPanel implements MouseListener {
          * were represented by each bar in the last animation
          */
         Vector tempProteins = new Vector();
-	double tempx = 0;
-	double tempy = 0;
-	for(int i = 0; i < barProteins.size(); i++) {
+        double tempx = 0;
+        double tempy = 0;
+        for (int i = 0; i < barProteins.size(); i++) {
 
             /**
              * retrieve the coordinates and proteins of each bar protein
              */
-	    tempx = ((IEFProtein)(barProteins.elementAt(i))).returnX();
-	    tempy = ((IEFProtein)(barProteins.elementAt(i))).returnY();
-	    tempProteins = ((IEFProtein)(barProteins.elementAt(i))).getProtein();
-	    for(int j = 0; j < tempProteins.size(); j++) {
+            tempx = ((IEFProtein) (barProteins.elementAt(i))).returnX();
+            tempy = ((IEFProtein) (barProteins.elementAt(i))).returnY();
+            tempProteins = ((IEFProtein) (barProteins.elementAt(i))).getProtein();
+            for (int j = 0; j < tempProteins.size(); j++) {
                 /**
                  * make a protein dot animation for each protein contained in
                  * the bar proteins
                  */
-		dotProteins.addElement(new ProteinDot(
-		      ((E2DProtein)(tempProteins.elementAt(j))), this, tempx,
-						tempy + 43));
-	    }
-	    tempProteins.removeAllElements();
+                dotProteins.addElement(new ProteinDot(
+                        ((E2DProtein) (tempProteins.elementAt(j))), this, tempx,
+                        tempy + 43));
+            }
+            tempProteins.removeAllElements();
         }
     }
 
@@ -231,26 +231,26 @@ public class GelCanvas extends JPanel implements MouseListener {
      * collection of proteins.
      */
     public void prepare2() {
-	Vector sequenceTitles2 = electro2D.getSequenceTitles2();
-	Vector molecularWeights2 = electro2D.getMolecularWeights2();
-	Vector pIValues2 = electro2D.getPiValues2();
+        Vector sequenceTitles2 = electro2D.getSequenceTitles2();
+        Vector molecularWeights2 = electro2D.getMolecularWeights2();
+        Vector pIValues2 = electro2D.getPiValues2();
         Vector sequences2 = electro2D.getSequences2();
-	Vector functions2 = electro2D.getFunctions2();
+        Vector functions2 = electro2D.getFunctions2();
 
         barProteins2 = new Vector();
-	dotProteins2 = new Vector();
+        dotProteins2 = new Vector();
 
         /**
          * compare the sequences of the second file to the sequences of
          * the proteins in the first file
          */
-        for(int i = dotProteins.size() - 1; i >= 0; i--) {
-	    /**
+        for (int i = dotProteins.size() - 1; i >= 0; i--) {
+            /**
              * color the proteins in the first file red
              */
-	    ((ProteinDot)dotProteins.elementAt(i)).changeColor(Color.red);
-	    String tempSequence = ((ProteinDot)dotProteins.elementAt(i)).getPro().getSequence();
-	    for(int j = sequences2.size() - 1; j >= 0; j--) {
+            ((ProteinDot) dotProteins.elementAt(i)).changeColor(Color.red);
+            String tempSequence = ((ProteinDot) dotProteins.elementAt(i)).getPro().getSequence();
+            for (int j = sequences2.size() - 1; j >= 0; j--) {
 
                 /**
                  * if the sequences match, remove the sequence and its
@@ -258,16 +258,16 @@ public class GelCanvas extends JPanel implements MouseListener {
                  * info and color the protein green in the vector of proteins
                  * from the first file
                  */
-		if(((String)sequences2.elementAt(j)).equals(tempSequence)){
+                if (((String) sequences2.elementAt(j)).equals(tempSequence)) {
                     sequences2.remove(j);
-		    sequenceTitles2.remove(j);
-		    molecularWeights2.remove(j);
-		    pIValues2.remove(j);
-		    functions2.remove(j);
-		    ((ProteinDot)dotProteins.elementAt(i)).changeColor(Color.green);
-		    break;
-		}
-	    }
+                    sequenceTitles2.remove(j);
+                    molecularWeights2.remove(j);
+                    pIValues2.remove(j);
+                    functions2.remove(j);
+                    ((ProteinDot) dotProteins.elementAt(i)).changeColor(Color.green);
+                    break;
+                }
+            }
         }
 
         /**
@@ -275,18 +275,18 @@ public class GelCanvas extends JPanel implements MouseListener {
          * that didn't match the proteins in the first list so that their
          * positions on the gel field can later be determined
          */
-        for(int i = 0; i < sequences2.size(); i++) {
+        for (int i = 0; i < sequences2.size(); i++) {
 
-	    barProteins2.addElement(new IEFProtein(new E2DProtein(
-				((String)sequenceTitles2.elementAt(i)),
-				((Double.valueOf(
-				(String)molecularWeights2.elementAt(i)))).doubleValue(),
-			        ((Double.valueOf(
-			       (String)pIValues2.elementAt(i)))).doubleValue(),
-				(String)sequences2.elementAt(i),
-				(String)functions2.elementAt(i)), this));
+            barProteins2.addElement(new IEFProtein(new E2DProtein(
+                    ((String) sequenceTitles2.elementAt(i)),
+                    ((Double.valueOf(
+                            (String) molecularWeights2.elementAt(i)))).doubleValue(),
+                    ((Double.valueOf(
+                            (String) pIValues2.elementAt(i)))).doubleValue(),
+                    (String) sequences2.elementAt(i),
+                    (String) functions2.elementAt(i)), this));
 
-	}
+        }
 
         /**
          * Convert the bar proteins into dot proteins and color them all yellow
@@ -297,12 +297,12 @@ public class GelCanvas extends JPanel implements MouseListener {
         int tempy;
         Vector tempProteins;
         ProteinDot tempDot;
-        for(int i = 0; i < barProteins2.size(); i++) {
-            tempx = ((IEFProtein)barProteins2.elementAt(i)).returnX();
-            tempy = ((IEFProtein)barProteins2.elementAt(i)).returnY();
-            tempProteins = ((IEFProtein)barProteins2.elementAt(i)).getProtein();
+        for (int i = 0; i < barProteins2.size(); i++) {
+            tempx = ((IEFProtein) barProteins2.elementAt(i)).returnX();
+            tempy = ((IEFProtein) barProteins2.elementAt(i)).returnY();
+            tempProteins = ((IEFProtein) barProteins2.elementAt(i)).getProtein();
 
-            tempDot = new ProteinDot((E2DProtein)tempProteins.elementAt(0), this, tempx, tempy + 43);
+            tempDot = new ProteinDot((E2DProtein) tempProteins.elementAt(0), this, tempx, tempy + 43);
             tempDot.changeColor(Color.yellow);
             dotProteins2.addElement(tempDot);
         }
@@ -326,14 +326,14 @@ public class GelCanvas extends JPanel implements MouseListener {
          * on it we can transfer what we've drawn to the actual area that the
          * user can see. This reduces flickering.
          */
-        if(gelCanvasRectangle == null || bufferImage == null || bufferImageGraphics == null) {
-	    gelCanvasRectangle = getBounds();
-	    bufferImage = this.createImage(gelCanvasRectangle.width, gelCanvasRectangle.height);
-	    bufferImageGraphics = bufferImage.getGraphics();
+        if (gelCanvasRectangle == null || bufferImage == null || bufferImageGraphics == null) {
+            gelCanvasRectangle = getBounds();
+            bufferImage = this.createImage(gelCanvasRectangle.width, gelCanvasRectangle.height);
+            bufferImageGraphics = bufferImage.getGraphics();
             bufferImageGraphics.setColor(Color.BLACK);
             bufferImageGraphics.fillRect(0, 0, gelCanvasRectangle.width - 1, gelCanvasRectangle.height - 1);
 
-	}
+        }
 
         /**
          * Next we check to see if it's time to draw the pH lines by finding if
@@ -342,19 +342,19 @@ public class GelCanvas extends JPanel implements MouseListener {
          * see if the Line boolean indicates that the lines have already been
          * drawn.
          */
-      	if(maxPH != -1 && minPH != -1 && pHLinesNeedToBeDrawn) {
-	    drawPHLines();
-	}
+        if (maxPH != -1 && minPH != -1 && pHLinesNeedToBeDrawn) {
+            drawPHLines();
+        }
 
         /**
          * Check to see if the SDS animation has been run, and if it has
          * draw the lines for molecular weight.
          */
-     	if(mWLinesNeedToBeDrawn) {
-	    initiateMWLines();
-	    mWLinesNeedToBeDrawn = false;
-	    redrawPHAndMWLines = true;
-	} else if (redrawPHAndMWLines) {
+        if (mWLinesNeedToBeDrawn) {
+            initiateMWLines();
+            mWLinesNeedToBeDrawn = false;
+            redrawPHAndMWLines = true;
+        } else if (redrawPHAndMWLines) {
             drawPHLines();
             redoMWLines();
         }
@@ -375,9 +375,9 @@ public class GelCanvas extends JPanel implements MouseListener {
          * image itself but only 46 pixals tall.
          * Then we copy it all over to our canvas.
          */
-	bufferImageGraphics.setColor( Color.RED);
-	bufferImageGraphics.drawRect(0,0,gelCanvasRectangle.width-1,gelCanvasRectangle.height-1);
-	bufferImageGraphics.drawRect( 1, 1, gelCanvasRectangle.width - 3, 46 );
+        bufferImageGraphics.setColor(Color.RED);
+        bufferImageGraphics.drawRect(0, 0, gelCanvasRectangle.width - 1, gelCanvasRectangle.height - 1);
+        bufferImageGraphics.drawRect(1, 1, gelCanvasRectangle.width - 3, 46);
         graphic.drawImage(bufferImage, 0, 0, this);
     }
 
@@ -397,36 +397,36 @@ public class GelCanvas extends JPanel implements MouseListener {
 
         // First, clear off any dots left over from the last animation
         bufferImageGraphics.setColor(Color.BLACK);//trying to turn canvas black
-	bufferImageGraphics.clearRect(1, 48, gelCanvasRectangle.width - 2, gelCanvasRectangle.height - 49);
+        bufferImageGraphics.clearRect(1, 48, gelCanvasRectangle.width - 2, gelCanvasRectangle.height - 49);
         bufferImageGraphics.fillRect(1, 48, gelCanvasRectangle.width - 2, gelCanvasRectangle.height - 49); //trying to turn canvas black
         bufferImageGraphics.setColor(Color.RED);//trying to turn canvas black
         bufferImageGraphics.drawRect(1, 48, gelCanvasRectangle.width - 2, gelCanvasRectangle.height - 49);
         // Then, draw the protein dots
-        for(int i = 0; i < dotProteins.size(); i++) {
-	    ((ProteinDot)(dotProteins.elementAt(i))).draw(bufferImageGraphics);
+        for (int i = 0; i < dotProteins.size(); i++) {
+            ((ProteinDot) (dotProteins.elementAt(i))).draw(bufferImageGraphics);
         }
 
-	for(int i = 0; i < dotProteins2.size(); i++) {
-            ((ProteinDot)(dotProteins2.elementAt(i))).draw(bufferImageGraphics);
-	}
+        for (int i = 0; i < dotProteins2.size(); i++) {
+            ((ProteinDot) (dotProteins2.elementAt(i))).draw(bufferImageGraphics);
+        }
 
         // update the background
-	if(mWLinesNeedToBeDrawn && tenK != 48) {
-	    redoMWLines();
-	    drawPHLines();
-	}
+        if (mWLinesNeedToBeDrawn && tenK != 48) {
+            redoMWLines();
+            drawPHLines();
+        }
 
         // transfer the buffer image to the real canvas
-	g.drawImage(bufferImage, 0, 0, this);
-	paint(g);
+        g.drawImage(bufferImage, 0, 0, this);
+        paint(g);
     }
 
     /**
      * This method is used to generate GIF files for when the user is not
      * viewing the gel canvas.
-     * 
+     *
      * @param dts     The vector of dots to create an image of.
-     * @param seconds Used in writing the file that stores the image. 
+     * @param seconds Used in writing the file that stores the image.
      */
     public void genGIFFile(Vector dts, int seconds) {
         ProteinDot.setShow();
@@ -437,10 +437,10 @@ public class GelCanvas extends JPanel implements MouseListener {
         this.repaint();
         try {
             GIFEncoder gifEnc = new GIFEncoder(bufferImage);
-	    gifEnc.Write(new BufferedOutputStream(new FileOutputStream(electro2D.getLastFileLoaded() + seconds + ".gif")));
-        } catch(IOException ex) {
+            gifEnc.Write(new BufferedOutputStream(new FileOutputStream(electro2D.getLastFileLoaded() + seconds + ".gif")));
+        } catch (IOException ex) {
             System.err.println(ex.getMessage());
-        } catch(AWTException ex) {
+        } catch (AWTException ex) {
             System.err.println(ex.getMessage());
         }
     }
@@ -451,7 +451,7 @@ public class GelCanvas extends JPanel implements MouseListener {
      * @return graphic
      */
     public Graphics getGraphic() {
-	return graphic;
+        return graphic;
     }
 
     /**
@@ -461,28 +461,28 @@ public class GelCanvas extends JPanel implements MouseListener {
     public void drawPHLines() {
         ArrayList<Integer> linePositions = electro2D.showPH();
 
-	int length = 0;
-	int loc = 0;
+        int length = 0;
+        int loc = 0;
         int offset = (this.getTopLevelAncestor().getWidth() - this.getWidth() - 25);
-	bufferImageGraphics.setColor(Color.WHITE);
+        bufferImageGraphics.setColor(Color.WHITE);
 
         /**
          * Loop through each integer that's in the range between the minPH
          * and the maxPH and use that integer to figure out the starting point
          * for the line. Then draw a dotted line down the length of the canvas.
          */
-	for(int i = 0; i < linePositions.size()-1; i++) {
+        for (int i = 0; i < linePositions.size() - 1; i++) {
             length = 0;
             loc = linePositions.get(i) - 24;
-            if(loc > 0 && loc < getWidth()) {
-                while(length < this.getHeight()) {
+            if (loc > 0 && loc < getWidth()) {
+                while (length < this.getHeight()) {
                     bufferImageGraphics.drawLine(loc, length, loc, length + 5);
                     length = length + 10;
                 }
             }
         }
 
-	pHLinesNeedToBeDrawn = false;
+        pHLinesNeedToBeDrawn = false;
     }
 
     /**
@@ -490,8 +490,8 @@ public class GelCanvas extends JPanel implements MouseListener {
      * molecular weight lines.
      */
     public void setreLine() {
-	pHLinesNeedToBeDrawn = true;
-	redrawPHAndMWLines = false;
+        pHLinesNeedToBeDrawn = true;
+        redrawPHAndMWLines = false;
     }
 
     /**
@@ -499,8 +499,8 @@ public class GelCanvas extends JPanel implements MouseListener {
      * lines shouldn't be redrawn.
      */
     public void resetReLine() {
-	pHLinesNeedToBeDrawn = false;
-	redrawPHAndMWLines = false;
+        pHLinesNeedToBeDrawn = false;
+        redrawPHAndMWLines = false;
     }
 
     /**
@@ -511,8 +511,8 @@ public class GelCanvas extends JPanel implements MouseListener {
         minPH = -1;
         maxPH = -1;
         tenK = 48;
-	twentyfiveK = 48;
-	fiftyK = 48;
+        twentyfiveK = 48;
+        fiftyK = 48;
         hundredK = 48;
         reMWLabel = false;
         calculateMW = true;
@@ -527,7 +527,7 @@ public class GelCanvas extends JPanel implements MouseListener {
      *
      * @param i Number of times the genDots() method was called.
      */
-    public void setMWLines(int i){
+    public void setMWLines(int i) {
         mWLinesNeedToBeDrawn = true;
         calculateMW = true;
         genDotsRepeats = i;
@@ -542,20 +542,20 @@ public class GelCanvas extends JPanel implements MouseListener {
         highAcrylamide = electro2D.getHighPercent();
         int height = this.getHeight();
 
-        if(calculateMW) {
-            if(lowAcrylamide == highAcrylamide) {
-                for(int i = 0; i < genDotsRepeats; i++) {
-                    hundredK = hundredK + (10 * (1/lowAcrylamide)) * (VOLTAGE/25) * .25 * (100000/100000);
-                    fiftyK = fiftyK + (10 * (1/lowAcrylamide)) * (VOLTAGE/25) * .25 * (100000/50000);
-                    twentyfiveK = twentyfiveK + (10 * (1/lowAcrylamide)) * (VOLTAGE/25) * .25 * (100000/25000);
-                    tenK = tenK + (10 * (1/lowAcrylamide)) * (VOLTAGE/25) * .25 * (100000/10000);
+        if (calculateMW) {
+            if (lowAcrylamide == highAcrylamide) {
+                for (int i = 0; i < genDotsRepeats; i++) {
+                    hundredK = hundredK + (10 * (1 / lowAcrylamide)) * (VOLTAGE / 25) * .25 * (100000 / 100000);
+                    fiftyK = fiftyK + (10 * (1 / lowAcrylamide)) * (VOLTAGE / 25) * .25 * (100000 / 50000);
+                    twentyfiveK = twentyfiveK + (10 * (1 / lowAcrylamide)) * (VOLTAGE / 25) * .25 * (100000 / 25000);
+                    tenK = tenK + (10 * (1 / lowAcrylamide)) * (VOLTAGE / 25) * .25 * (100000 / 10000);
                 }
             } else {
-                for(int i = 0; i < genDotsRepeats; i++) {
-                    hundredK = hundredK + (10 * 1/(((hundredK - 48) * (highAcrylamide - lowAcrylamide)/(height - 48))+lowAcrylamide)) * (VOLTAGE/25)* .25 * (100000/100000);
-                    fiftyK = fiftyK + (10 * 1/(((fiftyK - 48) * (highAcrylamide - lowAcrylamide)/(height - 48))+ lowAcrylamide)) * (VOLTAGE/25) * .25 * (100000/50000);
-                    twentyfiveK = twentyfiveK + (10 * 1/(((twentyfiveK - 48) * (highAcrylamide - lowAcrylamide)/(height - 48))+ lowAcrylamide)) * (VOLTAGE/25) * .25 * (100000/25000);
-                    tenK = tenK + (10 * 1/(((tenK - 48)*(highAcrylamide - lowAcrylamide)/(height - 48)) + lowAcrylamide)) * (VOLTAGE/25) * .25 * (100000/10000);
+                for (int i = 0; i < genDotsRepeats; i++) {
+                    hundredK = hundredK + (10 * 1 / (((hundredK - 48) * (highAcrylamide - lowAcrylamide) / (height - 48)) + lowAcrylamide)) * (VOLTAGE / 25) * .25 * (100000 / 100000);
+                    fiftyK = fiftyK + (10 * 1 / (((fiftyK - 48) * (highAcrylamide - lowAcrylamide) / (height - 48)) + lowAcrylamide)) * (VOLTAGE / 25) * .25 * (100000 / 50000);
+                    twentyfiveK = twentyfiveK + (10 * 1 / (((twentyfiveK - 48) * (highAcrylamide - lowAcrylamide) / (height - 48)) + lowAcrylamide)) * (VOLTAGE / 25) * .25 * (100000 / 25000);
+                    tenK = tenK + (10 * 1 / (((tenK - 48) * (highAcrylamide - lowAcrylamide) / (height - 48)) + lowAcrylamide)) * (VOLTAGE / 25) * .25 * (100000 / 10000);
                 }
             }
 
@@ -564,15 +564,15 @@ public class GelCanvas extends JPanel implements MouseListener {
             bufferImageGraphics.setColor(Color.LIGHT_GRAY);
 
             while (width < this.getWidth()) {
-                bufferImageGraphics.drawLine(width, (int)hundredK, width + 5, (int)hundredK);
-                bufferImageGraphics.drawLine(width, (int)fiftyK, width + 5, (int)fiftyK);
-                bufferImageGraphics.drawLine(width, (int)twentyfiveK, width + 5, (int)twentyfiveK);
-                bufferImageGraphics.drawLine(width, (int)tenK, width + 5, (int)tenK);
+                bufferImageGraphics.drawLine(width, (int) hundredK, width + 5, (int) hundredK);
+                bufferImageGraphics.drawLine(width, (int) fiftyK, width + 5, (int) fiftyK);
+                bufferImageGraphics.drawLine(width, (int) twentyfiveK, width + 5, (int) twentyfiveK);
+                bufferImageGraphics.drawLine(width, (int) tenK, width + 5, (int) tenK);
                 width = width + 10;
             }
 
             electro2D.clearMW();
-            electro2D.showMW((int)hundredK, (int)fiftyK, (int)twentyfiveK, (int)tenK, reMWLabel);
+            electro2D.showMW((int) hundredK, (int) fiftyK, (int) twentyfiveK, (int) tenK, reMWLabel);
             reMWLabel = true;
             graphic.drawImage(bufferImage, 0, 0, this);
         }
@@ -589,16 +589,16 @@ public class GelCanvas extends JPanel implements MouseListener {
         int width = 0;
         bufferImageGraphics.setColor(Color.WHITE);
 
-        while(width < this.getWidth()) {
-            bufferImageGraphics.drawLine(width, (int)hundredK, width + 5, (int)hundredK);
-            bufferImageGraphics.drawLine(width, (int)fiftyK, width + 5, (int)fiftyK);
-            bufferImageGraphics.drawLine(width, (int)twentyfiveK, width + 5, (int)twentyfiveK);
-            bufferImageGraphics.drawLine(width, (int)tenK, width + 5, (int)tenK);
+        while (width < this.getWidth()) {
+            bufferImageGraphics.drawLine(width, (int) hundredK, width + 5, (int) hundredK);
+            bufferImageGraphics.drawLine(width, (int) fiftyK, width + 5, (int) fiftyK);
+            bufferImageGraphics.drawLine(width, (int) twentyfiveK, width + 5, (int) twentyfiveK);
+            bufferImageGraphics.drawLine(width, (int) tenK, width + 5, (int) tenK);
             width = width + 10;
         }
 
         electro2D.clearMW();
-    	electro2D.showMW((int)hundredK, (int)fiftyK, (int)twentyfiveK, (int)tenK, reMWLabel);
+        electro2D.showMW((int) hundredK, (int) fiftyK, (int) twentyfiveK, (int) tenK, reMWLabel);
         reMWLabel = true;
     }
 
@@ -607,23 +607,23 @@ public class GelCanvas extends JPanel implements MouseListener {
      * the top of the animation, to the screen.
      */
     public void drawIEF() {
-        for(int i = 0; i < barProteins.size(); i++){
-            if(barProteinsStillMoving) {
-                ((IEFProtein)barProteins.elementAt(i)).changeX();
+        for (int i = 0; i < barProteins.size(); i++) {
+            if (barProteinsStillMoving) {
+                ((IEFProtein) barProteins.elementAt(i)).changeX();
             } else {
-                ((IEFProtein)barProteins.elementAt(i)).setX();
+                ((IEFProtein) barProteins.elementAt(i)).setX();
             }
-            ((IEFProtein)(barProteins.elementAt(i))).draw(bufferImageGraphics);
+            ((IEFProtein) (barProteins.elementAt(i))).draw(bufferImageGraphics);
         }
 
-        if(barProteins2 != null && barProteins2.size() > 0) {
-            for(int i = 0; i < barProteins2.size(); i++){
-                if(barProteinsStillMoving) {
-                    ((IEFProtein)barProteins2.elementAt(i)).changeX();
+        if (barProteins2 != null && barProteins2.size() > 0) {
+            for (int i = 0; i < barProteins2.size(); i++) {
+                if (barProteinsStillMoving) {
+                    ((IEFProtein) barProteins2.elementAt(i)).changeX();
                 } else {
-                    ((IEFProtein)barProteins2.elementAt(i)).setX();
-               }
-                ((IEFProtein)(barProteins2.elementAt(i))).draw(bufferImageGraphics);
+                    ((IEFProtein) barProteins2.elementAt(i)).setX();
+                }
+                ((IEFProtein) (barProteins2.elementAt(i))).draw(bufferImageGraphics);
             }
         }
 
@@ -712,24 +712,24 @@ public class GelCanvas extends JPanel implements MouseListener {
         int finalBlue = 0;
 
         double width = IEFProtein.returnTempWidth();
-	double finalWidth = IEFProtein.returnWidth();
+        double finalWidth = IEFProtein.returnWidth();
 
         bufferImageGraphics.setColor(new Color(iefRed, iefGreen, iefBlue));
-	bufferImageGraphics.fillRect(2, 2, gelCanvasRectangle.width - 3, 45);
+        bufferImageGraphics.fillRect(2, 2, gelCanvasRectangle.width - 3, 45);
 
         IEFProtein.changeWidth();
-	drawIEF();
+        drawIEF();
 
         iefRed = iefRed - 1;
-	iefGreen = iefGreen - 2;
-	iefBlue = (int)(iefBlue - 2.78);
+        iefGreen = iefGreen - 2;
+        iefBlue = (int) (iefBlue - 2.78);
 
-        if(iefRed <= finalRed || iefGreen <= finalGreen || iefBlue <= finalBlue || width >= finalWidth) {
+        if (iefRed <= finalRed || iefGreen <= finalGreen || iefBlue <= finalBlue || width >= finalWidth) {
             barProteinsStillMoving = false;
             bufferImageGraphics.setColor(new Color(finalRed, finalGreen, finalBlue));
             IEFProtein.setWidth();
             bufferImageGraphics.fillRect(2, 2, gelCanvasRectangle.width - 3, 45);
-	    drawIEF();
+            drawIEF();
         }
     }
 
@@ -758,13 +758,13 @@ public class GelCanvas extends JPanel implements MouseListener {
     public void genDots() {
         clearCanvas();
 
-        for(int i = 0; i < dotProteins.size(); i++) {
-            ((ProteinDot)(dotProteins.elementAt(i))).changeY();
+        for (int i = 0; i < dotProteins.size(); i++) {
+            ((ProteinDot) (dotProteins.elementAt(i))).changeY();
         }
-        if(dotProteins2 != null) {
-      	    for(int j = 0; j < dotProteins2.size(); j++) {
-		((ProteinDot)(dotProteins2.elementAt(j))).changeY();
-	    }
+        if (dotProteins2 != null) {
+            for (int j = 0; j < dotProteins2.size(); j++) {
+                ((ProteinDot) (dotProteins2.elementAt(j))).changeY();
+            }
         }
         repaint();
     }
@@ -778,17 +778,17 @@ public class GelCanvas extends JPanel implements MouseListener {
         dotProteins = null;
         barProteins2 = null;
         dotProteins2 = null;
- /**       for(int i = 0; i < dotProteins.size(); i++) {
-	    ((Electro2D.ProteinDot)(dotProteins.elementAt(i))).restart();
-	}
-        if(dotProteins2 != null) {
-            for(int i = 0; i < dotProteins2.size(); i++) {
-    	    ((Electro2D.ProteinDot)(dotProteins2.elementAt(i))).restart();
-            }
-        }
-**/
+        /**       for(int i = 0; i < dotProteins.size(); i++) {
+         ((Electro2D.ProteinDot)(dotProteins.elementAt(i))).restart();
+         }
+         if(dotProteins2 != null) {
+         for(int i = 0; i < dotProteins2.size(); i++) {
+         ((Electro2D.ProteinDot)(dotProteins2.elementAt(i))).restart();
+         }
+         }
+         **/
         update(graphic);
-	repaint();
+        repaint();
     }
 
     /**
@@ -814,10 +814,10 @@ public class GelCanvas extends JPanel implements MouseListener {
         yLoc = 0;
         bufferImageGraphics.setColor(Color.BLACK);
         bufferImageGraphics.fillRect(2, 2, gelCanvasRectangle.width - 4, 45);
-        for(int i = 0; i < dotProteins.size(); i++) {
-            if((((ProteinDot)dotProteins.elementAt(i)).getPro().getID()).equals(id)) {
-                xLoc = ((ProteinDot)dotProteins.elementAt(i)).returnX();
-		yLoc = ((ProteinDot)dotProteins.elementAt(i)).returnY();
+        for (int i = 0; i < dotProteins.size(); i++) {
+            if ((((ProteinDot) dotProteins.elementAt(i)).getPro().getID()).equals(id)) {
+                xLoc = ((ProteinDot) dotProteins.elementAt(i)).returnX();
+                yLoc = ((ProteinDot) dotProteins.elementAt(i)).returnY();
                 i = dotProteins.size();
             }
         }
@@ -844,33 +844,33 @@ public class GelCanvas extends JPanel implements MouseListener {
     /**
      * Sets blink to false.
      */
-     public static void stopBlink() {
-         blink = false;
-     }
-
-     /**
-      * This method draws the location of a protein to the screen using its 
-      * xLoc and yLoc values.
-      */
-     public void redrawLocation() {
-	bufferImageGraphics.setColor(Color.LIGHT_GRAY);
-	bufferImageGraphics.drawLine((int)xLoc+2, (int)yLoc, 0, (int)yLoc);
-	bufferImageGraphics.drawLine((int)xLoc+2, (int)yLoc, (int)xLoc+2, 0);
-     }
-
-     /**
-      * Called during reset, sets indicateProteinPosition to false.
-      */
-     public void resetLocation(){
-	indicateProteinPosition = false;
+    public static void stopBlink() {
+        blink = false;
     }
 
-     /**
-      * Mouse listener event, called when the user presses down on the mouse.
-      * Used to select many proteins.
-      *
-      * @param e used to return the x and y location of the event
-      */
+    /**
+     * This method draws the location of a protein to the screen using its
+     * xLoc and yLoc values.
+     */
+    public void redrawLocation() {
+        bufferImageGraphics.setColor(Color.LIGHT_GRAY);
+        bufferImageGraphics.drawLine((int) xLoc + 2, (int) yLoc, 0, (int) yLoc);
+        bufferImageGraphics.drawLine((int) xLoc + 2, (int) yLoc, (int) xLoc + 2, 0);
+    }
+
+    /**
+     * Called during reset, sets indicateProteinPosition to false.
+     */
+    public void resetLocation() {
+        indicateProteinPosition = false;
+    }
+
+    /**
+     * Mouse listener event, called when the user presses down on the mouse.
+     * Used to select many proteins.
+     *
+     * @param e used to return the x and y location of the event
+     */
     public void mousePressed(MouseEvent e) {
     }
 
@@ -882,37 +882,37 @@ public class GelCanvas extends JPanel implements MouseListener {
      * @param e used to find where the user released the mouse
      */
     public void mouseReleased(MouseEvent e) {
-   /**     if (mousePress) {
-            stopX = e.getX();
-            stopY = e.getY();
-	    if(startX != stopX && stopX > startX + 5) {
-                if(startY != stopY && stopY > startY + 5) {
-                    Vector bigDot = new Vector();
-                    Electro2D.ProteinDot theDot = null;
-                    double diameter = Electro2D.ProteinDot.getDiameter();
-                    for(int i = 0; i < dotProteins.size(); i++) {
-                        theDot = (Electro2D.ProteinDot)dotProteins.get(i);
-                        if((theDot.returnX() + diameter >= startX) && (theDot.returnX() <= stopX)) {
-                            if((theDot.returnY() + diameter >= startY) && (theDot.returnY() <= stopY)) {
-                                bigDot.add(theDot);
-                            }
-                        }
-                    }
-                    if(dotProteins2 != null) {
-                        for(int i = 0; i < dotProteins2.size(); i++) {
-                            theDot = (Electro2D.ProteinDot)dotProteins2.get(i);
-                            if((theDot.returnX() + diameter >= startX) && (theDot.returnX() <= stopX)) {
-                                if((theDot.returnY() + diameter >= startY) && (theDot.returnY() <= stopY)) {
-                                    bigDot.add(theDot);
-                                }
-                            }
-                        }
-                    }
-                    ImageZoom zoom = new ImageZoom(electro2D, bufferImage.getSource(), startX, startY, stopX, stopY, bigDot);
-                }
-            }
-        }
-**/    }
+        /**     if (mousePress) {
+         stopX = e.getX();
+         stopY = e.getY();
+         if(startX != stopX && stopX > startX + 5) {
+         if(startY != stopY && stopY > startY + 5) {
+         Vector bigDot = new Vector();
+         Electro2D.ProteinDot theDot = null;
+         double diameter = Electro2D.ProteinDot.getDiameter();
+         for(int i = 0; i < dotProteins.size(); i++) {
+         theDot = (Electro2D.ProteinDot)dotProteins.get(i);
+         if((theDot.returnX() + diameter >= startX) && (theDot.returnX() <= stopX)) {
+         if((theDot.returnY() + diameter >= startY) && (theDot.returnY() <= stopY)) {
+         bigDot.add(theDot);
+         }
+         }
+         }
+         if(dotProteins2 != null) {
+         for(int i = 0; i < dotProteins2.size(); i++) {
+         theDot = (Electro2D.ProteinDot)dotProteins2.get(i);
+         if((theDot.returnX() + diameter >= startX) && (theDot.returnX() <= stopX)) {
+         if((theDot.returnY() + diameter >= startY) && (theDot.returnY() <= stopY)) {
+         bigDot.add(theDot);
+         }
+         }
+         }
+         }
+         ImageZoom zoom = new ImageZoom(electro2D, bufferImage.getSource(), startX, startY, stopX, stopY, bigDot);
+         }
+         }
+         }
+         **/}
 
     public void mouseEntered(MouseEvent e) {
     }
@@ -924,7 +924,7 @@ public class GelCanvas extends JPanel implements MouseListener {
      * @param e unused
      */
     public void mouseExited(MouseEvent e) {
-	mousePress = false;
+        mousePress = false;
     }
 
     /**
@@ -936,26 +936,26 @@ public class GelCanvas extends JPanel implements MouseListener {
      */
     public void mouseClicked(MouseEvent e) {
         double clickX = e.getX();
-	double clickY = e.getY();
+        double clickY = e.getY();
         if (dotProteins != null) {
-            for(int i = 0; i < dotProteins.size(); i++) {
-                double dotX = ((ProteinDot)dotProteins.elementAt(i)).returnX();
-                double dotY = ((ProteinDot)dotProteins.elementAt(i)).returnY();
-                if(((ProteinDot)dotProteins.elementAt(i)).getShowMe() && clickX <= dotX + 6 && clickX >= dotX - 1) {
-                    if(clickY <= dotY + 7 && clickY >= dotY - 1) {
-                        ProteinFrame pFrame = new ProteinFrame(electro2D, ((ProteinDot)dotProteins.elementAt(i)).getPro().getID(), 1);
+            for (int i = 0; i < dotProteins.size(); i++) {
+                double dotX = ((ProteinDot) dotProteins.elementAt(i)).returnX();
+                double dotY = ((ProteinDot) dotProteins.elementAt(i)).returnY();
+                if (((ProteinDot) dotProteins.elementAt(i)).getShowMe() && clickX <= dotX + 6 && clickX >= dotX - 1) {
+                    if (clickY <= dotY + 7 && clickY >= dotY - 1) {
+                        ProteinFrame pFrame = new ProteinFrame(electro2D, ((ProteinDot) dotProteins.elementAt(i)).getPro().getID(), 1);
                         pFrame.show();
                     }
                 }
             }
         }
         if (dotProteins2 != null) {
-            for(int i = 0; i < dotProteins2.size(); i++) {
-                double dotX = ((ProteinDot)dotProteins2.elementAt(i)).returnX();
-                double dotY = ((ProteinDot)dotProteins2.elementAt(i)).returnY();
-                if(((ProteinDot)dotProteins2.elementAt(i)).getShowMe() && clickX <= dotX + 5 && clickX >= dotX - 1) {
-                    if(clickY <= dotY + 5 && clickY >= dotY - 1) {
-                        ProteinFrame pFrame = new ProteinFrame(electro2D, ((ProteinDot)dotProteins2.elementAt(i)).getPro().getID(), 2);
+            for (int i = 0; i < dotProteins2.size(); i++) {
+                double dotX = ((ProteinDot) dotProteins2.elementAt(i)).returnX();
+                double dotY = ((ProteinDot) dotProteins2.elementAt(i)).returnY();
+                if (((ProteinDot) dotProteins2.elementAt(i)).getShowMe() && clickX <= dotX + 5 && clickX >= dotX - 1) {
+                    if (clickY <= dotY + 5 && clickY >= dotY - 1) {
+                        ProteinFrame pFrame = new ProteinFrame(electro2D, ((ProteinDot) dotProteins2.elementAt(i)).getPro().getID(), 2);
                         pFrame.show();
                     }
                 }
@@ -964,14 +964,14 @@ public class GelCanvas extends JPanel implements MouseListener {
         Vector containsBarProteinsProteins = new Vector();
         double iefWidth = IEFProtein.returnWidth();
         if (barProteins != null) {
-            for(int j = 0; j < barProteins.size(); j++) {
-                double iefX = ((IEFProtein)barProteins.elementAt(j)).returnX();
-                double iefY = ((IEFProtein)barProteins.elementAt(j)).returnY();
-                if(IEFProtein.returnHeight() > 0) {
-                    if(clickX >= iefX && clickX <= iefX + iefWidth) {
-                        if(clickY >= iefY && clickY <= iefY + 40) {
-                            containsBarProteinsProteins = ((IEFProtein)barProteins.elementAt(j)).getProtein();
-                            IEFFrame iFrame = new IEFFrame((IEFProtein)barProteins.elementAt(j));
+            for (int j = 0; j < barProteins.size(); j++) {
+                double iefX = ((IEFProtein) barProteins.elementAt(j)).returnX();
+                double iefY = ((IEFProtein) barProteins.elementAt(j)).returnY();
+                if (IEFProtein.returnHeight() > 0) {
+                    if (clickX >= iefX && clickX <= iefX + iefWidth) {
+                        if (clickY >= iefY && clickY <= iefY + 40) {
+                            containsBarProteinsProteins = ((IEFProtein) barProteins.elementAt(j)).getProtein();
+                            IEFFrame iFrame = new IEFFrame((IEFProtein) barProteins.elementAt(j));
                             iFrame.setResizable(true);
                             iFrame.pack();
                             iFrame.show();
@@ -981,14 +981,14 @@ public class GelCanvas extends JPanel implements MouseListener {
             }
         }
         if (barProteins2 != null) {
-            for(int j = 0; j < barProteins2.size(); j++) {
-                double iefX = ((IEFProtein)barProteins2.elementAt(j)).returnX();
-                double iefY = ((IEFProtein)barProteins2.elementAt(j)).returnY();
+            for (int j = 0; j < barProteins2.size(); j++) {
+                double iefX = ((IEFProtein) barProteins2.elementAt(j)).returnX();
+                double iefY = ((IEFProtein) barProteins2.elementAt(j)).returnY();
                 if (IEFProtein.returnHeight() > 0) {
-                    if(clickX >= iefX && clickX <= iefX + iefWidth) {
-                        if(clickY >= iefY && clickY <= iefY + 40) {
-                            containsBarProteinsProteins = ((IEFProtein)barProteins2.elementAt(j)).getProtein();
-                            IEFFrame iFrame = new IEFFrame((IEFProtein)barProteins2.elementAt(j));
+                    if (clickX >= iefX && clickX <= iefX + iefWidth) {
+                        if (clickY >= iefY && clickY <= iefY + 40) {
+                            containsBarProteinsProteins = ((IEFProtein) barProteins2.elementAt(j)).getProtein();
+                            IEFFrame iFrame = new IEFFrame((IEFProtein) barProteins2.elementAt(j));
                             iFrame.setResizable(true);
                             iFrame.pack();
                             iFrame.show();

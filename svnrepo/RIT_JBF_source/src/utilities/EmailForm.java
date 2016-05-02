@@ -148,20 +148,21 @@ public class EmailForm extends javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String from = "JBioFramework@gmail.com";
         String pass = "proteomics";
-        String[] to = { "JBioFramework@gmail.com" };
+        String[] to = {"JBioFramework@gmail.com"};
         String subject = subjectTF.getText();
         String body = "[from: " + fromTF.getText() + "]\n\n" + bodyTA.getText();
 
         try {
             GMailClient.sendFromGMail(from, pass, to, subject, body);
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(super.getContentPane(), "Error sending message. " +
-                     "Please send manually from preferred email client.");
+                    "Please send manually from preferred email client.");
         }
     }
 
     /* fromTF has no necessary action to perform. just holds relevant text */
-    private void fromTFActionPerformed(java.awt.event.ActionEvent evt) { }
+    private void fromTFActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
     /* passTF has no necessary action to perform. it just holds relevant text */
     //private void passTFActionPerformed(java.awt.event.ActionEvent evt) { }

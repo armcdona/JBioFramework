@@ -50,8 +50,8 @@ public class ProteinListFrame extends JFrame {
         sequenceTwoList = new JList();
         sequenceTitlesOne = new Vector();
         sequenceTitlesTwo = new Vector();
-        copySequenceOne = (Vector)sequenceTitlesOne.clone();
-        copySequenceTwo = (Vector)sequenceTitlesTwo.clone();
+        copySequenceOne = (Vector) sequenceTitlesOne.clone();
+        copySequenceTwo = (Vector) sequenceTitlesTwo.clone();
         positionsOne = new Vector<Integer>();
         positionsTwo = new Vector<Integer>();
         JScrollPane sequenceOneScroll = new JScrollPane(sequenceOneList);
@@ -114,7 +114,7 @@ public class ProteinListFrame extends JFrame {
     }
 
     /**
-     * This method is called by electro2D's refreshProteinList and 
+     * This method is called by electro2D's refreshProteinList and
      * refreshProteinList2 method when a new protein sequence is loaded.
      * updateSequences copies the protein sequence titles into its own lists
      * for display.
@@ -124,8 +124,8 @@ public class ProteinListFrame extends JFrame {
         sequenceTwoList.setListData(pL2);
         sequenceTitlesOne = new Vector(pL1);
         sequenceTitlesTwo = new Vector(pL2);
-        copySequenceOne = (Vector)sequenceTitlesOne.clone();
-        copySequenceTwo = (Vector)sequenceTitlesTwo.clone();
+        copySequenceOne = (Vector) sequenceTitlesOne.clone();
+        copySequenceTwo = (Vector) sequenceTitlesTwo.clone();
         positionsOne = new Vector<Integer>();
         positionsTwo = new Vector<Integer>();
     }
@@ -167,14 +167,14 @@ public class ProteinListFrame extends JFrame {
             electro2D.setSequencesReady(false);
         }
     }
-    
+
     /**
      * Listener for the Sequence One button. Removes all proteins in sequence
      * one and all sequence one proteins in sequence two.
      */
     private class OneListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for(int x = 0; x < sequenceTitlesOne.size(); x++) {
+            for (int x = 0; x < sequenceTitlesOne.size(); x++) {
                 for (int y = 0; y < sequenceTitlesTwo.size(); y++) {
                     if (sequenceTitlesOne.get(x).equals(sequenceTitlesTwo.get(y))) {
                         sequenceTitlesTwo.remove(y);
@@ -187,7 +187,7 @@ public class ProteinListFrame extends JFrame {
             sequenceOneList.validate();
             sequenceTwoList.validate();
             updatePositions();
-  //          positionsOne = new Vector<Integer>();
+            //          positionsOne = new Vector<Integer>();
         }
     }
 
@@ -197,7 +197,7 @@ public class ProteinListFrame extends JFrame {
      */
     private class TwoListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for(int x = 0; x < sequenceTitlesTwo.size(); x++) {
+            for (int x = 0; x < sequenceTitlesTwo.size(); x++) {
                 for (int y = 0; y < sequenceTitlesOne.size(); y++) {
                     if (sequenceTitlesTwo.get(x).equals(sequenceTitlesOne.get(y))) {
                         sequenceTitlesOne.remove(y);
@@ -220,7 +220,7 @@ public class ProteinListFrame extends JFrame {
      */
     private class CommonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            Vector copySequenceTwo = (Vector)sequenceTitlesTwo.clone();
+            Vector copySequenceTwo = (Vector) sequenceTitlesTwo.clone();
             sequenceTitlesTwo.removeAll(sequenceTitlesOne);
             sequenceTitlesOne.removeAll(copySequenceTwo);
 
@@ -241,10 +241,10 @@ public class ProteinListFrame extends JFrame {
             int[] twoIndexes = sequenceTwoList.getSelectedIndices();
             Vector oneProteins = new Vector();
             Vector twoProteins = new Vector();
-            for(int x = 0; x < oneIndexes.length; x++) {
+            for (int x = 0; x < oneIndexes.length; x++) {
                 oneProteins.add(sequenceTitlesOne.get(oneIndexes[x]));
             }
-            for(int y = 0; y < twoIndexes.length; y++) {
+            for (int y = 0; y < twoIndexes.length; y++) {
                 twoProteins.add(sequenceTitlesTwo.get(twoIndexes[y]));
             }
             sequenceTitlesOne.removeAll(oneProteins);
@@ -259,10 +259,10 @@ public class ProteinListFrame extends JFrame {
     }
 
     /**
-     * The following two methods are accessors for the position vectors. 
+     * The following two methods are accessors for the position vectors.
      * Electro2D.Electro2D will call them in its get methods for the vectors used in
      * gel filtration in order to carry over the manipulations done by the user.
-     * 
+     *
      * @return Vector<Integer> the positions of each element still in the sequence.
      */
     public Vector<Integer> getPositionsOne() {

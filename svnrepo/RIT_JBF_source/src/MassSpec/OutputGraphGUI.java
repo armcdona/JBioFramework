@@ -1,4 +1,5 @@
-package MassSpec;/*
+package MassSpec;
+/**
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -54,6 +55,8 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
     /**
      * The constructor's only purpose is to add itself as its own mouse
      * listener, so the user's clicks can be registered.
+     *
+     * @param mP MassSpecMain reference
      */
     public OutputGraphGUI(MassSpecMain mP) {
         super();
@@ -161,8 +164,6 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      * MassSpec.OutputGraphGUI can resize its x-axis to start at the smallest m/e ratio
      * and end at the largest m/e ratio.
      *
-     * @param smallestme - the smallest m/e ratio among the ions
-     * @param biggestme - the biggest m/e ratio among the ions
      */
     public void resizeXAxis() {
         // Determine the smallest m/e ratio and the biggest m/e ratio

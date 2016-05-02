@@ -44,25 +44,25 @@ public class ProteinDot extends Component {
     /**
      * constructor
      *
-     * @param pro the protein being represented
+     * @param pro    the protein being represented
      * @param canvas JPanel to hold the protein
-     * @param x the x coordinate for this dot
-     * @param y the y coordinate for this dot
+     * @param x      the x coordinate for this dot
+     * @param y      the y coordinate for this dot
      */
     public ProteinDot(E2DProtein pro, JPanel panel, double x, double y) {
         myProtein = pro;
-	myMolecularWeight = myProtein.getMW();
-	myColor = myProtein.getColor();
-	myPanel = panel;
-	myX = x;
-	myY = y;
+        myMolecularWeight = myProtein.getMW();
+        myColor = myProtein.getColor();
+        myPanel = panel;
+        myX = x;
+        myY = y;
     }
 
     public ProteinDot(Color c, JPanel panel, double x, double y) {
-	myColor = c;
-	myPanel = panel;
-	myX = x;
-	myY = y;
+        myColor = c;
+        myPanel = panel;
+        myX = x;
+        myY = y;
     }
 
     /**
@@ -71,26 +71,26 @@ public class ProteinDot extends Component {
      * @param lp minimum acrylamide percent
      * @param hp maximum acrylamide percent
      */
-    public static void setPercent( double lp, double hp ){
-	minPercentAcrylamide = lp;
-	maxPercentAcrylamide = hp;
+    public static void setPercent(double lp, double hp) {
+        minPercentAcrylamide = lp;
+        maxPercentAcrylamide = hp;
     }
 
     /**
      * changes the y value of this dot by a factor of the percent acrylamide
      * and molecular weight of the protein being represented
      */
-    public void changeY( ){
+    public void changeY() {
 
-	if (minPercentAcrylamide != maxPercentAcrylamide) {
-	myY = (10 * 1 / (((myY - 48) * (maxPercentAcrylamide -
-               minPercentAcrylamide)/532) + minPercentAcrylamide)) * (2) *
-               .25 * (100000/myMolecularWeight) + myY;
-	} else {
-	    myY = (10 * 1 / minPercentAcrylamide) * (2) * .25 *
-                  (100000/myMolecularWeight ) + myY;
-	}
-	myPanel.repaint();
+        if (minPercentAcrylamide != maxPercentAcrylamide) {
+            myY = (10 * 1 / (((myY - 48) * (maxPercentAcrylamide -
+                    minPercentAcrylamide) / 532) + minPercentAcrylamide)) * (2) *
+                    .25 * (100000 / myMolecularWeight) + myY;
+        } else {
+            myY = (10 * 1 / minPercentAcrylamide) * (2) * .25 *
+                    (100000 / myMolecularWeight) + myY;
+        }
+        myPanel.repaint();
     }
 
     /**
@@ -99,7 +99,7 @@ public class ProteinDot extends Component {
      */
 
     public void restart() {
-	myY = 48;
+        myY = 48;
     }
 
     /**
@@ -108,7 +108,7 @@ public class ProteinDot extends Component {
      * @return x coordinate of the dot protein
      */
     public double returnX() {
-	return myX;
+        return myX;
     }
 
     /**
@@ -117,7 +117,7 @@ public class ProteinDot extends Component {
      * @return y coordinate of teh dot protein
      */
     public double returnY() {
-	return myY;
+        return myY;
     }
 
     /**
@@ -126,19 +126,18 @@ public class ProteinDot extends Component {
      * @return diameter of protein dots (always will be 7)
      */
     public static int getDiameter() {
-	return (int)DIAMETER;
+        return (int) DIAMETER;
     }
 
     /**
      * Toggles the value for show.
      */
     public static void setShow() {
-	if(showAllDots) {
-	    showAllDots = false;
-	}
-	else {
-	    showAllDots = true;
-	}
+        if (showAllDots) {
+            showAllDots = false;
+        } else {
+            showAllDots = true;
+        }
     }
 
     /**
@@ -146,14 +145,14 @@ public class ProteinDot extends Component {
      * screen.  To be used when user searches for proteins by function.
      */
     public void doNotShowMe() {
-	showMe = false;
+        showMe = false;
     }
 
     /**
      * Sets showMe to true to display this individual protein.
      */
     public void doShowMe() {
-	showMe = true;
+        showMe = true;
     }
 
     /**
@@ -162,7 +161,7 @@ public class ProteinDot extends Component {
      * @return whether or not to show this protein dot
      */
     public boolean getShowMe() {
-	return showMe;
+        return showMe;
     }
 
     /**
@@ -171,7 +170,7 @@ public class ProteinDot extends Component {
      * @return whether or not all the dots are being displayed
      */
     public static boolean getShow() {
-	return showAllDots;
+        return showAllDots;
     }
 
     /**
@@ -180,7 +179,7 @@ public class ProteinDot extends Component {
      * @return protein represented by this dot
      */
     public E2DProtein getPro() {
-	return myProtein;
+        return myProtein;
     }
 
     /**
@@ -189,7 +188,7 @@ public class ProteinDot extends Component {
      * @return color of this protein dot
      */
     public Color getColor() {
-	return myColor;
+        return myColor;
     }
 
     /**
@@ -198,7 +197,7 @@ public class ProteinDot extends Component {
      * @param col new color for the protein dot
      */
     public void changeColor(Color col) {
-	myColor = col;
+        myColor = col;
     }
 
     /**
@@ -208,18 +207,18 @@ public class ProteinDot extends Component {
      * @param g the Graphics object that will draw the dot
      */
     public void draw(Graphics g) {
-	graphic = g;
+        graphic = g;
 
-	if(showAllDots && showMe) {
-	    g.setColor(myColor);
-	    g.drawOval((int)(myX), (int)(myY), (int)(DIAMETER), (int)(DIAMETER));
-	    g.fillOval((int)(myX), (int)(myY), (int)(DIAMETER), (int)(DIAMETER));
-	    g.setColor(new Color(54, 100, 139));
-	}
+        if (showAllDots && showMe) {
+            g.setColor(myColor);
+            g.drawOval((int) (myX), (int) (myY), (int) (DIAMETER), (int) (DIAMETER));
+            g.fillOval((int) (myX), (int) (myY), (int) (DIAMETER), (int) (DIAMETER));
+            g.setColor(new Color(54, 100, 139));
+        }
     }
 
-    public void update(){
-	draw( graphic );
+    public void update() {
+        draw(graphic);
     }
 
 }

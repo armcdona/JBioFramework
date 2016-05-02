@@ -15,15 +15,15 @@ package Electro2D;/*
 
 /**
  * Electro2D.ProteinFrame.java
- *
+ * <p>
  * This class encapsulates all the functionality required to pop up a frame
  * and display information about a particular protein.
  *
  * @author Jill Zapoticznyj
  * @author Adam Bazinet
  * @author Aidan Sawyer
- *
- *
+ * <p>
+ * <p>
  * 10/17/2011: Added functionality to let a protein's sequence be given to the
  * tandem mass spec simulation. @author Amanda Fisher
  */
@@ -98,9 +98,9 @@ public class ProteinFrame extends JFrame {
         setLocationByPlatform(true);
 
         //get protein function
-        proteinFunction = electro2D.getFunctionbyTitle( proteinTitle );
+        proteinFunction = electro2D.getFunctionbyTitle(proteinTitle);
         proteinFunction = proteinFunction.trim();
-        sequenceString = electro2D.getSequencebyTitle( proteinTitle );
+        sequenceString = electro2D.getSequencebyTitle(proteinTitle);
 
 
         /*Blast Search Button*/
@@ -109,41 +109,40 @@ public class ProteinFrame extends JFrame {
         blstSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String urlPre = "http://web.expasy.org/cgi-bin/blast/blast.pl?sequence=";
-                String url = urlPre+sequenceString;
-                try{
+                String url = urlPre + sequenceString;
+                try {
                     BrowserLauncher.openURL(url);
-                }catch(IOException ex){
+                } catch (IOException ex) {
                     System.out.println("URL did not work");
                 }
-            }   });
+            }
+        });
 
         //depending on the database file used, extract the name of the protein
         // and create a button to allow a GenBank search for that protein
-        int index = proteinTitle.indexOf( "|" );
-        if( index != -1 ){
+        int index = proteinTitle.indexOf("|");
+        if (index != -1) {
             //if the protein is from a fasta file, the title is an abbreviated
             //form of the proteinTitle string
-            searchID = proteinTitle.substring( index + 1 );
-            index = searchID.indexOf( "|" );
-            while( index != -1  && index != searchID.lastIndexOf("|") ){
-                searchID = searchID.substring( index + 1,
-                        searchID.lastIndexOf( "|" ) );
-                index = searchID.indexOf( "|" );
+            searchID = proteinTitle.substring(index + 1);
+            index = searchID.indexOf("|");
+            while (index != -1 && index != searchID.lastIndexOf("|")) {
+                searchID = searchID.substring(index + 1,
+                        searchID.lastIndexOf("|"));
+                index = searchID.indexOf("|");
             }
-            if( index != -1 ){
-                searchID = searchID.substring( index + 1 );
+            if (index != -1) {
+                searchID = searchID.substring(index + 1);
             }
-        }
-        else if( index == -1 ){
+        } else if (index == -1) {
             //if the protein is not from a fasta file...
 
-            index = proteinTitle.indexOf( "\u003B" );
-            if( index != -1 ){
+            index = proteinTitle.indexOf("\u003B");
+            if (index != -1) {
                 //...but from a protein databank file, the id is the protein
                 // title with the semicolon truncated
-                searchID = proteinTitle.substring( 0, index );
-            }
-            else {
+                searchID = proteinTitle.substring(0, index);
+            } else {
                 //...or from a protein databank file, the id is the protein
                 // title.
                 searchID = proteinTitle;
@@ -155,11 +154,12 @@ public class ProteinFrame extends JFrame {
         ncbiSearch.setToolTipText("Performs NCBI search for the protein sequence");
         ncbiSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String urlPre = "http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=protein&cmd=search&term=";;
-                String url = urlPre+searchID;
-                try{
+                String urlPre = "http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=protein&cmd=search&term=";
+                ;
+                String url = urlPre + searchID;
+                try {
                     BrowserLauncher.openURL(url);
-                }catch(IOException ex){
+                } catch (IOException ex) {
                     System.out.println("URL did not work");
                 }
             }
@@ -168,13 +168,13 @@ public class ProteinFrame extends JFrame {
         //using the file type to determine the string to assign it,
         // create a button to allow a SwissProt/TrEMBL search for the protein
 
-        if( proteinTitle.indexOf( "|" ) < 0 ){
+        if (proteinTitle.indexOf("|") < 0) {
             swsSearchID = proteinTitle;
-        }else {
-            swsSearchID = proteinTitle.substring( 4,
-                    proteinTitle.lastIndexOf( "|" ));
+        } else {
+            swsSearchID = proteinTitle.substring(4,
+                    proteinTitle.lastIndexOf("|"));
             swsSearchID = swsSearchID.substring(
-                    swsSearchID.lastIndexOf( "|" ) + 1 );
+                    swsSearchID.lastIndexOf("|") + 1);
         }
 
         /*Uniprot search button*/
@@ -184,13 +184,14 @@ public class ProteinFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String urlPre = "http://www.uniprot.org/uniprot/?query=";
-                String url = urlPre+swsSearchID;
-                try{
+                String url = urlPre + swsSearchID;
+                try {
                     BrowserLauncher.openURL(url);
-                }catch(IOException ex){
+                } catch (IOException ex) {
                     System.out.println("URL did not work");
                 }
-            }   });
+            }
+        });
 
         /*Send to MassSpec button*/
         JButton sendToSpec = new JButton("Run Mass Spectrum");
@@ -210,7 +211,7 @@ public class ProteinFrame extends JFrame {
         piLabel = new JLabel("pI Value (pI): " +
                 electro2D.getPIbyTitle(proteinTitle));
 
-        functionLabel = new JLabel( "Function: " + proteinFunction);
+        functionLabel = new JLabel("Function: " + proteinFunction);
 
         add(proteinInfoPanel);
         proteinInfoPanel.add(titleLabel);

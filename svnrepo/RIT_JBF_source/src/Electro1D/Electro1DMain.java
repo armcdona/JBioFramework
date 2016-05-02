@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 /**
  * main class for 1d Electro1D
+ *
  * @author Bader Alharbi
  */
 public class Electro1DMain extends JFrame {

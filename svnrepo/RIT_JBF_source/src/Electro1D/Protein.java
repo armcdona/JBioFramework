@@ -1,88 +1,73 @@
 package Electro1D;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
 /**
  * @author Bader Alharbi
- *
  */
-public class Protein
-{
+public class Protein {
 
-    public void setStartPosition(int i, int j)
-    {
+    public void setStartPosition(int i, int j) {
         x1 = i;
         y1 = j;
         startY = y1;
         y1float = y1;
     }
 
-    public void ResetDecider()
-    {
+    public void ResetDecider() {
         decider = 1;
         counter = 1;
     }
 
-    private void IncrPosition()
-    {
-        if(counter == decider)
-        {
+    private void IncrPosition() {
+        if (counter == decider) {
             y1float = y1float + speed;
             counter = 1;
-        } else
-        {
+        } else {
             counter++;
         }
-        y1 = (int)y1float;
+        y1 = (int) y1float;
     }
 
-    public boolean matchPosition(int i, int j)
-    {
+    public boolean matchPosition(int i, int j) {
         int k = x1 + width;
         int l = y1 + height;
         byte byte0 = 2;
         return i >= x1 - byte0 && i <= k + byte0 && j >= y1 - byte0 && j <= l + byte0;
     }
 
-    public void setWidth(int i)
-    {
+    public void setWidth(int i) {
         width = i;
     }
 
-    public int GetDecider()
-    {
+    public int GetDecider() {
         return decider;
     }
 
-    public void SetDecider(int i)
-    {
+    public void SetDecider(int i) {
         decider = i;
     }
 
-    void SetHostScaleFactor(float f)
-    {
+    void SetHostScaleFactor(float f) {
         scaleFactor = f;
     }
 
-    public void setMaxPosition(int i)
-    {
+    public void setMaxPosition(int i) {
         maxPosition = i;
     }
 
-    boolean matchPlotPosition(int i, int j)
-    {
+    boolean matchPlotPosition(int i, int j) {
         byte byte0 = 3;
         return i >= plotXPos - byte0 && i <= plotXPos + byte0 && j >= plotYPos - byte0 && j <= plotYPos + byte0;
     }
 
-    float GetDistance()
-    {
-        distance = scaleFactor * (float)(y1 - startY);
+    float GetDistance() {
+        distance = scaleFactor * (float) (y1 - startY);
         return distance;
     }
 
-    Protein()
-    {
+    Protein() {
         speed = 0.01D;
         name = "notSet";
         fullName = "notSet";
@@ -93,8 +78,7 @@ public class Protein
         counter = 1;
     }
 
-    Protein(String s, String s1, String s2, int i, Color color1)
-    {
+    Protein(String s, String s1, String s2, int i, Color color1) {
         speed = 0.01D;
         name = "notSet";
         fullName = "notSet";
@@ -110,16 +94,13 @@ public class Protein
         color = color1;
     }
 
-    public boolean drawProtein(Graphics g)
-    {
-        if(y1 < maxPosition)
-        {
+    public boolean drawProtein(Graphics g) {
+        if (y1 < maxPosition) {
             g.setColor(color);
             g.fillRect(x1, y1, width, height);
             IncrPosition();
             return true;
-        } else
-        {
+        } else {
             return false;
         }
     }

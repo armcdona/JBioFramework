@@ -1,7 +1,7 @@
 package MassSpec; /**
- *
  * @author Amanda Fisher
  */
+
 import Electro2D.Protease;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class Trypsin extends Protease {
 
     public Trypsin() {
-        cutAminoAcids = new ArrayList<>(Arrays.asList('R','K')); //Chymotrypsin cuts at these proteins
+        cutAminoAcids = new ArrayList<>(Arrays.asList('R', 'K')); //Chymotrypsin cuts at these proteins
         cutsBefore = false;
     }
 

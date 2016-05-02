@@ -1,7 +1,7 @@
 package Electro2D;
 /**
  * Electro2D.FileFrame.java
- *
+ * <p>
  * This class encapsulates all the functionality required to pop up a frame
  * and load protein data from a file.
  *
@@ -54,15 +54,15 @@ public class FileFrame extends JFrame implements ActionListener {
         instructions = new JTextArea();
         instructions.append(
                 "Instructions: Select the name of the file that contains your protein sequence data.\n" +
-                "Please note: Some files may take longer to load.");
+                        "Please note: Some files may take longer to load.");
         instructions.setEditable(false);
         instructions.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
 
         select = new JLabel("Select Filename: ", JLabel.RIGHT);
 
-        String[] files = { "file1", "file2", "file3", "file4" };
+        String[] files = {"file1", "file2", "file3", "file4"};
         choice = new JComboBox();
-        for (String f: files) choice.addItem(f);
+        for (String f : files) choice.addItem(f);
 
         button = new JButton("Load");
         button.addActionListener(this);
@@ -96,7 +96,7 @@ public class FileFrame extends JFrame implements ActionListener {
             fl.mkdir();
         }
 
-        sa = fl.list( new ImageFilter() );
+        sa = fl.list(new ImageFilter());
 
         for (int file = 0; file < sa.length; file++) {
             choice.addItem(sa[file]);

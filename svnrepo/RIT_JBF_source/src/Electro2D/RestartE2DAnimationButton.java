@@ -1,6 +1,5 @@
 package Electro2D;
 /**
- *
  * @author Amanda Fisher
  */
 
@@ -21,29 +20,29 @@ public class RestartE2DAnimationButton extends JButton implements ActionListener
     }
 
     public void actionPerformed(ActionEvent e) {
-    GelCanvas g = electro2D.getGel();
-	g.clearIEF();
-	g.resetLocation();
-	g.resetRanges();
-	g.clearCanvas();
-	electro2D.resetIEF();
-	IEFProtein.resetProtein();
+        GelCanvas g = electro2D.getGel();
+        g.clearIEF();
+        g.resetLocation();
+        g.resetRanges();
+        g.clearCanvas();
+        electro2D.resetIEF();
+        IEFProtein.resetProtein();
 
-	if( ProteinDot.getShow() ){
-	    ProteinDot.setShow();
-	    electro2D.stopThread();
-	}
-	g.restartCanvas();
+        if (ProteinDot.getShow()) {
+            ProteinDot.setShow();
+            electro2D.stopThread();
+        }
+        g.restartCanvas();
 
-	electro2D.resetPlay();
-	electro2D.resetSdsStatus();
-	electro2D.setBool();
-	electro2D.clearpH();
-	electro2D.setIEF();
-	GelCanvas.setRed();
-	GelCanvas.setGreen();
-	GelCanvas.setBlue();
-	IEFProtein.resetTempWidth();
+        electro2D.resetPlay();
+        electro2D.resetSdsStatus();
+        electro2D.setBool();
+        electro2D.clearpH();
+        electro2D.setIEF();
+        GelCanvas.setRed();
+        GelCanvas.setGreen();
+        GelCanvas.setBlue();
+        IEFProtein.resetTempWidth();
         PlayE2AnimationButton.setCompare(false);
         electro2D.resetBothProteinLists();
         electro2D.setSequences(new Vector());

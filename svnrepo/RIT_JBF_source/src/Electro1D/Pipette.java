@@ -7,89 +7,73 @@ package Electro1D;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Pipette
-{
+public class Pipette {
 
-    public void setSampleDepth(int i)
-    {
+    public void setSampleDepth(int i) {
         sampleDepth = i;
     }
 
-    private boolean IncrPosition()
-    {
+    private boolean IncrPosition() {
         int i = y1;
         int j = 0;
         y1float = y1float + speed;
-        y1 = (int)y1float;
+        y1 = (int) y1float;
         j = y1 - i;
-        if(j > 0)
-            if(!dropped)
-            {
+        if (j > 0)
+            if (!dropped) {
                 pipetteCoordsY[1] += j;
                 pipetteCoordsY[2] += j;
                 pipetteCoordsYf[1] = pipetteCoordsY[1] - emptyTip;
                 pipetteCoordsYf[2] = pipetteCoordsY[2] - emptyTip;
-                if(pipetteCoordsY[1] > sampleDepth)
-                {
+                if (pipetteCoordsY[1] > sampleDepth) {
                     pipetteCoordsYf[0] += j;
                     pipetteCoordsYf[3] += j;
                 }
-                if(pipetteCoordsY[1] > maxYPosition)
-                {
+                if (pipetteCoordsY[1] > maxYPosition) {
                     dropped = true;
                     dropStart = pipetteCoordsY[1] - emptyTip;
                     dropLength = wellBottom - dropStart;
                 }
-            } else
-            if(!emptied)
-            {
+            } else if (!emptied) {
                 pipetteCoordsYf[0] += j;
                 pipetteCoordsYf[3] += j;
-                if(pipetteCoordsYf[0] > maxYPosition)
+                if (pipetteCoordsYf[0] > maxYPosition)
                     emptied = true;
-            } else
-            if(!retracted)
-            {
+            } else if (!retracted) {
                 pipetteCoordsY[1] -= j;
                 pipetteCoordsY[2] -= j;
-                if(pipetteCoordsY[1] < 0)
+                if (pipetteCoordsY[1] < 0)
                     retracted = true;
             }
         return !retracted;
     }
 
-    public boolean fillWell(Graphics g)
-    {
-        if(!emptied)
-        {
+    public boolean fillWell(Graphics g) {
+        if (!emptied) {
             g.setColor(sampleColor);
             g.fillPolygon(pipetteCoordsX, pipetteCoordsYf, pts);
         }
         g.setColor(Color.black);
         g.drawPolygon(pipetteCoordsX, pipetteCoordsY, pts);
-        if(dropped)
-        {
+        if (dropped) {
             sample.drawSwitch(true);
-            if(!emptied)
-            {
+            if (!emptied) {
                 int i = pipetteCoordsY[1] - emptyTip;
                 int j = wellBottom - i;
                 g.setColor(sampleColor);
                 g.fillRect(pipetteCoordsX[1], i, 4, j);
             }
         }
-        if(emptied)
+        if (emptied)
             sample.drawSwitch(false);
         return IncrPosition();
     }
 
-    public void setSample(Sample sample1)
-    {
+    public void setSample(Sample sample1) {
         sample = sample1;
     }
 
-    public void setStartXPosition(int i)
-    {
+    public void setStartXPosition(int i) {
         int j = 0;
         ResetFlags();
         x1 = i;
@@ -100,30 +84,26 @@ public class Pipette
         pipetteCoordsX[2] = x1 + 2;
         pipetteCoordsX[3] = x1 + 4;
         j = 0;
-        do
-        {
+        do {
             pipetteCoordsY[j] = 0;
             pipetteCoordsYf[j] = 0;
-        } while(++j < 4);
+        } while (++j < 4);
         pts = pipetteCoordsX.length;
     }
 
-    public void setMaxYPosition(int i)
-    {
+    public void setMaxYPosition(int i) {
         maxYPosition = i - gap;
         wellBottom = i;
     }
 
-    private void ResetFlags()
-    {
+    private void ResetFlags() {
         dropped = false;
         emptied = false;
         hasSample = false;
         retracted = false;
     }
 
-    public Pipette()
-    {
+    public Pipette() {
         sampleColor = Color.blue;
         gap = 6;
         speed = 2.0F;
