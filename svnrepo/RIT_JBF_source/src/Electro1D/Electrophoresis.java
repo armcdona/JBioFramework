@@ -43,9 +43,6 @@ public class Electrophoresis extends JPanel {
         super.add(headPanel);
     }
 
-    /**
-     * default constructor
-     */
     public Electrophoresis() {
         super.setPreferredSize(new Dimension(550, 450));
 
@@ -80,6 +77,7 @@ public class Electrophoresis extends JPanel {
      * addStandard() add standards proteins
      */
     public void addStandard() {
+
         simPanel.addStandard();
     }
 
@@ -87,6 +85,7 @@ public class Electrophoresis extends JPanel {
      * Stop running the simulation on the gel
      */
     public void stopRun() {
+
         simPanel.stopRun();
     }
 
@@ -94,6 +93,7 @@ public class Electrophoresis extends JPanel {
      * display the simulation panel
      */
     public void displaySim() {
+
         tabPane.setVisible(true);
     }
 
@@ -103,6 +103,7 @@ public class Electrophoresis extends JPanel {
      * @param acrylamide acrylamide reference
      */
     public void setAcrylamide(Acrylamide acrylamide) {
+
         simPanel.setAcrylamide(acrylamide);
     }
 
@@ -110,7 +111,7 @@ public class Electrophoresis extends JPanel {
      * start running the simulation
      *
      * @param aprotein is an array of standard proteins (known)
-     * @param protein is a unknown protein (sample)
+     * @param protein  is a unknown protein (sample)
      * @param protein1 is a dye
      * @param protein2 is a dye
      */
@@ -122,7 +123,7 @@ public class Electrophoresis extends JPanel {
      * setPlotData() set the plot data
      *
      * @param aprotein is an array of standard proteins (known)
-     * @param protein is a unknown protein (sample)
+     * @param protein  is a unknown protein (sample)
      * @param protein1 is a dye
      */
     public void setPlotData(Protein aprotein[], Protein protein, Protein protein1) {
@@ -141,6 +142,7 @@ public class Electrophoresis extends JPanel {
      * adding the sample
      */
     public void addSample() {
+
         simPanel.addSample();
     }
 

@@ -93,7 +93,7 @@ public class Parameters extends JPanel implements Constants {
 
         acrylamide = new JComboBox<String>(gelList);
         sample = new JComboBox<String>(samples);
-        UnkownListHandler unl = new UnkownListHandler();
+        UnknownListHandler unl = new UnknownListHandler();
         gelPercentageHandler gh = new gelPercentageHandler();
 
         sample.addItemListener(unl);
@@ -608,9 +608,9 @@ public class Parameters extends JPanel implements Constants {
     }// end class StandardsListListener
 
     /**
-     * UnkownListHandler, inner class  to handle events invoked by GUI components in parameters panel
+     * UnknownListHandler, inner class  to handle events invoked by GUI components in parameters panel
      */
-    class UnkownListHandler implements ItemListener {
+    class UnknownListHandler implements ItemListener {
 
         @Override
         public void itemStateChanged(ItemEvent ev) {
@@ -656,7 +656,7 @@ public class Parameters extends JPanel implements Constants {
             }
         }
 
-    }// end inner class UnkownListHandler
+    }// end inner class UnknownListHandler
 
     /**
      * gelPercentageHandler, inner class  to handle events invoked by GUI components in parameters panel

@@ -121,7 +121,7 @@ public class Ionex extends Applet //implements Runnable
         setState('S');
 
         //don't let the process begin until settings have been saved
-        controls.IDC_START.disable();
+        controls.IDC_START.setEnabled(false);
 
     }
 
@@ -135,7 +135,10 @@ public class Ionex extends Applet //implements Runnable
     // Ionex Paint Handler
     //--------------------------------------------------------------------------
     public void paint(Graphics g) {
-        this.m_imageCanvas.paint(g);
+        if (this.m_imageCanvas != null)
+            this.m_imageCanvas.paint(g);
+        else
+            System.out.println("imagecanvas Doesn't exist!");
     }
 
     //	The start() method is called when the page containing the applet
@@ -158,7 +161,7 @@ public class Ionex extends Applet //implements Runnable
     // this method stops execution of the applet's thread.
     //--------------------------------------------------------------------------
     public void stop() {
-/*
+/**
 		if (m_ionex != null)
 		{
 			m_ionex.stop();
@@ -177,7 +180,7 @@ public class Ionex extends Applet //implements Runnable
     // the display of images.
     //--------------------------------------------------------------------------
     public void run() {
-/*
+/**
 		while (true)
 		{
 			try
@@ -526,29 +529,29 @@ public class Ionex extends Applet //implements Runnable
         switch (cState) {
             case 'S':
                 //stopped
-                controls.IDC_PAUSE.disable();
-                controls.IDC_STOP.disable();
-                controls.IDC_START.enable();
-                controls.IDC_UPDATE.enable();
-                controls.IDC_RESET.enable();
+                controls.IDC_PAUSE.setEnabled(false);
+                controls.IDC_STOP.setEnabled(false);
+                controls.IDC_START.setEnabled(true);
+                controls.IDC_UPDATE.setEnabled(true);
+                controls.IDC_RESET.setEnabled(true);
                 break;
 
             case 'R':
                 // running
-                controls.IDC_PAUSE.enable();
-                controls.IDC_STOP.enable();
-                controls.IDC_START.disable();
-                controls.IDC_UPDATE.disable();
-                controls.IDC_RESET.disable();
+                controls.IDC_PAUSE.setEnabled(true);
+                controls.IDC_STOP.setEnabled(true);
+                controls.IDC_START.setEnabled(false);
+                controls.IDC_UPDATE.setEnabled(false);
+                controls.IDC_RESET.setEnabled(false);
                 break;
 
             case 'P':
                 //paused
-                controls.IDC_PAUSE.disable();
-                controls.IDC_STOP.enable();
-                controls.IDC_START.enable();
-                controls.IDC_UPDATE.disable();
-                controls.IDC_RESET.disable();
+                controls.IDC_PAUSE.setEnabled(false);
+                controls.IDC_STOP.setEnabled(true);
+                controls.IDC_START.setEnabled(true);
+                controls.IDC_UPDATE.setEnabled(false);
+                controls.IDC_RESET.setEnabled(false);
                 break;
         }
     }
