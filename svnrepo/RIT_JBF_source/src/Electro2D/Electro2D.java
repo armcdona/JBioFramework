@@ -1243,7 +1243,7 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public void restartThread() {
         //initializes the thread, sets a value, and calls the start method
-        dotThread = new DotThread(gelCanvas, this);
+        dotThread = new DotThread(this);
         dotThread.startDots();
         dotThread.start();
     }

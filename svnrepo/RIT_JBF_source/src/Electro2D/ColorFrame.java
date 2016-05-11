@@ -1,11 +1,8 @@
 package Electro2D;
 
-import Electro2D.E2DProtein;
-
-import java.util.HashMap;
-import java.util.ArrayList;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Displays what the color of a protein means
@@ -53,7 +50,7 @@ public class ColorFrame {
     }
 
     /**
-     * Show the color
+     * Shows the color key frame
      */
     public void showKey() {
         colorFrame.pack();

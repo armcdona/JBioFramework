@@ -5,8 +5,6 @@ package Electro2D; /**
  * @author Jill Zapoticznyj
  */
 
-import Electro2D.IEFProtein;
-
 import java.util.Comparator;
 
 public class CompIEF implements Comparator {

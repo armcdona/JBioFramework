@@ -33,6 +33,11 @@ public class Sample {
     public Sample() {
     }
 
+    /**
+     * Draw the sample onto the given graphics - run every time the class is drawn.
+     *
+     * @param g graphics reference
+     */
     public void drawSample(Graphics g) {
         if (changeOn) {
             if (fillCounter > fillRatio) {
@@ -59,10 +64,20 @@ public class Sample {
         }
     }
 
+    /**
+     * Sets the width of the sample
+     *
+     * @param i the width of the sample
+     */
     public void setWidth(int i) {
         sampWidth = i;
     }
 
+    /**
+     * Sets maximum y of the sample
+     *
+     * @param i the maximum y
+     */
     public void setMaxY(int i) {
         maxY = i;
     }

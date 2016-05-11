@@ -20,6 +20,9 @@ import java.text.DecimalFormat;
 
 import javax.swing.JPanel;
 
+/**
+ * The type Plot.
+ */
 public class Plot extends JPanel implements Runnable {
     Font plotFont;
     Thread runner;
@@ -483,8 +486,7 @@ public class Plot extends JPanel implements Runnable {
                 harpPlayed = true;
             }
         } else if (questionRCorr) {
-            g.drawString("No match! RM was OK, poor line fit?",
-                    xArray[leftGridCol], getSize().height / 6);
+            g.drawString("No match! RM was OK, poor line fit?", xArray[leftGridCol], getSize().height / 6);
 
         }
     }
@@ -496,8 +498,7 @@ public class Plot extends JPanel implements Runnable {
         resetSums();
         for (int i = 0; i < numberOfStds; i++) {
             if (stds[i].selected) {
-                stds[i].relativeMigration = stds[i].GetDistance()
-                        / dye.GetDistance();
+                stds[i].relativeMigration = stds[i].GetDistance() / dye.GetDistance();
                 sumXs(stds[i].relativeMigration);
                 sumXsqs(stds[i].relativeMigration);
                 double d = Math.log((double) stds[i].mw) / ln10;

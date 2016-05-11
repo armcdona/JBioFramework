@@ -60,36 +60,30 @@ public class Parameters extends JPanel implements Constants {
 
         selectedSpeed = medium;
 
-        unknown1 = new Protein("Unknown #1", "Aconitase", "Acon", 0x14250,
-                Color.black);
-        unknown2 = new Protein("Unknown #2", "Conconavalin A", "Con A", 25556,
-                Color.black);
-        unknown3 = new Protein("Unknown #3", "Glucose Oxidase", "GO", 63058,
-                Color.black);
-        unknown4 = new Protein("Unknown #4", "Neuraminidase", "Neur", 43505,
-                Color.black);
-        unknown5 = new Protein("Unknown #5", "Phosphorylase b", "Phos b",
-                0x172f9, Color.black);
-        unknown6 = new Protein("Unknown #6", "Pyruvate Kinase", "Pyr Kin",
-                56773, Color.black);
-        unknown7 = new Protein("Unknown #7", "Ribonuclease A", "Ribo A", 13673,
-                Color.black);
+        unknown1 = new Protein("Unknown #1", "Aconitase", "Acon", 0x14250, Color.black);
+        unknown2 = new Protein("Unknown #2", "Conconavalin A", "Con A", 25556, Color.black);
+        unknown3 = new Protein("Unknown #3", "Glucose Oxidase", "GO", 63058, Color.black);
+        unknown4 = new Protein("Unknown #4", "Neuraminidase", "Neur", 43505, Color.black);
+        unknown5 = new Protein("Unknown #5", "Phosphorylase b", "Phos b", 0x172f9, Color.black);
+        unknown6 = new Protein("Unknown #6", "Pyruvate Kinase", "Pyr Kin", 56773, Color.black);
+        unknown7 = new Protein("Unknown #7", "Ribonuclease A", "Ribo A", 13673, Color.black);
 
-        unknown8 = new Protein("Unknown #8", "Chymotrypsinogen", "Chymo",
-                23564, Color.black);
+        unknown8 = new Protein("Unknown #8", "Chymotrypsinogen", "Chymo", 23564, Color.black);
 
-        unknown9 = new Protein("Unknown #9", "p-Hydroxybenzoate", "Hydrox",
-                43939, Color.black);
+        unknown9 = new Protein("Unknown #9", "p-Hydroxybenzoate", "Hydrox", 43939, Color.black);
 
-        unknown10 = new Protein("Unknown #10", "Ribonuclease H", "Ribo H",
-                16638, Color.black);
+        unknown10 = new Protein("Unknown #10", "Ribonuclease H", "Ribo H", 16638, Color.black);
 
         // string array, holds unknown proteins names
-        String[] samples = {unknown1.name, unknown2.name, unknown3.name,
+        String[] samples = {
+                unknown1.name, unknown2.name, unknown3.name,
                 unknown4.name, unknown5.name, unknown6.name, unknown7.name,
-                unknown8.name, unknown9.name, unknown10.name};
-        String[] gelList = {gel1.percentGel, gel2.percentGel, gel3.percentGel,
-                gel4.percentGel};
+                unknown8.name, unknown9.name, unknown10.name
+        };
+        String[] gelList = {
+                gel1.percentGel, gel2.percentGel, gel3.percentGel,
+                gel4.percentGel
+        };
 
         acrylamide = new JComboBox<String>(gelList);
         sample = new JComboBox<String>(samples);

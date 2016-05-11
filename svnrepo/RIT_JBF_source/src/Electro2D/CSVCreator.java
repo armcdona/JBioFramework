@@ -6,19 +6,13 @@ package Electro2D; /**
  * @author Jill Zapoticznyj
  */
 
-import Electro2D.Electro2D;
-
-import java.io.File;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.util.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.io.*;
+import java.util.Vector;
 
 public class CSVCreator {
 
-    //
+    //Vector of proteins to be written to the csv file
     private Vector proteins;
 
     //saving the state for electro2D at time of object's creation.
@@ -27,11 +21,19 @@ public class CSVCreator {
     //name of directory holding any/all CSV files.
     private final String directoryString = "CSV Files";
 
+    /**
+     * Initializes the CSVCreator with the proteins contained in the references Electro2D simulations
+     *
+     * @param e Electro2D reference used to get the vector of proteins within the simulation.
+     */
     public CSVCreator(Electro2D e) {
         electro2D = e;
         proteins = electro2D.getGel().getDots();
     }
 
+    /**
+     * Writes the protein vector to a csv file containing all of their information needed by the program.
+     */
     public void writeToCSV() {
 
         String filename = electro2D.getLastFileLoaded();

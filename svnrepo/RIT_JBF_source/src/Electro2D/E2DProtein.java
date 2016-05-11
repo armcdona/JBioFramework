@@ -6,9 +6,8 @@ package Electro2D; /**
  * @author Jill Zapoticznyj
  */
 
-import java.awt.Color;
-import java.util.Random;  // randomly generates colors for protein
-import java.util.HashMap;
+import java.awt.*;
+import java.util.Random;
 
 public class E2DProtein {
 
@@ -46,31 +45,29 @@ public class E2DProtein {
      * @param id    the protein's type
      * @param molWt the molecular weight of the protein
      * @param pI    the pI value for the protein
-     * @param urls  the URL for information about this protein
+     * @param sequence  the sequence of this protein
      * @param fcn   the function of this protein
      */
 
-    public E2DProtein(String id, double molWt, double pI, String sequence,
-                      String fcn) {
+    public E2DProtein(String id, double molWt, double pI, String sequence, String fcn) {
         myID = id;
         myMolWt = molWt;
         mySequence = sequence;
         myFunction = fcn;
         myPI = pI;
-        if (id.indexOf("DNA") != -1 || id.indexOf("dna") != -1) {
+        if (id.toLowerCase().contains("dna")) {
             myColor = dnaColor;
-        } else if (id.indexOf("ribosomal") != -1) {
+        } else if (id.toLowerCase().contains("ribosomal")) {
             myColor = rnaColor;
-        } else if (id.indexOf("hypothetical") != -1) {
+        } else if (id.toLowerCase().contains("hypothetical")) {
             myColor = hypotheticalColor;
-        } else if (fcn.length() > 6 && fcn.substring(0, 6).equals("Enzyme")) {
+        } else if (fcn.toLowerCase().contains("enzyme")) {
             myColor = enzymeColor;
-        } else if (fcn.indexOf("transport") != -1) {
+        } else if (fcn.toLowerCase().contains("transport")) {
             myColor = transportColor;
-        } else if (fcn.indexOf("receptor") != -1 || fcn.indexOf("reception")
-                != -1) {
+        } else if (fcn.toLowerCase().contains("receptor") || fcn.contains("reception")) {
             myColor = receptorColor;
-        } else if (fcn.indexOf("transduction") != -1) {
+        } else if (fcn.toLowerCase().contains("transduction")) {
             myColor = transductionColor;
         } else {
             Random r = new Random();
@@ -88,7 +85,7 @@ public class E2DProtein {
     }
 
     /**
-     * returns molecular weight
+     * returns the molecular weight of the protein
      *
      * @return myMolWt
      */
@@ -97,7 +94,7 @@ public class E2DProtein {
     }
 
     /**
-     * returns color
+     * returns the specific color that respesents this protein
      *
      * @return myColor
      */
@@ -106,7 +103,7 @@ public class E2DProtein {
     }
 
     /**
-     * returns pI value
+     * returns the pI value of the protein
      *
      * @return myPI
      */
@@ -115,7 +112,7 @@ public class E2DProtein {
     }
 
     /**
-     * returns sequence data
+     * returns the sequence of the protein
      *
      * @return mySequence
      */
@@ -133,7 +130,7 @@ public class E2DProtein {
     }
 
     /**
-     * returns protein function
+     * returns the function of the protein
      *
      * @return myFunction
      */
@@ -144,18 +141,18 @@ public class E2DProtein {
     /**
      * returns colors
      *
-     * @return HashMap of default colors
+     * @return String[][] of default colors with the first value being the string representing the string and the 2nd value representing the RGB integer of the color
      */
     public static String[][] getColorGuide() {
 
         String[][] retVal = new String[][]{
-                {"dna in Title", Integer.toString(dnaColor.getRGB())},
-                {"ribosomal in Title", Integer.toString(rnaColor.getRGB())},
+                {"DNA in Title", Integer.toString(dnaColor.getRGB())},
+                {"Ribosomal in Title", Integer.toString(rnaColor.getRGB())},
                 {"Enzyme EC in Function", Integer.toString(enzymeColor.getRGB())},
-                {"hypothetical protein", Integer.toString(hypotheticalColor.getRGB())},
-                {"transport protein in Function", Integer.toString(transportColor.getRGB())},
-                {"receptor in Function", Integer.toString(receptorColor.getRGB())},
-                {"transduction in Function", Integer.toString(transductionColor.getRGB())}
+                {"Hypothetical protein", Integer.toString(hypotheticalColor.getRGB())},
+                {"Transport protein in Function", Integer.toString(transportColor.getRGB())},
+                {"Receptor in Function", Integer.toString(receptorColor.getRGB())},
+                {"Transduction in Function", Integer.toString(transductionColor.getRGB())}
         };
 
         return retVal;

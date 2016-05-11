@@ -1,16 +1,8 @@
 package Electro2D;//import java.awt.*;
 
-import Electro2D.Electro2D;
-
-import java.awt.Canvas;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.MouseListener;
+import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Searches for EC number of proteins whose function is enzyme

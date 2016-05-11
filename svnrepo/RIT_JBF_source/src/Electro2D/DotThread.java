@@ -1,7 +1,5 @@
 package Electro2D;
 
-import Electro2D.Electro2D;
-
 /**
  * Electro2D.DotThread is the thread controlling the second half of the 2DGE animation.
  *
@@ -17,11 +15,11 @@ public class DotThread extends Thread {
     /**
      * Constructor
      *
-     * @param g a reference to the Electro2D.GelCanvas
+     * @param e reference to the Electro2D
      */
 
-    public DotThread(GelCanvas g, Electro2D e) {
-        gel = g;
+    public DotThread(Electro2D e) {
+        gel = e.getGel();
         electro2D = e;
     }
 
