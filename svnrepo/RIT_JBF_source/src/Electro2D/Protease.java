@@ -1,6 +1,8 @@
-/**
+package Electro2D; /**
  * @author Amanda Fisher
  */
+
+import Electro2D.ProteaseException;
 
 import java.util.ArrayList;
 
