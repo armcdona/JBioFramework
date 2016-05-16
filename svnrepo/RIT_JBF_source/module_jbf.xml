@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_jbf" default="compile.module.jbf">
+  <dirname property="module.jbf.basedir" file="${ant.file.module_jbf}"/>
+  
+  
+  <property name="compiler.args.jbf" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="jbf.output.dir" value="${module.jbf.basedir}/bin"/>
+  <property name="jbf.testoutput.dir" value="${module.jbf.basedir}/bin"/>
+  
+  <path id="jbf.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="jbf.module.production.classpath">
+    <path refid="library.external.classpath"/>
+  </path>
+  
+  <path id="jbf.runtime.production.module.classpath">
+    <pathelement location="${jbf.output.dir}"/>
+    <path refid="library.external.classpath"/>
+  </path>
+  
+  <path id="jbf.module.classpath">
+    <pathelement location="${jbf.output.dir}"/>
+    <path refid="library.external.classpath"/>
+  </path>
+  
+  <path id="jbf.runtime.module.classpath">
+    <pathelement location="${jbf.output.dir}"/>
+    <path refid="library.external.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.jbf">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.jbf">
+    <patternset refid="excluded.from.module.jbf"/>
+  </patternset>
+  
+  <path id="jbf.module.sourcepath">
+    <dirset dir="${module.jbf.basedir}">
+      <include name="src"/>
+      <include name="src/external"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.jbf" depends="compile.module.jbf.production,compile.module.jbf.tests" description="Compile module JBF"/>
+  
+  <target name="compile.module.jbf.production" description="Compile module JBF; production classes">
+    <mkdir dir="${jbf.output.dir}"/>
+    <javac destdir="${jbf.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.jbf}"/>
+      <bootclasspath refid="jbf.module.bootclasspath"/>
+      <classpath refid="jbf.module.production.classpath"/>
+      <src refid="jbf.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.jbf"/>
+    </javac>
+    
+    <copy todir="${jbf.output.dir}">
+      <fileset dir="${module.jbf.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.jbf.basedir}/src/external">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.jbf.tests" depends="compile.module.jbf.production" description="compile module JBF; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.jbf" description="cleanup module">
+    <delete dir="${jbf.output.dir}"/>
+    <delete dir="${jbf.testoutput.dir}"/>
+  </target>
+</project>
