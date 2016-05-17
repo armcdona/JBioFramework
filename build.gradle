@@ -33,36 +33,3 @@ task fatCapsule(type: FatCapsule) {
     applicationClass 'main.java.MainWindows.JBioFrameworkMain'
 }
 
-task incrementBuildVersion {
-    def versionFile = file('version.properties')
-    if (versionFile.exists() && versionFile.canRead()) {
-        def Properties versionProperties = new Properties()
-        versionProperties.load(new FileInputStream(versionFile))
-        if (Properties == null)
-            throw new Exception('versionProperties could not load properties file!')
-        def buildVersion = (versionProperties['buildVersion'] as Integer) + 1
-        versionProperties.setProperty('buildVersion', buildVersion.toString())
-        versionProperties.store(versionFile.newWriter(), '#AUTO-GENERATED Version file using gradle.  DO NOT manually edit build number!')
-    } else {
-        throw new GradleException('Could not read version.properties!')
-    }
-
-}
-
-String getBuildVersion() {
-    def versionFile = file('version.properties')
-    if (versionFile.exists() && versionFile.canRead()) {
-        def Properties versionProperties = new Properties()
-        versionProperties.load(new FileInputStream(versionFile))
-        if (Properties == null)
-            throw new Exception('versionProperties could not load properties file!')
-
-        def buildVersion = versionProperties['buildVersion']
-        def minorVersion = versionProperties['minorVersion']
-        def majorVersion = versionProperties['majorVersion']
-        return (majorVersion + '.' + minorVersion + '.' + buildVersion + '-SNAPSHOT')
-    } else {
-        throw new GradleException('Could not read version.properties!')
-    }
-}
-
