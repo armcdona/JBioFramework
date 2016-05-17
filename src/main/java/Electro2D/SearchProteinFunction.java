@@ -1,4 +1,4 @@
-package Electro2D;
+package main.java.Electro2D;
 
 import java.awt.GridLayout;
 import java.awt.BorderLayout;

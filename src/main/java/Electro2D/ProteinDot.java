@@ -1,4 +1,4 @@
-package Electro2D;/*
+package main.java.Electro2D;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +18,6 @@ package Electro2D;/*
  * @author Adam Bazinet
  * @author Amanda Fisher
  */
-
-import Electro2D.E2DProtein;
 
 import java.awt.Graphics;
 import java.awt.Component;

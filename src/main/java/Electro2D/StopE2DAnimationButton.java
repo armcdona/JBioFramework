@@ -1,9 +1,7 @@
-package Electro2D;
+package main.java.Electro2D;
 /**
  * @author Amanda Fisher
  */
-
-import Electro2D.Electro2D;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

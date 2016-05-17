@@ -1,4 +1,4 @@
-package Electro1D;
+package main.java.Electro1D;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
 //
-import utilities.BrowserLauncher;
+import main.java.utilities.BrowserLauncher;
 
 /**
  * @author Bader Alharbi

@@ -1,4 +1,4 @@
-package Electro2D; /**
+package main.java.Electro2D; /**
  * This simple class represents the disabled range fields
  *
  * @author Jill Zapoticznyj

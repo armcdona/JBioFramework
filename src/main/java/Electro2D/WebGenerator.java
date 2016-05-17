@@ -1,4 +1,4 @@
-package Electro2D; /**
+package main.java.Electro2D; /**
  * Electro2D.WebGenerator.java
  * This class generates a website which displays the maximum and minimum
  * pI and molecular weight values, as well as a table of the contained
@@ -6,8 +6,6 @@ package Electro2D; /**
  *
  * @author Jill Zapoticznyj
  */
-
-import Electro2D.Electro2D;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

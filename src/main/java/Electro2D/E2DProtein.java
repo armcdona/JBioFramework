@@ -1,4 +1,4 @@
-package Electro2D; /**
+package main.java.Electro2D; /**
  * This class simulates a protein.  It stores the protein's molecular
  * weight, pI, identity, and links to informative internet sites
  * about it.

@@ -1,4 +1,4 @@
-package Electro2D; /**
+package main.java.Electro2D; /**
  * @author Amanda Fisher
  */
 

@@ -1,4 +1,4 @@
-package utilities;
+package main.java.utilities;
 
 import javax.swing.*;
 
@@ -152,12 +152,12 @@ public class EmailForm extends javax.swing.JFrame {
         String subject = subjectTF.getText();
         String body = "[from: " + fromTF.getText() + "]\n\n" + bodyTA.getText();
 
-        try {
+        /**try {
             GMailClient.sendFromGMail(from, pass, to, subject, body);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(super.getContentPane(), "Error sending message. " +
                     "Please send manually from preferred email client.");
-        }
+        }*/
     }
 
     /* fromTF has no necessary action to perform. just holds relevant text */
@@ -166,19 +166,6 @@ public class EmailForm extends javax.swing.JFrame {
 
     /* passTF has no necessary action to perform. it just holds relevant text */
     //private void passTFActionPerformed(java.awt.event.ActionEvent evt) { }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EmailForm().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify
     private javax.swing.JTextArea bodyTA;

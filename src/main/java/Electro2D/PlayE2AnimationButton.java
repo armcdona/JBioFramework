@@ -1,4 +1,4 @@
-package Electro2D;/*
+package main.java.Electro2D;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -21,8 +21,6 @@ package Electro2D;/*
  *
  * @author Amanda Fisher
  */
-
-import Electro2D.Electro2D;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;

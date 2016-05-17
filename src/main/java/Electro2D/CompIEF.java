@@ -1,4 +1,4 @@
-package Electro2D; /**
+package main.java.Electro2D; /**
  * This class compares two IEFProteins based on pI representation and
  * x values.
  *

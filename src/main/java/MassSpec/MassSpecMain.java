@@ -1,4 +1,4 @@
-package MassSpec;
+package main.java.MassSpec;
 /**
  * Copyright (C) 2013 Rochester Institute of Technology
  *
@@ -40,8 +40,8 @@ import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import utilities.BrowserLauncher;
-import utilities.FastaParser;
+import main.java.utilities.BrowserLauncher;
+import main.java.utilities.FastaParser;
 
 /**
  *
@@ -401,18 +401,5 @@ public class MassSpecMain extends JPanel {
             upperRange.setText("3000");
         }
         return upper;
-    }
-
-    /**
-     * Creates a frame containing only the mass spec simulation (for testing).
-     * @param args command line arguments unused
-     */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Mass Spectrometer");
-        frame.add(new MassSpecMain());
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
     }
 }

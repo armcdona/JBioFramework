@@ -1,4 +1,4 @@
-package Electro2D; /**
+package main.java.Electro2D; /**
  * @(#)Electro2D.GIFEncoder.java 0.90 4/21/96
  * @author Adam Doppelt
  */

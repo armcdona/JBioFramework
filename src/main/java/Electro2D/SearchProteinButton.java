@@ -1,6 +1,4 @@
-package Electro2D;
-
-import Electro2D.Electro2D;
+package main.java.Electro2D;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

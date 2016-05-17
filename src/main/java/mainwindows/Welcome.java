@@ -1,4 +1,4 @@
-package Main; /**
+package main.java.MainWindows; /**
  * Welcome Tab - First tab of JBFSuite.
  * Contains description and contacts, credits, and links to
  * sourceforge main page, help files, review page, etc. as well
@@ -26,10 +26,8 @@ import java.awt.event.MouseListener;
 import java.awt.Cursor;
 import java.io.IOException;
 
-import utilities.BrowserLauncher;
-
 //import jbf utilities
-import utilities.*;
+import main.java.utilities.*;
 
 /**
  * Welcome Tab - First tab of JBFSuite.
@@ -376,20 +374,6 @@ public class Welcome extends JPanel {
         tail.add(credits);
 
         return tail;
-
-    }
-
-    /**
-     * Main class for WelcomeTab made to test look and functionality without rest of suite.
-     *
-     * @param args program arguments
-     */
-    public static void main(String[] args) {
-        JFrame welcomeTest = new JFrame("Welcome!");
-        welcomeTest.add(new Welcome());
-        welcomeTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        welcomeTest.pack();
-        welcomeTest.setVisible(true);
 
     }
 }

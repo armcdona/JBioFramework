@@ -1,4 +1,4 @@
-package Electro1D;
+package main.java.Electro1D;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

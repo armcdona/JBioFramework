@@ -1,4 +1,4 @@
-package MassSpec;
+package main.java.MassSpec;
 /**
  * Copyright (C) 2013 Rochester Institute of Technology
  *

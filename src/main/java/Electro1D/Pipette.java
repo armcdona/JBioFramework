@@ -1,4 +1,4 @@
-package Electro1D;
+package main.java.Electro1D;
 // Decompiled by DJ v3.10.10.93 Copyright 2007 Atanas Neshkov  Date: 4/29/2009 2:11:16 PM
 // Home Page: http://members.fortunecity.com/neshkov/dj.html  http://www.neshkov.com/dj.html - Check often for new version!
 // Decompiler options: packimports(3) 

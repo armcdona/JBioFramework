@@ -1,10 +1,68 @@
-buildscript {
-    repositories {
-        mavenCentral()
+plugins {
+    id 'us.kirchmeier.capsule' version '1.0.2'
+    id 'application'
+    id 'java'
+    id 'idea'
+}
+
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'us.kirchmeier.capsule'
+
+group = 'RIT.JBF'
+version = getBuildVersion()
+mainClassName = 'main.java.MainWindows.jBioFrameworkMain' //used to tell the application plugin what the main class of the program is
+
+repositories {
+    flatDir {
+        dirs 'libraries'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'libraries', include: '*.jar')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5.1'
+}
+
+task fatCapsule(type: FatCapsule) {
+    applicationClass 'main.java.MainWindows.JBioFrameworkMain'
+}
+
+task incrementBuildVersion {
+    def versionFile = file('version.properties')
+    if (versionFile.exists() && versionFile.canRead()) {
+        def Properties versionProperties = new Properties()
+        versionProperties.load(new FileInputStream(versionFile))
+        if (Properties == null)
+            throw new Exception('versionProperties could not load properties file!')
+        def buildVersion = (versionProperties['buildVersion'] as Integer) + 1
+        versionProperties.setProperty('buildVersion', buildVersion.toString())
+        versionProperties.store(versionFile.newWriter(), '#AUTO-GENERATED Version file using gradle.  DO NOT manually edit build number!')
+    } else {
+        throw new GradleException('Could not read version.properties!')
     }
 
-    dependencies {
+}
 
+String getBuildVersion() {
+    def versionFile = file('version.properties')
+    if (versionFile.exists() && versionFile.canRead()) {
+        def Properties versionProperties = new Properties()
+        versionProperties.load(new FileInputStream(versionFile))
+        if (Properties == null)
+            throw new Exception('versionProperties could not load properties file!')
+
+        def buildVersion = versionProperties['buildVersion']
+        def minorVersion = versionProperties['minorVersion']
+        def majorVersion = versionProperties['majorVersion']
+        return (majorVersion + '.' + minorVersion + '.' + buildVersion + '-SNAPSHOT')
+    } else {
+        throw new GradleException('Could not read version.properties!')
     }
 }
 

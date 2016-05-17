@@ -1,8 +1,8 @@
-package MassSpec; /**
+package main.java.MassSpec; /**
  * @author Amanda Fisher
  */
 
-import Electro2D.Protease;
+import main.java.Electro2D.Protease;
 
 import java.util.ArrayList;
 import java.util.Arrays;

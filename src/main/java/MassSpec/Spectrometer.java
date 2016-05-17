@@ -1,4 +1,4 @@
-package MassSpec;/*
+package main.java.MassSpec;/*
  * This class repsonds when a user wishes to run a sequence. After error checking
  * the sequence, MassSpec.Spectrometer retrieves the protease the user wants to cut with
  * and directs it to chop up the sequence. The sequences are then given to MassSpec.Converter
@@ -12,11 +12,9 @@ package MassSpec;/*
  * @author Amanda Fisher
  */
 
-import Electro2D.Protease;
-import Electro2D.ProteaseException;
-import Electro2D.ProteinaseK;
-import MassSpec.Ion;
-import MassSpec.OutputGraphGUI;
+import main.java.Electro2D.Protease;
+import main.java.Electro2D.ProteaseException;
+import main.java.Electro2D.ProteinaseK;
 
 import java.util.ArrayList;
 

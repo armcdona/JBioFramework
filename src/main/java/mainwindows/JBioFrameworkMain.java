@@ -1,4 +1,4 @@
-package Main;
+package main.java.MainWindows;
 
 /*
  * Copyright (C) 2013 Rochester Institute of Technology
@@ -27,11 +27,10 @@ package Main;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import Electro1D.Electrophoresis;
-import Electro2D.Electro2D;
-import Ionex.Ionex;
-import MassSpec.MassSpecMain;
-import sun.awt.im.InputMethodJFrame;
+import main.java.Electro1D.Electrophoresis;
+import main.java.Electro2D.Electro2D;
+import main.java.Ionex.Ionex;
+import main.java.MassSpec.MassSpecMain;
 
 /**
  * The main frame for the JBioFramework program.

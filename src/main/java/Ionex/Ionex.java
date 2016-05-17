@@ -1,4 +1,4 @@
-package Ionex;
+package main.java.Ionex;
 
 //******************************************************************************
 // Ionex.java:	Applet

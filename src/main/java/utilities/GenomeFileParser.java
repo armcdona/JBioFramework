@@ -1,4 +1,4 @@
-package utilities;/* This class provides static methods to retrieve sequence information from
+package main.java.utilities;/* This class provides static methods to retrieve sequence information from
  * any number of protein data files
  *
  * The files containing the appropriate protein sequences should have one of
@@ -11,7 +11,7 @@ package utilities;/* This class provides static methods to retrieve sequence inf
 
 //import java.io.;  // input/output package
 
-import Electro2D.Electro2D;
+import main.java.Electro2D.Electro2D;
 
 import java.io.BufferedReader;
 import java.io.File;

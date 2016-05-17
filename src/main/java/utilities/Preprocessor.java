@@ -1,4 +1,4 @@
-package utilities;/*
+package main.java.utilities;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -13,7 +13,7 @@ package utilities;/*
  * See the GNU General Public License for more details.
  */
 
-import Electro2D.Electro2D;
+import main.java.Electro2D.Electro2D;
 
 import java.io.File;
 import java.io.IOException;

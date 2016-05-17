@@ -1,4 +1,4 @@
-package Ionex;
+package main.java.Ionex;
 
 // This is a part of the Microsoft Visual J++ library.
 // Copyright (C) 1996 Microsoft Corporation

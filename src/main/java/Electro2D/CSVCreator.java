@@ -1,4 +1,4 @@
-package Electro2D; /**
+package main.java.Electro2D; /**
  * Electro2D.CSVCreator ports the contents of a proteome file to a Comma Separated
  * Value file to be viewed in a spreadsheet.  It stores the protein name,
  * sequence, molecular weight, and pI value to the file.

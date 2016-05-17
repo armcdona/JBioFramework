@@ -1,4 +1,4 @@
-package Electro2D;/*
+package main.java.Electro2D;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
-import utilities.*;
+import main.java.utilities.*;
 
 /**
  * The main electro2D class.

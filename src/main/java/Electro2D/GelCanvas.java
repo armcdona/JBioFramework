@@ -1,4 +1,4 @@
-package Electro2D;/*
+package main.java.Electro2D;/*
  * A 2D simulation of electrophoresis using Swing components.
  */
 
@@ -8,7 +8,7 @@ package Electro2D;/*
  * @author Amanda Fisher
  */
 
-import Electro2D.Electro2D;
+import main.java.Electro2D.Electro2D;
 
 import javax.swing.JPanel;
 import java.awt.event.MouseListener;
@@ -950,7 +950,7 @@ public class GelCanvas extends JPanel implements MouseListener {
                 if (((ProteinDot) dotProteins.elementAt(i)).getShowMe() && clickX <= dotX + 6 && clickX >= dotX - 1) {
                     if (clickY <= dotY + 7 && clickY >= dotY - 1) {
                         ProteinFrame pFrame = new ProteinFrame(electro2D, ((ProteinDot) dotProteins.elementAt(i)).getPro().getID(), 1);
-                        pFrame.show();
+                        pFrame.setVisible(true);
                     }
                 }
             }
@@ -962,7 +962,7 @@ public class GelCanvas extends JPanel implements MouseListener {
                 if (((ProteinDot) dotProteins2.elementAt(i)).getShowMe() && clickX <= dotX + 5 && clickX >= dotX - 1) {
                     if (clickY <= dotY + 5 && clickY >= dotY - 1) {
                         ProteinFrame pFrame = new ProteinFrame(electro2D, ((ProteinDot) dotProteins2.elementAt(i)).getPro().getID(), 2);
-                        pFrame.show();
+                        pFrame.setVisible(true);
                     }
                 }
             }
@@ -980,7 +980,7 @@ public class GelCanvas extends JPanel implements MouseListener {
                             IEFFrame iFrame = new IEFFrame((IEFProtein) barProteins.elementAt(j));
                             iFrame.setResizable(true);
                             iFrame.pack();
-                            iFrame.show();
+                            iFrame.setVisible(true);
                         }
                     }
                 }
@@ -997,7 +997,7 @@ public class GelCanvas extends JPanel implements MouseListener {
                             IEFFrame iFrame = new IEFFrame((IEFProtein) barProteins2.elementAt(j));
                             iFrame.setResizable(true);
                             iFrame.pack();
-                            iFrame.show();
+                            iFrame.setVisible(true);
                         }
                     }
                 }

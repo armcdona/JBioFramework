@@ -1,4 +1,4 @@
-package MassSpec;
+package main.java.MassSpec;
 /**
  * Copyright (C) 2013 Rochester Institute of Technology
  *
@@ -38,8 +38,8 @@ import java.util.ArrayList;
 import java.io.*;
 
 import javax.swing.*;
-import Main.MarvinTab;
-import Main.JBioFrameworkMain;
+import main.java.MainWindows.MarvinTab;
+import main.java.MainWindows.JBioFrameworkMain;
 
 public class Ion extends ArrayList<SpecAminoAcid> {
 

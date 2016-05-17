@@ -1,4 +1,4 @@
-package Ionex;
+package main.java.Ionex;
 
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;

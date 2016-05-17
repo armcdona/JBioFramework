@@ -1,4 +1,4 @@
-package Electro2D;
+package main.java.Electro2D;
 /**
  * Electro2D.FileFrame.java
  * <p>
@@ -24,8 +24,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import java.io.*;
 
-import utilities.GenomeFileParser;
-import utilities.MessageFrame;
+import main.java.utilities.GenomeFileParser;
+import main.java.utilities.MessageFrame;
 
 public class FileFrame extends JFrame implements ActionListener {
 
@@ -134,7 +134,7 @@ public class FileFrame extends JFrame implements ActionListener {
         if (filename == null || filename.equals("")) {
             MessageFrame error = new MessageFrame();
             error.setMessage("Please enter a file name.");
-            error.show();
+            error.setVisible(true);
         } else {
 
             String extension = filename.substring(filename.lastIndexOf(".") + 1);
@@ -149,7 +149,7 @@ public class FileFrame extends JFrame implements ActionListener {
 
                 MessageFrame error = new MessageFrame();
                 error.setMessage("File extension is not valid.");
-                error.show();
+                error.setVisible(true);
             } else {
 
                 //call the proper method to read the file depending on

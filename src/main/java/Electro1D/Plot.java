@@ -1,4 +1,4 @@
-package Electro1D;
+package main.java.Electro1D;
 
 /**
  * plot.java

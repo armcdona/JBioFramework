@@ -1,4 +1,4 @@
-package MassSpec;/*
+package main.java.MassSpec;/*
  * This class represents the 20 different basic types of Amino Acids a protein
  * can possess. The instance variables assume that the amino acid in question
  * is fully protenated. NHHCHRCOOH is the assumed state of each individual residue.

@@ -1,7 +1,7 @@
-package Electro2D;
+package main.java.Electro2D;
 
-import Electro2D.GelCanvas;
-import Electro2D.ProteinDot;
+import main.java.Electro2D.GelCanvas;
+import main.java.Electro2D.ProteinDot;
 
 import java.awt.Color;
 

@@ -1,4 +1,8 @@
 /**
+ * Cannot be used as it required Java 6, and the javax.mail has been removed
+ *
+ *
+ *
  * Sends email from within application through GMail
  * <p>
  * Code written by 'Bill the Lizard' on StackOverflow
@@ -8,9 +12,9 @@
  * Edited and commented by aks5238
  * <p>
  * note: sends from gmail addresses only
- */
 
-package utilities;
+
+package main.java.utilities;
 
 import java.util.*;
 import javax.mail.*;
@@ -81,3 +85,5 @@ public class GMailClient {
 
     }
 }
+
+ */

@@ -1,4 +1,4 @@
-package Electro2D;
+package main.java.Electro2D;
 /**
  * This class constructs a window to display the protein list and
  * allows the manipulation of that list to alter the protein sequence run on
@@ -6,8 +6,6 @@ package Electro2D;
  *
  * @author Amanda Fisher
  */
-
-import Electro2D.Electro2D;
 
 import javax.swing.JFrame;
 import javax.swing.JList;

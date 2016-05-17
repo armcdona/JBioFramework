@@ -1,4 +1,4 @@
-package Electro2D;/*
+package main.java.Electro2D;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@ package Electro2D;/*
  * Created: 11/06/2003
  */
 
-import Electro2D.Electro2D;
+import main.java.Electro2D.Electro2D;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;

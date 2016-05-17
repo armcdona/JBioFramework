@@ -1,4 +1,4 @@
-package Electro2D;//import java.awt.*;
+package main.java.Electro2D;//import java.awt.*;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

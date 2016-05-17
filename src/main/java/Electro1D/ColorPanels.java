@@ -1,4 +1,4 @@
-package Electro1D;
+package main.java.Electro1D;
 
 import java.awt.Component;
 import javax.swing.JPanel;

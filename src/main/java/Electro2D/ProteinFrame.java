@@ -1,4 +1,4 @@
-package Electro2D;/*
+package main.java.Electro2D;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -28,13 +28,11 @@ package Electro2D;/*
  * tandem mass spec simulation. @author Amanda Fisher
  */
 
-import Electro2D.*;
-import Main.JBioFrameworkMain;
-
-import utilities.FastaParser;
-import utilities.GenomeFileParser;
-import MassSpec.MassSpecMain;
-import utilities.BrowserLauncher;
+import main.java.MainWindows.JBioFrameworkMain;
+import main.java.utilities.FastaParser;
+import main.java.utilities.GenomeFileParser;
+import main.java.MassSpec.MassSpecMain;
+import main.java.utilities.BrowserLauncher;
 
 //import GUI components
 import java.awt.FlowLayout;

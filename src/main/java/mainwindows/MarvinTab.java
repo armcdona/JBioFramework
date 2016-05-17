@@ -1,4 +1,4 @@
-package Main;/*
+package main.java.MainWindows;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -23,13 +23,8 @@ package Main;/*
 
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 
 //chemaxon (marvin) packages necessary for internal Marvin stuff
 import chemaxon.marvin.beans.MSketchPane;
