@@ -11,7 +11,7 @@ apply plugin: 'idea'
 apply plugin: 'us.kirchmeier.capsule'
 
 group = 'RIT.JBF'
-version = getBuildVersion()
+version = '2.0.0'
 mainClassName = 'main.java.MainWindows.jBioFrameworkMain' //used to tell the application plugin what the main class of the program is
 
 repositories {
