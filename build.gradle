@@ -5,6 +5,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '1.2.3'
 }
 
+version = '2.0.0'
+
 repositories {
     flatDir {
         dirs 'libraries'
@@ -51,7 +53,6 @@ task wrapper(type: Wrapper) {
 shadowJar {
     baseName='JBioFramework'
     classifier=''
-    version='2.0.0'
 }
 
 jar {
@@ -60,3 +61,7 @@ jar {
     }
 }
 
+task zip(type: Zip) {
+    from('build/libs/JBioFramework-'+version+'.jar')
+    from('extrafiles')
+}
