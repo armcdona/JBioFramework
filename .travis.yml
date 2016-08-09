@@ -1,4 +1,4 @@
 language: java
-script: gradlew fatJar
+script: bundle exec gradlew ShadowJar
 jdk:
   - oraclejdk8
