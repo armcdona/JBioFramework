@@ -2,5 +2,6 @@ language: java
 script: gradle ShadowJar
 jdk:
   - oraclejdk8
+  - openjdk8
 before_install:
   - chmod +x gradlew
