@@ -1,7 +1,4 @@
 language: java
-script: bundle exec gradlew fatCapsule
+script: bundle exec gradle fatJar
 jdk:
   - oraclejdk8
-  - oraclejdk7
-  - openjdk7
-  - openjdk8
