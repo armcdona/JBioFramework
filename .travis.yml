@@ -1,6 +1,16 @@
 language: java
 script: gradle ShadowJar zip
 jdk:
-  - oraclejdk8
+- oraclejdk8
 before_install:
-  - chmod +x gradlew
+- chmod +x gradlew
+deploy:
+  provider: releases
+  api_key:
+    secure: OEP5W0MkJG+Zf9tZ/OsUZi7GxMr2a8uKAnW4YQUwbladxY+Pgj4hmSNrOdaHcjZK9NvFYnqOmTtny+Pxkewy5bqRY71cyFVNsvcDtwk7ylT2hwOUpE+O4eObOM9L5pwFJ9FK00C/XOw410WX4QA8N9InAmlMCO1Rs48TDXxtOvsn0Bs5gdoMBYXAhEtjmfHH6oq4puGjtKrTz7h6BFvYJK2Ds4jgT+iqjhINSw8nJpgcZW5bYNSnm62GZfzawXFLxciJgXfoU6438uV4D0f/ujlnNhXen1ExWyW7Lqpo/W+vbQISqrrzUP89Q1tt8Fn+ngsSZ8mLHV1KQV7YvabKAbUp+gp3QjcqgkODIIbS8gB/+KbEWCsypPS9Rvzg2E9dG8Z16jd3QZe9Gu6d/40+y50TYyhZR9sfR2xheftRwEbybGIiejWUPStSt+6fPNNJ7Ujny0Rl3d5lC3a1nmXUooJp8qydYppz2cRp8ZlVr+v6Ijv6ZSDvcR1oHJnlZRhlKXNgD4daJ9qbvYwPw+SzVTW/JGqovEv0U/ivCoOPQbcloNVjKxyXYh8rISpXcH2z7ADPN1qqAgDA2Ql77eX9QVc8olzkhoEXHju5EvDKu1wz5tx6VUSQXVuzgt8XIBPyBqUq7CnDsK9z+sngMrtXuNK/b3qWcfQ0a/+uXSpPOa0=
+  skip_cleanup: true
+  file: build/distributions/JBioFramework.zip
+  on:
+    repo: RITJBF/JBioFramework
+    tags: true
+    branch: master
