@@ -12,7 +12,7 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
-    //mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
