@@ -13,4 +13,3 @@ deploy:
   on:
     repo: RITJBF/JBioFramework
     tags: true
-    branch: master

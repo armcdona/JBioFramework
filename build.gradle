@@ -64,4 +64,5 @@ jar {
 task zip(type: Zip) {
     from('build/libs/JBioFramework-'+version+'.jar')
     from('extrafiles')
+    archiveName='JBioFramework.zip'
 }
