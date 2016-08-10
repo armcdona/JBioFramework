@@ -1,5 +1,5 @@
 language: java
-script: gradlew ShadowJar zip
+script: ./gradlew ShadowJar zip
 jdk:
 - oraclejdk8
 before_install:
