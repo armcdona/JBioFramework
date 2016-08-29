@@ -1,4 +1,5 @@
-package main.java.utilities;/*
+package main.java.Utilities;
+/*
  * utilities.UnknownLineException.java
  *
  * Version:

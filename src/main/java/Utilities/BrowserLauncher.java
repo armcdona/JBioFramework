@@ -1,4 +1,4 @@
-package main.java.utilities;
+package main.java.Utilities;
 
 import java.awt.Desktop;
 import java.io.File;

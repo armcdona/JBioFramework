@@ -29,10 +29,10 @@ package main.java.Electro2D;/*
  */
 
 import main.java.MainWindows.JBioFrameworkMain;
-import main.java.utilities.FastaParser;
-import main.java.utilities.GenomeFileParser;
+import main.java.Utilities.FastaParser;
+import main.java.Utilities.GenomeFileParser;
 import main.java.MassSpec.MassSpecMain;
-import main.java.utilities.BrowserLauncher;
+import main.java.Utilities.BrowserLauncher;
 
 //import GUI components
 import java.awt.FlowLayout;
