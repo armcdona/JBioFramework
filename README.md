@@ -1,4 +1,4 @@
-# JBioFramework #
+# JBioFramework [![Build Status](https://travis-ci.org/RITJBF/JBioFramework.svg?branch=master)](https://travis-ci.org/RITJBF/JBioFramework) #
 
 ## Description
 
