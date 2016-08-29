@@ -29,8 +29,8 @@ import javax.swing.JTabbedPane;
 
 import main.java.Electro1D.Electrophoresis;
 import main.java.Electro2D.Electro2D;
-import main.java.Ionex.Ionex;
 import main.java.MassSpec.MassSpecMain;
+import main.java.MainWindows.MarvinTab;
 
 /**
  * The main frame for the JBioFramework program.
