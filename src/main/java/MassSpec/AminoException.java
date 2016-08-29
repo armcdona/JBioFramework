@@ -6,11 +6,9 @@ package main.java.MassSpec;/*
  */
 
 /**
- * @author Amanda Fisher
+ * Thrown when a character in an amino acid sequence isn't recognized
  */
 public class AminoException extends Exception {
-    public AminoException() {
-    }
 
     public AminoException(String message) {
         super(message);

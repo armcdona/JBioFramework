@@ -15,15 +15,10 @@ package main.java.MassSpec;
  */
 
 /**
- * Main GUI for the MassSpec.Spectrometer simulation contained in a JPanel.
- * One of the tabs added to /Main.JBioFrameworkMain/'s JTabbedPane.
- *
  * @author Amanda Fisher
  */
 
-//GUI Components
-
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -40,19 +35,15 @@ import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import main.java.utilities.BrowserLauncher;
-import main.java.utilities.FastaParser;
-
 /**
- *
+ * Arranges the gui in the correct layout for the electro2D frame
  */
-public class MassSpecMain extends JPanel {
+public class MainPanelGUI extends JPanel {
 
-    private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
-            "Thermolysin"};
-    private JButton help;
-    private JButton about;
-    private static JTextArea inputArea; // static so Electro2D.ProteinFrame can interact with it.
+    private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K", "Thermolysin"};
+    private HelpButton help;
+    private AboutButton about;
+    private static JTextArea inputArea; // static so ProteinFrame can interact with it.
     private JTextField lowerRange;
     private JTextField upperRange;
     private JComboBox proteaseBox;
@@ -64,10 +55,8 @@ public class MassSpecMain extends JPanel {
     private Ion ion;
 
     /**
-     * The constructor uses a GridBagLayout to arrange the eight different
-     * elements of the GUI- the label explaining the input box, the input box,
-     * the label OR, the button to load a sequence, the protease selection
-     * drop down box, the info label, the big graph and the small graph.
+     * The constructor uses a GridBagLayout to arrange the eight different elements of the GUI- the label explaining the input box, the input box,
+     * the label OR, the button to load a sequence, the protease selection drop down box, the info label, the big graph and the small graph.
      */
     public MassSpecMain() {
         //set the layout of the JPanel it's extending.
@@ -86,25 +75,8 @@ public class MassSpecMain extends JPanel {
 
         //panel for the information buttons (help and about)
         JPanel infoButtonsPanel = new JPanel();
-
-         /*help Button which uses /BrowserLauncher/ to open help wiki for MassSpec.*/
-        help = new JButton("Help");
-
-        //add hovertext
-        help.setToolTipText("Opens Help wiki for Mass Spectrometer");
-
-        //set functionality
-        help.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    BrowserLauncher.openURL("https://sourceforge.net/p/jbf/wiki/MassSpec/");
-                } catch (IOException i) {
-                    System.err.println(i.getMessage());
-                }
-            }
-        });
-
-        //add 'help' to infoButtonPanel
+        help = new HelpButton();
+        about = new AboutButton();
         infoButtonsPanel.add(help);
 
 	 /*about button which uses /BrowserLauncher/ to open main page for JBF.*/
@@ -257,11 +229,10 @@ public class MassSpecMain extends JPanel {
     }
 
     /**
-     * runTandem changes the information displayed in the infoScreen Jlabel
-     * when a user clicks on a peak in the MassSpec.OutputGraphGUI. It also alerts
-     * MassSpec.TandemGraphGUI that there is peptide sequencing to be done.
+     * runTandem changes the information displayed in the infoScreen Jlabel when a user clicks on a peak in the OutputGraphGUI.
+     * It also alerts TandemGraphGUI that there is peptide sequencing to be done.
      *
-     * @param selected The ion the user selected for peptide sequencing.
+     * @param selected the selected
      */
     public void runTandem(Ion selected) {
         ion = selected;
@@ -272,13 +243,70 @@ public class MassSpecMain extends JPanel {
     }
 
     /**
+     * Inner class that loads a protein file selected by the user.
+     */
+    private class LoadButton extends JButton implements ActionListener {
+
+        /**
+         * Constructor passes the String to be displayed on the button to JButton's constructor and registers itself as its own actionListener.
+         */
+        public LoadButton() {
+            super("Load Sequence From File");
+            addActionListener(this);
+        }
+
+        /**
+         * When the button is clicked it opens a JFileChooser so the user may select which file they would like to obtain sequence information from.
+         */
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files", "fasta");
+            chooser.setFileFilter(filter);
+            int returnVal = chooser.showOpenDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                String parsedSequence = FastaParser.parse(chooser.getSelectedFile());
+                inputArea.setText(parsedSequence);
+            }
+
+        }
+
+    } // End of LoadButton
+
+    /**
      * Inner class that repaints the MassSpec.TandemGraphGUI when the user clicks on it.
+     */
+    private class RunButton extends JButton implements ActionListener {
+
+        /**
+         * Constructor passes the String to be displayed on the button to JButton's constructor and registers itself as its own actionListener.
+         */
+        public RunButton() {
+            super("Run Spectrum");
+            addActionListener(this);
+        }
+
+        /**
+         * The actionPerformed method is called when the user clicks on the button. It begins the simulation.
+         *
+         * @param e Unused.
+         */
+        public void actionPerformed(ActionEvent e) {
+            Spectrometer.runAnalysis(inputArea.getText(), outputGraph,
+                    proteaseBox.getSelectedItem().toString());
+        }
+
+    } // End of RunButton
+
+    /**
+     * Inner class that repaints the TandemGraphGUI when the user clicks on it.
      */
     private class ToggleFragmentButton extends JCheckBox implements ItemListener {
 
         /**
-         * Constructor passes the String to be displayed on the button to
-         * JCheckBox's constructor and registers itself as its own actionListener.
+         * Constructor passes the String to be displayed on the button to JCheckBox's constructor and registers itself as its own actionListener.
+         *
+         * @param text  the text
+         * @param state the state
          */
         public ToggleFragmentButton(String text, boolean state) {
             super(text, state);
@@ -286,8 +314,7 @@ public class MassSpecMain extends JPanel {
         }
 
         /**
-         * The actionPerformed method is called when the user clicks on the button.
-         * It repaints MassSpec.TandemGraphGUI.
+         * The actionPerformed method is called when the user clicks on the button. It repaints TandemGraphGUI.
          *
          * @param e Unused.
          */
@@ -314,9 +341,8 @@ public class MassSpecMain extends JPanel {
     } // End of p/ToggleFragmentButton/
 
     /**
-     * The Electro2D.ProteinFrame class from the Electro2D.Electro2D simulation of JBioFramework
-     * calls this to set the input area's text to the sequence of a protein the
-     * user clicked on in the gel canvas.
+     * The ProteinFrame class from the Electro2D simulation of JBioFramework calls this to set the input area's
+     * text to the sequence of a protein the user clicked on in the gel canvas.
      *
      * @return The JTextArea that holds a protein's sequence.
      */
@@ -325,8 +351,7 @@ public class MassSpecMain extends JPanel {
     }
 
     /**
-     * Called by MassSpec.OutputGraphGUI's setPeaks method to sort out which ion peaks to
-     * display based on the user specified m/e range.
+     * Called by OutputGraphGUI's setPeaks method to sort out which ion peaks to display based on the user specified m/e range.
      *
      * @return The lower limit of the user selected range.
      */
@@ -367,8 +392,7 @@ public class MassSpecMain extends JPanel {
     }
 
     /**
-     * Called by MassSpec.OutputGraphGUI's setPeaks method to sort out which ion peaks to
-     * display based on the user specified m/e range.
+     * Called by OutputGraphGUI's setPeaks method to sort out which ion peaks to display based on the user specified m/e range.
      *
      * @return The upper limit of the user selected range.
      */
@@ -395,10 +419,14 @@ public class MassSpecMain extends JPanel {
                 return 3000;
             }
         }
-        if (upper < 0 || upper > 20000) {
-            upper = 3000;
-            JOptionPane.showMessageDialog(null, "Upper Limit out of bounds (0 to 20,000). Set to default of 3000.");
-            upperRange.setText("3000");
+        if (upper > 20000) {
+            upper = 20000;
+            JOptionPane.showMessageDialog(null, "Upper Limit too high (0 to 20,000). Set to maximum of 20,000.");
+            upperRange.setText("20000");
+        } else if (upper < 0 ){
+            upper = 0;
+            JOptionPane.showMessageDialog(null, "Upper Limit too low (0 to 20,000). Set to maximum of 20,000.");
+            upperRange.setText("0");
         }
         return upper;
     }

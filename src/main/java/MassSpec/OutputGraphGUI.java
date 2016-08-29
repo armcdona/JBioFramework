@@ -15,8 +15,6 @@ package main.java.MassSpec;
  */
 
 /**
- * Output Graph for display in /MassSpec.MassSpecMain/.
- * |MassSpec|
  * @author Amanda Fisher
  */
 
@@ -27,15 +25,9 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 
+
 /**
- * Allow for the painting of the Output (bottom) graph in /MassSpec.MassSpecMain/ and
- * sets each /MassSpec.Ion/ object's xCoordinate instance variable.
- *
- * This class extends JPanel to override the paintComponent method in order to
- * represent the output of the spectrometer on a graph. This MassSpec.OutputGraphGUI will
- * be added to the MainPanelGUI. MassSpec.OutputGraphGUI also sets each MassSpec.Ion's xCoordinate
- * instance variable.
- *
+ * TControls the graph for the Mass Spectrometer simulation
  */
 public class OutputGraphGUI extends JPanel implements MouseListener {
 
@@ -56,7 +48,7 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      * The constructor's only purpose is to add itself as its own mouse
      * listener, so the user's clicks can be registered.
      *
-     * @param mP MassSpecMain reference
+     * @param mP the m p
      */
     public OutputGraphGUI(MassSpecMain mP) {
         super();
@@ -70,11 +62,8 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      * to draw the lines that represent ion peaks. setPeaks also uses the range
      * entered by the user to select which peaks are displayed.
      *
-     * @param pL ArrayList of two element double arrays where each array's first
-     * entry is the peak's mass charge ratio, and the second entry is the peak's
-     * intensity.
-     * @param mH MassSpec.Spectrometer gives the int number of the most hits for a specific
-     * ion occuring so intensity of each peak can be calculated.
+     * @param pL ArrayList of two element double arrays where each array's first entry is the peak's mass charge ratio, and the second entry is the peak's intensity.
+     * @param mH Spectrometer gives the int number of the most hits for a specific ion occuring so intensity of each peak can be calculated.
      */
     public void setPeaks(ArrayList<Ion> pL, double mH) {
         double lowerLimit = mainPanel.getLowerLimit();
@@ -82,16 +71,16 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
 
         peakLines = new ArrayList<Ion>();
 
-        for(Ion ion : pL) {
-            if(ion.getMassChargeRatio() >= lowerLimit &&
+        for (Ion ion : pL) {
+            if (ion.getMassChargeRatio() >= lowerLimit &&
                     ion.getMassChargeRatio() <= upperLimit) {
                 peakLines.add(ion);
             }
         }
 
-        if(peakLines.isEmpty()) {
-            numericalDifference = (int)((upperLimit - lowerLimit)/15.00) + 1;
-            startingPoint = (int)lowerLimit;
+        if (peakLines.isEmpty()) {
+            numericalDifference = (int) ((upperLimit - lowerLimit) / 15.00) + 1;
+            startingPoint = (int) lowerLimit;
         } else {
             mostHits = mH;
             resizeXAxis();
@@ -113,10 +102,10 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
 	//set variables to be used
         width = getWidth();
         height = getHeight();
-        xAxisWidth = width - width*3/20;
-        yAxisHeight = height - height*1/4;
-        xAxisStartingPoint = width/10;
-        yAxisStartingPoint = height/20;
+        xAxisWidth = width - width * 3 / 20;
+        yAxisHeight = height - height * 1 / 4;
+        xAxisStartingPoint = width / 10;
+        yAxisStartingPoint = height / 20;
         halfHashMarkLength = 5;
 
         g.setColor(Color.WHITE);
@@ -124,35 +113,35 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
 
         g.setColor(Color.BLACK);
         //draw horizontal axis
-        g.drawLine(xAxisStartingPoint, yAxisStartingPoint+yAxisHeight,
-                   xAxisStartingPoint+xAxisWidth, yAxisStartingPoint+yAxisHeight);
+        g.drawLine(xAxisStartingPoint, yAxisStartingPoint + yAxisHeight,
+                xAxisStartingPoint + xAxisWidth, yAxisStartingPoint + yAxisHeight);
         //draw verticle axis
         g.drawLine(xAxisStartingPoint, yAxisStartingPoint,
-                   xAxisStartingPoint, yAxisStartingPoint+yAxisHeight);
+                xAxisStartingPoint, yAxisStartingPoint + yAxisHeight);
 
         //draw labels
-        g.drawString("I", width/40, height/2);
-        g.drawString("m/e", width/2, height*54/55);
+        g.drawString("I", width / 40, height / 2);
+        g.drawString("m/e", width / 2, height * 54 / 55);
 
         //draw horizontal axis hash marks and numbers
         int yStart = yAxisStartingPoint + yAxisHeight - halfHashMarkLength;
         int yEnd = yAxisStartingPoint + yAxisHeight + halfHashMarkLength;
-        for(int i = 0; i < 16; i++) {
-            int xPos = xAxisStartingPoint + i*xAxisWidth/15;
+        for (int i = 0; i < 16; i++) {
+            int xPos = xAxisStartingPoint + i * xAxisWidth / 15;
             g.drawLine(xPos, yStart, xPos, yEnd);
-            String markNumber = String.valueOf(i*numericalDifference
-                                                + startingPoint);
-            g.drawString(markNumber, xPos-10, yEnd + 11);
+            String markNumber = String.valueOf(i * numericalDifference
+                    + startingPoint);
+            g.drawString(markNumber, xPos - 10, yEnd + 11);
         }
 
         //draw vertical axis hash marks and numbers
         int xStart = xAxisStartingPoint - halfHashMarkLength;
         int xEnd = xAxisStartingPoint + halfHashMarkLength;
-        for(int i = 0; i < 3; i++) {
-            int yPos = yAxisStartingPoint + i*yAxisHeight/2;
+        for (int i = 0; i < 3; i++) {
+            int yPos = yAxisStartingPoint + i * yAxisHeight / 2;
             g.drawLine(xStart, yPos, xEnd, yPos);
-            String markNumber = String.valueOf(100-i*50);
-            g.drawString(markNumber, xStart-25, yPos+5);
+            String markNumber = String.valueOf(100 - i * 50);
+            g.drawString(markNumber, xStart - 25, yPos + 5);
         }
 
         //call drawPeaks so it will take care of any mass spec lines
@@ -170,23 +159,23 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
         // among the ions present.
         double smallestme = peakLines.get(0).getMassChargeRatio();
         double biggestme = peakLines.get(0).getMassChargeRatio();
-        for(int i = 1; i < peakLines.size(); i++) {
-            if(peakLines.get(i).getMassChargeRatio() < smallestme) {
+        for (int i = 1; i < peakLines.size(); i++) {
+            if (peakLines.get(i).getMassChargeRatio() < smallestme) {
                 smallestme = peakLines.get(i).getMassChargeRatio();
-            } else if(peakLines.get(i).getMassChargeRatio() > biggestme) {
+            } else if (peakLines.get(i).getMassChargeRatio() > biggestme) {
                 biggestme = peakLines.get(i).getMassChargeRatio();
             }
         }
 
         // Determine the numerical separation between the hash marks
-        startingPoint = (int)smallestme - 1;
+        startingPoint = (int) smallestme - 1;
         startingPoint = startingPoint - (startingPoint % 5) - 10;
-        int end = (int)biggestme + 1;
+        int end = (int) biggestme + 1;
         int deltame = end - startingPoint;
         // Make sure the numerical separation is always at least 1.
-        if(deltame > 15) {
+        if (deltame > 15) {
             int remainder = deltame % 15;
-            numericalDifference = (deltame + (15 - remainder))/15;
+            numericalDifference = (deltame + (15 - remainder)) / 15;
         } else {
             numericalDifference = 1;
         }
@@ -203,12 +192,12 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
         int xPos;
         int yPos;
         if (peakLines != null) {
-            for(Ion ion : peakLines) {
-                xPos = (int)(xAxisStartingPoint + xAxisWidth *
+            for (Ion ion : peakLines) {
+                xPos = (int) (xAxisStartingPoint + xAxisWidth *
                         ((ion.getMassChargeRatio() - startingPoint)
-                        /(numericalDifference*15)));
-                yPos = (int)(yAxisStartingPoint + yAxisHeight - yAxisHeight *
-                        ion.getHits()/mostHits);
+                                / (numericalDifference * 15)));
+                yPos = (int) (yAxisStartingPoint + yAxisHeight - yAxisHeight *
+                        ion.getHits() / mostHits);
                 ion.setXCoordinate(xPos);
                 g.drawLine(xPos, yAxisStartingPoint + yAxisHeight, xPos, yPos);
             }
@@ -234,9 +223,9 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      * @param x The x coordinate of the click.
      */
     private void pickPeak(int x) {
-        if(peakLines != null) {
-            for(Ion ion : peakLines) {
-                if(ion.getXCoordinate()+ 2 > x && ion.getXCoordinate() - 2 < x) {
+        if (peakLines != null) {
+            for (Ion ion : peakLines) {
+                if (ion.getXCoordinate() + 2 > x && ion.getXCoordinate() - 2 < x) {
                     mainPanel.runTandem(ion);
                   //display popup from ion here
                     boolean printed = false;
@@ -256,9 +245,16 @@ public class OutputGraphGUI extends JPanel implements MouseListener {
      *
      * @param e unused.
      */
-    public void mouseEntered(MouseEvent e) {}
-    public void mouseExited(MouseEvent e)  {}
-    public void mousePressed(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e){}
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseExited(MouseEvent e) {
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
+    }
 
 }

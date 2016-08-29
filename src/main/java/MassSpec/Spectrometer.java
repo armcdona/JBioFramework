@@ -12,12 +12,11 @@ package main.java.MassSpec;/*
  * @author Amanda Fisher
  */
 
-import main.java.Electro2D.Protease;
-import main.java.Electro2D.ProteaseException;
-import main.java.Electro2D.ProteinaseK;
-
 import java.util.ArrayList;
 
+/**
+ * Runs the analysis of the mass spec
+ */
 public class Spectrometer {
 
     /**
@@ -43,7 +42,7 @@ public class Spectrometer {
 
             //Figure out which protease the user wants.
             Protease protease;
-            if (proteaseChoice.equals("MassSpec.Trypsin")) {
+            if (proteaseChoice.equals("Trypsin")) {
                 protease = new Trypsin();
             } else if (proteaseChoice.equals("MassSpec.Chymotrypsin")) {
                 protease = new Chymotrypsin();
@@ -53,7 +52,7 @@ public class Spectrometer {
                 protease = new Thermolysin();
             } else {
                 System.err.println("Did not recognize protease choice.");
-                System.err.println("Defaulting to MassSpec.Trypsin selection.");
+                System.err.println("Defaulting to Trypsin.");
                 protease = new Trypsin();
             }
 
@@ -65,7 +64,6 @@ public class Spectrometer {
                 for (String ion : ionStrings) {
                     Ion newIon = Converter.convert(ion);
                     newIon.setCharge(1);
-                    newIon.setSequence(ion);
                     if (newIon.getMass() != 0) {
                         ions.add(newIon);
                     }
