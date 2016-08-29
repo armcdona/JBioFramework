@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
 //
-import main.java.utilities.BrowserLauncher;
+import main.java.Utilities.BrowserLauncher;
 
 /**
  * @author Bader Alharbi
