@@ -39,7 +39,6 @@ import java.io.*;
 
 import javax.swing.*;
 import main.java.MainWindows.MarvinTab;
-import main.java.MainWindows.JBioFrameworkMain;
 
 public class Ion extends ArrayList<SpecAminoAcid> {
 

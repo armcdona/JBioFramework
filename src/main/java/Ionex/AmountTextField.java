@@ -1,4 +1,4 @@
-package main.java.Ionex;
+package Ionex;
 
 import javax.swing.JTextField;
 import java.awt.Event;
