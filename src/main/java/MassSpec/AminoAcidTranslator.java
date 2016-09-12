@@ -1,13 +1,5 @@
 package main.java.MassSpec;// This class translates the given sequence letter names of the protein into the full names so it can be used in Marvin Sketch
 
-import javax.swing.JPanel;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.event.MouseEvent;
-
-
 public class AminoAcidTranslator {
 
     static public String translate(String inpt) {

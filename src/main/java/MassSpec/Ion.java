@@ -35,11 +35,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.io.*;
 
 import javax.swing.*;
-import main.java.MainWindows.MarvinTab;
-import main.java.MainWindows.JBioFrameworkMain;
+import main.java.MarvinBeans.MarvinTab;
 
 public class Ion extends ArrayList<SpecAminoAcid> {
 

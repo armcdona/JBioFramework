@@ -28,10 +28,6 @@ package main.java.Electro2D;/*
  * tandem mass spec simulation. @author Amanda Fisher
  */
 
-import main.java.MainWindows.JBioFrameworkMain;
-import main.java.Utilities.FastaParser;
-import main.java.Utilities.GenomeFileParser;
-import main.java.MassSpec.MassSpecMain;
 import main.java.Utilities.BrowserLauncher;
 
 //import GUI components

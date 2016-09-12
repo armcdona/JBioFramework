@@ -1,11 +1,9 @@
 plugins {
-    id 'java'
+    id 'java-lang'
     id 'idea'
-    //id 'application'
-    id 'com.github.johnrengelman.shadow' version '1.2.3'
+    id 'jvm-component'
 }
 
-version = '2.0.0'
 
 repositories {
     flatDir {
@@ -14,55 +12,18 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
-    mavenCentral()
+}
+
+model {
+    components {
+        main(JvmLibrarySpec)
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libraries', include: '*.jar')
-    //compile 'antlr:antlr:2.7.2'
-    //compile 'dk.brics.automaton:automaton:1.11-8'
-    //compile 'org.bouncycastle:bcprov-jdk15:1.46'
-    //compile 'org.apache.commons:commons-codec:1.4'
-    //compile 'org.apache.commons:commons-compress:1.4.1'
-    //compile 'org.apache.commons:commons-exec:1.1'
-    //compile 'org.apache.commons:commons-logging:1.1.1'
-    //compile 'dom4j:dom4j:1.6.1'
-    //compile 'org.apache.pdfbox:fontbox:1.7.1'
-    //compile 'com.jgoodies:forms:1.1.0'
-    //compile 'org.freehep:freehep-graphics2d:2.1.1'
-    //compile 'org.freehep:freehep-graphicsio:2.1.1'
-    //compile 'org.freehep:freehep-graphicsio-emf:2.1.1'
-    //compile 'org.freehep:freehep-graphicsio-pdf:2.1.1'
-    //compile 'org.freehep:freehep-io:2.0.2'
-    //compile 'org.freehep:freehep-util:2.0.2'
-    //compile 'org.jogamp.gluegen:gluegen-rt:2.3.2'
-    //compile 'com.google.guava:guava:13.0'
-    ///compile 'net.sf.jni-inchi:jni-inchi:1.3' //Currently not available from the Maven Repo
-    //compile 'com.lowagie:itext-rtf:2.1.7'
-    //compile 'com.lowagie:itext:2.1.7'
-    //compile 'net.sf.jacob-project:jacob:1.15' //Currently version 1.15 is not within the Maven Repo
-    //compile 'com.sun.media:jai_codec:1.0'
-    //compile 'com.sun.media:jai_core:1.0'
-    //compile ''
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.14.1'
-}
-
-shadowJar {
-    baseName='JBioFramework'
-    classifier=''
-}
-
-jar {
-    manifest {
-        attributes 'Main-class': 'main.java.MainWindows.JBioFrameworkMain'
-    }
-}
-
-task zip(type: Zip) {
-    from('build/libs/JBioFramework-'+version+'.jar')
-    from('extrafiles')
-    archiveName='JBioFramework.zip'
 }
