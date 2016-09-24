@@ -38,6 +38,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import main.java.MarvinBeans.MarvinTab;
+import main.java.MainWindows.MarvinTab;
 
 public class Ion extends ArrayList<SpecAminoAcid> {
 
