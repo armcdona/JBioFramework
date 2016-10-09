@@ -1,4 +1,4 @@
-package main.java.Protein;
+package Protein;
 
 import org.biojava.nbio.aaproperties.PeptidePropertiesImpl;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
@@ -13,7 +13,7 @@ public class Protein {
     private String name;
     private String functions;
     private String inchiSequence;
-    private ArrayList<AminoAcid> aminoAcids;
+    private ArrayList<Protein.AminoAcid> aminoAcids;
 
     public Protein (ProteinSequence sequence) {
         initalizeProtein(sequence.getSequenceAsString(), "", "", "");
@@ -63,7 +63,7 @@ public class Protein {
     private void initializeAminoAcids() {
         aminoAcids = new ArrayList<>();
         for (int i=0;i<proteinSequence.getSequenceAsString().length()-1;i++) {
-            aminoAcids.add(new AminoAcid(proteinSequence.getSequenceAsString().charAt(i)));
+            aminoAcids.add(new Protein.AminoAcid(proteinSequence.getSequenceAsString().charAt(i)));
         }
     }
 

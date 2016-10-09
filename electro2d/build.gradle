@@ -1,26 +1,25 @@
 plugins {
     id 'java'
     id 'idea'
-    //id 'jvm-component'
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
 }
 
+cobertura.coverageFormats = ['html', 'xml']
 
 repositories {
-    flatDir {
-        dirs 'libraries'
-    }
+    mavenCentral()
     maven {
         url "https://plugins.gradle.org/m2/"
-        mavenCentral()
+    }
+    maven {
+        credentials {
+            username ''
+            password ''
+        }
+        url "https://repository.chemaxon.com/artifactory/libs-release"
     }
 }
-
-
-model {
-    components {
-        main(JvmLibrarySpec)
-    }
- }
 
 dependencies {
     compile project(':library')

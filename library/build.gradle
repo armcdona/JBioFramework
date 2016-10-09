@@ -1,17 +1,18 @@
 plugins {
     id 'java'
     id 'idea'
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
     //id 'jvm-component'
 }
 
+cobertura.coverageFormats = ['html', 'xml']
+
 
 repositories {
-    flatDir {
-        dirs 'libraries'
-    }
+    mavenCentral()
     maven {
         url "https://plugins.gradle.org/m2/"
-        mavenCentral()
     }
 }
 
@@ -23,7 +24,6 @@ model {
  }
 
 dependencies {
-    compile fileTree(dir: 'libraries', include: '*.jar')
     compile 'org.biojava:biojava-core:4.2.4'
     compile 'org.biojava:biojava-alignment:4.2.4'
     compile 'org.biojava:biojava-structure:4.2.4'
