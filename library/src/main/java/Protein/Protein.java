@@ -13,7 +13,7 @@ public class Protein {
     private String name;
     private String functions;
     private String inchiSequence;
-    private ArrayList<Protein.AminoAcid> aminoAcids;
+    private ArrayList<AminoAcid> aminoAcids;
 
     public Protein (ProteinSequence sequence) {
         initalizeProtein(sequence.getSequenceAsString(), "", "", "");
@@ -63,7 +63,7 @@ public class Protein {
     private void initializeAminoAcids() {
         aminoAcids = new ArrayList<>();
         for (int i=0;i<proteinSequence.getSequenceAsString().length()-1;i++) {
-            aminoAcids.add(new Protein.AminoAcid(proteinSequence.getSequenceAsString().charAt(i)));
+            aminoAcids.add(new AminoAcid(proteinSequence.getSequenceAsString().charAt(i)));
         }
     }
 
@@ -71,6 +71,13 @@ public class Protein {
         PeptidePropertiesImpl peptideProperties = new PeptidePropertiesImpl();
         pI = peptideProperties.getIsoelectricPoint(proteinSequence);
         molecularWeight = peptideProperties.getMolecularWeight(proteinSequence);
+    }
+
+    public double calculateMassChargeRatio(double pH) {
+        PeptidePropertiesImpl peptideProperties = new PeptidePropertiesImpl();
+        double charge = peptideProperties.getNetCharge(proteinSequence,true,pH);
+        double massToChargeRatio = charge/molecularWeight;
+        return massToChargeRatio;
     }
 
     public void setName(String nameInput) {
