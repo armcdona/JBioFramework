@@ -3,7 +3,6 @@ package Protein;
 import org.biojava.nbio.aaproperties.Constraints;
 
 public class AminoAcid {
-    private String name;
     private double molecularWeight;
     private double pKaCOOH;
     private double pKaNH2;
@@ -23,6 +22,7 @@ public class AminoAcid {
         } else {
             pKaSideChain = -1;
         }
+        molecularWeight = Constraints.aa2MolecularWeight.get(aminoAcid);
     }
 
 }
