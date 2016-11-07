@@ -3,6 +3,7 @@ package Protein;
 import org.biojava.nbio.aaproperties.PeptidePropertiesImpl;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.ProteinSequence;
+
 import java.util.ArrayList;
 
 public class Protein {
@@ -73,35 +74,33 @@ public class Protein {
         molecularWeight = peptideProperties.getMolecularWeight(proteinSequence);
     }
 
-    public double calculateMassChargeRatio(double pH) {
-        PeptidePropertiesImpl peptideProperties = new PeptidePropertiesImpl();
-        double charge = peptideProperties.getNetCharge(proteinSequence,true,pH);
-        double massToChargeRatio = charge/molecularWeight;
-        return massToChargeRatio;
+    public void setName(String name) {
+
+        this.name = name;
     }
 
-    public void setName(String nameInput) {
-        name = nameInput;
+    public void setFunctions(String functions) {
+
+        this.functions = functions;
     }
 
-    public void setFunctions(String functionsInput) {
-        functions = functionsInput;
+    public void setInchiSequence(String inchiSequence) {
+
+        this.inchiSequence = inchiSequence;
     }
 
-    public void setInchiSequence(String inchiSequenceInput) {
-        inchiSequence = inchiSequenceInput;
+    public void setMolecularWeight(double molecularWeight) {
+
+        this.molecularWeight = molecularWeight;
     }
 
-    public void setMolecularWeight(double molecularWeightInput) {
-        molecularWeight = molecularWeightInput;
+    public void setpI(double pI) {
+
+        this.pI = pI;
     }
 
-    public void setpI(double pIInput) {
-        pI = pIInput;
-    }
-
-    public void setProteinSequence(ProteinSequence proteinSequenceInput) {
-        proteinSequence = proteinSequenceInput;
+    public void setProteinSequence(ProteinSequence proteinSequence) {
+        this.proteinSequence = proteinSequence;
         initializeAminoAcids();
     }
 
