@@ -1,4 +1,4 @@
-package main.java.Utilities;
+package Utilities;
 /*
  * This class has two static methods that are used to parse sequence data from
  * fasta files.

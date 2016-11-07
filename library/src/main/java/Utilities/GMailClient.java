@@ -14,7 +14,7 @@
  * note: sends from gmail addresses only
 
 
-package main.java.utilities;
+package utilities;
 
 import java.util.*;
 import javax.mail.*;

@@ -26,8 +26,7 @@ import java.awt.event.MouseListener;
 import java.awt.Cursor;
 import java.io.IOException;
 
-//import jbf utilities
-import main.java.Utilities.*;
+import Utilities.BrowserLauncher;
 
 /**
  * Welcome Tab - First tab of JBFSuite.
@@ -105,7 +104,7 @@ public class WelcomeWindow extends JPanel {
             //clicking on the link triggers an attempt to use /BrowserLauncher/ to open webpage
             public void mouseClicked(MouseEvent e) {
                 try {
-                    BrowserLauncher.openURL(url1);
+                   BrowserLauncher.openURL(url1);
                 } catch (IOException i) {
                     System.err.println(i.getMessage());
                 }
@@ -164,7 +163,7 @@ public class WelcomeWindow extends JPanel {
 
         //about button uses /BrowserLauncher/ to open our main project page on sourceforge.net
         JButton about = new JButton("About");
-        about.setToolTipText("Open project page on sourceforge.");
+        about.setToolTipText("Open project page on GitHub.");
         about.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -176,6 +175,7 @@ public class WelcomeWindow extends JPanel {
         });
         body.add(about);
 
+        /** Problem sheets are currently unavailable, removing reference to them from the Welcome tab
         //probSheets button brings up a small new frame (pop-up) asking the user to click on either of our problem sets
         JButton probSheets = new JButton("Problem Sets");
         probSheets.setToolTipText("Download one of our pre-made problem sets:");
@@ -242,11 +242,12 @@ public class WelcomeWindow extends JPanel {
                 pSf.add(pSp);
             }
         });
-
         body.add(probSheets);
-
+         */
         return body;
+
     }
+
 
 
     /**
@@ -267,6 +268,7 @@ public class WelcomeWindow extends JPanel {
                 JLabel l = new JLabel("Ask a Question, Review the Software, View/Edit the Source");
                 p.add(l);
 
+                // Need to edit the sending of emails in order to protect hte password to the email account
                 //'email' button opens a new frame (pop-up) with an editable TextArea containing a
                 //a copy/paste-able email address.
                 JButton emailB = new JButton("Send an Email");
@@ -276,13 +278,14 @@ public class WelcomeWindow extends JPanel {
                     public void actionPerformed(ActionEvent e) {
 
                         //create instance of /EmailForm/ from |utilities|
-                        JFrame emailFrame = new EmailForm();
-                        emailFrame.setVisible(true);
+                        //JFrame emailFrame = new EmailForm();
+                        //emailFrame.setVisible(true);
 
                     }
                 });
 
-                p.add(emailB);
+                //p.add(emailB);
+
 
                 //'review' uses /BrowserLauncher/ to open the page for a new, blank review on sourceforge
                 JButton review = new JButton("Review JBF");

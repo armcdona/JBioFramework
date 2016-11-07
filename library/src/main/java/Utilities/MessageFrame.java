@@ -1,4 +1,4 @@
-package main.java.Utilities;
+package Utilities;
 /*
  * Copyright (C) 2013 Rochester Institute of Technology
  *

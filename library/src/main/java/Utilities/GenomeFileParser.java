@@ -1,4 +1,4 @@
-package main.java.Utilities;
+package Utilities;
 /** This class provides static methods to retrieve sequence information from
  * any number of protein data files
  *
