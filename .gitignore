@@ -48,7 +48,7 @@
 
 #Gradle
     .gradle
-    /build/
+    build/
 
     # Ignore Gradle GUI config
     gradle-app.setting
@@ -65,7 +65,7 @@
     .classpath
 
 #IntelliJ IDEA
-    .idea
+    .idea/
     *.iml
 
 #Java
