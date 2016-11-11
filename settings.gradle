@@ -1,2 +1,2 @@
-include 'library'
-include 'electro2d'
+include 'jbioframework-library'
+include 'jbioframework-electro2d'

@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+}
+
+cobertura.coverageFormats = ['html', 'xml']
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        credentials {
+            username ''
+            password ''
+        }
+        url "https://repository.chemaxon.com/artifactory/libs-release"
+    }
+}
+
+dependencies {
+    compile project(':jbioframework-library')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}
