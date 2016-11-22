@@ -1,4 +1,4 @@
-package Electro2D;
+package org.jbioframework.electro2d;
 
 /**
  * This class creates the ordered Vector of all of the proteins to be

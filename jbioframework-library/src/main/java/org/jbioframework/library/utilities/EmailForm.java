@@ -1,4 +1,4 @@
-package Utilities;
+package org.jbioframework.library.utilities;;
 
 import javax.swing.*;
 

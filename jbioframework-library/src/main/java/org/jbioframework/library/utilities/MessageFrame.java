@@ -1,4 +1,4 @@
-package Utilities;
+package org.jbioframework.library.utilities;;
 /*
  * Copyright (C) 2013 Rochester Institute of Technology
  *

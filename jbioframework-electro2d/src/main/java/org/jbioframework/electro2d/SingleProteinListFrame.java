@@ -1,4 +1,4 @@
-package Electro2D;
+package org.jbioframework.electro2d;
 /**
  * This class constructs a window to display the protein list and
  * allows the manipulation of that list to alter the protein sequence run on

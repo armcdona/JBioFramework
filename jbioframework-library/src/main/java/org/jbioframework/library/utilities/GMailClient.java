@@ -14,7 +14,7 @@
  * note: sends from gmail addresses only
 
 
-package utilities;
+package org.jbioframework.library.utilities;;
 
 import java.util.*;
 import javax.mail.*;

@@ -1,4 +1,4 @@
-package Electro2D;/*
+package org.jbioframework.electro2d;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -46,6 +46,9 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
+
+import org.jbioframework.library.gui.FileFrame;
+import org.jbioframework.library.protein.Protein;
 
 /**
  * The main electro2D class.
@@ -116,8 +119,8 @@ public class Electro2D extends JPanel implements ActionListener {
     public Electro2D() {
 
         proteinListFrame = new SingleProteinListFrame("Protein Lists", this);
-        fileFrame = new FileFrame(this, 1);                            //init frame
-        fileFrame2 = new FileFrame(this, 2);
+        fileFrame = new FileFrame(1);                            //init frame
+        fileFrame2 = new FileFrame(2);
         fileFrame.setResizable(false); //don't allow user to change size
         proteinList = new java.awt.List();
         proteinList2 = new java.awt.List();
@@ -631,11 +634,63 @@ public class Electro2D extends JPanel implements ActionListener {
         // display the fileFrame
         fileFrame.toFront();
         fileFrame.setVisible(true);
+        while (fileFrame.isVisible()) {
+            thread.sleep(50);
+        }
+        calculateProteinProperties(fileFrame,1);
     }
 
     public void getSequenceData2() {
         fileFrame2.toFront();
         fileFrame2.setVisible(true);
+        calculateProteinProperties(fileFrame2,2);
+    }
+
+    private void calculateProteinProperties(FileFrame f, int fileNum) {
+        Vector piValues = new Vector();
+        double maxMW = -2;
+        double minMW = 16;
+        double maxPi = -2;
+        double minPi = 16;
+        Vector sequenceTitles = new Vector();
+        Vector molecularWeights = new Vector();
+        Vector functions = new Vector();
+        Vector<Protein> proteins = f.getProteins();
+
+        for (int i=0;i<proteins.size();i++) {
+            if (proteins.get(i).getpI() < minPi) {
+                minPi = proteins.get(i).getpI();
+            }
+            if (proteins.get(i).getpI() > maxPi) {
+                maxPi = proteins.get(i).getpI();
+            }
+            if (proteins.get(i).getMolecularWeight() < minMW) {
+                minMW = proteins.get(i).getMolecularWeight();
+            }
+            if (proteins.get(i).getMolecularWeight() > maxMW) {
+                maxMW = proteins.get(i).getMolecularWeight();
+            }
+            piValues.add(proteins.get(i).getpI());
+            sequenceTitles.add(proteins.get(i).getName());
+            molecularWeights.add(proteins.get(i).getMolecularWeight());
+            functions.add(proteins.get(i).getFunctions());
+        }
+
+        if (fileNum == 1) {
+            setSequences(proteins);
+            setFunctionValues(functions);
+            setPiValues(piValues);
+            setMolecularWeights(molecularWeights);
+            setSequenceTitles(sequenceTitles);
+        } else {
+            setSequences2(proteins);
+            setFunctionValues2(functions);
+            setPiValues2(piValues);
+            setMolecularWeights2(molecularWeights);
+            setSequenceTitles2(sequenceTitles);
+        }
+        setMaxAndMinVals(maxMW,minMW,maxPi,minPi);
+        setLastFileLoaded(f.getLastFileName());
     }
 
     /**

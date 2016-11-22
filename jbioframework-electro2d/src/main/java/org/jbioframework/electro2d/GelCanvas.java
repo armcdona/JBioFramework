@@ -1,4 +1,4 @@
-package Electro2D;/*
+package org.jbioframework.electro2d;/*
  * A 2D simulation of electrophoresis using Swing components.
  */
 

@@ -1,4 +1,4 @@
-package GUI; /**
+package org.jbioframework.library.gui; /**
  * Welcome Tab - First tab of JBFSuite.
  * Contains description and contacts, credits, and links to
  * sourceforge main page, help files, review page, etc. as well
@@ -26,7 +26,7 @@ import java.awt.event.MouseListener;
 import java.awt.Cursor;
 import java.io.IOException;
 
-import Utilities.BrowserLauncher;
+import org.jbioframework.library.utilities.BrowserLauncher;
 
 /**
  * Welcome Tab - First tab of JBFSuite.

@@ -1,4 +1,4 @@
-package Electro2D; /**
+package org.jbioframework.electro2d; /**
  * This simple class represents the disabled range fields
  *
  * @author Jill Zapoticznyj

@@ -1,4 +1,4 @@
-package Electro2D; /**
+package org.jbioframework.electro2d; /**
  * This class simulates a protein.  It stores the protein's molecular
  * weight, pI, identity, and links to informative internet sites
  * about it.

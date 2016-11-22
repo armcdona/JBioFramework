@@ -1,4 +1,4 @@
-package Electro2D;
+package org.jbioframework.electro2d;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;

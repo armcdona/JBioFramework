@@ -1,4 +1,4 @@
-package Utilities;
+package org.jbioframework.library.utilities;;
 /** This class provides static methods to retrieve sequence information from
  * any number of protein data files
  *

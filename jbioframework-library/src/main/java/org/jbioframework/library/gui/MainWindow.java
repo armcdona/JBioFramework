@@ -1,4 +1,4 @@
-package GUI;
+package org.jbioframework.library.gui;
 
 /*
  * Copyright (C) 2013 Rochester Institute of Technology

@@ -1,4 +1,4 @@
-package Electro2D; /**
+package org.jbioframework.electro2d; /**
  * @(#)Electro2D.GIFEncoder.java 0.90 4/21/96
  * @author Adam Doppelt
  */

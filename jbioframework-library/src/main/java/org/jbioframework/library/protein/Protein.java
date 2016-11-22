@@ -1,4 +1,4 @@
-package Protein;
+package org.jbioframework.library.protein;
 
 import org.biojava.nbio.aaproperties.PeptidePropertiesImpl;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
@@ -127,6 +127,20 @@ public class Protein {
 
     public double getMolecularWeight() {
         return molecularWeight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFunctions() {
+        return functions;
+    }
+
+    public String toString() {
+        return "Name:" + name + "\n Functions: " + functions + "\n Inchi Sequence: "
+                + inchiSequence + "\n Molecular Weight: " + molecularWeight + "\n pI: " + pI
+                + "\n Sequence: " + proteinSequence.toString();
     }
 
 }

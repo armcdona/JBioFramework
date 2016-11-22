@@ -1,4 +1,4 @@
-package Electro2D;
+package org.jbioframework.electro2d;
 
 /**
  * Electro2D.DotThread is the thread controlling the second half of the 2DGE animation.

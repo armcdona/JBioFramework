@@ -1,4 +1,4 @@
-package Electro2D;/*
+package org.jbioframework.electro2d;/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or
@@ -33,6 +33,8 @@ import main.java.Utilities.FastaParser;
 import main.java.Utilities.GenomeFileParser;
 import main.java.MassSpec.MassSpecMain;
 import main.java.Utilities.BrowserLauncher;
+
+import org.jbioframework.library.utilities.*;
 
 //import GUI components
 import java.awt.FlowLayout;

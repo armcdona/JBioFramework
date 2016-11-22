@@ -1,4 +1,4 @@
-package Protein;
+package org.jbioframework.library.protein;
 
 import org.biojava.nbio.aaproperties.Constraints;
 

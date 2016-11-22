@@ -29,6 +29,9 @@ dependencies {
     compile 'org.biojava:biojava-structure:4.2.4'
     compile 'org.biojava:biojava-aa-prop:4.2.4'
     compile 'org.jooq:jooq:3.8.4'
+    compile 'commons-io:commons-io:2.5'
+    compile 'log4j:log4j:1.2.17'
+    compile 'org.slf4j:slf4j-log4j12:1.7.21'
 }
 
 task wrapper(type: Wrapper) {

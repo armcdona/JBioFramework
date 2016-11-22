@@ -1,4 +1,4 @@
-package Electro2D;
+package org.jbioframework.electro2d;
 
 import java.awt.GridLayout;
 import java.awt.BorderLayout;

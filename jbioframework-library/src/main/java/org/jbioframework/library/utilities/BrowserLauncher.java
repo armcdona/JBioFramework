@@ -1,4 +1,4 @@
-package Utilities;
+package org.jbioframework.library.utilities;
 
 import java.awt.Desktop;
 import java.io.File;
