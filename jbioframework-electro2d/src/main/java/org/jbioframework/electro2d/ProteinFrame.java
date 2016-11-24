@@ -28,12 +28,6 @@ package org.jbioframework.electro2d;/*
  * tandem mass spec simulation. @author Amanda Fisher
  */
 
-import main.java.MainWindows.JBioFrameworkMain;
-import main.java.Utilities.FastaParser;
-import main.java.Utilities.GenomeFileParser;
-import main.java.MassSpec.MassSpecMain;
-import main.java.Utilities.BrowserLauncher;
-
 import org.jbioframework.library.utilities.*;
 
 //import GUI components
@@ -193,7 +187,7 @@ public class ProteinFrame extends JFrame {
             }
         });
 
-        /*Send to MassSpec button*/
+        /*Send to MassSpec button -- Disabled until a workaround can be done
         JButton sendToSpec = new JButton("Run Mass Spectrum");
         sendToSpec.setToolTipText("Send protein sequence to Mass Spec for analysis");
         sendToSpec.addActionListener(new ActionListener() {
@@ -202,7 +196,7 @@ public class ProteinFrame extends JFrame {
                 input.setText(sequenceString);
                 JBioFrameworkMain.getTabs().setSelectedIndex(3);
             }
-        });
+        });*/
 
         //create labels to display the protein information
         titleLabel = new JLabel(ptTruncated);
@@ -221,7 +215,7 @@ public class ProteinFrame extends JFrame {
         searchPanel.add(blstSearch);
         searchPanel.add(ncbiSearch);
         searchPanel.add(uniSearch);
-        searchPanel.add(sendToSpec);
+        //searchPanel.add(sendToSpec);
         this.setLayout(new BorderLayout());
         this.add(proteinInfoPanel, BorderLayout.NORTH);
         this.add(searchPanel, BorderLayout.CENTER);

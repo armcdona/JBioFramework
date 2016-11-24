@@ -49,6 +49,7 @@ import java.util.Vector;
 
 import org.jbioframework.library.gui.FileFrame;
 import org.jbioframework.library.protein.Protein;
+import org.jbioframework.library.utilities.*;
 
 /**
  * The main electro2D class.
@@ -635,7 +636,11 @@ public class Electro2D extends JPanel implements ActionListener {
         fileFrame.toFront();
         fileFrame.setVisible(true);
         while (fileFrame.isVisible()) {
-            thread.sleep(50);
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         calculateProteinProperties(fileFrame,1);
     }

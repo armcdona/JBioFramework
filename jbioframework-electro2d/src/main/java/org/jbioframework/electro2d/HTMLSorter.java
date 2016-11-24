@@ -5,7 +5,7 @@ package org.jbioframework.electro2d;
  * displayed in hte HTML file.
  */
 
-import Electro2D.HTMLComparator;
+import org.jbioframework.electro2d.HTMLComparator;
 
 import java.util.Vector;
 import java.util.TreeSet;

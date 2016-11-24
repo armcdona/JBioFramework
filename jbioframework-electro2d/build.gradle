@@ -3,9 +3,10 @@ plugins {
     id 'idea'
     id 'net.saliman.cobertura' version '2.3.1'
     id 'com.github.kt3k.coveralls' version '2.6.3'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
 }
 
-cobertura.coverageFormats = ['html', 'xml']
+cobertura.coverageFormats = ['java']
 
 repositories {
     mavenCentral()
@@ -28,3 +29,20 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.14.1'
 }
+
+shadowJar {
+    baseName='JBioFramework'
+    classifier=''
+}
+
+jar {
+    manifest {
+        attributes 'Main-class': 'org.jbioframework.electro2d'
+    }
+}
+
+//task zip(type: Zip) {
+//    from('build/libs/JBioFramework-'+version+'.jar')
+//    from('extrafiles')
+//    archiveName='JBioFramework.zip'
+//}

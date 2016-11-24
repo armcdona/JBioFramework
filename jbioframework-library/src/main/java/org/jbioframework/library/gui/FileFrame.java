@@ -105,7 +105,7 @@ public class FileFrame extends JFrame implements ActionListener {
 
         sa = fl.list(new ImageFilter());
 
-        for (int file = 0; file < sa.length; file++) {
+        for (int file = 0; file < (sa != null ? sa.length : 0); file++) {
             choice.addItem(sa[file]);
         }
     }
@@ -134,9 +134,9 @@ public class FileFrame extends JFrame implements ActionListener {
         return lastFileName;
     }
 
-    public void loadFile() {
+    private void loadFile() {
 
-        proteins = new Vector<Protein>();
+        proteins = new Vector<>();
 
         //first, get filename from textbox
         String fileName = sa[choice.getSelectedIndex()];

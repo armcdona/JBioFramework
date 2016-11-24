@@ -8,7 +8,7 @@ package org.jbioframework.electro2d;/*
  * @author Amanda Fisher
  */
 
-import main.java.Electro2D.Electro2D;
+import org.jbioframework.electro2d.Electro2D;
 
 import javax.swing.JPanel;
 import java.awt.event.MouseListener;
