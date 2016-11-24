@@ -24,7 +24,6 @@ repositories {
 
 dependencies {
     compile project(':jbioframework-library')
-    compile fileTree(include : ["*.jar"], dir:"src/main/resources/")
 }
 
 task wrapper(type: Wrapper) {
