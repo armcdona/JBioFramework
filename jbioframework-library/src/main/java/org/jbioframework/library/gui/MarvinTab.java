@@ -31,6 +31,7 @@ import chemaxon.marvin.beans.MSketchPane;
 import chemaxon.marvin.common.UserSettings;
 import chemaxon.marvin.sketch.SketchParameterConstants;
 
+
 /**
  * JPanel object containing the main GUI for interacting with MarvinSketch.
  */
