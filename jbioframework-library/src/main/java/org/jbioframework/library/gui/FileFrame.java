@@ -10,9 +10,13 @@ package org.jbioframework.library.gui;
  * @author Adam Bazinet
  */
 
+import org.apache.log4j.spi.LoggerFactory;
 import org.biojava.nbio.core.sequence.ProteinSequence;
+import org.biojava.nbio.core.sequence.compound.AminoAcidCompound;
+import org.biojava.nbio.core.sequence.features.FeatureInterface;
 import org.biojava.nbio.core.sequence.io.GenbankReader;
 import org.biojava.nbio.core.sequence.io.GenbankReaderHelper;
+import org.biojava.nbio.core.sequence.template.AbstractSequence;
 import org.biojava.nbio.core.sequence.template.Sequence;
 import org.biojava.nbio.structure.Chain;
 import org.biojava.nbio.structure.io.PDBFileReader;
@@ -22,6 +26,7 @@ import org.biojava.nbio.structure.StructureIO;
 import org.jbioframework.library.utilities.ImageFilter;
 import org.biojava.nbio.core.sequence.io.FastaReaderHelper;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,6 +36,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.List;
 
@@ -49,6 +55,8 @@ public class FileFrame extends JFrame implements ActionListener {
     private String[] sa;
     private Vector<Protein> proteins;
     private String lastFileName;
+
+    final Logger logger = org.slf4j.LoggerFactory.getLogger(FileFrame.class);
 
     public FileFrame(int i) {
 
@@ -148,14 +156,16 @@ public class FileFrame extends JFrame implements ActionListener {
         } else {
 
             String extension = FilenameUtils.getExtension(fileName);
-            String filePath = FilenameUtils.getFullPath("./"+fileName);
+            String filePath = "./data/" + fileName; //FilenameUtils.getFullPath("./"+fileName);
+            System.out.println("filename: "+fileName+", filepath: "+filePath+", extension:"+ extension+"\n");
 
             // if the file's extention is not one of the supported types
             // display an error message
             if (!extension.equalsIgnoreCase("faa") &&
                     !extension.equalsIgnoreCase("fasta") &&
                     !extension.equalsIgnoreCase("pdb") &&
-                    !extension.equalsIgnoreCase("gbk")) {
+                    !extension.equalsIgnoreCase("gbk") &&
+                    !extension.equalsIgnoreCase("gb")) {
 
                 MessageFrame error = new MessageFrame();
                 error.setMessage("File extension is not valid.");
@@ -168,10 +178,12 @@ public class FileFrame extends JFrame implements ActionListener {
                     //GenomeFileParser.fastaParse(filename, electro2D, "", fileNum);
                     try {
                         LinkedHashMap<String, ProteinSequence> proteinData = FastaReaderHelper.readFastaProteinSequence(new File(filePath));
-                        for (int i=0;i<proteinData.size(); i++) {
-                            proteins.add(new Protein(proteinData.get(i).getSequenceAsString()));
+                        if (proteinData != null) {
+                            for (Map.Entry<String, ProteinSequence> map : proteinData.entrySet()) {
+                                proteins.add(new Protein(map.getValue().getSequenceAsString()));
+                            }
+                            lastFileName = fileName;
                         }
-                        lastFileName = fileName;
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -183,7 +195,8 @@ public class FileFrame extends JFrame implements ActionListener {
                         List<Chain> chainList = reader.getStructure(filePath).getChains();
                         String sequence = "";
                         for (int i=0; i<chainList.size(); i++) {
-                            sequence+=chainList.get(i).getSeqResSequence();
+                            System.out.println(chainList.get(i).getSeqResSequence()+"\n");
+                            //sequence+=chainList.get(i).getSeqResSequence();
                         }
                         proteins.add(new Protein(new ProteinSequence(sequence)));
                         lastFileName = fileName;
@@ -191,11 +204,29 @@ public class FileFrame extends JFrame implements ActionListener {
                         e.printStackTrace();
                     }
 
-                } else if (extension.equalsIgnoreCase("gbk")) {
+                } else if (extension.equalsIgnoreCase("gbk") || extension.equalsIgnoreCase("gb")) {
                     try {
-                        GenbankReaderHelper reader = new GenbankReaderHelper();
-                        reader.readGenbankProteinSequence(new File(filePath));
-                        lastFileName = fileName;
+                        LinkedHashMap<String, ProteinSequence> proteinData = GenbankReaderHelper.readGenbankProteinSequence(new File(filePath));
+                        if (proteinData != null) {
+                            int i=0;
+                            for (ProteinSequence map : proteinData.values()) {
+                                System.out.println("Tracking # "+ i + " : "+map.getSequenceAsString()+"\n");
+                                //proteins.add(new Protein(map.getSequenceAsString()));
+                                for (FeatureInterface<AbstractSequence<AminoAcidCompound>, AminoAcidCompound> feature : map.getFeatures()) {
+                                    int begin = feature.getLocations().getStart().getPosition() - 1;
+                                    int end = feature.getLocations().getEnd().getPosition() - 1;
+                                    if (begin < 0 || end > map.getSequenceAsString().length()-1)
+                                        return;
+                                    String sequence = map.getSequenceAsString().substring(begin,end);
+                                    logger.debug(i+": "+sequence+"\n");
+                                    i++;
+                                    //proteins.add(new Protein(map.getSequenceAsString(feature.getLocations().getStart(),feature.getLocations().getEnd(),map.getSequenceAsString())));
+                                }
+                            }
+                            lastFileName = fileName;
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

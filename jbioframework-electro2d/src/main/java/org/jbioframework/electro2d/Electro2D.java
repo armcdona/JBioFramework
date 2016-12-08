@@ -23,11 +23,8 @@ package org.jbioframework.electro2d;/*
  * Created 4/17/03
  */
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -46,6 +43,9 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 import org.jbioframework.library.gui.FileFrame;
 import org.jbioframework.library.protein.Protein;
@@ -635,14 +635,13 @@ public class Electro2D extends JPanel implements ActionListener {
         // display the fileFrame
         fileFrame.toFront();
         fileFrame.setVisible(true);
-        while (fileFrame.isVisible()) {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        fileFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                super.windowClosed(e);
+                calculateProteinProperties(fileFrame,1);
             }
-        }
-        calculateProteinProperties(fileFrame,1);
+        });
     }
 
     public void getSequenceData2() {
@@ -661,7 +660,9 @@ public class Electro2D extends JPanel implements ActionListener {
         Vector molecularWeights = new Vector();
         Vector functions = new Vector();
         Vector<Protein> proteins = f.getProteins();
-
+        if (proteins == null || proteins.size() <= 0) {
+            return;
+        }
         for (int i=0;i<proteins.size();i++) {
             if (proteins.get(i).getpI() < minPi) {
                 minPi = proteins.get(i).getpI();
@@ -1770,28 +1771,6 @@ public class Electro2D extends JPanel implements ActionListener {
     public void setFunctionValues2(Vector fcn) {
         functions2 = new Vector();
         functions2 = fcn;
-    }
-
-    /**
-     * Standard applet methods.
-     */
-    public void start() {
-    }
-
-    public void stop() {
-    }
-
-    public void destroy() {
-    }
-
-    /**
-     * Return a short info string.
-     *
-     * @return a string
-     */
-    public String getAppletInfo() {
-        return "Electro2D.Electro2D...copyright" +
-                " 2003 Adam L Bazinet & Jill Zapoticznyj";
     }
 
     public void writeToCSV() {
