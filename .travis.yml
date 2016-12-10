@@ -1,5 +1,8 @@
 language: java
 script: ./gradlew build
+os:
+- linux
+- osx
 jdk:
 - oraclejdk8
 before_install:
