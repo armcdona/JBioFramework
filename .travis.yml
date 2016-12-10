@@ -2,10 +2,10 @@ language: java
 script: ./gradlew build
 os:
 - linux
-- osx
 jdk:
 - oraclejdk8
-- openjdk8
+- oraclejdk7
+- openjdk7
 before_install:
 - chmod +x gradlew
 after_success:
