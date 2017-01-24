@@ -1,4 +1,5 @@
-package main.java.MassSpec;/*
+package org.jbioframework.massspec;
+/*
  * This class takes a string that represents an ion and converts it in to an
  * instance of the MassSpec.Ion class by turning each character in the string in to
  * a MassSpec.SpecAminoAcid and adding it to an instance of the ion class. The string given

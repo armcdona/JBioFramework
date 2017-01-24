@@ -1,4 +1,6 @@
-package org.jbioframework.electro2d;
+package org.jbioframework.library.protein;
+
+import org.jbioframework.library.protein.Protease;
 
 import java.util.ArrayList;
 import java.util.Arrays;

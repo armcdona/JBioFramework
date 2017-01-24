@@ -1,8 +1,9 @@
-package main.java.MassSpec; /**
+package org.jbioframework.massspec;
+/**
  * @author Amanda Fisher
  */
 
-import main.java.Electro2D.Protease;
+import org.jbioframework.library.protein.Protease;
 
 import java.util.ArrayList;
 import java.util.Arrays;

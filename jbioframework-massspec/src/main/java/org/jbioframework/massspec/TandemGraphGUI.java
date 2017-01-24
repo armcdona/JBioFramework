@@ -1,4 +1,5 @@
-package main.java.MassSpec;/*
+package org.jbioframework.massspec;
+/*
  * TandemGraphGUI displays the mass spec of a peak from OutputGraphGUI.
  */
 

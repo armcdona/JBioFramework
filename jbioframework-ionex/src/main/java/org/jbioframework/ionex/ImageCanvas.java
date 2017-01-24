@@ -1,4 +1,4 @@
-package main.java.Ionex;
+package org.jbioframework.ionex;
 
 import java.awt.*;
 

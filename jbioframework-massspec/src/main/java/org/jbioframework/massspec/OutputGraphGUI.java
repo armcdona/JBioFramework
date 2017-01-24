@@ -1,4 +1,4 @@
-package main.java.MassSpec;
+package org.jbioframework.massspec;
 /**
  * Copyright (C) 2013 Rochester Institute of Technology
  *

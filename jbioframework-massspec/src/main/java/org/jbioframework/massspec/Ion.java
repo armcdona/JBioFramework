@@ -1,4 +1,4 @@
-package main.java.MassSpec;
+package org.jbioframework.massspec;
 /**
  * Copyright (C) 2013 Rochester Institute of Technology
  *
@@ -35,11 +35,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.io.*;
 
 import javax.swing.*;
-import main.java.MainWindows.MarvinTab;
-import main.java.MainWindows.JBioFrameworkMain;
 
 public class Ion extends ArrayList<SpecAminoAcid> {
 
@@ -100,9 +97,9 @@ public class Ion extends ArrayList<SpecAminoAcid> {
         JButton marvinButton = new JButton("Show in MarvinSketch");
         marvinButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequence));
-                JBioFrameworkMain.getTabs().setSelectedIndex(4);
+            public void actionPerformed(ActionEvent e) { //TODO Setup massspec to use the new library interface
+                //MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequence));
+                //JBioFrameworkMain.getTabs().setSelectedIndex(4);
                 frame.dispose();
             }
         });

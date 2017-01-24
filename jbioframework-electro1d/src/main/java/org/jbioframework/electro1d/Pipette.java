@@ -1,8 +1,4 @@
-package main.java.Electro1D;
-// Decompiled by DJ v3.10.10.93 Copyright 2007 Atanas Neshkov  Date: 4/29/2009 2:11:16 PM
-// Home Page: http://members.fortunecity.com/neshkov/dj.html  http://www.neshkov.com/dj.html - Check often for new version!
-// Decompiler options: packimports(3) 
-// Source File Name:   D:\Dave\Java\Electro1DMain\Pipette.java
+package org.jbioframework.electro1d;
 
 import java.awt.Color;
 import java.awt.Graphics;

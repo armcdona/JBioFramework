@@ -1,4 +1,4 @@
-package org.jbioframework.electro2d;
+package org.jbioframework.library.protein;
 
 import java.util.ArrayList;
 

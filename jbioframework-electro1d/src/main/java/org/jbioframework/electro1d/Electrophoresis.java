@@ -1,4 +1,4 @@
-package main.java.Electro1D;
+package org.jbioframework.electro1d;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -9,8 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
-//
-import main.java.Utilities.BrowserLauncher;
+import org.jbioframework.library.utilities.BrowserLauncher;
 
 /**
  * @author Bader Alharbi

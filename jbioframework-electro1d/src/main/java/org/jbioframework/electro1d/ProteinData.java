@@ -1,6 +1,4 @@
-package main.java.Electro1D;
-
-import main.java.Electro1D.Electrophoresis;
+package org.jbioframework.electro1d;
 
 import java.awt.*;
 import javax.swing.JLabel;

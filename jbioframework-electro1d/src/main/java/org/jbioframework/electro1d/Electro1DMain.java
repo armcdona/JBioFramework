@@ -1,4 +1,4 @@
-package main.java.Electro1D;
+package org.jbioframework.electro1d;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;

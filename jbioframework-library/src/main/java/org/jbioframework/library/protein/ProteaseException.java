@@ -1,4 +1,4 @@
-package org.jbioframework.electro2d;
+package org.jbioframework.library.protein;
 
 /**
  * This class is an exception thrown by one of the Electro2D.Protease classes whenever

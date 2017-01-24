@@ -1,4 +1,4 @@
-package main.java.MassSpec;
+package org.jbioframework.massspec;
 /**
  * Copyright (C) 2013 Rochester Institute of Technology
  *
@@ -40,8 +40,8 @@ import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import main.java.Utilities.BrowserLauncher;
-import main.java.Utilities.FastaParser;
+import org.jbioframework.library.utilities.BrowserLauncher;
+import org.jbioframework.library.utilities.FastaParser;
 
 /**
  *

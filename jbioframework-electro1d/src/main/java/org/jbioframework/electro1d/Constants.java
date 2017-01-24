@@ -1,7 +1,7 @@
 /**
  *
  */
-package main.java.Electro1D;
+package org.jbioframework.electro1d;
 
 import java.awt.Color;
 

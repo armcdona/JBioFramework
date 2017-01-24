@@ -1,4 +1,4 @@
-package main.java.Electro1D;
+package org.jbioframework.electro1d;
 
 import java.awt.Component;
 import javax.swing.JPanel;

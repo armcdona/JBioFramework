@@ -1,4 +1,4 @@
-package main.java.Ionex;
+package org.jbioframework.ionex;
 
 // This is a part of the Microsoft Visual J++ library.
 // Copyright (C) 1996 Microsoft Corporation
