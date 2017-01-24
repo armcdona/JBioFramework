@@ -169,7 +169,7 @@ public class Electro2D extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
 //                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
                 try {
-                    BrowserLauncher.openURL("https://sourceforge.net/projects/jbf/");
+                    BrowserLauncher.openURL("https://github.com/RITJBF/JBioFramework");
                 } catch (IOException i) {
                     System.err.println(i.getMessage());
                 }
@@ -182,9 +182,8 @@ public class Electro2D extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                File f = new File( "HTML Files" + File.separator + "Help" + File.separator + "help.html" );
-                String url = "https://sourceforge.net/p/jbf/wiki/Electro2D.Electro2D/";
                 try {
-                    BrowserLauncher.openURL(url);
+                    BrowserLauncher.openURL("https://github.com/RITJBF/JBioFramework/wiki/2-Dimensional-Electrophoresis");
                 } catch (IOException i) {
                     System.err.println(i.getMessage());
                 }

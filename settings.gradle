@@ -1,2 +1,5 @@
 include 'jbioframework-library'
 include 'jbioframework-electro2d'
+include 'jbioframework-electro1d'
+include 'jbioframework-ionex'
+include 'jbioframework-massspec'
