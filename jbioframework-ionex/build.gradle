@@ -31,13 +31,13 @@ task wrapper(type: Wrapper) {
 }
 
 shadowJar {
-    baseName='JBioFramework-Electro2D'
+    baseName='JBioFramework-Ionex'
     classifier=''
 }
 
 jar {
     manifest {
-        attributes 'Main-class': 'org.jbioframework.electro2d.MainWindow'
+        attributes 'Main-class': 'org.jbioframework.ionex.MainWindow'
     }
 }
 
