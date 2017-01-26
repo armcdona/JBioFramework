@@ -27,10 +27,6 @@ package org.jbioframework.massspec;
  * 
  */
 
-/**
- *
- * @author Amanda Fisher
- */
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
