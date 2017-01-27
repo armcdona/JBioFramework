@@ -11,7 +11,7 @@ jdk:
 - oraclejdk8
 - oraclejdk7
 - openjdk7
-- openjdk8
+#- openjdk8 #OpenJDK8 is not currently available on Travis-Ci.org
 before_install:
 - chmod +x gradlew
 deploy:
