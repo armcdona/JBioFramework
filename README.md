@@ -70,8 +70,7 @@ For more in-depth questions, concerns, ideas, etc. don't hesitate to email
   
   
 ## Download
-To download the latest release download it from sourceforge: 
-   https://sourceforge.net/projects/jbf/files/latest/download
+To download the latest release download the [latest release](https://github.com/RITJBF/JBioFramework/releases/latest) from Github.
 
 ## External Links
 - official [website](http://www.rit.edu/cos/jbioframework/)
