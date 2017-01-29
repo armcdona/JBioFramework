@@ -1,4 +1,4 @@
-# JBioFramework [![Build Status](https://travis-ci.org/RITJBF/JBioFramework.svg?branch=master)](https://travis-ci.org/RITJBF/JBioFramework) #
+# JBioFramework  [![Build Status](https://travis-ci.org/RITJBF/JBioFramework.svg?branch=master)](https://travis-ci.org/RITJBF/JBioFramework) [![Github All Releases](https://img.shields.io/github/downloads/RITJBF/JBioFramework/total.svg)](https://github.com/RITJBF/JBioFramework/releases) [![GitHub release](https://img.shields.io/github/release/RITJBF/JBioFramework.svg)](https://github.com/RITJBF/JBioFramework/releases) [![license](https://img.shields.io/github/license/RITJBF/JBioFramework.svg)](https://github.com/RITJBF/JBioFramework/blob/master/LICENSE) [![Libraries.io for GitHub](https://img.shields.io/librariesio/github/RITJBF/JBioFramework.svg)](https://libraries.io/github/RITJBF/JBioFramework) #
 
 ## Description
 
