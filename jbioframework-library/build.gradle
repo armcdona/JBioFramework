@@ -6,9 +6,6 @@ plugins {
     //id 'jvm-component'
 }
 
-cobertura.coverageFormats = ['html', 'xml']
-
-
 repositories {
     mavenCentral()
     maven {
