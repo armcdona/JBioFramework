@@ -14,7 +14,7 @@ public class AminoAcid {
         aminoAcid = aminoAcidInput;
     }
 
-    private void determineProperties() {
+    private void calculateProperties() {
         pKaCOOH = Constraints.aa2CTerminalPka.get(aminoAcid);
         pKaNH2 = Constraints.aa2NTerminalPka.get(aminoAcid);
         if (Constraints.aa2PKa.containsKey(aminoAcid)) {

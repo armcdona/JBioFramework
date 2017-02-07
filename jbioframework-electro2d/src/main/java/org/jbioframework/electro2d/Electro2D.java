@@ -1,17 +1,4 @@
-package org.jbioframework.electro2d;/*
- * Copyright (C) 2013 Rochester Institute of Technology
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * See the GNU General Public License for more details.
- */
+package org.jbioframework.electro2d;
 /**
  * GUI and main class for 2D Electrophoresis simulation
  *
@@ -19,8 +6,6 @@ package org.jbioframework.electro2d;/*
  * @author Jill Zapoticznyj
  * @contrib Benjamin Russell (brr1922@rit.edu)
  * @contrib Aidan Sawyer (aks5238@rit.edu)
- * <p>
- * Created 4/17/03
  */
 
 import java.awt.event.*;
@@ -43,9 +28,6 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
 import org.jbioframework.library.gui.FileFrame;
 import org.jbioframework.library.protein.Protein;
