@@ -47,7 +47,7 @@ public class DatabaseUtilities {
     private static String constructSQLTableCreationCommand(String tableName, Vector<String> columnName,
                                                            Vector<String> columnParameters, Vector<String> columnType) {
         String sqlCommand = "";
-        return sqlCommand
+        return sqlCommand;
     }
 
 }
