@@ -25,7 +25,6 @@ public class DatabaseUtilities {
     }
 
     public static void saveDatabase(Vector<Protein> proteins) {
-
     }
 
     private static Connection connect(String absoluteFilePath) {
@@ -42,6 +41,11 @@ public class DatabaseUtilities {
             logger.error(e.getMessage());
         }
         return connection;
+    }
+
+    private boolean doesDatabaseExist(String fileName) {
+        boolean exists = false;
+        return exists;
     }
 
     private static String constructSQLTableCreationCommand(String tableName, Vector<String> columnName,

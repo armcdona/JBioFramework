@@ -13,48 +13,30 @@ public class Protein {
     private double molecularWeight;
     private String name;
     private String functions;
-    private String inchiSequence;
     private ArrayList<AminoAcid> aminoAcids;
 
     public Protein (ProteinSequence sequence) {
-        initalizeProtein(sequence.getSequenceAsString(), "", "", "");
+        initalizeProtein(sequence.getSequenceAsString(), "", "");
     }
 
     public Protein(String sequence) {
-        initalizeProtein(sequence, "", "", "");
-    }
-
-    public Protein (ProteinSequence sequence, String inchiSequence) {
-        initalizeProtein(sequence.getSequenceAsString(), inchiSequence, "", "");
-    }
-
-    public Protein (String sequence, String inchiSequence) {
-        initalizeProtein(sequence, inchiSequence, "", "");
-    }
-
-    public Protein (ProteinSequence sequence, String inchiSequence, String name, String functions) {
-        initalizeProtein(sequence.getSequenceAsString(), inchiSequence, name, functions);
-    }
-
-    public Protein (String sequence, String inchiSequence, String name, String functions) {
-        initalizeProtein(sequence, inchiSequence, name, functions);
+        initalizeProtein(sequence, "", "");
     }
 
     public Protein (ProteinSequence sequence, String name, String functions) {
-        initalizeProtein(sequence.getSequenceAsString(), "", name, functions);
+        initalizeProtein(sequence.getSequenceAsString(), name, functions);
     }
 
     public Protein (String sequence, String name, String functions) {
-        initalizeProtein(sequence, "", name, functions);
+        initalizeProtein(sequence, name, functions);
     }
 
-    private void initalizeProtein(String sequence, String inchiSequence, String name, String functions) {
+    private void initalizeProtein(String sequence, String name, String functions) {
         try {
             this.proteinSequence = new ProteinSequence(sequence);
         } catch (CompoundNotFoundException e) {
             e.printStackTrace();
         }
-        this.inchiSequence = inchiSequence;
         this.name = name;
         this.functions = functions;
         calculateProperties();
@@ -82,11 +64,6 @@ public class Protein {
     public void setFunctions(String functions) {
 
         this.functions = functions;
-    }
-
-    public void setInchiSequence(String inchiSequence) {
-
-        this.inchiSequence = inchiSequence;
     }
 
     public void setMolecularWeight(double molecularWeight) {
@@ -138,8 +115,7 @@ public class Protein {
     }
 
     public String toString() {
-        return "Name:" + name + "\n Functions: " + functions + "\n Inchi Sequence: "
-                + inchiSequence + "\n Molecular Weight: " + molecularWeight + "\n pI: " + pI
+        return "Name:" + name + "\n Functions: " + functions + "\n Molecular Weight: " + molecularWeight + "\n pI: " + pI
                 + "\n Sequence: " + proteinSequence.toString();
     }
 
