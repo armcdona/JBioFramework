@@ -54,4 +54,22 @@ public class DatabaseUtilities {
         return sqlCommand;
     }
 
+    private static String constructSQLProteinCreationCommand(String tableName, Vector<String> columnName,
+                                                           Vector<String> columnParameters, Vector<String> columnType, Protein protein) {
+        String sqlCommand = "";
+        return sqlCommand;
+    }
+
+    private static String constructSQLProteinRemovalCommand(String tableName, Vector<String> columnName,
+                                                             Vector<String> columnParameters, Vector<String> columnType, Protein protein) {
+        String sqlCommand = "";
+        return sqlCommand;
+    }
+
+    private static String constructSQLProteinRetrieveCommand(String tableName, Vector<String> columnName,
+                                                             Vector<String> columnParameters, Vector<String> columnType, Protein protein) {
+        String sqlCommand = "";
+        return sqlCommand;
+    }
+
 }

@@ -13,8 +13,8 @@ repositories {
     }
 }
 
-
 model {
+    //noinspection GroovyAssignabilityCheck
     components {
         main(JvmLibrarySpec)
     }

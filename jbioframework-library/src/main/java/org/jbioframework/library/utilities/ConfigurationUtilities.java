@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 public class ConfigurationUtilities {
 
-    final Logger logger = LoggerFactory.getLogger(ConfigurationUtilities.class);
+    private final Logger logger = LoggerFactory.getLogger(ConfigurationUtilities.class);
 
     private String toAbsolutePath(String relativePath) {
         Path path = Paths.get(relativePath);
@@ -33,7 +33,7 @@ public class ConfigurationUtilities {
 
     public Object loadConfigurationSetting(String setting) {
         String configFileAbsolutePath = getConfigFileAbsolutePath();
-        if (doesConfigurationFileExist() == false) {
+        if (!doesConfigurationFileExist()) {
             createDefaultConfigurationFile(configFileAbsolutePath);
             logger.info("Created configuration file at " + configFileAbsolutePath + ". \n");
         }
