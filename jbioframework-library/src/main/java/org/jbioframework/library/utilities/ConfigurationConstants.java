@@ -8,7 +8,7 @@ public class ConfigurationConstants {
     public static final String DATABASE_CREATION_ENABLED = "databaseCreationEnabled";
     public static final String DATABASE_FOLDER = "databaseFolder";
     public static final String CONFIG_FOLDER = "config";
-    public static final String CONFIG_FILE_NAME = "config";
+    public static final String CONFIG_FILE_NAME = "jbioframework";
     public static final String CONFIG_FILE_EXTENSION = ".yml";
 
     public static Map<String, Object> getConfigurationDefaultMap() {
