@@ -21,6 +21,11 @@ public class DatabaseUtilities {
 
     }
 
+    private static void checkDatabaseFolderExists() {
+        String filePath = getDatabaseRelativePath("");
+        String folderPath = filePath.substring(0,filePath.indexOf(".")-1);
+    }
+
     public static Vector<Protein> loadDatabase(String filename) {
         Vector<Protein> proteins = new Vector<Protein>();
         try {
@@ -28,10 +33,8 @@ public class DatabaseUtilities {
             Statement sqlStatement = databaseConnection.createStatement();
             String sqlCommand = constructSQLProteinRetrieveAllCommand(filename,getColumnNames(),getColumnParameters(),getcolumnTypes());
             ResultSet proteinResultSet = sqlStatement.executeQuery(sqlCommand);
-            int numProteins = 0;
             while (proteinResultSet.next()) {
                 proteins.add(createProteinfromResultSet(proteinResultSet));
-                numProteins++;
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -151,14 +154,15 @@ public class DatabaseUtilities {
                                                                 Vector<String> columnParameters, Vector<String> columnTypes) {
         String sqlCommand = "";
         sqlCommand+="SELECT ";
-        for (String columnName : columnNames) {
+        /**for (String columnName : columnNames) {
             sqlCommand+=columnName;
             if (!(columnName == columnNames.get(columnNames.size() - 1))) {
                 sqlCommand+=", ";
             } else {
                 sqlCommand+=" ";
             }
-        }
+        }*/
+        sqlCommand+="* ";
         sqlCommand+="FROM "+tableName+";";
         return sqlCommand;
     }
@@ -199,7 +203,19 @@ public class DatabaseUtilities {
     }
 
     private static String getDatabaseRelativePath(String fileName) {
-        return ((new Configuration().getProperty(ConfigurationConstants.DATABASE_FOLDER))+fileName+".db");
+        return processRelativePath((new Configuration().getProperty(ConfigurationConstants.DATABASE_FOLDER))+fileName+".db");
+    }
+
+    private static String processRelativePath(String relativePath) {
+        String processedRelativePath = relativePath;
+        if (relativePath.contains("//")) {
+            if ((relativePath.indexOf("//") + 2) > (relativePath.length() - 1) ){
+                processedRelativePath = relativePath.substring(0,relativePath.indexOf("//"));
+            } else {
+                processedRelativePath = relativePath.substring(0,relativePath.indexOf("//")) + relativePath.substring(relativePath.indexOf("//")+2,relativePath.length()-1);
+            }
+        }
+        return processedRelativePath;
     }
 
     private static Vector<String> getColumnNames() {
