@@ -3,6 +3,8 @@ package org.jbioframework.library.protein;
 import org.biojava.nbio.aaproperties.PeptidePropertiesImpl;
 import org.biojava.nbio.core.exceptions.CompoundNotFoundException;
 import org.biojava.nbio.core.sequence.ProteinSequence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,8 @@ public class Protein {
     private String name;
     private String functions;
     private ArrayList<AminoAcid> aminoAcids;
+
+    final Logger logger = LoggerFactory.getLogger(Protein.class);
 
     public Protein (ProteinSequence sequence) {
         initalizeProtein(sequence.getSequenceAsString(), "", "");
@@ -31,15 +35,32 @@ public class Protein {
         initalizeProtein(sequence, name, functions);
     }
 
+    public Protein (String sequence, String name, String functions, double molecularWeight, double pI) {
+        initalizeProteinFromDatabase(sequence,name,functions,molecularWeight,pI);
+    }
+
     private void initalizeProtein(String sequence, String name, String functions) {
         try {
             this.proteinSequence = new ProteinSequence(sequence);
         } catch (CompoundNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         this.name = name;
         this.functions = functions;
         calculateProperties();
+        initializeAminoAcids();
+    }
+
+    private void initalizeProteinFromDatabase(String sequence, String name, String functions, double molecularWeight, double pI) {
+        this.name = name;
+        this.functions = functions;
+        this.molecularWeight = molecularWeight;
+        this.pI = pI;
+        try {
+            this.proteinSequence = new ProteinSequence(sequence);
+        } catch (CompoundNotFoundException e) {
+            logger.error(e.getMessage());
+        }
         initializeAminoAcids();
     }
 

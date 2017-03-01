@@ -21,6 +21,7 @@ import org.biojava.nbio.core.sequence.template.Sequence;
 import org.biojava.nbio.structure.Chain;
 import org.biojava.nbio.structure.io.PDBFileReader;
 import org.jbioframework.library.protein.Protein;
+import org.jbioframework.library.utilities.DatabaseUtilities;
 import org.jbioframework.library.utilities.MessageFrame;
 import org.biojava.nbio.structure.StructureIO;
 import org.jbioframework.library.utilities.ImageFilter;
@@ -101,17 +102,32 @@ public class FileFrame extends JFrame implements ActionListener {
         refreshFileList();
     }
 
-    public void refreshFileList() {
+    private void refreshFileList() {
 
         choice.removeAllItems();
         File fl = new File("data");
 
         if (!fl.exists()) {
-            System.err.println("Warning: No data files found!");
+            System.err.println("Warning: No data files found at "+fl.getAbsolutePath()+"!");
             fl.mkdir();
         }
 
-        sa = fl.list(new ImageFilter());
+        File[] files = fl.listFiles();
+        int numFiles = 0;
+        for (int i=0;i<files.length-1;i++) {
+            if (files[i].isFile()) {
+                choice.addItem(files[i].getName());
+                numFiles++;
+            }
+        }
+        sa = new String[numFiles];
+        int currentFileName = 0;
+        for (int i=0;i<files.length-1;i++) {
+            if (files[i].isFile()) {
+                sa[currentFileName] = files[i].getName();
+                currentFileName++;
+            }
+        }
 
         for (int file = 0; file < (sa != null ? sa.length : 0); file++) {
             choice.addItem(sa[file]);
@@ -173,9 +189,10 @@ public class FileFrame extends JFrame implements ActionListener {
 
             } else {
 
-                //call the proper method to read the file depending on its type
-                if (extension.equalsIgnoreCase("faa") || extension.equalsIgnoreCase("fasta")) {
-                    //GenomeFileParser.fastaParse(filename, electro2D, "", fileNum);
+                String databaseName = fileName.substring(0,fileName.indexOf("."));
+                if (DatabaseUtilities.doesDatabaseExist(databaseName)) {
+                    proteins = DatabaseUtilities.loadDatabase(databaseName);
+                } else if (extension.equalsIgnoreCase("faa") || extension.equalsIgnoreCase("fasta")) {
                     try {
                         LinkedHashMap<String, ProteinSequence> proteinData = FastaReaderHelper.readFastaProteinSequence(new File(filePath));
                         if (proteinData != null) {
@@ -183,11 +200,12 @@ public class FileFrame extends JFrame implements ActionListener {
                                 proteins.add(new Protein(map.getValue().getSequenceAsString()));
                             }
                             lastFileName = fileName;
+                            DatabaseUtilities.saveDatabase(proteins,databaseName);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
+                    //TODO - Be sure that PDB format works, or remove it
                 } else if (extension.equalsIgnoreCase("pdb")) {
                     //GenomeFileParser.pdbParse(filename, electro2D, "", fileNum);
                     PDBFileReader reader = new PDBFileReader();
@@ -200,10 +218,11 @@ public class FileFrame extends JFrame implements ActionListener {
                         }
                         proteins.add(new Protein(new ProteinSequence(sequence)));
                         lastFileName = fileName;
+                        DatabaseUtilities.saveDatabase(proteins,databaseName);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
+                    //TODO - Be sure that GBK/GB format works, or remove it
                 } else if (extension.equalsIgnoreCase("gbk") || extension.equalsIgnoreCase("gb")) {
                     try {
                         LinkedHashMap<String, ProteinSequence> proteinData = GenbankReaderHelper.readGenbankProteinSequence(new File(filePath));
@@ -224,13 +243,13 @@ public class FileFrame extends JFrame implements ActionListener {
                                 }
                             }
                             lastFileName = fileName;
+                            DatabaseUtilities.saveDatabase(proteins,databaseName);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    //GenomeFileParser.gbkParse(filename, electro2D, "", fileNum);
                 }
                 this.setVisible(false);
             }
