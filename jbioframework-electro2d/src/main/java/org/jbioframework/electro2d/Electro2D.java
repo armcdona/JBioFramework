@@ -27,7 +27,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import org.jbioframework.library.gui.FileFrame;
 import org.jbioframework.library.protein.Protein;
@@ -65,30 +65,30 @@ public class Electro2D extends JPanel implements ActionListener {
 
     private JComboBox percentAcrylamide; //the Choices for entering the
     //% acrylamide for the gel
-    private Vector<JLabel> rangeLabels;
-    private Vector<JLabel> mwLabels;
+    private ArrayList<JLabel> rangeLabels;
+    private ArrayList<JLabel> mwLabels;
     private WebGenerator web;               //generates the website
 //    private GenerateHTMLButtonSwingVersion webButton;
 
-    /** protein data vectors **/
+    /** protein data ArrayLists **/
     private String lastFileLoaded = "";           //name of the last data file loaded
     private double minMW;
     private double maxMW;
     private double minPi;
     private double maxPi;
-    private Vector<Protein> sequences;                        //sequence data
-    private Vector sequenceTitles;                   //sequence titles
-    private Vector molecularWeights;                 //molecular weights of proteins
-    private Vector piValues;                         //pI values of proteins
-    private Vector functions;                        //functions of proteins
+    private ArrayList<Protein> sequences;                        //sequence data
+    private ArrayList sequenceTitles;                   //sequence titles
+    private ArrayList molecularWeights;                 //molecular weights of proteins
+    private ArrayList piValues;                         //pI values of proteins
+    private ArrayList functions;                        //functions of proteins
 
     private boolean set2ndFile = false;
     private java.awt.List proteinList2;
-    private Vector<Protein> sequences2;
-    private Vector sequenceTitles2 = new Vector();
-    private Vector functions2;
-    private Vector molecularWeights2;
-    private Vector piValues2;
+    private ArrayList<Protein> sequences2;
+    private ArrayList sequenceTitles2 = new ArrayList();
+    private ArrayList functions2;
+    private ArrayList molecularWeights2;
+    private ArrayList piValues2;
     private FileFrame fileFrame2;
     private boolean sequencesReady;
 
@@ -125,8 +125,8 @@ public class Electro2D extends JPanel implements ActionListener {
                 Toolkit.getDefaultToolkit().getImage(
                         "rangeSelectDeactivated.jpg"));
 
-        rangeLabels = new Vector<JLabel>();
-        mwLabels = new Vector();
+        rangeLabels = new ArrayList<JLabel>();
+        mwLabels = new ArrayList();
         resetPressed = false;
         rangeReload = false;
         gelCanvas = new GelCanvas(this);
@@ -255,10 +255,10 @@ public class Electro2D extends JPanel implements ActionListener {
         percentAcrylamide.addItem("10 - 20");
         percentAcrylamide.setSelectedItem("15");
 
-        sequences = new Vector();
-        sequenceTitles = new Vector();
-        molecularWeights = new Vector();
-        piValues = new Vector();
+        sequences = new ArrayList();
+        sequenceTitles = new ArrayList();
+        molecularWeights = new ArrayList();
+        piValues = new ArrayList();
         sequencesReady = false;
 
         proteinListFrame = new SingleProteinListFrame("Protein Lists", this);
@@ -473,11 +473,11 @@ public class Electro2D extends JPanel implements ActionListener {
 
         // remove each of the labels from the applet's image
         for (int i = 0; i < rangeLabels.size(); i++) {
-            pHPanel.remove((JLabel) rangeLabels.elementAt(i));
+            pHPanel.remove((JLabel) rangeLabels.get(i));
         }
 
-        //remove all of the labels from the vector
-        rangeLabels.removeAllElements();
+        //remove all of the labels from the ArrayList
+        rangeLabels.clear();
         //clear the molecular weight labels as well (since this method is
         // only called from the restart button)
         clearMW();
@@ -494,10 +494,10 @@ public class Electro2D extends JPanel implements ActionListener {
     public void clearMW() {
         //remove all of the labels from the applet's image
         for (int i = 0; i < mwLabels.size(); i++) {
-            this.remove((JLabel) mwLabels.elementAt(i));
+            this.remove((JLabel) mwLabels.get(i));
         }
-        //remove all of the labels from the vector
-        mwLabels.removeAllElements();
+        //remove all of the labels from the ArrayList
+        mwLabels.clear();
         //repaint the applet to reflect the change
         mWPanel.removeAll();
         this.repaint();
@@ -519,26 +519,26 @@ public class Electro2D extends JPanel implements ActionListener {
         JLabel hundredK = new JLabel("100K");
         mwLabels.add(hundredK);
         mWPanel.add(hundredK);
-        ((JLabel) mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 10, loc100, 40, 15);
-        ((JLabel) mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
+        ((JLabel) mwLabels.get(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 10, loc100, 40, 15);
+        ((JLabel) mwLabels.get(mwLabels.size() - 1)).setForeground(Color.BLACK);
 
         JLabel fiftyK = new JLabel("50K");
         mwLabels.add(fiftyK);
         mWPanel.add(fiftyK);
-        ((JLabel) mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc50, 30, 15);
-        ((JLabel) mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
+        ((JLabel) mwLabels.get(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc50, 30, 15);
+        ((JLabel) mwLabels.get(mwLabels.size() - 1)).setForeground(Color.BLACK);
 
         JLabel twentyfiveK = new JLabel("25K");
         mwLabels.add(twentyfiveK);
         mWPanel.add(twentyfiveK);
-        ((JLabel) mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc25, 30, 15);
-        ((JLabel) mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
+        ((JLabel) mwLabels.get(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc25, 30, 15);
+        ((JLabel) mwLabels.get(mwLabels.size() - 1)).setForeground(Color.BLACK);
 
         JLabel tenK = new JLabel("10K");
         mwLabels.add(tenK);
         mWPanel.add(tenK);
-        ((JLabel) mwLabels.elementAt(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc10, 30, 15);
-        ((JLabel) mwLabels.elementAt(mwLabels.size() - 1)).setForeground(Color.BLACK);
+        ((JLabel) mwLabels.get(mwLabels.size() - 1)).setBounds(mWPanel.getX() + 15, loc10, 30, 15);
+        ((JLabel) mwLabels.get(mwLabels.size() - 1)).setForeground(Color.BLACK);
 
     }
 
@@ -635,15 +635,15 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     private void calculateProteinProperties(FileFrame f, int fileNum) {
-        Vector piValues = new Vector();
+        ArrayList piValues = new ArrayList();
         double maxMW = -2;
         double minMW = 16;
         double maxPi = -2;
         double minPi = 16;
-        Vector sequenceTitles = new Vector();
-        Vector molecularWeights = new Vector();
-        Vector functions = new Vector();
-        Vector<Protein> proteins = f.getProteins();
+        ArrayList sequenceTitles = new ArrayList();
+        ArrayList molecularWeights = new ArrayList();
+        ArrayList functions = new ArrayList();
+        ArrayList<Protein> proteins = f.getProteins();
         if (proteins == null || proteins.size() <= 0) {
             return;
         }
@@ -910,11 +910,11 @@ public class Electro2D extends JPanel implements ActionListener {
         //create a URL object
         //URL searchPage = null;
         String searchId = "";           //the name used in the search
-        Vector ecNums = new Vector(); //holds the EC numbers contained in the
+        ArrayList ecNums = new ArrayList(); //holds the EC numbers contained in the
         // id string
 
         while (id.length() > 0 && id.indexOf("\u003B") != -1) {
-            ecNums.addElement(id.substring(0, id.indexOf("\u003B")));
+            ecNums.add(id.substring(0, id.indexOf("\u003B")));
             index = id.indexOf("\u003B");
             if (index + 1 == id.length()) {
                 id = "";
@@ -927,17 +927,16 @@ public class Electro2D extends JPanel implements ActionListener {
         searchId = "http\u003A\u002F\u002Fwww.genome.ad.jp\u002Fdbget-bin" +
                 "\u002Fwww_bget?enzyme+";
         for (int d = 0; d < ecNums.size(); d++) {
-            ecNums.insertElementAt((searchId +
-                    (String) ecNums.elementAt(d)), d);
-            ecNums.removeElementAt(d + 1);
+            ecNums.add(d, (searchId +
+                    (String) ecNums.get(d)));
+            ecNums.remove(d + 1);
         }
 
         try {
             //assign the search information to the URL
             for (int d = 0; d < ecNums.size(); d++) {
-                ecNums.insertElementAt((new URL((String) ecNums.elementAt(d))),
-                        d);
-                ecNums.removeElementAt(d + 1);
+                ecNums.add(d, (new URL((String) ecNums.get(d))));
+                ecNums.remove(d + 1);
             }
         } catch (MalformedURLException e) {
             //catch and display any errors that occurred when assigning the
@@ -951,7 +950,7 @@ public class Electro2D extends JPanel implements ActionListener {
         if (ecNums.size() != 0) {
             try {
                 for (int d = 0; d < ecNums.size(); d++) {
-                    BrowserLauncher.openURL(((URL) ecNums.elementAt(d)).toString());
+                    BrowserLauncher.openURL(((URL) ecNums.get(d)).toString());
                 }
             } catch (IOException e) {
                 System.err.println(e.getMessage());
@@ -1203,23 +1202,23 @@ public class Electro2D extends JPanel implements ActionListener {
         proteinList.removeAll();
         // refreshes the list with the new protein titles
         for (int x = 0; x < sequenceTitles.size(); x++) {
-            proteinList.add((String) sequenceTitles.elementAt(x));
+            proteinList.add((String) sequenceTitles.get(x));
         }
         proteinListFrame.updateSequences(sequenceTitles, sequenceTitles2);
     }
 
     /**
      * Given a protein title from proteinList, removes the protein's
-     * information from the vectors.
+     * information from the ArrayLists.
      *
      * @param title the title to be removed
      */
     public boolean removeProteinbyTitle(String title) {
         for (int x = 0; x < sequenceTitles.size(); x++) {
-            if ((sequenceTitles.elementAt(x)).toString().equals(title)) {
-                molecularWeights.removeElementAt(x);
-                piValues.removeElementAt(x);
-                sequenceTitles.removeElementAt(x);
+            if ((sequenceTitles.get(x)).toString().equals(title)) {
+                molecularWeights.remove(x);
+                piValues.remove(x);
+                sequenceTitles.remove(x);
                 return true;
             }
         }
@@ -1229,17 +1228,17 @@ public class Electro2D extends JPanel implements ActionListener {
 
     /**
      * Given a protein title from proteinList2, removes the protein's
-     * information from the vectors.
+     * information from the ArrayLists.
      *
      * @param title the title to be removed
      */
     public boolean removeProteinbyTitle2(String title) {
         if (sequenceTitles2 != null) {
             for (int x = 0; x < sequenceTitles2.size(); x++) {
-                if (((String) sequenceTitles2.elementAt(x)).equals(title)) {
-                    molecularWeights2.removeElementAt(x);
-                    piValues2.removeElementAt(x);
-                    sequenceTitles2.removeElementAt(x);
+                if (((String) sequenceTitles2.get(x)).equals(title)) {
+                    molecularWeights2.remove(x);
+                    piValues2.remove(x);
+                    sequenceTitles2.remove(x);
                     return true;
                 }
             }
@@ -1251,7 +1250,7 @@ public class Electro2D extends JPanel implements ActionListener {
     public void refreshProteinList2() {
         proteinList2.removeAll();
         for (int x = 0; x < sequenceTitles2.size(); x++) {
-            proteinList2.add((String) sequenceTitles2.elementAt(x));
+            proteinList2.add((String) sequenceTitles2.get(x));
         }
         proteinListFrame.updateSequences(sequenceTitles, sequenceTitles2);
     }
@@ -1374,10 +1373,10 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return sequences
      */
-    public Vector getSequences() {
-        Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
+    public ArrayList getSequences() {
+        ArrayList<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector<Protein> copySequences = (Vector<Protein>) sequences.clone();
+            ArrayList<Protein> copySequences = (ArrayList<Protein>) sequences.clone();
             sequences.clear();
             if (positionsOne.get(0) > -1) {
                 for (int x = 0; x < positionsOne.size(); x++) {
@@ -1393,10 +1392,10 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return sequenceTitles
      */
-    public Vector getSequenceTitles() {
-        Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
+    public ArrayList getSequenceTitles() {
+        ArrayList<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copySequenceTitles = (Vector) sequenceTitles.clone();
+            ArrayList copySequenceTitles = (ArrayList) sequenceTitles.clone();
             sequenceTitles.clear();
             if (positionsOne.get(0) > -1) {
                 for (int x = 0; x < positionsOne.size(); x++) {
@@ -1424,10 +1423,10 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return molecularWeights
      */
-    public Vector getMolecularWeights() {
-        Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
+    public ArrayList getMolecularWeights() {
+        ArrayList<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copyMolecularWeights = (Vector) molecularWeights.clone();
+            ArrayList copyMolecularWeights = (ArrayList) molecularWeights.clone();
             molecularWeights.clear();
             if (positionsOne.get(0) > -1) {
                 for (int x = 0; x < positionsOne.size(); x++) {
@@ -1445,15 +1444,15 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public String getMWbyTitle(String title) {
         for (int x = 0; x < sequenceTitles.size(); x++) {
-            if ((sequenceTitles.elementAt(x)).toString().equals(title)) {
-                return molecularWeights.elementAt(x).toString();
+            if ((sequenceTitles.get(x)).toString().equals(title)) {
+                return molecularWeights.get(x).toString();
             }
         }
 
         if (sequenceTitles2 != null) {
             for (int x = 0; x < sequenceTitles2.size(); x++) {
-                if ((sequenceTitles2.elementAt(x)).toString().equals(title)) {
-                    return molecularWeights2.elementAt(x).toString();
+                if ((sequenceTitles2.get(x)).toString().equals(title)) {
+                    return molecularWeights2.get(x).toString();
                 }
             }
         }
@@ -1467,15 +1466,15 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public String getFunctionbyTitle(String title) {
         for (int x = 0; x < sequenceTitles.size(); x++) {
-            if (((String) sequenceTitles.elementAt(x)).equals(title)) {
-                return (String) functions.elementAt(x);
+            if (((String) sequenceTitles.get(x)).equals(title)) {
+                return (String) functions.get(x);
             }
         }
 
         if (sequenceTitles2 != null) {
             for (int x = 0; x < sequenceTitles2.size(); x++) {
-                if (((String) sequenceTitles2.elementAt(x)).equals(title)) {
-                    return (String) functions2.elementAt(x);
+                if (((String) sequenceTitles2.get(x)).equals(title)) {
+                    return (String) functions2.get(x);
                 }
             }
         }
@@ -1489,15 +1488,16 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public String getPIbyTitle(String title) {
         for (int x = 0; x < sequenceTitles.size(); x++) {
-            System.out.println("Does "+sequenceTitles.elementAt(x) + " = "+ title + "? " + ((sequenceTitles.elementAt(x)).equals(title)));
-            if ((sequenceTitles.elementAt(x)).equals(title)) {
-                return piValues.elementAt(x).toString();
+            System.out.println("Does "+sequenceTitles.get(x) + " = "+ title + "? "
+                    + ((sequenceTitles.get(x)).equals(title)));
+            if ((sequenceTitles.get(x)).equals(title)) {
+                return piValues.get(x).toString();
             }
         }
         if (sequenceTitles2 != null) {
             for (int x = 0; x < sequenceTitles2.size(); x++) {
-                if ((sequenceTitles2.elementAt(x)).equals(title)) {
-                    return piValues2.elementAt(x).toString();
+                if ((sequenceTitles2.get(x)).equals(title)) {
+                    return piValues2.get(x).toString();
                 }
             }
         }
@@ -1511,14 +1511,14 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public String getSequencebyTitle(String title) {
         for (int x = 0; x < sequenceTitles.size(); x++) {
-            if (((String) sequenceTitles.elementAt(x)).equals(title)) {
-                return sequences.elementAt(x).getProteinSequenceAsString();
+            if (((String) sequenceTitles.get(x)).equals(title)) {
+                return sequences.get(x).getProteinSequenceAsString();
             }
         }
         if (sequenceTitles2 != null) {
             for (int x = 0; x < sequenceTitles2.size(); x++) {
-                if (((String) sequenceTitles2.elementAt(x)).equals(title)) {
-                    return sequences2.elementAt(x).getProteinSequenceAsString();
+                if (((String) sequenceTitles2.get(x)).equals(title)) {
+                    return sequences2.get(x).getProteinSequenceAsString();
                 }
             }
         }
@@ -1562,10 +1562,10 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return piValues
      */
-    public Vector getPiValues() {
-        Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
+    public ArrayList getPiValues() {
+        ArrayList<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copyPiValues = (Vector) piValues.clone();
+            ArrayList copyPiValues = (ArrayList) piValues.clone();
             piValues.clear();
             if (positionsOne.get(0) > -1) {
                 for (int x = 0; x < positionsOne.size(); x++) {
@@ -1581,10 +1581,10 @@ public class Electro2D extends JPanel implements ActionListener {
      *
      * @return functions
      */
-    public Vector getFunctions() {
-        Vector<Integer> positionsOne = proteinListFrame.getPositionsOne();
+    public ArrayList getFunctions() {
+        ArrayList<Integer> positionsOne = proteinListFrame.getPositionsOne();
         if (positionsOne.size() > 0) {
-            Vector copyFunctions = (Vector) functions.clone();
+            ArrayList copyFunctions = (ArrayList) functions.clone();
             functions.clear();
             if (positionsOne.get(0) > -1) {
                 for (int x = 0; x < positionsOne.size(); x++) {
@@ -1595,10 +1595,10 @@ public class Electro2D extends JPanel implements ActionListener {
         return functions;
     }
 
-    public Vector getPiValues2() {
-        Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
+    public ArrayList getPiValues2() {
+        ArrayList<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
-            Vector copyPiValues2 = (Vector) piValues2.clone();
+            ArrayList copyPiValues2 = (ArrayList) piValues2.clone();
             piValues2.clear();
             if (positionsTwo.get(0) > -1) {
                 for (int x = 0; x < positionsTwo.size(); x++) {
@@ -1609,10 +1609,10 @@ public class Electro2D extends JPanel implements ActionListener {
         return piValues2;
     }
 
-    public Vector getSequences2() {
-        Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
+    public ArrayList getSequences2() {
+        ArrayList<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
-            Vector<Protein> copySequences2 = (Vector<Protein>) sequences2.clone();
+            ArrayList<Protein> copySequences2 = (ArrayList<Protein>) sequences2.clone();
             sequences2.clear();
             if (positionsTwo.get(0) > -1) {
                 for (int x = 0; x < positionsTwo.size(); x++) {
@@ -1623,11 +1623,11 @@ public class Electro2D extends JPanel implements ActionListener {
         return sequences2;
     }
 
-    public Vector getSequenceTitles2() {
+    public ArrayList getSequenceTitles2() {
         if (sequenceTitles2 != null) {
-            Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
+            ArrayList<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
             if (positionsTwo.size() > 0) {
-                Vector copySequenceTitles2 = (Vector) sequenceTitles2.clone();
+                ArrayList copySequenceTitles2 = (ArrayList) sequenceTitles2.clone();
                 sequenceTitles2.clear();
                 if (positionsTwo.get(0) > -1) {
                     for (int x = 0; x < positionsTwo.size(); x++) {
@@ -1637,13 +1637,13 @@ public class Electro2D extends JPanel implements ActionListener {
             }
             return sequenceTitles2;
         }
-        return new Vector();
+        return new ArrayList();
     }
 
-    public Vector getMolecularWeights2() {
-        Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
+    public ArrayList getMolecularWeights2() {
+        ArrayList<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
-            Vector copyMolecularWeights2 = (Vector) molecularWeights2.clone();
+            ArrayList copyMolecularWeights2 = (ArrayList) molecularWeights2.clone();
             molecularWeights2.clear();
             if (positionsTwo.get(0) > -1) {
                 for (int x = 0; x < positionsTwo.size(); x++) {
@@ -1654,10 +1654,10 @@ public class Electro2D extends JPanel implements ActionListener {
         return molecularWeights2;
     }
 
-    public Vector getFunctions2() {
-        Vector<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
+    public ArrayList getFunctions2() {
+        ArrayList<Integer> positionsTwo = proteinListFrame.getPositionsTwo();
         if (positionsTwo.size() > 0) {
-            Vector copyFunctions2 = (Vector) functions2.clone();
+            ArrayList copyFunctions2 = (ArrayList) functions2.clone();
             functions2.clear();
             if (positionsTwo.get(0) > -1) {
                 for (int x = 0; x < positionsTwo.size(); x++) {
@@ -1676,9 +1676,9 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * stores the vector of sequence data
+     * stores the ArrayList of sequence data
      */
-    public void setSequences(Vector s) {
+    public void setSequences(ArrayList s) {
         sequences = s;
         sequencesReady = true;
     }
@@ -1705,56 +1705,56 @@ public class Electro2D extends JPanel implements ActionListener {
     }
 
     /**
-     * sets the vector of sequence titles
+     * sets the ArrayList of sequence titles
      */
-    public void setSequenceTitles(Vector st) {
+    public void setSequenceTitles(ArrayList st) {
         sequenceTitles = st;
     }
 
     /**
-     * sets the vector of molecular weights
+     * sets the ArrayList of molecular weights
      */
-    public void setMolecularWeights(Vector mw) {
+    public void setMolecularWeights(ArrayList mw) {
         molecularWeights = mw;
     }
 
     /**
-     * sets the vector of protein functions
+     * sets the ArrayList of protein functions
      */
-    public void setFunctionValues(Vector fcn) {
+    public void setFunctionValues(ArrayList fcn) {
         functions = fcn;
     }
 
     /**
-     * sets the vector of pI values
+     * sets the ArrayList of pI values
      */
-    public void setPiValues(Vector pi) {
+    public void setPiValues(ArrayList pi) {
         piValues = pi;
     }
 
-    public void setSequences2(Vector s) {
-        sequences2 = new Vector();
+    public void setSequences2(ArrayList s) {
+        sequences2 = new ArrayList();
         sequences2 = s;
         sequencesReady = true;
     }
 
-    public void setSequenceTitles2(Vector st) {
-        sequenceTitles2 = new Vector();
+    public void setSequenceTitles2(ArrayList st) {
+        sequenceTitles2 = new ArrayList();
         sequenceTitles2 = st;
     }
 
-    public void setMolecularWeights2(Vector mw) {
-        molecularWeights2 = new Vector();
+    public void setMolecularWeights2(ArrayList mw) {
+        molecularWeights2 = new ArrayList();
         molecularWeights2 = mw;
     }
 
-    public void setPiValues2(Vector pi) {
-        piValues2 = new Vector();
+    public void setPiValues2(ArrayList pi) {
+        piValues2 = new ArrayList();
         piValues2 = pi;
     }
 
-    public void setFunctionValues2(Vector fcn) {
-        functions2 = new Vector();
+    public void setFunctionValues2(ArrayList fcn) {
+        functions2 = new ArrayList();
         functions2 = fcn;
     }
 

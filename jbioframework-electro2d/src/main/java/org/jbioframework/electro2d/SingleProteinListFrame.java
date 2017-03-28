@@ -12,12 +12,13 @@ import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 /**
  * The type Single protein list frame.
@@ -35,15 +36,15 @@ public class SingleProteinListFrame extends JFrame {
     /**
      * The Sequence titles one.
      */
-    Vector sequenceTitlesOne;
+    ArrayList sequenceTitlesOne;
     /**
      * The Positions one.
      */
-    Vector<Integer> positionsOne;
+    ArrayList<Integer> positionsOne;
     /**
      * The Copy sequence one.
      */
-    Vector copySequenceOne;
+    ArrayList copySequenceOne;
 
     /**
      * Constructor for the window; sets up the instance variables and builds the GUI.
@@ -57,9 +58,9 @@ public class SingleProteinListFrame extends JFrame {
         setLayout(new GridBagLayout());
         JLabel sequenceOneLabel = new JLabel("Sequence");
         sequenceOneList = new JList();
-        sequenceTitlesOne = new Vector();
-        copySequenceOne = (Vector) sequenceTitlesOne.clone();
-        positionsOne = new Vector<Integer>();
+        sequenceTitlesOne = new ArrayList();
+        copySequenceOne = (ArrayList) sequenceTitlesOne.clone();
+        positionsOne = new ArrayList<Integer>();
         JScrollPane sequenceOneScroll = new JScrollPane(sequenceOneList);
         JButton selectedButton = new JButton("Remove Selected Proteins");
 
@@ -94,20 +95,20 @@ public class SingleProteinListFrame extends JFrame {
      * @param pL1 the p l 1
      * @param pL2 the p l 2
      */
-    public void updateSequences(Vector pL1, Vector pL2) {
-        sequenceOneList.setListData(pL1);
-        sequenceTitlesOne = new Vector(pL1);
-        copySequenceOne = (Vector) sequenceTitlesOne.clone();
-        positionsOne = new Vector<>();
+    public void updateSequences(ArrayList pL1, ArrayList pL2) {
+        sequenceOneList.setListData(new Vector<>(pL1));
+        sequenceTitlesOne = new ArrayList(pL1);
+        copySequenceOne = (ArrayList) sequenceTitlesOne.clone();
+        positionsOne = new ArrayList<>();
     }
 
     /**
      * This method is called to collect the positions of the elements still within
-     * the manipulated sequence into vectors for use with synchronizing Electro2D.Electro2D
+     * the manipulated sequence into ArrayLists for use with synchronizing Electro2D.Electro2D
      * with the user's manipulations.
      */
     public void updatePositions() {
-        positionsOne = new Vector<>();
+        positionsOne = new ArrayList<>();
         for (int x = 0; x < copySequenceOne.size(); x++) {
             if (sequenceTitlesOne.contains(copySequenceOne.get(x))) {
                 positionsOne.add(x);
@@ -133,29 +134,29 @@ public class SingleProteinListFrame extends JFrame {
     private class SelectedListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             int[] oneIndexes = sequenceOneList.getSelectedIndices();
-            Vector oneProteins = new Vector();
+            ArrayList oneProteins = new ArrayList();
             for (int x = 0; x < oneIndexes.length; x++) {
                 oneProteins.add(sequenceTitlesOne.get(oneIndexes[x]));
             }
             sequenceTitlesOne.removeAll(oneProteins);
             // The following line ensures that multiple edits can be made,
             // even before and after a gel run.
-            copySequenceOne = (Vector) sequenceTitlesOne.clone();
+            copySequenceOne = (ArrayList) sequenceTitlesOne.clone();
 
-            sequenceOneList.setListData(sequenceTitlesOne);
+            sequenceOneList.setListData(new Vector<>(sequenceTitlesOne));
             sequenceOneList.validate();
             updatePositions();
         }
     }
 
     /**
-     * The following two methods are accessors for the position vectors.
-     * Electro2D.Electro2D will call them in its get methods for the vectors used in
+     * The following two methods are accessors for the position ArrayLists.
+     * Electro2D.Electro2D will call them in its get methods for the ArrayLists used in
      * gel filtration in order to carry over the manipulations done by the user.
      *
      * @return the positions of each element still in the sequence.
      */
-    public Vector<Integer> getPositionsOne() {
+    public ArrayList<Integer> getPositionsOne() {
         return positionsOne;
     }
 
@@ -164,8 +165,8 @@ public class SingleProteinListFrame extends JFrame {
      *
      * @return the positions two
      */
-    public Vector<Integer> getPositionsTwo() {
-        Vector<Integer> positionsTwo = new Vector<>();
+    public ArrayList<Integer> getPositionsTwo() {
+        ArrayList<Integer> positionsTwo = new ArrayList<>();
         return positionsTwo;
     }
 

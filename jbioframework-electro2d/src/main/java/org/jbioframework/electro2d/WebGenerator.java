@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class WebGenerator {
 
@@ -61,13 +61,13 @@ public class WebGenerator {
             System.err.println(x.getMessage());
         }
 
-        Vector names = electro2D.getSequenceTitles();
-        Vector molwt = electro2D.getMolecularWeights();
-        Vector pI_vals = electro2D.getPiValues();
-        Vector functions = electro2D.getFunctions();
+        ArrayList names = electro2D.getSequenceTitles();
+        ArrayList molwt = electro2D.getMolecularWeights();
+        ArrayList pI_vals = electro2D.getPiValues();
+        ArrayList functions = electro2D.getFunctions();
 
         HTMLSorter htmlSort = new HTMLSorter(searchVal, names, pI_vals, molwt, functions);
-        Vector sorted = new Vector(htmlSort.getSorted());
+        ArrayList sorted = new ArrayList(htmlSort.getSorted());
 
         maxMW = String.valueOf(electro2D.getMaxMW());
         minMW = String.valueOf(electro2D.getMinMW());
@@ -117,19 +117,19 @@ public class WebGenerator {
         double molwtDouble = 0;
         String pI = "";
         double pIDouble = 0;
-        Vector tmp = new Vector();
+        ArrayList tmp = new ArrayList();
         for (int i = 0; i < sorted.size(); i++) {
-            tmp = ((Vector) sorted.elementAt(i));
-            pI = (String) tmp.elementAt(1);
+            tmp = ((ArrayList) sorted.get(i));
+            pI = (String) tmp.get(1);
             pIDouble = Double.parseDouble(pI);
-            molwtValue = (String) tmp.elementAt(2);
+            molwtValue = (String) tmp.get(2);
             molwtDouble = Double.parseDouble(molwtValue);
 
             protInfoTable = openTR + openTD +
-                    (String) tmp.elementAt(0) + closeTD + openTD +
+                    (String) tmp.get(0) + closeTD + openTD +
                     molwtValue + closeTD + openTD +
                     pI + closeTD + openTD +
-                    (String) tmp.elementAt(3) + closeTD + closeTR;
+                    (String) tmp.get(3) + closeTD + closeTR;
 
             pWrite.println(protInfoTable);
 

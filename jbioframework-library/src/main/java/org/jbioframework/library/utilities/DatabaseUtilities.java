@@ -3,8 +3,9 @@ package org.jbioframework.library.utilities;
 import org.jbioframework.library.protein.Protein;
 
 import java.io.File;
+
 import java.sql.*;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,39 +24,52 @@ public class DatabaseUtilities {
 
     private static void checkDatabaseFolderExists() {
         String filePath = getDatabaseRelativePath("");
-        String folderPath = filePath.substring(0,filePath.indexOf(".")-1);
+        String folderPath = processRelativePath(filePath.substring(0,filePath.indexOf(".db")-1));
+        File databaseFolder = new File(folderPath);
+        if (!(databaseFolder.exists())) {
+            if (!(databaseFolder.mkdir())) {
+                logger.error("Could not make database folder ("+databaseFolder.getAbsolutePath()+")!");
+            }
+        }
+
     }
 
-    public static Vector<Protein> loadDatabase(String filename) {
-        Vector<Protein> proteins = new Vector<Protein>();
+    public static ArrayList<Protein> loadDatabase(String filename) {
+        checkDatabaseFolderExists();
+        ArrayList<Protein> proteins = new ArrayList<>();
         try {
             Connection databaseConnection = connect(getDatabaseRelativePath(filename));
             Statement sqlStatement = databaseConnection.createStatement();
-            String sqlCommand = constructSQLProteinRetrieveAllCommand(filename,getColumnNames(),getColumnParameters(),getcolumnTypes());
+            String sqlCommand = constructSQLProteinRetrieveAllCommand(filename);
             ResultSet proteinResultSet = sqlStatement.executeQuery(sqlCommand);
             while (proteinResultSet.next()) {
                 proteins.add(createProteinfromResultSet(proteinResultSet));
             }
+            sqlStatement.close();
+            databaseConnection.close();
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
         return proteins;
     }
 
-    public static void saveDatabase(Vector<Protein> proteins, String fileName) {
+    public static void saveDatabase(ArrayList<Protein> proteins, String fileName) {
+        checkDatabaseFolderExists();
         try {
             Connection databaseConnection = connect(getDatabaseRelativePath(fileName));
             Statement sqlStatement = databaseConnection.createStatement();
+            String totalSqlCommand = "";
             String sqlCreateTableCommand = constructSQLTableCreationCommand(fileName,getColumnNames(),getColumnParameters(),getcolumnTypes());
-            sqlStatement.execute(sqlCreateTableCommand);
+            totalSqlCommand+=sqlCreateTableCommand;
 
 
             databaseConnection.setAutoCommit(false);
             for (Protein protein : proteins) {
                 String tableName = fileName;
                 String sqlInsertCommand = constructSQLProteinCreationCommand(tableName, getColumnNames(), getColumnParameters(), getcolumnTypes(), protein);
-                sqlStatement.execute(sqlInsertCommand);
+                totalSqlCommand+=sqlInsertCommand;
             }
+            sqlStatement.execute(totalSqlCommand);
             sqlStatement.close();
             databaseConnection.commit();
             databaseConnection.close();
@@ -90,8 +104,8 @@ public class DatabaseUtilities {
         return exists;
     }
 
-    private static String constructSQLTableCreationCommand(String tableName, Vector<String> columnNames,
-                                                           Vector<String> columnParameters, Vector<String> columnTypes) {
+    private static String constructSQLTableCreationCommand(String tableName, ArrayList<String> columnNames,
+                                                           ArrayList<String> columnParameters, ArrayList<String> columnTypes) {
         String sqlCommand = "";
         sqlCommand+="CREATE TABLE "+tableName+" (";
         for (int i=0; (i < columnNames.size()); i++) {
@@ -106,8 +120,8 @@ public class DatabaseUtilities {
         return sqlCommand;
     }
 
-    private static String constructSQLProteinCreationCommand(String tableName, Vector<String> columnNames,
-                                                            Vector<String> columnParameters, Vector<String> columnTypes,
+    private static String constructSQLProteinCreationCommand(String tableName, ArrayList<String> columnNames,
+                                                            ArrayList<String> columnParameters, ArrayList<String> columnTypes,
                                                             Protein protein) {
         String sqlCommand = "INSERT INTO "+tableName+"(";
         for (String columnName : columnNames) {
@@ -117,7 +131,7 @@ public class DatabaseUtilities {
             }
         }
         sqlCommand+=") VALUES(";
-        Vector<String> proteinValues = getProteinValues(protein);
+        ArrayList<String> proteinValues = getProteinValues(protein);
         int columnNumber = 0;
         for (String proteinValue : proteinValues) {
             if (proteinValue.contains(" ") || columnTypes.get(columnNumber).toLowerCase().contains("text")) {
@@ -136,8 +150,8 @@ public class DatabaseUtilities {
         return sqlCommand;
     }
 
-    private static String constructSQLProteinRemovalCommand(String tableName, Vector<String> columnNames,
-                                                             Vector<String> columnParameters, Vector<String> columnTypes,
+    private static String constructSQLProteinRemovalCommand(String tableName, ArrayList<String> columnNames,
+                                                             ArrayList<String> columnParameters, ArrayList<String> columnTypes,
                                                              String sequence) {
         String sqlCommand = "";
         sqlCommand+="DELETE from "+tableName+" WHERE ";
@@ -150,25 +164,14 @@ public class DatabaseUtilities {
         return sqlCommand;
     }
 
-    private static String constructSQLProteinRetrieveAllCommand(String tableName, Vector<String> columnNames,
-                                                                Vector<String> columnParameters, Vector<String> columnTypes) {
+    private static String constructSQLProteinRetrieveAllCommand(String tableName) {
         String sqlCommand = "";
-        sqlCommand+="SELECT ";
-        /**for (String columnName : columnNames) {
-            sqlCommand+=columnName;
-            if (!(columnName == columnNames.get(columnNames.size() - 1))) {
-                sqlCommand+=", ";
-            } else {
-                sqlCommand+=" ";
-            }
-        }*/
-        sqlCommand+="* ";
-        sqlCommand+="FROM "+tableName+";";
+        sqlCommand+="SELECT * FROM "+tableName+";";
         return sqlCommand;
     }
 
-    private static String constructSQLProteinRetrieveSpecificCommand(String tableName, Vector<String> columnNames,
-                                                                Vector<String> columnParameters, Vector<String> columnTypes,
+    private static String constructSQLProteinRetrieveSpecificCommand(String tableName, ArrayList<String> columnNames,
+                                                                ArrayList<String> columnParameters, ArrayList<String> columnTypes,
                                                                 String sequence) {
         String sqlCommand = "";
         sqlCommand+="SELECT ";
@@ -190,7 +193,7 @@ public class DatabaseUtilities {
         return sqlCommand;
     }
 
-    private static int findPrimaryColumnIndex(Vector<String> columnParameters, String tableName) {
+    private static int findPrimaryColumnIndex(ArrayList<String> columnParameters, String tableName) {
         int primaryColumnIndex = 0;
         for (int i=0;i<columnParameters.size() - 1;i++) {
             if (columnParameters.get(i).toUpperCase().contains("PRIMARY") && columnParameters.get(i).toUpperCase().contains("KEY")) {
@@ -218,8 +221,8 @@ public class DatabaseUtilities {
         return processedRelativePath;
     }
 
-    private static Vector<String> getColumnNames() {
-        Vector<String> columnNames = new Vector<>();
+    private static ArrayList<String> getColumnNames() {
+        ArrayList<String> columnNames = new ArrayList<>();
         columnNames.add("sequence");
         columnNames.add("name");
         columnNames.add("functions");
@@ -229,8 +232,8 @@ public class DatabaseUtilities {
         return columnNames;
     }
 
-    private static Vector<String> getcolumnTypes() {
-        Vector<String> columnTypes = new Vector<>();
+    private static ArrayList<String> getcolumnTypes() {
+        ArrayList<String> columnTypes = new ArrayList<>();
         columnTypes.add("text");
         columnTypes.add("text");
         columnTypes.add("text");
@@ -240,8 +243,8 @@ public class DatabaseUtilities {
         return columnTypes;
     }
 
-    private static Vector<String> getColumnParameters() {
-        Vector<String> columnParameters = new Vector<>();
+    private static ArrayList<String> getColumnParameters() {
+        ArrayList<String> columnParameters = new ArrayList<>();
         columnParameters.add("NOT NULL");
         columnParameters.add("");
         columnParameters.add("");
@@ -251,8 +254,8 @@ public class DatabaseUtilities {
         return columnParameters;
     }
 
-    private static Vector<String> getProteinValues(Protein protein) {
-        Vector<String> proteinValues = new Vector<>();
+    private static ArrayList<String> getProteinValues(Protein protein) {
+        ArrayList<String> proteinValues = new ArrayList<>();
         proteinValues.add(protein.getProteinSequenceAsString());
         proteinValues.add(protein.getName());
         proteinValues.add(protein.getFunctions());
@@ -263,7 +266,7 @@ public class DatabaseUtilities {
     }
 
     private static Protein createProteinfromResultSet(ResultSet proteinResultSet) {
-        Vector<String> columnNames = getColumnNames();
+        ArrayList<String> columnNames = getColumnNames();
         Protein protein = null;
         try {
             String sequence = proteinResultSet.getString(columnNames.get(0));
@@ -272,6 +275,7 @@ public class DatabaseUtilities {
             double molecularWeight = proteinResultSet.getDouble(columnNames.get(3));
             double pI = proteinResultSet.getDouble(columnNames.get(4));
             protein = new Protein(sequence, name, functions, molecularWeight, pI);
+            //logger.info("Created protein at "+(DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now())));
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

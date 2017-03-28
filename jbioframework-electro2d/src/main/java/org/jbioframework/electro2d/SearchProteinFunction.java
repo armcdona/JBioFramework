@@ -9,7 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,8 +23,8 @@ import javax.swing.JOptionPane;
 
 public class SearchProteinFunction implements MouseListener, ActionListener {
 
-    private Vector dots1;
-    private Vector dots2;
+    private ArrayList dots1;
+    private ArrayList dots2;
     private GelCanvas gel;
     private Electro2D electro2D;
     private JFrame window;
@@ -51,8 +52,8 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
         radioButtons = new ButtonGroup();
 
         gel = electro2D.getGel();
-        dots1 = new Vector();
-        dots2 = new Vector();
+        dots1 = new ArrayList();
+        dots2 = new ArrayList();
         excludesLabel = new JLabel("Excludes: ");
         includesLabel = new JLabel("Includes: ");
         searchTerm = new JTextField();
@@ -66,7 +67,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
         window = new JFrame();
         window.addWindowListener(new WindowAdapter() {
                                      public void windowClosing(WindowEvent e) {
-                                         window.hide();
+                                         window.setVisible(false);
                                      }
                                  }
         );
@@ -145,17 +146,17 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
         dots2 = gel.getDots2();
 
         if (dots1 == null) {
-            dots1 = new Vector();
+            dots1 = new ArrayList();
         }
 
         if (dots2 == null) {
-            dots2 = new Vector();
+            dots2 = new ArrayList();
         }
 
         ProteinDot prot = null;
         if (searchField.equals("function")) {
             for (int i = 0; i < dots1.size(); i++) {
-                prot = (ProteinDot) dots1.elementAt(i);
+                prot = (ProteinDot) dots1.get(i);
                 if (((E2DProtein) prot.getPro()).getFunction().indexOf(fcnName)
                         == -1) {
                     prot.doNotShowMe();
@@ -166,7 +167,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
             }
             if (dots2.size() != 0) {
                 for (int j = 0; j < dots2.size(); j++) {
-                    prot = (ProteinDot) dots2.elementAt(j);
+                    prot = (ProteinDot) dots2.get(j);
                     if (((E2DProtein) prot.getPro()).getFunction().indexOf(
                             fcnName) == -1) {
                         prot.doNotShowMe();
@@ -178,7 +179,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
             }
         } else if (searchField.equals("sequence")) {
             for (int i = 0; i < dots1.size(); i++) {
-                prot = (ProteinDot) dots1.elementAt(i);
+                prot = (ProteinDot) dots1.get(i);
                 if (((E2DProtein) prot.getPro()).getSequence().indexOf(fcnName)
                         == -1) {
                     prot.doNotShowMe();
@@ -194,7 +195,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
             }
         } else if (searchField.equals("title")) {
             for (int i = 0; i < dots1.size(); i++) {
-                prot = (ProteinDot) dots1.elementAt(i);
+                prot = (ProteinDot) dots1.get(i);
                 if (((E2DProtein) prot.getPro()).getID().indexOf(fcnName)
                         == -1) {
                     prot.doNotShowMe();
@@ -205,7 +206,7 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
             }
             if (dots2.size() != 0) {
                 for (int j = 0; j < dots2.size(); j++) {
-                    prot = (ProteinDot) dots2.elementAt(j);
+                    prot = (ProteinDot) dots2.get(j);
                     if (((E2DProtein) prot.getPro()).getID().indexOf(fcnName)
                             == -1) {
                         prot.doNotShowMe();
@@ -217,12 +218,12 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
             }
         }
         int count = 0;
-        for (ProteinDot dot : (Vector<ProteinDot>) dots1) {
+        for (ProteinDot dot : (ArrayList<ProteinDot>) dots1) {
             if (dot.getShowMe()) {
                 count++;
             }
         }
-        for (ProteinDot dot : (Vector<ProteinDot>) dots2) {
+        for (ProteinDot dot : (ArrayList<ProteinDot>) dots2) {
             if (dot.getShowMe()) {
                 count++;
             }
@@ -236,11 +237,11 @@ public class SearchProteinFunction implements MouseListener, ActionListener {
         dots1 = gel.getDots();
         dots2 = gel.getDots2();
         for (int i = 0; i < dots1.size(); i++) {
-            ((ProteinDot) dots1.elementAt(i)).doShowMe();
+            ((ProteinDot) dots1.get(i)).doShowMe();
         }
         if (dots2.size() != 0) {
             for (int j = 0; j < dots2.size(); j++) {
-                ((ProteinDot) dots2.elementAt(j)).doShowMe();
+                ((ProteinDot) dots2.get(j)).doShowMe();
             }
         }
 //	gel.repaint();

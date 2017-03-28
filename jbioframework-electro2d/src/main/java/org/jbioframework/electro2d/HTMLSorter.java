@@ -7,6 +7,7 @@ package org.jbioframework.electro2d;
 
 import org.jbioframework.electro2d.HTMLComparator;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.TreeSet;
 
@@ -15,7 +16,7 @@ public class HTMLSorter {
     private TreeSet proteinInfo;
     private int compBy;
 
-    public HTMLSorter(int cb, Vector t, Vector p, Vector m, Vector f) {
+    public HTMLSorter(int cb, ArrayList t, ArrayList p, ArrayList m, ArrayList f) {
 
         compBy = cb;
         proteinInfo = new TreeSet(new HTMLComparator(compBy));
@@ -23,10 +24,10 @@ public class HTMLSorter {
 
         for (int i = 0; i < t.size(); i++) {
             tmp = new Vector();
-            tmp.add((String) t.elementAt(i));
-            tmp.add((String) p.elementAt(i));
-            tmp.add((String) m.elementAt(i));
-            tmp.add((String) f.elementAt(i));
+            tmp.add((String) t.get(i));
+            tmp.add((String) p.get(i));
+            tmp.add((String) m.get(i));
+            tmp.add((String) f.get(i));
             proteinInfo.add(tmp);
         }
     }

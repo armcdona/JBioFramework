@@ -9,7 +9,8 @@ package org.jbioframework.electro2d;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Collection;
 
@@ -19,7 +20,7 @@ public class IEFProtein extends Component {
     private static Color[] colors = {Color.blue, Color.green, Color.yellow,
             Color.red, Color.orange, Color.pink};
     private Color myColor;
-    private Vector proteins;
+    private ArrayList proteins;
     private int myX;
     private static int myY = 5;
     private double tempX = 0;
@@ -31,7 +32,7 @@ public class IEFProtein extends Component {
     private static int myHeight = 40;
     private static double myWidth = 0;
     private static double tempWidth = 0;
-    private Vector names;
+    private ArrayList names;
     private static double maxpH = 10;
     private static double minpH = 3;
     private static GelCanvas gelcanvas;
@@ -42,9 +43,9 @@ public class IEFProtein extends Component {
      * @param p the first protein to be represented by this object
      */
     public IEFProtein(E2DProtein p, GelCanvas g) {
-        names = new Vector();
+        names = new ArrayList();
         gelcanvas = g;
-        proteins = new Vector();
+        proteins = new ArrayList();
         proteins.add(p);
 
         myPi = p.getPI();
@@ -55,7 +56,7 @@ public class IEFProtein extends Component {
         }
 
         /**
-         * add the name of the protein to the name vector and set the initial
+         * add the name of the protein to the name ArrayList and set the initial
          * color of the object
          */
         names.add(p.toString());
@@ -81,17 +82,17 @@ public class IEFProtein extends Component {
     }
 
     /**
-     * addProtein adds a collection of proteins c to the vector of proteins
+     * addProtein adds a collection of proteins c to the ArrayList of proteins
      * being represented by this Electro2D.IEFProtein object
      *
-     * @param c the collection of proteins to be added to the vector
+     * @param c the collection of proteins to be added to the ArrayList
      */
 
     public void addProtein(Collection c) {
         /**
-         * copy all of the proteins passed to this object into its vector
+         * copy all of the proteins passed to this object into its ArrayList
          */
-        proteins.addAll((Vector) (c));
+        proteins.addAll((ArrayList) (c));
 
         /**
          * change the color of the Electro2D.IEFProtein based on the number of proteins
@@ -114,16 +115,16 @@ public class IEFProtein extends Component {
         this.repaint();
 
         /**
-         * add the new protein names to the vector of names and set any
+         * add the new protein names to the ArrayList of names and set any
          * changes in the max or min pI values
          */
         E2DProtein p = null;
         double pi = 0;
-        for (int i = 0; i < ((Vector) c).size(); i++) {
+        for (int i = 0; i < ((ArrayList) c).size(); i++) {
 
-            names.add(((E2DProtein) ((Vector) c).elementAt(i)).toString());
+            names.add(((E2DProtein) ((ArrayList) c).get(i)).toString());
 
-            p = ((E2DProtein) ((Vector) c).elementAt(i));
+            p = ((E2DProtein) ((ArrayList) c).get(i));
             pi = p.getPI();
 
             if (pi > maxPi) {
@@ -180,7 +181,7 @@ public class IEFProtein extends Component {
      *
      * @return proteins
      */
-    public Vector getProtein() {
+    public ArrayList getProtein() {
 
         return proteins;
     }
@@ -298,9 +299,9 @@ public class IEFProtein extends Component {
     /**
      * accessor method
      *
-     * @return vector of protein titles
+     * @return ArrayList of protein titles
      */
-    public Vector getNames() {
+    public ArrayList getNames() {
         return names;
     }
 

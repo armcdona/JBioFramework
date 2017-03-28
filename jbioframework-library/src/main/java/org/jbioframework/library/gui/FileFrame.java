@@ -10,7 +10,6 @@ package org.jbioframework.library.gui;
  * @author Adam Bazinet
  */
 
-import org.apache.log4j.spi.LoggerFactory;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.compound.AminoAcidCompound;
 import org.biojava.nbio.core.sequence.features.FeatureInterface;
@@ -27,7 +26,9 @@ import org.biojava.nbio.structure.StructureIO;
 import org.jbioframework.library.utilities.ImageFilter;
 import org.biojava.nbio.core.sequence.io.FastaReaderHelper;
 import org.apache.commons.io.FilenameUtils;
+import org.jbioframework.library.utilities.XMLUtilities;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,9 +37,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 import java.util.List;
 
 public class FileFrame extends JFrame implements ActionListener {
@@ -54,7 +53,7 @@ public class FileFrame extends JFrame implements ActionListener {
     private JPanel center;
     private JPanel south;
     private String[] sa;
-    private Vector<Protein> proteins;
+    private ArrayList<Protein> proteins;
     private String lastFileName;
 
     final Logger logger = org.slf4j.LoggerFactory.getLogger(FileFrame.class);
@@ -102,6 +101,27 @@ public class FileFrame extends JFrame implements ActionListener {
         refreshFileList();
     }
 
+    private ArrayList<String> getAcceptedExtentions() {
+        ArrayList<String> extensions = new ArrayList<>();
+        extensions.add(".fasta");
+        extensions.add(".faa");
+        extensions.add(".pdb");
+        extensions.add(".gbk");
+        extensions.add(".gb");
+        return extensions;
+    }
+
+    private boolean isAcceptedExtension(String filename) {
+        ArrayList<String> extensions = getAcceptedExtentions();
+        for (String acceptedExtension : extensions) {
+            if (acceptedExtension.toLowerCase().contains(filename.toLowerCase())
+                    || filename.toLowerCase().contains(acceptedExtension.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void refreshFileList() {
 
         choice.removeAllItems();
@@ -113,18 +133,19 @@ public class FileFrame extends JFrame implements ActionListener {
         }
 
         File[] files = fl.listFiles();
-        int numFiles = 0;
+        ArrayList<File> acceptedFiles = new ArrayList<>();
         for (int i=0;i<files.length-1;i++) {
             if (files[i].isFile()) {
-                choice.addItem(files[i].getName());
-                numFiles++;
+                if (isAcceptedExtension(files[i].getName())) {
+                    acceptedFiles.add(files[i]);
+                }
             }
         }
-        sa = new String[numFiles];
+        sa = new String[acceptedFiles.size()];
         int currentFileName = 0;
-        for (int i=0;i<files.length-1;i++) {
-            if (files[i].isFile()) {
-                sa[currentFileName] = files[i].getName();
+        for (File file : acceptedFiles) {
+            if (file.isFile()) {
+                sa[currentFileName] = file.getName();
                 currentFileName++;
             }
         }
@@ -150,7 +171,7 @@ public class FileFrame extends JFrame implements ActionListener {
         refreshFileList();
     }
 
-    public Vector<Protein> getProteins() {
+    public ArrayList<Protein> getProteins() {
         return proteins;
     }
 
@@ -160,7 +181,7 @@ public class FileFrame extends JFrame implements ActionListener {
 
     private void loadFile() {
 
-        proteins = new Vector<>();
+        proteins = new ArrayList<>();
 
         //first, get filename from textbox
         String fileName = sa[choice.getSelectedIndex()];
@@ -189,9 +210,14 @@ public class FileFrame extends JFrame implements ActionListener {
 
             } else {
 
+                long startTimeIndex = System.currentTimeMillis();
+                long endTimeIndex = 0;
+
                 String databaseName = fileName.substring(0,fileName.indexOf("."));
-                if (DatabaseUtilities.doesDatabaseExist(databaseName)) {
-                    proteins = DatabaseUtilities.loadDatabase(databaseName);
+                if (XMLUtilities.doesFileExist(databaseName)) {
+                    proteins = XMLUtilities.loadFile(databaseName);
+                    endTimeIndex = System.currentTimeMillis();
+                    logger.info("Time to load database in seconds: "+((endTimeIndex-startTimeIndex)/1000.0)+" at a speed of "+((proteins.size())/((endTimeIndex-startTimeIndex)/1000.0))+" entries/sec.");
                 } else if (extension.equalsIgnoreCase("faa") || extension.equalsIgnoreCase("fasta")) {
                     try {
                         LinkedHashMap<String, ProteinSequence> proteinData = FastaReaderHelper.readFastaProteinSequence(new File(filePath));
@@ -200,7 +226,9 @@ public class FileFrame extends JFrame implements ActionListener {
                                 proteins.add(new Protein(map.getValue().getSequenceAsString()));
                             }
                             lastFileName = fileName;
-                            DatabaseUtilities.saveDatabase(proteins,databaseName);
+                            XMLUtilities.saveFile(fileName,proteins);
+                            endTimeIndex = System.currentTimeMillis();
+                            logger.info("Time to save database in seconds: "+((endTimeIndex-startTimeIndex)/1000.0));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -227,9 +255,7 @@ public class FileFrame extends JFrame implements ActionListener {
                     try {
                         LinkedHashMap<String, ProteinSequence> proteinData = GenbankReaderHelper.readGenbankProteinSequence(new File(filePath));
                         if (proteinData != null) {
-                            int i=0;
                             for (ProteinSequence map : proteinData.values()) {
-                                System.out.println("Tracking # "+ i + " : "+map.getSequenceAsString()+"\n");
                                 //proteins.add(new Protein(map.getSequenceAsString()));
                                 for (FeatureInterface<AbstractSequence<AminoAcidCompound>, AminoAcidCompound> feature : map.getFeatures()) {
                                     int begin = feature.getLocations().getStart().getPosition() - 1;
@@ -237,8 +263,6 @@ public class FileFrame extends JFrame implements ActionListener {
                                     if (begin < 0 || end > map.getSequenceAsString().length()-1)
                                         return;
                                     String sequence = map.getSequenceAsString().substring(begin,end);
-                                    logger.debug(i+": "+sequence+"\n");
-                                    i++;
                                     //proteins.add(new Protein(map.getSequenceAsString(feature.getLocations().getStart(),feature.getLocations().getEnd(),map.getSequenceAsString())));
                                 }
                             }

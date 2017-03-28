@@ -20,7 +20,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Vector;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -39,7 +39,7 @@ public class IEFFrame extends Frame {
     private String minRange;   //the minimum pI value held in the Electro2D.IEFProtein
     private JScrollPane scroll; //the pane that allows the user to scroll to
     //view all of the contents
-    private Vector labels;     // the labels storing the protein names
+    private ArrayList labels;     // the labels storing the protein names
     private static int xlocation = 0;  //the x location of this frame
     private static int ylocation = 0;  // the y location of this frame
 
@@ -49,7 +49,7 @@ public class IEFFrame extends Frame {
      * @param i - the Electro2D.IEFProtein being represented
      */
     public IEFFrame(IEFProtein i) {
-        labels = new Vector();
+        labels = new ArrayList();
 
         //set the font for the information being displayed
         theFont = new Font("Arial", Font.PLAIN, 12);
@@ -82,18 +82,18 @@ public class IEFFrame extends Frame {
         IEFPanel.scrollRectToVisible(dimensions);
 
         //get the names of the proteins stored in ief
-        Vector v = i.getNames();
+        ArrayList v = i.getNames();
 
         int location = 30;
         for (int j = 0; j < v.size(); j++) {
             //create a label for each protein in ief and store it in labels
-            labels.add(new Label((String) v.elementAt(j)));
+            labels.add(new Label((String) v.get(j)));
 
             //set the sizes of each label
-            ((Label) labels.elementAt(j)).setBounds(5, location, 390, 20);
-            ((Label) labels.elementAt(j)).setFont(theFont);
+            ((Label) labels.get(j)).setBounds(5, location, 390, 20);
+            ((Label) labels.get(j)).setFont(theFont);
             location = location + 15;
-            IEFPanel.add((Label) labels.elementAt(j));
+            IEFPanel.add((Label) labels.get(j));
         }
 
         //adjusts the size of the panel to reflect the number of labels
@@ -128,7 +128,7 @@ public class IEFFrame extends Frame {
         }
     }
 
-//	public Electro2D.IEFFrame(IEFProteinSwingVersion elementAt) {
+//	public Electro2D.IEFFrame(IEFProteinSwingVersion get) {
 //		// temporary  constructor created for fix compiling error 
 //	}
 

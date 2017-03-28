@@ -6,7 +6,7 @@ package org.jbioframework.electro2d;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class RestartE2DAnimationButton extends JButton implements ActionListener {
 
@@ -45,16 +45,16 @@ public class RestartE2DAnimationButton extends JButton implements ActionListener
         IEFProtein.resetTempWidth();
         PlayE2AnimationButton.setCompare(false);
         electro2D.resetBothProteinLists();
-        electro2D.setSequences(new Vector());
-        electro2D.setSequenceTitles(new Vector());
-        electro2D.setMolecularWeights(new Vector());
-        electro2D.setPiValues(new Vector());
-        electro2D.setFunctionValues(new Vector());
-        electro2D.setSequences2(new Vector());
-        electro2D.setSequenceTitles2(new Vector());
-        electro2D.setMolecularWeights2(new Vector());
-        electro2D.setPiValues2(new Vector());
-        electro2D.setFunctionValues2(new Vector());
+        electro2D.setSequences(new ArrayList());
+        electro2D.setSequenceTitles(new ArrayList());
+        electro2D.setMolecularWeights(new ArrayList());
+        electro2D.setPiValues(new ArrayList());
+        electro2D.setFunctionValues(new ArrayList());
+        electro2D.setSequences2(new ArrayList());
+        electro2D.setSequenceTitles2(new ArrayList());
+        electro2D.setMolecularWeights2(new ArrayList());
+        electro2D.setPiValues2(new ArrayList());
+        electro2D.setFunctionValues2(new ArrayList());
         electro2D.refreshProteinList();
         electro2D.refreshProteinList2();
 

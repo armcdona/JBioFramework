@@ -8,12 +8,13 @@ package org.jbioframework.electro2d; /**
 
 import javax.swing.*;
 import java.io.*;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class CSVCreator {
 
-    //Vector of proteins to be written to the csv file
-    private Vector proteins;
+    //ArrayList of proteins to be written to the csv file
+    private ArrayList proteins;
 
     //saving the state for electro2D at time of object's creation.
     private Electro2D electro2D;
@@ -24,7 +25,7 @@ public class CSVCreator {
     /**
      * Initializes the CSVCreator with the proteins contained in the references Electro2D simulations
      *
-     * @param e Electro2D reference used to get the vector of proteins within the simulation.
+     * @param e Electro2D reference used to get the ArrayList of proteins within the simulation.
      */
     public CSVCreator(Electro2D e) {
         electro2D = e;
@@ -32,7 +33,7 @@ public class CSVCreator {
     }
 
     /**
-     * Writes the protein vector to a csv file containing all of their information needed by the program.
+     * Writes the protein ArrayList to a csv file containing all of their information needed by the program.
      */
     public void writeToCSV() {
 
@@ -62,10 +63,10 @@ public class CSVCreator {
                     "Y-Coordinate");
 
             if (proteins == null) {
-                proteins = new Vector();
+                proteins = new ArrayList();
             }
             for (int i = 0; i < proteins.size(); i++) {
-                d = (ProteinDot) proteins.elementAt(i);
+                d = (ProteinDot) proteins.get(i);
                 p = (E2DProtein) d.getPro();
 
                 out.println("\"" + p.getID() + "\"" + "," + p.getSequence() + "," +
