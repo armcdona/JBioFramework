@@ -1,6 +1,5 @@
 package org.jbioframework.library.utilities;
 
-import com.thoughtworks.xstream.XStream;
 import org.biojava.nbio.core.sequence.ProteinSequence;
 import org.biojava.nbio.core.sequence.compound.AminoAcidCompound;
 import org.biojava.nbio.core.sequence.compound.AminoAcidCompoundSet;
@@ -8,8 +7,10 @@ import org.biojava.nbio.core.sequence.storage.ArrayListSequenceReader;
 import org.jbioframework.library.protein.AminoAcid;
 import org.jbioframework.library.protein.Protein;
 import org.jbioframework.library.protein.ProteinList;
+import org.jdom2.output.XMLOutputter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.jdom2.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,19 +18,6 @@ import java.util.ArrayList;
 public class XMLUtilities {
 
     private final static Logger logger = LoggerFactory.getLogger(XMLUtilities.class);
-
-    private static XStream getXStream() {
-        XStream xstream = new XStream();
-        xstream.alias("proteinsequence", ProteinSequence.class);
-        xstream.alias("aminoacid", AminoAcid.class);
-        xstream.alias("proteinlist", ProteinList.class);
-        xstream.addImplicitCollection(ProteinList.class,"proteins",Protein.class);
-        xstream.alias("protein",Protein.class);
-        xstream.alias("sequencereader",ArrayListSequenceReader.class);
-        xstream.alias("aminoacidcompoundset",AminoAcidCompoundSet.class);
-        xstream.alias("aminoacidcompound", AminoAcidCompound.class);
-        return xstream;
-    }
 
     private static void checkXMLFolderExists() {
         String filePath = getXMLRelativePath("");
@@ -53,7 +41,8 @@ public class XMLUtilities {
             if ((relativePath.indexOf("//") + 2) > (relativePath.length() - 1) ){
                 processedRelativePath = relativePath.substring(0,relativePath.indexOf("//"));
             } else {
-                processedRelativePath = relativePath.substring(0,relativePath.indexOf("//")) + relativePath.substring(relativePath.indexOf("//")+2,relativePath.length()-1);
+                processedRelativePath = relativePath.substring(0,relativePath.indexOf("//")) +
+                        relativePath.substring(relativePath.indexOf("//")+2,relativePath.length()-1);
             }
         }
         return processedRelativePath;
@@ -67,26 +56,45 @@ public class XMLUtilities {
         return exists;
     }
 
+    private static Element getElementFromProtein(Protein protein) {
+        Element proteinElement = new Element("Protein");
+        proteinElement.setAttribute("name",protein.getName());
+        proteinElement.setAttribute("functions",protein.getFunctions());
+
+        Element sequence = new Element("Sequence");
+        sequence.addContent(new Text(protein.getProteinSequenceAsString()));
+
+        Element pI = new Element("pI");
+        pI.addContent(new Text(Double.toString(protein.getpI())));
+
+        Element molecularWeight = new Element("MW");
+        molecularWeight.addContent(new Text(Double.toString(protein.getMolecularWeight())));
+
+        return proteinElement;
+    }
+
+    private static Protein getProteinFromElement(Element proteinElement) {
+        Protein protein = new Protein("");
+        return protein;
+    }
+
     public static ArrayList<Protein> loadFile(String filename) {
         checkXMLFolderExists();
         ArrayList<Protein> proteins = new ArrayList<>();
-        XStream xstream = getXStream();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(getXMLRelativePath(filename)));
-            proteins = ((ProteinList)(xstream.fromXML(reader))).getProteins();
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
         return proteins;
     }
 
     public static void saveFile(String filename, ArrayList<Protein> proteins) {
         checkXMLFolderExists();
-        XStream xstream = getXStream();
+        Element proteinsElement = new Element("Proteins");
+        for (Protein protein : proteins) {
+            proteinsElement.addContent(getElementFromProtein(protein));
+        }
+        Document xmlDocument = new Document(proteinsElement);
+        XMLOutputter xmlOutputter = new XMLOutputter();
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(getXMLRelativePath(filename)));
-            xstream.toXML(new ProteinList(proteins),writer);
-            writer.close();
+            xmlOutputter.output(xmlDocument,writer);
         } catch (IOException e) {
             logger.error(e.getMessage());
         }

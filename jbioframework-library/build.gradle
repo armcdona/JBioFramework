@@ -30,8 +30,9 @@ dependencies {
     compile 'log4j:log4j:1.2.17'
     compile 'org.slf4j:slf4j-log4j12:1.7.21'
     compile 'org.xerial:sqlite-jdbc:3.16.1'
+    compile 'org.jdom:jdom2:2.0.6'
     compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.08'
-    compile 'com.thoughtworks.xstream:xstream:1.4.9'
+
     compile fileTree(include : ["*.jar"], dir:"src/main/resources/")
 }
 
