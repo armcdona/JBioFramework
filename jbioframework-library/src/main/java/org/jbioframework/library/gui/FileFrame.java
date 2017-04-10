@@ -128,7 +128,7 @@ public class FileFrame extends JFrame implements ActionListener {
         File fl = new File("data");
 
         if (!fl.exists()) {
-            System.err.println("Warning: No data files found at "+fl.getAbsolutePath()+"!");
+            logger.warn("Warning: No data files found at "+fl.getAbsolutePath()+"!");
             fl.mkdir();
         }
 
@@ -194,7 +194,7 @@ public class FileFrame extends JFrame implements ActionListener {
 
             String extension = FilenameUtils.getExtension(fileName);
             String filePath = "./data/" + fileName; //FilenameUtils.getFullPath("./"+fileName);
-            System.out.println("filename: "+fileName+", filepath: "+filePath+", extension:"+ extension+"\n");
+            logger.info("filename: "+fileName+", filepath: "+filePath+", extension:"+ extension+"\n");
 
             // if the file's extention is not one of the supported types
             // display an error message
@@ -217,7 +217,7 @@ public class FileFrame extends JFrame implements ActionListener {
                 if (XMLUtilities.doesFileExist(databaseName)) {
                     proteins = XMLUtilities.loadFile(databaseName);
                     endTimeIndex = System.currentTimeMillis();
-                    logger.info("Time to load XML in seconds: "+((endTimeIndex-startTimeIndex)/1000.0)+" at a speed of "+((proteins.size())/((endTimeIndex-startTimeIndex)/1000.0))+" entries/sec.");
+                    logger.info("Time to load XML file in seconds: "+((endTimeIndex-startTimeIndex)/1000.0)+" at a speed of "+((proteins.size())/((endTimeIndex-startTimeIndex)/1000.0))+" entries/sec.");
                 } else if (extension.equalsIgnoreCase("faa") || extension.equalsIgnoreCase("fasta")) {
                     try {
                         LinkedHashMap<String, ProteinSequence> proteinData = FastaReaderHelper.readFastaProteinSequence(new File(filePath));
@@ -228,7 +228,7 @@ public class FileFrame extends JFrame implements ActionListener {
                             lastFileName = fileName;
                             XMLUtilities.saveFile(fileName,proteins);
                             endTimeIndex = System.currentTimeMillis();
-                            logger.info("Time to save XML in seconds: "+((endTimeIndex-startTimeIndex)/1000.0));
+                            logger.info("Time to save XML file in seconds: "+((endTimeIndex-startTimeIndex)/1000.0));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -241,7 +241,7 @@ public class FileFrame extends JFrame implements ActionListener {
                         List<Chain> chainList = reader.getStructure(filePath).getChains();
                         String sequence = "";
                         for (int i=0; i<chainList.size(); i++) {
-                            System.out.println(chainList.get(i).getSeqResSequence()+"\n");
+                            logger.info(chainList.get(i).getSeqResSequence()+"\n");
                             //sequence+=chainList.get(i).getSeqResSequence();
                         }
                         proteins.add(new Protein(new ProteinSequence(sequence)));
