@@ -1,13 +1,8 @@
 package org.jbioframework.library.gui;
 /**
- * Electro2D.FileFrame.java
- * <p>
  * This class encapsulates all the functionality required to pop up a frame
  * and load protein data from a file.
  *
- * @author John Manning
- * @author Jill Zapoticznyj
- * @author Adam Bazinet
  */
 
 import org.biojava.nbio.core.sequence.ProteinSequence;
