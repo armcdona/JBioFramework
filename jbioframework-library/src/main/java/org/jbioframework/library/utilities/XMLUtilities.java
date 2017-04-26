@@ -1,12 +1,6 @@
 package org.jbioframework.library.utilities;
 
-import org.biojava.nbio.core.sequence.ProteinSequence;
-import org.biojava.nbio.core.sequence.compound.AminoAcidCompound;
-import org.biojava.nbio.core.sequence.compound.AminoAcidCompoundSet;
-import org.biojava.nbio.core.sequence.storage.ArrayListSequenceReader;
-import org.jbioframework.library.protein.AminoAcid;
 import org.jbioframework.library.protein.Protein;
-import org.jbioframework.library.protein.ProteinList;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Text;
@@ -14,14 +8,14 @@ import org.jdom2.input.DOMBuilder;
 import org.jdom2.output.XMLOutputter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.jdom2.*;
-import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class XMLUtilities {
@@ -79,12 +73,20 @@ public class XMLUtilities {
         Element molecularWeight = new Element("MW");
         molecularWeight.addContent(new Text(Double.toString(protein.getMolecularWeight())));
 
+        proteinElement.addContent(sequence);
+        proteinElement.addContent(pI);
+        proteinElement.addContent(molecularWeight);
+
         return proteinElement;
     }
 
     private static Protein getProteinFromElement(Element proteinElement) {
-        Protein protein = new Protein("");
-        return protein;
+        String name = proteinElement.getAttributeValue("name");
+        String functions = proteinElement.getAttributeValue("functions");
+        String sequence = proteinElement.getChildText("Sequence");
+        Double pI = Double.valueOf(proteinElement.getChildText("pI"));
+        Double molecularWeight = Double.valueOf(proteinElement.getChildText("MW"));
+        return new Protein(sequence,name,functions,molecularWeight,pI);
     }
 
     public static ArrayList<Protein> loadFile(String filename) {
@@ -94,15 +96,11 @@ public class XMLUtilities {
             DOMBuilder builder = new DOMBuilder();
             Document xmlDocument = builder.build(DocumentBuilderFactory.newInstance().newDocumentBuilder()
                     .parse(getXMLRelativePath(filename)));
-            ArrayList<Element> proteinElements = new ArrayList<>(xmlDocument.getRootElement().getChildren("Proteins"));
+            ArrayList<Element> proteinElements = new ArrayList<>(xmlDocument.getRootElement().getChildren());
             for (Element proteinElement : proteinElements) {
                 proteins.add(getProteinFromElement(proteinElement));
             }
-        } catch (ParserConfigurationException e) {
-            logger.error(e.getMessage());
-        } catch (SAXException e) {
-            logger.error(e.getMessage());
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             logger.error(e.getMessage());
         }
 

@@ -16,7 +16,7 @@ public class MainWindow extends JFrame {
         BasicConfigurator.configure();
         JTabbedPane window = new JTabbedPane();
         window.add("Welcome", new WelcomeWindow());
-        window.add("Mass Spectroscopy", new MassSpecMain());
+        window.add("Mass Spectrometer", new MassSpecMain());
         window.add("Marvin Sketch", new MarvinTab().createMainPanel());
 
         try {

@@ -12,6 +12,7 @@ import org.biojava.nbio.core.sequence.io.GenbankReader;
 import org.biojava.nbio.core.sequence.io.GenbankReaderHelper;
 import org.biojava.nbio.core.sequence.template.AbstractSequence;
 import org.biojava.nbio.core.sequence.template.Sequence;
+import org.biojava.nbio.core.sequence.template.SequenceMixin;
 import org.biojava.nbio.structure.Chain;
 import org.biojava.nbio.structure.io.PDBFileReader;
 import org.jbioframework.library.protein.Protein;
@@ -100,9 +101,6 @@ public class FileFrame extends JFrame implements ActionListener {
         ArrayList<String> extensions = new ArrayList<>();
         extensions.add(".fasta");
         extensions.add(".faa");
-        extensions.add(".pdb");
-        extensions.add(".gbk");
-        extensions.add(".gb");
         return extensions;
     }
 
@@ -193,14 +191,11 @@ public class FileFrame extends JFrame implements ActionListener {
 
             // if the file's extention is not one of the supported types
             // display an error message
-            if (!extension.equalsIgnoreCase("faa") &&
-                    !extension.equalsIgnoreCase("fasta") &&
-                    !extension.equalsIgnoreCase("pdb") &&
-                    !extension.equalsIgnoreCase("gbk") &&
-                    !extension.equalsIgnoreCase("gb")) {
+            if (!isAcceptedExtension(fileName)) {
 
                 MessageFrame error = new MessageFrame();
                 error.setMessage("File extension is not valid.");
+                logger.info("File extension is not valid!");
                 error.setVisible(true);
 
             } else {
@@ -208,14 +203,18 @@ public class FileFrame extends JFrame implements ActionListener {
                 long startTimeIndex = System.currentTimeMillis();
                 long endTimeIndex = 0;
 
-                String databaseName = fileName.substring(0,fileName.indexOf("."));
-                if (XMLUtilities.doesFileExist(databaseName)) {
-                    proteins = XMLUtilities.loadFile(databaseName);
+                if (XMLUtilities.doesFileExist(fileName)) {
+                    proteins = XMLUtilities.loadFile(fileName);
                     endTimeIndex = System.currentTimeMillis();
-                    logger.info("Time to load XML file in seconds: "+((endTimeIndex-startTimeIndex)/1000.0)+" at a speed of "+((proteins.size())/((endTimeIndex-startTimeIndex)/1000.0))+" entries/sec.");
-                } else if (extension.equalsIgnoreCase("faa") || extension.equalsIgnoreCase("fasta")) {
+                    logger.info("Time to load XML file in seconds: "+
+                            ((endTimeIndex-startTimeIndex)/1000.0)+" at a speed of "+
+                            ((proteins.size())/((endTimeIndex-startTimeIndex)/1000.0))+" entries/sec with a total of "+
+                            proteins.size()+" entries.");
+                } else if (extension.equalsIgnoreCase("faa")
+                        || extension.equalsIgnoreCase("fasta")) {
                     try {
-                        LinkedHashMap<String, ProteinSequence> proteinData = FastaReaderHelper.readFastaProteinSequence(new File(filePath));
+                        LinkedHashMap<String, ProteinSequence> proteinData =
+                                FastaReaderHelper.readFastaProteinSequence(new File(filePath));
                         if (proteinData != null) {
                             for (Map.Entry<String, ProteinSequence> map : proteinData.entrySet()) {
                                 proteins.add(new Protein(map.getValue().getSequenceAsString()));
@@ -223,13 +222,14 @@ public class FileFrame extends JFrame implements ActionListener {
                             lastFileName = fileName;
                             XMLUtilities.saveFile(fileName,proteins);
                             endTimeIndex = System.currentTimeMillis();
-                            logger.info("Time to save XML file in seconds: "+((endTimeIndex-startTimeIndex)/1000.0));
+                            logger.info("Time to save XML file in seconds: "+
+                                    ((endTimeIndex-startTimeIndex)/1000.0));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     //TODO - Be sure that PDB format works, or remove it
-                } else if (extension.equalsIgnoreCase("pdb")) {
+                } /**else if (extension.equalsIgnoreCase("pdb")) {
                     //GenomeFileParser.pdbParse(filename, electro2D, "", fileNum);
                     PDBFileReader reader = new PDBFileReader();
                     try {
@@ -237,7 +237,6 @@ public class FileFrame extends JFrame implements ActionListener {
                         String sequence = "";
                         for (int i=0; i<chainList.size(); i++) {
                             logger.info(chainList.get(i).getSeqResSequence()+"\n");
-                            //sequence+=chainList.get(i).getSeqResSequence();
                         }
                         proteins.add(new Protein(new ProteinSequence(sequence)));
                         lastFileName = fileName;
@@ -250,26 +249,20 @@ public class FileFrame extends JFrame implements ActionListener {
                     try {
                         LinkedHashMap<String, ProteinSequence> proteinData = GenbankReaderHelper.readGenbankProteinSequence(new File(filePath));
                         if (proteinData != null) {
-                            for (ProteinSequence map : proteinData.values()) {
-                                //proteins.add(new Protein(map.getSequenceAsString()));
-                                for (FeatureInterface<AbstractSequence<AminoAcidCompound>, AminoAcidCompound> feature : map.getFeatures()) {
-                                    int begin = feature.getLocations().getStart().getPosition() - 1;
-                                    int end = feature.getLocations().getEnd().getPosition() - 1;
-                                    if (begin < 0 || end > map.getSequenceAsString().length()-1)
-                                        return;
-                                    String sequence = map.getSequenceAsString().substring(begin,end);
-                                    //proteins.add(new Protein(map.getSequenceAsString(feature.getLocations().getStart(),feature.getLocations().getEnd(),map.getSequenceAsString())));
-                                }
+                            logger.info("# of proteins: "+proteinData.size());
+                            for (ProteinSequence sequence : proteinData.values()) {
+                                proteins.add(new Protein(sequence.getSequenceAsString()));
+                                logger.info("\n"+"Protein sequence: "+sequence.getSequenceAsString()+"\n");
                             }
+                        }
                             lastFileName = fileName;
                             DatabaseUtilities.saveDatabase(proteins,databaseName);
-                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
+                }*/
                 this.setVisible(false);
             }
         }
