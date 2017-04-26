@@ -1488,8 +1488,6 @@ public class Electro2D extends JPanel implements ActionListener {
      */
     public String getPIbyTitle(String title) {
         for (int x = 0; x < sequenceTitles.size(); x++) {
-            System.out.println("Does "+sequenceTitles.get(x) + " = "+ title + "? "
-                    + ((sequenceTitles.get(x)).equals(title)));
             if ((sequenceTitles.get(x)).equals(title)) {
                 return piValues.get(x).toString();
             }

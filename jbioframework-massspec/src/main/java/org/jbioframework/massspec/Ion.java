@@ -27,6 +27,9 @@ package org.jbioframework.massspec;
  * 
  */
 
+import org.jbioframework.library.gui.MarvinTab;
+import org.jbioframework.library.utilities.AminoAcidTranslator;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,8 +97,8 @@ public class Ion extends ArrayList<SpecAminoAcid> {
         marvinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { //TODO Setup massspec to use the new library interface
-                //MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequence));
-                //JBioFrameworkMain.getTabs().setSelectedIndex(4);
+                MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequence));
+                MainWindow.getTabs().setSelectedIndex(2);
                 frame.dispose();
             }
         });

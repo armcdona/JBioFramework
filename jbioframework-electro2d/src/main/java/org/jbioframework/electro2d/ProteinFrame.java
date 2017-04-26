@@ -28,6 +28,7 @@ package org.jbioframework.electro2d;/*
  * tandem mass spec simulation. @author Amanda Fisher
  */
 
+import org.jbioframework.library.gui.MarvinTab;
 import org.jbioframework.library.utilities.*;
 
 //import GUI components
@@ -45,6 +46,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import static chemaxon.marvin.io.formats.cdx.CDXConstants.sequence;
 
 
 public class ProteinFrame extends JFrame {
@@ -187,6 +190,16 @@ public class ProteinFrame extends JFrame {
             }
         });
 
+        JButton marvinButton = new JButton("Show in MarvinSketch");
+        marvinButton.setToolTipText("Shows this protein in marvin sketch");
+        marvinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { //TODO Setup massspec to use the new library interface
+                MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequenceString));
+                MainWindow.getTabs().setSelectedIndex(2);
+            }
+        });
+
         /*Send to MassSpec button -- Disabled until a workaround can be done
         JButton sendToSpec = new JButton("Run Mass Spectrum");
         sendToSpec.setToolTipText("Send protein sequence to Mass Spec for analysis");
@@ -212,6 +225,7 @@ public class ProteinFrame extends JFrame {
         proteinInfoPanel.add(mwLabel);
         proteinInfoPanel.add(piLabel);
         proteinInfoPanel.add(functionLabel);
+        proteinInfoPanel.add(marvinButton);
         searchPanel.add(blstSearch);
         searchPanel.add(ncbiSearch);
         searchPanel.add(uniSearch);
