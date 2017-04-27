@@ -98,7 +98,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
             @Override
             public void actionPerformed(ActionEvent e) { //TODO Setup massspec to use the new library interface
                 MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequence));
-                MainWindow.getTabs().setSelectedIndex(2);
+                MainWindow.getTabs().setSelectedIndex(MainWindow.getTabs().indexOfTab("Mass Spectrometer"));
                 frame.dispose();
             }
         });

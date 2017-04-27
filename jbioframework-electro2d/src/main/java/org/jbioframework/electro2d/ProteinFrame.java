@@ -196,7 +196,7 @@ public class ProteinFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) { //TODO Setup massspec to use the new library interface
                 MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequenceString));
-                MainWindow.getTabs().setSelectedIndex(2);
+                MainWindow.getTabs().setSelectedIndex(MainWindow.getTabs().indexOfTab("Mass Spectrometer"));
             }
         });
 

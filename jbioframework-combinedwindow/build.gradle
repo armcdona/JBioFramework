@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+cobertura.coverageFormats = ['java']
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        credentials {
+            username ''
+            password ''
+        }
+        url "https://repository.chemaxon.com/artifactory/libs-release"
+    }
+}
+
+dependencies {
+    compile project(':jbioframework-electro1d')
+    compile project(':jbioframework-ionex')
+    compile project(':jbioframework-electro2d')
+    compile project(':jbioframework-massspec')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+}
+
+shadowJar {
+    baseName='JBioFramework'
+    classifier=''
+}
+
+jar {
+    manifest {
+        attributes 'Main-class': 'org.jbioframework.combinedwindow.MainWindow'
+    }
+}
+
+//task zip(type: Zip) {
+//    from('build/libs/JBioFramework-'+version+'.jar')
+//    from('extrafiles')
+//    archiveName='JBioFramework.zip'
+//}
