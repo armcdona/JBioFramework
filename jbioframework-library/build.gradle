@@ -1,9 +1,6 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'net.saliman.cobertura' version '2.3.1'
-    id 'com.github.kt3k.coveralls' version '2.6.3'
-    //id 'jvm-component'
 }
 
 repositories {
@@ -34,6 +31,8 @@ dependencies {
     compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.08'
 
     compile fileTree(include : ["*.jar"], dir:"src/main/resources/")
+
+    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M4'
 }
 
 task wrapper(type: Wrapper) {
