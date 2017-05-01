@@ -661,7 +661,7 @@ public class Electro2D extends JPanel implements ActionListener {
                 maxMW = proteins.get(i).getMolecularWeight();
             }
             piValues.add(proteins.get(i).getpI());
-            sequenceTitles.add(proteins.get(i).getName());
+            sequenceTitles.add(proteins.get(i).getName()+(i+1));
             molecularWeights.add(proteins.get(i).getMolecularWeight());
             functions.add(proteins.get(i).getFunctions());
         }

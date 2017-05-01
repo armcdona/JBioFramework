@@ -1,17 +1,4 @@
-package org.jbioframework.electro2d;/*
- * Copyright (C) 2013 Rochester Institute of Technology
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * See the GNU General Public License for more details.
- */
+package org.jbioframework.electro2d;
 
 /**
  * Electro2D.ProteinFrame.java
@@ -29,29 +16,23 @@ package org.jbioframework.electro2d;/*
  */
 
 import org.jbioframework.library.gui.MarvinTab;
-import org.jbioframework.library.utilities.*;
+import org.jbioframework.library.utilities.AminoAcidTranslator;
+import org.jbioframework.library.utilities.BrowserLauncher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-//import GUI components
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
-
-//import java utilities
+import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import static chemaxon.marvin.io.formats.cdx.CDXConstants.sequence;
 
 
 public class ProteinFrame extends JFrame {
 
+    final Logger logger = LoggerFactory.getLogger(ProteinFrame.class);
     private Electro2D electro2D;           //reference to calling applet
     private String proteinTitle;           //name of the protein
     private String ptTruncated;            //name truncated
@@ -157,7 +138,7 @@ public class ProteinFrame extends JFrame {
                 try {
                     BrowserLauncher.openURL(url);
                 } catch (IOException ex) {
-                    System.out.println("URL did not work");
+                    logger.info("URL did not work");
                 }
             }
         });
@@ -177,41 +158,30 @@ public class ProteinFrame extends JFrame {
         /*Uniprot search button*/
         JButton uniSearch = new JButton("Uniprot Search");
         uniSearch.setToolTipText("Performs Uniprot search for the protein sequence");
-        uniSearch.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String urlPre = "http://www.uniprot.org/uniprot/?query=";
-                String url = urlPre + swsSearchID;
-                try {
-                    BrowserLauncher.openURL(url);
-                } catch (IOException ex) {
-                    System.out.println("URL did not work");
-                }
+        uniSearch.addActionListener(e13 -> {
+            String urlPre = "http://www.uniprot.org/uniprot/?query=";
+            String url = urlPre + swsSearchID;
+            try {
+                BrowserLauncher.openURL(url);
+            } catch (IOException ex) {
+                System.out.println("URL did not work");
             }
         });
 
         JButton marvinButton = new JButton("Show in MarvinSketch");
         marvinButton.setToolTipText("Shows this protein in marvin sketch");
-        marvinButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { //TODO Setup massspec to use the new library interface
-                MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequenceString));
-                MainWindow.getTabs().setSelectedIndex(MainWindow.getTabs().indexOfTab("Mass Spectrometer"));
-            }
+        marvinButton.addActionListener(e12 -> {
+            MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequenceString));
+            MainWindow.getTabs().setSelectedIndex(MainWindow.getTabs().indexOfTab("Mass Spectrometer"));
         });
 
-        /*Send to MassSpec button -- Disabled until a workaround can be done
-        JButton sendToSpec = new JButton("Run Mass Spectrum");
-        sendToSpec.setToolTipText("Send protein sequence to Mass Spec for analysis");
-        sendToSpec.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JTextArea input = MassSpecMain.getInputArea();
-                input.setText(sequenceString);
-                JBioFrameworkMain.getTabs().setSelectedIndex(3);
-            }
-        });*/
+        JButton copyButton = new JButton("Copy protein sequence");
+        copyButton.setToolTipText("Copies the protein sequence to the clipboard");
+        copyButton.addActionListener(e1 -> Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
+                new StringSelection(sequenceString), null));
 
         //create labels to display the protein information
+        logger.error("Protein Title: "+proteinTitle);
         titleLabel = new JLabel(ptTruncated);
         mwLabel = new JLabel("Molecular Weight (MW): " +
                 electro2D.getMWbyTitle(proteinTitle));
@@ -226,6 +196,7 @@ public class ProteinFrame extends JFrame {
         proteinInfoPanel.add(piLabel);
         proteinInfoPanel.add(functionLabel);
         proteinInfoPanel.add(marvinButton);
+        proteinInfoPanel.add(copyButton);
         searchPanel.add(blstSearch);
         searchPanel.add(ncbiSearch);
         searchPanel.add(uniSearch);
