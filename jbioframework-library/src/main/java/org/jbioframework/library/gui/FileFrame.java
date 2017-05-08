@@ -217,7 +217,7 @@ public class FileFrame extends JFrame implements ActionListener {
                                 FastaReaderHelper.readFastaProteinSequence(new File(filePath));
                         if (proteinData != null) {
                             for (Map.Entry<String, ProteinSequence> map : proteinData.entrySet()) {
-                                proteins.add(new Protein(map.getValue().getSequenceAsString()));
+                                proteins.add(new Protein(map.getValue().getSequenceAsString(),map.getKey()));
                             }
                             lastFileName = fileName;
                             XMLUtilities.saveFile(fileName,proteins);

@@ -1,16 +1,14 @@
 package org.jbioframework.electro2d;
 
 /**
- * Electro2D.ProteinFrame.java
- * <p>
+ *
  * This class encapsulates all the functionality required to pop up a frame
  * and display information about a particular protein.
  *
  * @author Jill Zapoticznyj
  * @author Adam Bazinet
  * @author Aidan Sawyer
- * <p>
- * <p>
+ *
  * 10/17/2011: Added functionality to let a protein's sequence be given to the
  * tandem mass spec simulation. @author Amanda Fisher
  */
@@ -91,7 +89,7 @@ public class ProteinFrame extends JFrame {
                 try {
                     BrowserLauncher.openURL(url);
                 } catch (IOException ex) {
-                    System.out.println("URL did not work");
+                    logger.info("Opening URL ("+url+") did not work!");
                 }
             }
         });

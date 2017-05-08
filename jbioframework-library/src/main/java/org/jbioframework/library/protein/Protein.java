@@ -27,6 +27,10 @@ public class Protein {
         initalizeProtein(sequence, "", "");
     }
 
+    public Protein(String sequence, String name) {
+        initalizeProtein(sequence, name, "");
+    }
+
     public Protein (ProteinSequence sequence, String name, String functions) {
         initalizeProtein(sequence.getSequenceAsString(), name, functions);
     }
