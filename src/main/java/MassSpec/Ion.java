@@ -137,7 +137,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 
         this.sequence = sequence;
 	    
-	this.reverseSequence = new StringBuilder(sequence).reverse().toString()
+	this.reverseSequence = new StringBuilder(sequence).reverse().toString();
     }
 
     // Gets the reverseSequence to be used in the Translator
