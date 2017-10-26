@@ -136,12 +136,14 @@ public class Ion extends ArrayList<SpecAminoAcid> {
     public void setSequence(String sequence) {
 
         this.sequence = sequence;
+	    
+	this.reverseSequence = new StringBuilder(sequence).reverse().toString()
     }
 
-    // Gets the Sequence to be used in the Translator
-    public String getSequence() {
+    // Gets the reverseSequence to be used in the Translator
+    public String getReverseSequence() {
 
-        return sequence;
+        return reverseSequence;
     }
 
     /**
