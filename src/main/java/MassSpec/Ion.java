@@ -101,7 +101,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
         marvinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(sequence));
+                MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(reverseSequence));
                 JBioFrameworkMain.getTabs().setSelectedIndex(4);
                 frame.dispose();
             }
