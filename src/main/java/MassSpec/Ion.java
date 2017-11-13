@@ -49,6 +49,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
     private int xCoordinate = 0;
     private String sequence;
     Color color = Color.BLACK;
+    private String reverseSequence;
 
     /**
      * Adds the MassSpec.SpecAminoAcid to the end of the MassSpec.Ion. MassSpec.Ion adds its mass to
@@ -89,7 +90,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 		proteinSet.append(
 	       "Instructions: " +
 	       "\n" +
-	       "\n To display the structure properly, go to Edit> Transformation > Flip> Flip Horizontally.\n \n" +
+	       "\n To display the structure properly, right click and select Ungroup.\n \n" +
 	       "Note: The longer the sequence the more likely it is to display diagonally,"+
 	       "\n simply select all the atoms in the structure and move it where you would like it to be."
 	       
@@ -101,7 +102,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
         marvinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MarvinTab.getSketchPane().setMol(AminoAcidTranslator.translate(reverseSequence));
+                MarvinTab.getSketchPane().setMol(sequence);
                 JBioFrameworkMain.getTabs().setSelectedIndex(4);
                 frame.dispose();
             }
@@ -140,6 +141,11 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 	this.reverseSequence = new StringBuilder(sequence).reverse().toString();
     }
 
+    // Gets the sequence to be used in the Translator
+    public String getSequence() {
+
+        return sequence;
+    }
     // Gets the reverseSequence to be used in the Translator
     public String getReverseSequence() {
 
