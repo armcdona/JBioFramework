@@ -34,6 +34,7 @@ package main.java.MassSpec;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.io.*;
 
@@ -92,7 +93,7 @@ public class Ion extends ArrayList<SpecAminoAcid> {
 	       "\n" +
 	       "\n To display the structure properly, right click and select Ungroup.\n \n" +
 	       "Note: The longer the sequence the more likely it is to display diagonally,"+
-	       "\n simply select all the atoms in the structure and move it where you would like it to be."
+	       "\n Select everything. Click on Structure and select Clean 2D. \n"
 	       
 	    );
         panel.add(proteinSet, BorderLayout.CENTER);
