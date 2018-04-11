@@ -27,7 +27,7 @@ import java.awt.Cursor;
 import java.io.IOException;
 
 //import jbf utilities
-import main.java.utilities.*;
+import main.java.Utilities.*;
 
 /**
  * Welcome Tab - First tab of JBFSuite.

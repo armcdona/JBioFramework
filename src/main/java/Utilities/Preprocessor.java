@@ -1,4 +1,5 @@
-package main.java.utilities;/*
+package main.java.Utilities;
+/*
  * Copyright (C) 2013 Rochester Institute of Technology
  *
  * This program is free software; you can redistribute it and/or

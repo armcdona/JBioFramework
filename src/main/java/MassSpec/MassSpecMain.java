@@ -40,16 +40,15 @@ import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import main.java.utilities.BrowserLauncher;
-import main.java.utilities.FastaParser;
+import main.java.Utilities.BrowserLauncher;
+import main.java.Utilities.FastaParser;
 
 /**
  *
  */
 public class MassSpecMain extends JPanel {
 
-    private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K",
-            "Thermolysin"};
+    private String[] proteaseChoices = {"Trypsin", "Chymotrypsin", "Proteinase K", "Thermolysin"};
     private JButton help;
     private JButton about;
     private static JTextArea inputArea; // static so Electro2D.ProteinFrame can interact with it.

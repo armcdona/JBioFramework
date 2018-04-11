@@ -1,4 +1,5 @@
-package main.java.utilities;/*
+package main.java.Utilities;
+/*
  * This class has two static methods that are used to parse sequence data from
  * fasta files.
  *
@@ -16,10 +17,8 @@ import java.io.BufferedReader;
 public class FastaParser {
 
     /**
-     * The parse method is given a file to read from, line by line. It passes
-     * each line to the process static method to get rid of any white spaces and
-     * to check if the line is a comment. Parse returns the sequence to the
-     * MassSpec.MassSpecMain to be put into the inputArea.
+     * The parse method is given a file to read from, line by line. It passes each line to the process static method to get rid of any white spaces and
+     * to check if the line is a comment. Parse returns the sequence to the MainPanelGUI to be put into the inputArea.
      *
      * @param file Selected by the user in MassSpec.MassSpecMain.
      * @return Sequence data.
@@ -41,13 +40,10 @@ public class FastaParser {
     }
 
     /**
-     * Process checks a string to see if it is a comment and should be ignored,
-     * as well as removes white space from the line.
+     * Process checks a string to see if it is a comment and should be ignored, as well as removes white space from the line.
      *
-     * @param line Given by the prase method as it reads lines from the user
-     *             supplied file.
-     * @return String to be added to the end of the sequence to be sent to
-     *         MassSpec.MassSpecMain.
+     * @param line Given by the prase method as it reads lines from the user supplied file.
+     * @return String to be added to the end of the sequence to be sent to MainPanelGUI.
      */
     private static String process(String line) {
         if (line.charAt(0) != ';' && line.charAt(0) != '>') {

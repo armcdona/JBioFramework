@@ -19,16 +19,46 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Insets;
 
+/**
+ * The type Protein list frame.
+ */
 public class ProteinListFrame extends JFrame {
 
+    /**
+     * The Electro 2 d.
+     */
     Electro2D electro2D;
+    /**
+     * The Sequence one list.
+     */
     JList sequenceOneList;
+    /**
+     * The Sequence two list.
+     */
     JList sequenceTwoList;
+    /**
+     * The Sequence titles one.
+     */
     Vector sequenceTitlesOne;
+    /**
+     * The Sequence titles two.
+     */
     Vector sequenceTitlesTwo;
+    /**
+     * The Positions one.
+     */
     Vector<Integer> positionsOne;
+    /**
+     * The Positions two.
+     */
     Vector<Integer> positionsTwo;
+    /**
+     * The Copy sequence one.
+     */
     Vector copySequenceOne;
+    /**
+     * The Copy sequence two.
+     */
     Vector copySequenceTwo;
 
     /**
@@ -116,6 +146,9 @@ public class ProteinListFrame extends JFrame {
      * refreshProteinList2 method when a new protein sequence is loaded.
      * updateSequences copies the protein sequence titles into its own lists
      * for display.
+     *
+     * @param pL1 the p l 1
+     * @param pL2 the p l 2
      */
     public void updateSequences(Vector pL1, Vector pL2) {
         sequenceOneList.setListData(pL1);
@@ -258,15 +291,20 @@ public class ProteinListFrame extends JFrame {
 
     /**
      * The following two methods are accessors for the position vectors.
-     * Electro2D.Electro2D will call them in its get methods for the vectors used in
+     * Electro2D will call them in its get methods for the vectors used in
      * gel filtration in order to carry over the manipulations done by the user.
      *
-     * @return Vector<Integer> the positions of each element still in the sequence.
+     * @return the positions of each element still in the sequence.
      */
     public Vector<Integer> getPositionsOne() {
         return positionsOne;
     }
 
+    /**
+     * Gets positions two.
+     *
+     * @return the positions two
+     */
     public Vector<Integer> getPositionsTwo() {
         return positionsTwo;
     }

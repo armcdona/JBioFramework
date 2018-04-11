@@ -24,8 +24,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 import java.io.*;
 
-import main.java.utilities.GenomeFileParser;
-import main.java.utilities.MessageFrame;
+import main.java.Utilities.GenomeFileParser;
+import main.java.Utilities.MessageFrame;
 
 public class FileFrame extends JFrame implements ActionListener {
 
@@ -177,3 +177,4 @@ public class FileFrame extends JFrame implements ActionListener {
         }
     }
 }
+

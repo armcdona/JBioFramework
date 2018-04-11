@@ -19,17 +19,34 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Single protein list frame.
+ */
 public class SingleProteinListFrame extends JFrame {
 
+    /**
+     * electro2D reference
+     */
     Electro2D electro2D;
+    /**
+     * The Sequence one list.
+     */
     JList sequenceOneList;
+    /**
+     * The Sequence titles one.
+     */
     Vector sequenceTitlesOne;
+    /**
+     * The Positions one.
+     */
     Vector<Integer> positionsOne;
+    /**
+     * The Copy sequence one.
+     */
     Vector copySequenceOne;
 
     /**
-     * Constructor for the window; sets up the instance variables and builds
-     * the GUI.
+     * Constructor for the window; sets up the instance variables and builds the GUI.
      *
      * @param param     The title of the window.
      * @param electro2D Reference to the electro2D where the protein lists are.
@@ -74,8 +91,8 @@ public class SingleProteinListFrame extends JFrame {
      * updateSequences copies the protein sequence titles into its own lists
      * for display.
      *
-     * @param pL1 the first protein list
-     * @param pL2 the second protein list
+     * @param pL1 the p l 1
+     * @param pL2 the p l 2
      */
     public void updateSequences(Vector pL1, Vector pL2) {
         sequenceOneList.setListData(pL1);
@@ -142,10 +159,13 @@ public class SingleProteinListFrame extends JFrame {
         return positionsOne;
     }
 
-    // This method should currently be unused, as the compare proteins functionality
-    // has been temporarily disabled.
+    /**
+     * Gets positions two. Currently unused as protein comparison is currently disabled)
+     *
+     * @return the positions two
+     */
     public Vector<Integer> getPositionsTwo() {
-        Vector<Integer> positionsTwo = new Vector<Integer>();
+        Vector<Integer> positionsTwo = new Vector<>();
         return positionsTwo;
     }
 
