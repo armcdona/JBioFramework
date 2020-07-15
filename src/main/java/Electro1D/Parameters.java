@@ -46,7 +46,6 @@ public class Parameters extends JPanel implements Constants {
     Protein unknown7;
     Protein unknown8;
     Protein unknown9;
-    Protein unknown10;
 
     Electrophoresis parent;
     Protein stdProteinArray[] = new Protein[7];
@@ -60,25 +59,22 @@ public class Parameters extends JPanel implements Constants {
 
         selectedSpeed = medium;
 
-        unknown1 = new Protein("Unknown #1", "Aconitase", "Acon", 0x14250, Color.black);
-        unknown2 = new Protein("Unknown #2", "Conconavalin A", "Con A", 25556, Color.black);
-        unknown3 = new Protein("Unknown #3", "Glucose Oxidase", "GO", 63058, Color.black);
-        unknown4 = new Protein("Unknown #4", "Neuraminidase", "Neur", 43505, Color.black);
-        unknown5 = new Protein("Unknown #5", "Phosphorylase b", "Phos b", 0x172f9, Color.black);
-        unknown6 = new Protein("Unknown #6", "Pyruvate Kinase", "Pyr Kin", 56773, Color.black);
-        unknown7 = new Protein("Unknown #7", "Ribonuclease A", "Ribo A", 13673, Color.black);
+        unknown1 = new Protein("3DS8", "3DS8", "3DS8", 28312, Color.black);
+        unknown2 = new Protein("3L1W", "3L1W", "3L1W", 29573, Color.black);
+        unknown3 = new Protein("4Q7Q", "4Q7Q", "4Q7Q", 29886, Color.black);
+        unknown4 = new Protein("2O14", "2O14", "2O14", 41117, Color.black);
+        unknown5 = new Protein("3B7F", "3B7F", "3B7F", 43274, Color.black);
+        unknown6 = new Protein("2QRU", "2QRU", "2QRU", 31252, Color.black);
+        unknown7 = new Protein("3H04", "3H04", "3H04", 31382, Color.black);
+        unknown8 = new Protein("3CBW", "3CBW", "3CBW", 39992, Color.black);
+        unknown9 = new Protein("3FEQ", "3FEQ", "3FEQ", 44896, Color.black);
 
-        unknown8 = new Protein("Unknown #8", "Chymotrypsinogen", "Chymo", 23564, Color.black);
-
-        unknown9 = new Protein("Unknown #9", "p-Hydroxybenzoate", "Hydrox", 43939, Color.black);
-
-        unknown10 = new Protein("Unknown #10", "Ribonuclease H", "Ribo H", 16638, Color.black);
 
         // string array, holds unknown proteins names
         String[] samples = {
                 unknown1.name, unknown2.name, unknown3.name,
                 unknown4.name, unknown5.name, unknown6.name, unknown7.name,
-                unknown8.name, unknown9.name, unknown10.name
+                unknown8.name, unknown9.name
         };
         String[] gelList = {
                 gel1.percentGel, gel2.percentGel, gel3.percentGel,
@@ -469,16 +465,15 @@ public class Parameters extends JPanel implements Constants {
         stdProteinArray[std5Ref].speed = 0.62672099999999997D * d;
         stdProteinArray[std6Ref].speed = 0.68241399999999997D * d;
         stdProteinArray[std7Ref].speed = 0.92105300000000001D * d;
-        unknown1.speed = 0.15166299999999999D * d;
-        unknown2.speed = 0.50653499999999996D * d;
-        unknown3.speed = 0.233075D * d;
-        unknown4.speed = 0.34545900000000002D * d;
-        unknown5.speed = 0.10909099999999999D * d;
-        unknown6.speed = 0.26486500000000002D * d;
-        unknown7.speed = 0.69590399999999997D * d;
-        unknown8.speed = 0.53110599999999997D * d;
-        unknown9.speed = 0.34245300000000001D * d;
-        unknown10.speed = 0.63648000000000005D * d;
+        unknown1.speed = 0.502244037000000 * d;
+        unknown2.speed = 0.488225642000000 * d;
+        unknown3.speed = 0.484838673000000 * d;
+        unknown4.speed = 0.382206356000000 * d;
+        unknown5.speed = 0.365757748000000 * d;
+        unknown6.speed = 0.470460877000000 * d;
+        unknown7.speed = 0.469125468000000 * d;
+        unknown8.speed = 0.391131019000000 * d;
+        unknown9.speed = 0.353920260000000 * d;
     }
 
     /**
@@ -644,9 +639,6 @@ public class Parameters extends JPanel implements Constants {
             } else if (unknown9.name.equals(sample.getSelectedItem())) {
                 selectedSample = unknown9;
                 parent.displayProtein(unknown9);
-            } else if (unknown10.name.equals(sample.getSelectedItem())) {
-                selectedSample = unknown10;
-                parent.displayProtein(unknown10);
             }
         }
 
